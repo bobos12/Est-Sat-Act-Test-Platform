@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>16hundred: EST mock exams for American Diploma students</title>
+<meta name="description" content="Timed EST I and EST II mock exams built from the official blueprint and scored by topic. Aim for 1600. Your first exam is free.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%231559ED'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='Arial' font-weight='700' font-size='14' fill='white'%3E16%3C/text%3E%3C/svg%3E">
+<style>
+@font-face{font-family:"Instrument Sans";font-style:normal;font-weight:400 700;font-stretch:75% 100%;font-display:swap;src:url(fonts/isans.woff2) format("woff2-variations"),url(fonts/isans.woff2) format("woff2")}
+@font-face{font-family:"Instrument Sans";font-style:italic;font-weight:400 700;font-stretch:75% 100%;font-display:swap;src:url(fonts/isans-italic.woff2) format("woff2-variations"),url(fonts/isans-italic.woff2) format("woff2")}
+@font-face{font-family:"Instrument Serif";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/iserif.woff2) format("woff2")}
+@font-face{font-family:"Instrument Serif";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/iserif-italic.woff2) format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-weight:400;font-display:swap;src:url(fonts/jbm-400.woff2) format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-weight:500;font-display:swap;src:url(fonts/jbm-500.woff2) format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-weight:600;font-display:swap;src:url(fonts/jbm-600.woff2) format("woff2")}
+:root{
+  --white:#FFFFFF; --bg:#F5F7FC; --bg-2:#ECF0F8;
+  --ink:#0A0F1C; --ink-2:#3B4458; --mute:#7A8499; --line:#E2E7F1; --line-2:#C8D1E2;
+  --blue:#1559ED; --blue-ink:#0B3FC2; --blue-soft:#EAF1FF; --blue-2:#D6E4FF; --navy:#0A1A3A; --navy-2:#132755; --sky:#6AA4FF;
+  --teal:#14A6B8; --peri:#7C8BFF;
+  --ok:#12A150; --ok-soft:#E5F6EC; --bad:#E23B3B; --bad-soft:#FDECEC;
+  --r:16px; --r-lg:24px;
+  --sans:"Instrument Sans", system-ui, sans-serif;
+  --serif:"Instrument Serif", Georgia, serif;
+  --mono:"JetBrains Mono", ui-monospace, monospace;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  --shadow:0 1px 2px rgba(10,15,28,.06),0 12px 32px -12px rgba(10,15,28,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--white);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:var(--blue);color:#fff}
+.wrap{width:min(1220px,100% - 40px);margin-inline:auto}
+.serif{font-family:var(--serif);font-weight:400;font-style:italic;letter-spacing:-.01em}
+.eyebrow{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}
+.h{font-weight:650;font-stretch:88%;letter-spacing:-.035em;line-height:1}
+.h .serif{color:var(--blue);font-size:1.08em}
+
+/* logo */
+.logo{display:inline-flex;align-items:center;gap:5px;font-weight:700;font-stretch:90%;font-size:21px;letter-spacing:-.03em}
+.logo .mk{width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:13.5px;font-weight:700;letter-spacing:-.02em;font-stretch:85%;box-shadow:inset 0 0 0 3px var(--blue),inset 0 0 0 4.5px rgba(255,255,255,.55)}
+.logo b{color:var(--blue);font-weight:700}
+
+/* buttons */
+.btn{--h:52px;display:inline-flex;align-items:center;justify-content:center;gap:10px;height:var(--h);padding:0 24px;border-radius:14px;font-weight:600;font-size:16px;letter-spacing:-.01em;transition:transform .2s var(--ease),background .2s,box-shadow .2s,border-color .2s;white-space:nowrap}
+.btn svg{transition:transform .25s var(--ease)}
+.btn:hover svg{transform:translateX(3px)}
+.btn:active{transform:translateY(1px) scale(.985)}
+.btn-blue{background:var(--blue);color:#fff;box-shadow:0 1px 0 var(--blue-ink),0 8px 20px -8px rgba(21,89,237,.6)}
+.btn-blue:hover{background:var(--blue-ink);transform:translateY(-1px)}
+.btn-ink{background:var(--ink);color:#fff}
+.btn-ink:hover{background:#1B2336;transform:translateY(-1px)}
+.btn-line{border:1.5px solid var(--line-2);background:var(--white)}
+.btn-line:hover{border-color:var(--ink)}
+.btn-white{background:#fff;color:var(--ink)}
+.btn-white:hover{transform:translateY(-1px);box-shadow:0 10px 24px -10px rgba(0,0,0,.4)}
+.btn-sm{--h:42px;font-size:15px;padding:0 16px;border-radius:12px}
+.link{font-weight:600;color:var(--blue);display:inline-flex;align-items:center;gap:6px}
+.link:hover{color:var(--blue-ink);text-decoration:underline;text-underline-offset:4px}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color .3s}
+.nav.scrolled{border-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;height:70px;gap:24px}
+.nav-links{display:flex;gap:2px;margin-left:16px}
+.nav-links a{padding:8px 13px;border-radius:10px;font-weight:500;font-size:15px;color:var(--ink-2);transition:background .2s,color .2s}
+.nav-links a:hover{background:var(--bg);color:var(--ink)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:8px}
+.nav-right .login{font-weight:600;font-size:15px;padding:8px 12px}
+@media (max-width:900px){.nav-links,.nav-right .login{display:none}}
+
+/* hero */
+.hero{position:relative;padding:64px 0 130px;overflow:hidden;background:linear-gradient(180deg,#fff 0%,var(--bg) 100%)}
+#grid{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.08fr .92fr;gap:60px;align-items:center}
+.hero .wrap>*{min-width:0}
+.pill{display:inline-flex;align-items:center;gap:10px;padding:6px 14px 6px 6px;border-radius:999px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);font-size:14px;font-weight:500;color:var(--ink-2);animation:fade .7s var(--ease) both}
+.pill b{white-space:nowrap;background:var(--blue-soft);color:var(--blue);font-family:var(--mono);font-size:11.5px;font-weight:600;padding:4px 9px;border-radius:999px;letter-spacing:.04em}
+.hero h1{font-size:clamp(42px,5.4vw,78px);margin:24px 0 24px}
+.hero h1 .ln{display:block;overflow:hidden;padding-bottom:.06em}
+.hero h1 .ln>span{display:inline-block;animation:rise .9s var(--ease) both}
+.hero h1 .ln:nth-child(2)>span{animation-delay:.1s}
+.hero h1 .goal{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--blue);font-size:1.2em;letter-spacing:-.02em;position:relative;display:inline-block}
+.hero h1 .goal:after{content:"";position:absolute;left:0;right:0;bottom:.08em;height:.07em;background:var(--blue);border-radius:9px;transform:scaleX(0);transform-origin:left;animation:line .9s .8s var(--ease) forwards;opacity:.25}
+@keyframes rise{from{transform:translateY(105%)}to{transform:none}}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes line{to{transform:scaleX(1)}}
+.lede{font-size:19px;color:var(--ink-2);max-width:540px;animation:fade .8s .3s var(--ease) both}
+.lede strong{color:var(--ink)}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:30px;animation:fade .8s .4s var(--ease) both}
+.ctas .link{margin-left:8px}
+.trust{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:30px;font-size:14.5px;color:var(--ink-2);animation:fade .8s .5s var(--ease) both}
+.trust span{display:inline-flex;align-items:center;gap:7px}
+.trust svg{color:var(--blue);flex:none}
+
+/* try card */
+.try{animation:fade .9s .25s var(--ease) both}
+.card-q{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:0 2px 4px rgba(10,15,28,.04),0 40px 80px -30px rgba(10,26,58,.35)}
+.q-top{display:flex;align-items:center;gap:10px;padding:14px 18px;background:var(--navy);color:#fff}
+.q-top .tag{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px}
+.q-top .tag i{width:8px;height:8px;border-radius:50%;background:var(--c,var(--sky))}
+.q-top .timer{margin-left:auto;font-family:var(--mono);font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px;background:var(--navy-2);padding:5px 10px;border-radius:8px}
+.q-top .timer:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--sky);animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:.25}}
+.q-prog{display:flex;gap:5px;padding:0 20px;margin-top:16px}
+.q-prog span{flex:1;height:5px;border-radius:3px;background:var(--bg-2);transition:background .4s}
+.q-prog span.on{background:var(--blue)}.q-prog span.ok{background:var(--ok)}.q-prog span.no{background:var(--bad)}
+.q-body{padding:16px 22px 22px}
+.q-label{font-family:var(--mono);font-size:11.5px;color:var(--mute);text-transform:uppercase;letter-spacing:.07em}
+.q-stem{font-size:19px;font-weight:600;line-height:1.4;margin:8px 0 16px;min-height:54px;letter-spacing:-.01em}
+.q-stem .passage{display:block;font-weight:400;font-size:16px;background:var(--bg);border-left:3px solid var(--ink);padding:10px 12px;border-radius:0 10px 10px 0;margin-bottom:10px;color:var(--ink-2)}
+.q-stem u{text-decoration-color:var(--blue);text-decoration-thickness:2px;text-underline-offset:3px;color:var(--ink);font-weight:600}
+.q-stem .m,.opt .m{font-family:var(--serif);font-style:italic;font-size:1.15em;font-weight:400}
+.opts{display:grid;gap:8px}
+.opt{display:flex;align-items:center;gap:14px;width:100%;text-align:left;padding:9px 14px 9px 9px;border:1.5px solid var(--line);border-radius:14px;font-size:16.5px;font-weight:500;background:#fff;transition:border-color .2s,background .2s,transform .2s var(--ease)}
+.opt:hover:not([disabled]){border-color:var(--blue);background:var(--blue-soft)}
+.opt .bub{position:relative;width:32px;height:32px;flex:none;border-radius:50%;border:2px solid var(--line-2);display:grid;place-items:center;font-family:var(--mono);font-weight:600;font-size:13px;color:var(--ink-2);overflow:hidden;transition:border-color .2s}
+.opt:hover:not([disabled]) .bub{border-color:var(--blue);color:var(--blue)}
+.opt .bub:after{content:"";position:absolute;inset:-2px;border-radius:50%;background:var(--blue);transform:scale(0);transition:transform .35s var(--ease)}
+.opt .bub b{position:relative;z-index:1}
+.opt.picked .bub{border-color:var(--blue)}.opt.picked .bub:after{transform:scale(1)}.opt.picked .bub b{color:#fff}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.right .bub{border-color:var(--ok)}.opt.right .bub:after{background:var(--ok);transform:scale(1)}.opt.right .bub b{color:#fff}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt.wrong .bub{border-color:var(--bad)}.opt.wrong .bub:after{background:var(--bad)}
+.opt[disabled]{cursor:default}
+.q-foot{display:flex;align-items:center;gap:12px;margin-top:14px;min-height:44px}
+.explain{font-size:14.5px;color:var(--ink-2);flex:1;opacity:0;transform:translateY(6px);transition:all .35s var(--ease)}
+.explain.show{opacity:1;transform:none}
+.explain b{color:var(--ink)}
+.q-foot .btn{opacity:0;pointer-events:none;transition:opacity .3s}
+.q-foot .btn.show{opacity:1;pointer-events:auto}
+.try-note{display:flex;justify-content:space-between;align-items:center;margin-top:16px;font-size:14px;color:var(--ink-2);padding:0 4px;gap:10px}
+.score-chip{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);padding:6px 12px;border-radius:999px;font-family:var(--mono);font-size:12.5px;box-shadow:var(--shadow);white-space:nowrap}
+.score-chip b{color:var(--blue)}
+.done{text-align:center;padding:22px 6px 6px}
+.done .big{font-family:var(--serif);font-style:italic;font-size:76px;line-height:1;color:var(--blue)}
+.done p{color:var(--ink-2);margin:10px auto 20px;max-width:340px}
+@media (max-width:980px){.hero .wrap{grid-template-columns:1fr;gap:50px}.try{max-width:560px}}
+
+/* ticker */
+.ticker{background:var(--navy);color:#C9D6F2;overflow:hidden}
+.ticker-track{display:flex;width:max-content;padding:14px 0;animation:tick 46s linear infinite;font-family:var(--mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.ticker-track span{display:inline-flex;align-items:center;gap:22px;padding-right:22px}
+.ticker-track span:after{content:"";width:8px;height:8px;border-radius:50%;border:1.5px solid var(--sky)}
+.ticker-track span:nth-child(3n):after{background:var(--sky)}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* sections */
+section{position:relative}
+.sec{padding:104px 0}
+.sec-head{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:44px;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(36px,4.6vw,62px);margin-top:12px;max-width:760px}
+.sec-head p{max-width:400px;color:var(--ink-2)}
+.tint{background:var(--bg)}
+
+/* shelf */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.chip{display:inline-flex;align-items:center;gap:9px;padding:9px 15px 9px 11px;border-radius:12px;border:1.5px solid var(--line);background:#fff;font-weight:600;font-size:15px;color:var(--ink-2);transition:all .2s var(--ease)}
+.chip i{width:15px;height:15px;border-radius:50%;border:2px solid var(--line-2);position:relative;transition:border-color .2s}
+.chip i:after{content:"";position:absolute;inset:2px;border-radius:50%;background:var(--blue);transform:scale(0);transition:transform .25s var(--ease)}
+.chip:hover{border-color:var(--ink);color:var(--ink)}
+.chip[aria-pressed="true"]{border-color:var(--blue);background:var(--blue-soft);color:var(--blue-ink)}
+.chip[aria-pressed="true"] i{border-color:var(--blue)}
+.chip[aria-pressed="true"] i:after{transform:scale(1)}
+.chip .ct{font-family:var(--mono);font-size:11.5px;opacity:.6}
+.shelf{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:1060px){.shelf{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:660px){.shelf{grid-template-columns:1fr}}
+.exam{position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:20px;min-height:320px;transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s;box-shadow:0 1px 2px rgba(10,15,28,.04)}
+.exam:hover{transform:translateY(-4px);box-shadow:0 24px 50px -24px rgba(10,26,58,.35);border-color:var(--blue-2)}
+.exam-top{display:flex;align-items:center;gap:8px}
+.subj{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;font-weight:500;color:var(--ink-2)}
+.subj i{width:9px;height:9px;border-radius:50%;background:var(--c)}
+.access{margin-left:auto;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;padding:4px 9px;border-radius:7px}
+.access.free{background:var(--blue-soft);color:var(--blue-ink)}
+.access.pro{background:var(--ink);color:#fff}
+.access.soon{border:1px dashed var(--line-2);color:var(--mute)}
+.exam h3{font-weight:650;font-stretch:90%;font-size:24px;line-height:1.1;letter-spacing:-.025em;margin:18px 0 6px}
+.exam .kind{color:var(--ink-2);font-size:15px}
+.live{color:var(--ok);font-weight:600}
+.sheet{display:grid;grid-template-columns:repeat(var(--cols,25),1fr);gap:3px;margin:20px 0 18px}
+.sheet s{aspect-ratio:1;border-radius:50%;border:1.2px solid var(--line-2);text-decoration:none}
+.sheet s.mod{border-color:var(--c)}
+.exam:hover .sheet s{animation:fill .45s var(--ease) both;animation-delay:calc(var(--i) * 8ms)}
+@keyframes fill{to{background:var(--c);border-color:var(--c)}}
+.meta{display:flex;flex-wrap:wrap;gap:6px 16px;font-family:var(--mono);font-size:12px;color:var(--ink-2);margin-top:auto}
+.meta span{display:inline-flex;align-items:center;gap:6px}
+.meta svg{width:14px;height:14px;color:var(--mute)}
+.exam-cta{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+.exam-cta .go{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:15.5px;color:var(--ink)}
+.exam.free-x .exam-cta .go{color:var(--blue)}
+.exam-cta .go svg{transition:transform .25s var(--ease)}
+.exam:hover .exam-cta .go svg{transform:translateX(4px)}
+.exam-cta .tiny{font-size:13px;color:var(--mute)}
+.soon-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:16px;padding:16px 18px;border:1.5px dashed var(--line-2);border-radius:var(--r-lg);background:rgba(255,255,255,.6)}
+.soon-row .lab{font-weight:650;letter-spacing:-.01em;margin-right:6px}
+.soon-pill{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:10px;background:#fff;border:1px solid var(--line);font-size:14.5px;font-weight:600}
+.soon-pill i{width:8px;height:8px;border-radius:50%;background:var(--c)}
+.soon-pill small{font-family:var(--mono);font-size:11px;color:var(--mute);font-weight:500}
+.soon-row .access{margin-left:auto}
+.shelf-foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;margin-top:22px}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;color:var(--ink-2)}
+.legend span{display:inline-flex;gap:8px;align-items:center}
+
+/* road to 1600 */
+.road{background:var(--navy);color:#fff;overflow:hidden}
+.road .eyebrow{color:var(--sky)}
+.road-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:end}
+.road-grid>*{min-width:0}
+@media (max-width:980px){.road-grid{grid-template-columns:1fr}}
+.road h2{font-size:clamp(38px,4.8vw,64px);margin:14px 0 22px}
+.road h2 .serif{color:var(--sky)}
+.road .lead{color:#C2CEEA;font-size:18.5px;max-width:470px}
+.counter{font-family:var(--serif);font-style:italic;font-size:clamp(120px,17vw,230px);line-height:.82;letter-spacing:-.03em;margin-top:34px;color:#fff;display:flex;align-items:flex-start;gap:12px}
+.counter small{font-family:var(--mono);font-style:normal;font-size:13px;letter-spacing:.08em;color:var(--sky);text-transform:uppercase;line-height:1.5;margin-top:22px}
+.split{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.split span{font-family:var(--mono);font-size:12.5px;padding:7px 12px;border-radius:10px;background:var(--navy-2);color:#C2CEEA}
+.split b{color:#fff}
+.stairs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;align-items:end;height:520px}
+.step{position:relative;background:var(--navy-2);border:1px solid #23396E;border-radius:18px 18px 6px 6px;padding:18px 16px;display:flex;flex-direction:column;height:0;transition:height 1s var(--ease);overflow:hidden}
+.in .step{height:var(--h)}
+.step:nth-child(2){transition-delay:.12s}.step:nth-child(3){transition-delay:.24s}.step:nth-child(4){transition-delay:.36s;background:var(--blue);border-color:var(--blue)}
+.step .n{font-family:var(--mono);font-size:12px;color:var(--sky)}
+.step:nth-child(4) .n{color:#D6E4FF}
+.step h4{font-size:18px;font-weight:650;letter-spacing:-.015em;line-height:1.2;margin:8px 0 6px}
+.step p{font-size:14px;color:#C2CEEA;line-height:1.45}
+.step:nth-child(4) p{color:#E6EEFF}
+.step .flag{position:absolute;top:14px;right:14px;font-family:var(--serif);font-style:italic;font-size:30px;line-height:1}
+@media (max-width:760px){.stairs{grid-template-columns:1fr 1fr;height:auto}.step{height:auto!important;min-height:180px}}
+.promise{display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:center;margin-top:44px;padding:24px 26px;border-radius:var(--r-lg);background:var(--navy-2);border:1px solid #23396E}
+.promise .ic{width:52px;height:52px;border-radius:50%;background:var(--blue);display:grid;place-items:center}
+.promise b{font-size:19px;letter-spacing:-.01em;display:block}
+.promise span{color:#C2CEEA;font-size:15.5px}
+@media (max-width:760px){.promise{grid-template-columns:1fr}}
+
+/* exam room */
+.engine-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:30px;align-items:start}
+.engine-grid>*{min-width:0}
+@media (max-width:980px){.engine-grid{grid-template-columns:1fr}}
+.app{border-radius:20px;background:#fff;border:1px solid var(--line);overflow:hidden;box-shadow:0 40px 80px -40px rgba(10,26,58,.4)}
+.app-bar{display:flex;align-items:center;gap:14px;padding:12px 16px;background:var(--navy);color:#C2CEEA;font-family:var(--mono);font-size:12px}
+.app-bar .t{margin-left:auto;display:flex;align-items:center;gap:8px}
+.app-bar .clock{font-size:14.5px;color:#fff;font-weight:600;background:var(--navy-2);padding:5px 10px;border-radius:8px}
+.app-bar .flag{padding:5px 10px;border-radius:8px;border:1px solid #2A4278;color:#C2CEEA;font-family:var(--mono);font-size:12px}
+.app-bar .flag.on{border-color:var(--sky);color:#fff;background:var(--blue)}
+.app-main{display:grid;grid-template-columns:1fr 1fr;min-height:340px}
+@media (max-width:640px){.app-main{grid-template-columns:1fr}.app-pass{border-right:0!important;border-bottom:1px solid var(--line)}}
+.app-pass{padding:20px;border-right:1px solid var(--line);font-family:var(--serif);font-size:17.5px;line-height:1.6;color:var(--ink-2);background:var(--bg)}
+.app-pass h5{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--mute);font-weight:500;margin-bottom:10px;text-transform:uppercase}
+.app-pass mark{background:transparent;color:var(--ink);border-bottom:2px solid var(--line-2);padding:0 1px}
+.app-pass mark.act{background:var(--blue-2);border-color:var(--blue)}
+.app-pass sup{font-family:var(--mono);font-size:9.5px;background:var(--ink);color:#fff;border-radius:4px;padding:1px 4px;margin-right:2px}
+.app-pass mark.act sup{background:var(--blue)}
+.app-q{padding:20px}
+.app-q .ql{font-family:var(--mono);font-size:11.5px;color:var(--mute)}
+.app-q p{margin:8px 0 14px;font-weight:600}
+.app-opt{display:flex;align-items:center;gap:12px;padding:8px 10px;border:1.5px solid var(--line);border-radius:12px;margin-bottom:7px;font-size:15px;cursor:pointer;transition:border-color .2s,background .2s}
+.app-opt:hover{border-color:var(--blue)}
+.app-opt i{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--line-2);display:grid;place-items:center;font-style:normal;font-family:var(--mono);font-size:11px;flex:none}
+.app-opt.sel{border-color:var(--blue);background:var(--blue-soft)}
+.app-opt.sel i{background:var(--blue);color:#fff;border-color:var(--blue)}
+.app-nav{display:flex;align-items:center;gap:5px;padding:12px 16px;border-top:1px solid var(--line);flex-wrap:wrap}
+.app-nav b{width:22px;height:22px;border-radius:50%;border:1.3px solid var(--line-2);font-family:var(--mono);font-size:9px;font-weight:500;display:grid;place-items:center;color:var(--mute)}
+.app-nav b.a{background:var(--ink);color:#fff;border-color:var(--ink)}
+.app-nav b.f{border-color:var(--blue);color:var(--blue);border-width:2px}
+.app-nav b.c{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-2)}
+.app-nav .save{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--ok);display:flex;gap:6px;align-items:center}
+.app-nav .save:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ok)}
+.features{display:grid;gap:4px}
+.feat{display:grid;grid-template-columns:44px 1fr;gap:14px;padding:16px;border-radius:16px;transition:background .25s}
+.feat:hover{background:var(--bg)}
+.feat .ic{width:44px;height:44px;border-radius:12px;background:var(--blue-soft);color:var(--blue);display:grid;place-items:center;transition:all .25s}
+.feat:hover .ic{background:var(--blue);color:#fff}
+.feat h4{font-weight:650;font-size:18px;letter-spacing:-.015em}
+.feat p{color:var(--ink-2);font-size:15px;margin-top:2px}
+
+/* results */
+.results-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.results-grid>*{min-width:0}
+@media (max-width:980px){.results-grid{grid-template-columns:1fr}}
+.report{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;position:relative;box-shadow:var(--shadow)}
+.report .sample{position:absolute;top:-12px;left:24px;background:var(--ink);color:#fff;border-radius:7px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:4px 9px}
+.score-row{display:flex;align-items:center;gap:18px;padding-bottom:20px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.score-big{font-family:var(--serif);font-style:italic;font-size:88px;line-height:.85;color:var(--ink)}
+.score-big small{font-size:.42em;color:var(--mute)}
+.score-row .t{font-weight:650}
+.score-row .s{font-family:var(--mono);font-size:12px;color:var(--mute)}
+.ring{margin-left:auto;width:84px;height:84px}
+.bars{display:grid;gap:15px;margin-top:22px}
+.bar-l{display:flex;justify-content:space-between;font-size:15px;font-weight:600;margin-bottom:7px;gap:10px}
+.bar-l span:last-child{font-family:var(--mono);font-weight:500;font-size:12.5px;color:var(--ink-2)}
+.bar-l em{font-style:normal;font-family:var(--mono);font-size:10.5px;background:var(--blue-soft);color:var(--blue-ink);padding:2px 6px;border-radius:5px;margin-left:6px;vertical-align:2px}
+.bar{height:10px;border-radius:999px;background:var(--bg-2);overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:999px;background:var(--c,var(--ink));transition:width 1.2s var(--ease)}
+.in .bar i{width:var(--w)}
+.next{display:flex;align-items:center;gap:14px;margin-top:22px;padding:14px;border-radius:14px;background:var(--blue-soft)}
+.next .ic{width:40px;height:40px;border-radius:12px;background:var(--blue);color:#fff;display:grid;place-items:center;flex:none}
+.next b{display:block;font-size:15.5px}
+.next span{font-size:14px;color:var(--ink-2)}
+.points{display:grid;gap:26px}
+.point{display:grid;grid-template-columns:52px 1fr;gap:16px;align-items:start}
+.point .n{font-family:var(--serif);font-style:italic;font-size:44px;line-height:.9;color:var(--blue)}
+.point h4{font-size:20px;font-weight:650;letter-spacing:-.02em}
+.point p{color:var(--ink-2)}
+
+/* parents */
+.par-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media (max-width:1000px){.par-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.par-grid{grid-template-columns:1fr}}
+.par{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:0 1px 2px rgba(10,15,28,.04)}
+.par .ic{width:46px;height:46px;border-radius:12px;background:var(--blue-soft);color:var(--blue);display:grid;place-items:center;margin-bottom:18px}
+.par h4{font-size:19px;font-weight:650;letter-spacing:-.015em;line-height:1.2;margin-bottom:8px}
+.par p{color:var(--ink-2);font-size:15.5px}
+.par .k{font-family:var(--serif);font-style:italic;font-size:42px;line-height:1;color:var(--blue);margin-bottom:12px}
+.faq-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:40px;margin-top:64px}
+@media (max-width:900px){.faq-wrap{grid-template-columns:1fr}}
+.faq-wrap h3{font-size:clamp(28px,3vw,38px)}
+.faq-wrap .side p{color:var(--ink-2);margin-top:14px;max-width:340px}
+details{border-bottom:1px solid var(--line-2);padding:4px 0}
+details:first-child{border-top:1px solid var(--line-2)}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 0;font-weight:600;font-size:17.5px;letter-spacing:-.01em}
+summary::-webkit-details-marker{display:none}
+summary .pm{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--line-2);display:grid;place-items:center;flex:none;transition:transform .3s var(--ease),background .2s,border-color .2s}
+details[open] summary .pm{transform:rotate(45deg);background:var(--blue);border-color:var(--blue);color:#fff}
+details p{color:var(--ink-2);padding:0 46px 18px 0}
+
+/* plans */
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:860px){.plans{grid-template-columns:1fr}}
+.plan{border:1px solid var(--line);border-radius:var(--r-lg);padding:30px;display:flex;flex-direction:column;background:#fff;box-shadow:var(--shadow)}
+.plan.pro{background:var(--navy);color:#fff;border-color:var(--navy)}
+.plan .top{display:flex;align-items:center;justify-content:space-between}
+.plan h3{font-size:40px}
+.plan.pro h3 .serif{color:var(--sky)}
+.plan .tl{color:var(--ink-2);margin:10px 0 22px;max-width:390px}
+.plan.pro .tl{color:#C2CEEA}
+.plan ul{list-style:none;display:grid;gap:12px;margin-bottom:28px}
+.plan li{display:flex;gap:12px;align-items:start}
+.plan li:before{content:"";width:18px;height:18px;margin-top:3px;border-radius:50%;flex:none;background:var(--blue) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M5 9.2l2.6 2.5L13 6.5' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/18px no-repeat}
+.plan .btn{margin-top:auto;align-self:flex-start}
+.plan.pro .access{background:var(--blue);color:#fff}
+
+/* final */
+.final{background:var(--blue);color:#fff;overflow:hidden;position:relative}
+.final .wrap{padding:110px 0;position:relative;z-index:1}
+.final h2{font-size:clamp(46px,7.4vw,112px);line-height:.95}
+.final h2 .serif{color:#fff;opacity:.92}
+.final .row{display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;margin-top:36px}
+.final p{max-width:470px;font-size:19px;color:#E0E9FF}
+.final .ghost{position:absolute;right:-30px;bottom:-90px;font-family:var(--serif);font-style:italic;font-size:clamp(200px,32vw,460px);line-height:1;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.22);pointer-events:none;user-select:none}
+
+/* footer */
+footer{background:var(--ink);color:#fff;padding:70px 0 30px;overflow:hidden}
+.foot-top{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:30px}
+@media (max-width:760px){.foot-top{grid-template-columns:1fr 1fr}}
+.foot-top h6{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:#7F8AA3;font-weight:500;margin-bottom:14px}
+.foot-top a{display:block;padding:4px 0;color:#C9D1E3;transition:color .2s}
+.foot-top a:hover{color:var(--sky)}
+.foot-top a.logo{display:inline-flex;color:#fff}
+.foot-top p{color:#9AA5BE;max-width:300px;margin-top:14px;font-size:15px}
+.wordmark{font-weight:700;font-stretch:85%;font-size:clamp(64px,16.5vw,236px);line-height:.8;letter-spacing:-.06em;margin:70px 0 28px;white-space:nowrap}
+.wordmark b{color:var(--blue)}
+.legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:#7F8AA3;padding-top:20px;border-top:1px solid #232B3E}
+
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.in{opacity:1;transform:none}
+@media (max-width:560px){.sec{padding:76px 0}.score-big{font-size:68px}.ring{width:64px;height:64px}.report{padding:20px}.nav .wrap{gap:10px}.logo{font-size:19px}}
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.step{height:var(--h)}}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:10px}
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a href="/" class="logo" aria-label="16hundred home"><span class="mk">16</span><span>hundred</span></a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#exams">Exams</a>
+      <a href="#road">Road to 1600</a>
+      <a href="#parents">For parents</a>
+      <a href="#access">Pricing</a>
+    </nav>
+    <div class="nav-right">
+      <a href="/login" class="login">Log in</a>
+      <a href="/exams/foundational-algebra-practice-1" class="btn btn-blue btn-sm">Start free exam</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <canvas id="grid" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div>
+      <span class="pill"><b>EST I · EST II</b>Practice exams for American Diploma students</span>
+      <h1 class="h">
+        <span class="ln"><span>Practice the real EST.</span></span>
+        <span class="ln"><span>Aim for <span class="goal">1600</span>.</span></span>
+      </h1>
+      <p class="lede">Timed mock exams that follow the official EST blueprint. Every exam is scored by topic, so you always know what to study next. <strong>Your first exam is free.</strong></p>
+      <div class="ctas">
+        <a href="/exams/foundational-algebra-practice-1" class="btn btn-blue">Start a free exam <svg width="16" height="16" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#exams" class="btn btn-line">Explore all exams</a>
+        <a href="#access" class="link">Get Pro access →</a>
+      </div>
+      <div class="trust">
+        <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="M4.8 8.2l2.1 2 4.3-4.4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Free account, no card</span>
+        <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="M4.8 8.2l2.1 2 4.3-4.4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Built from 24 official EST papers</span>
+        <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="M4.8 8.2l2.1 2 4.3-4.4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Every result saved</span>
+      </div>
+    </div>
+
+    <div class="try">
+      <div class="card-q" role="group" aria-label="Try a sample question">
+        <div class="q-top">
+          <span class="tag" id="qSubj"><i></i><span>EST I · Math</span></span>
+          <span class="timer" id="qTime">01:30</span>
+        </div>
+        <div class="q-prog" id="qProg"><span></span><span></span><span></span></div>
+        <div class="q-body" id="qBody"></div>
+      </div>
+      <div class="try-note"><span>Try three real-format questions. No sign-up needed.</span><span class="score-chip">SCORE <b id="qScore">0/3</b></span></div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true"><div class="ticker-track" id="ticker"></div></div>
+
+<!-- EXAMS -->
+<section class="sec tint" id="exams">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="eyebrow">The exam library</div>
+        <h2 class="h">Pick an exam. <span class="serif">Start in one click.</span></h2>
+      </div>
+      <p>Each card shows the subject, how long it takes and whether it's free. Each dot on a card is one question.</p>
+    </div>
+    <div class="filters rv" role="toolbar" aria-label="Filter exams" id="filters"></div>
+    <div class="shelf" id="shelf"></div>
+    <div class="soon-row rv" id="soonRow"></div>
+    <div class="shelf-foot rv">
+      <div class="legend">
+        <span><span class="access free">FREE</span> with a free account</span>
+        <span><span class="access pro">PRO</span> with a subscription</span>
+      </div>
+      <a href="/exams" class="link">Open the full library →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ROAD TO 1600 -->
+<section class="sec road" id="road">
+  <div class="wrap">
+    <div class="road-grid">
+      <div class="rv">
+        <div class="eyebrow">The road to 1600</div>
+        <h2 class="h">Every top score <span class="serif">started with</span> a first mock.</h2>
+        <p class="lead">1600 is the highest EST I score: a perfect 800 in Math plus a perfect 800 in Literacy. It's a big goal, and you don't reach it by luck. You get closer one topic at a time. Here's the plan.</p>
+        <div class="counter" aria-label="1600"><span id="count">1600</span><small>The<br>goal</small></div>
+        <div class="split"><span>Math <b>800</b></span><span>+</span><span>Literacy <b>800</b></span></div>
+      </div>
+      <div class="stairs rv" id="stairs">
+        <div class="step" style="--h:52%"><span class="n">STEP 01</span><h4>Find your starting point</h4><p>Take one full mock under the real timer. That's your honest baseline.</p></div>
+        <div class="step" style="--h:67%"><span class="n">STEP 02</span><h4>See where the points are</h4><p>Your results show which topics cost you marks.</p></div>
+        <div class="step" style="--h:83%"><span class="n">STEP 03</span><h4>Practise just those</h4><p>Short topic sets with an explanation for every answer.</p></div>
+        <div class="step" style="--h:100%"><span class="flag">1600</span><span class="n">STEP 04</span><h4>Retake and climb</h4><p>Take a new mock, compare it with the last one, and keep going.</p></div>
+      </div>
+    </div>
+    <div class="promise rv">
+      <span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span>
+      <div><b>You don't need to be perfect today. You just need to find your next ten points.</b><span>We can't promise anyone a 1600, and no honest platform can. What we can do is show you exactly where every point is hiding, so your practice counts.</span></div>
+      <a href="/exams/foundational-algebra-practice-1" class="btn btn-white">Take my first mock</a>
+    </div>
+  </div>
+</section>
+
+<!-- EXAM ROOM -->
+<section class="sec" id="engine">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="eyebrow">The exam room</div>
+        <h2 class="h">Feels like test day, <span class="serif">so test day feels easy.</span></h2>
+      </div>
+      <p>The same layout, timing and question types as the real EST, so nothing on exam day is a surprise.</p>
+    </div>
+    <div class="engine-grid">
+      <div class="app rv">
+        <div class="app-bar">
+          <span>EST I · LITERACY · MODULE 1</span>
+          <span class="t"><button class="flag" id="flagBtn">⚑ Flag</button><span class="clock" id="clock">89:59</span></span>
+        </div>
+        <div class="app-main">
+          <div class="app-pass">
+            <h5>Passage 1 · Analysis in Science</h5>
+            Coral reefs cover less than one percent of the ocean floor, <mark><sup>4</sup>yet support</mark> roughly a quarter of all marine species. Scientists have long <mark class="act"><sup>5</sup>wandered</mark> how such a small area sustains so much life. The answer lies in a partnership between coral and the algae <mark><sup>6</sup>who</mark> live inside its tissue.
+          </div>
+          <div class="app-q">
+            <span class="ql">QUESTION 5 OF 35</span>
+            <p>Which choice best fits the context of the passage?</p>
+            <div id="appOpts">
+              <div class="app-opt"><i>A</i>NO CHANGE</div>
+              <div class="app-opt"><i>B</i>wondered</div>
+              <div class="app-opt"><i>C</i>wondering</div>
+              <div class="app-opt"><i>D</i>had wandered</div>
+            </div>
+          </div>
+        </div>
+        <div class="app-nav" id="appNav"></div>
+      </div>
+      <div class="features">
+        <div class="feat rv"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg></span><div><h4>A timer that works like the real one</h4><p>The server keeps the time. When it runs out, your exam is submitted automatically.</p></div></div>
+        <div class="feat rv"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg></span><div><h4>Every answer saved</h4><p>Answers save as you go, even if the Wi-Fi drops. Come back and pick up where you stopped.</p></div></div>
+        <div class="feat rv"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 21V4h11l-2 4 2 4H5"/></svg></span><div><h4>Flag it, come back to it</h4><p>Mark the hard ones, move on, and jump back from the question map.</p></div></div>
+        <div class="feat rv"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="8" height="16" rx="1"/><path d="M14 7h7M14 12h7M14 17h5"/></svg></span><div><h4>The passage stays on screen</h4><p>Literacy passages stay pinned beside the questions, with the tested part highlighted.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section class="sec tint" id="results">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="eyebrow">Your results</div>
+        <h2 class="h">Know exactly <span class="serif">what to fix</span> next.</h2>
+      </div>
+      <p>Every exam is scored by the official EST topics, with a worked explanation for every question.</p>
+    </div>
+    <div class="results-grid">
+      <div class="report rv" id="report">
+        <span class="sample">SAMPLE RESULT</span>
+        <div class="score-row">
+          <div class="score-big">41<small>/50</small></div>
+          <div><div class="t">EST I Math · Full mock</div><div class="s">72:14 used of 75:00</div></div>
+          <svg class="ring" viewBox="0 0 86 86"><circle cx="43" cy="43" r="36" fill="none" stroke="#ECF0F8" stroke-width="9"/><circle id="ringArc" cx="43" cy="43" r="36" fill="none" stroke="#1559ED" stroke-width="9" stroke-linecap="round" stroke-dasharray="226.2" stroke-dashoffset="226.2" transform="rotate(-90 43 43)" style="transition:stroke-dashoffset 1.4s cubic-bezier(.2,.8,.2,1)"/><text x="43" y="48" text-anchor="middle" font-family="JetBrains Mono, monospace" font-weight="600" font-size="15" fill="#0A0F1C">82%</text></svg>
+        </div>
+        <div class="bars">
+          <div><div class="bar-l"><span>Foundational Algebra</span><span>13/14</span></div><div class="bar"><i style="--w:93%;--c:var(--blue)"></i></div></div>
+          <div><div class="bar-l"><span>Data Analysis and Probability</span><span>13/15</span></div><div class="bar"><i style="--w:87%;--c:var(--blue)"></i></div></div>
+          <div><div class="bar-l"><span>Advanced Algebra and Functions</span><span>12/15</span></div><div class="bar"><i style="--w:80%;--c:var(--blue)"></i></div></div>
+          <div><div class="bar-l"><span>Geometry and Trigonometry<em>FOCUS</em></span><span>3/6</span></div><div class="bar"><i style="--w:50%;--c:var(--ink)"></i></div></div>
+        </div>
+        <div class="next"><span class="ic"><svg width="18" height="18" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Up next: Geometry and Trigonometry practice</b><span>Your weakest topic, so this is where your fastest gains are.</span></div></div>
+      </div>
+      <div class="points">
+        <div class="point rv"><span class="n">i.</span><div><h4>Scored the way the EST is</h4><p>Results use the official topic names, so you know exactly which part of the test to work on.</p></div></div>
+        <div class="point rv"><span class="n">ii.</span><div><h4>An explanation for every question</h4><p>Not just the right letter. You see why it's right and why the other options are wrong.</p></div></div>
+        <div class="point rv"><span class="n">iii.</span><div><h4>Progress you can see</h4><p>Every attempt stays in your dashboard, so you can compare this month with last month.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARENTS -->
+<section class="sec" id="parents">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="eyebrow">For parents</div>
+        <h2 class="h">Know what your child is practising, <span class="serif">and how it's going.</span></h2>
+      </div>
+      <p>EST prep is a real investment. Here's what you get, in plain words.</p>
+    </div>
+    <div class="par-grid">
+      <div class="par rv"><div class="k">24</div><h4>Built on the real exam</h4><p>We analysed 24 official EST papers and answer keys. Our exams follow the same topics, question counts and timing.</p></div>
+      <div class="par rv"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><h4>Progress you can check together</h4><p>Every exam your child takes is saved with its score and topic breakdown. Sit down together and open their dashboard.</p></div>
+      <div class="par rv"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="18" height="11" rx="2"/><path d="M7 10V7a5 5 0 0110 0v3"/></svg></span><h4>Clear, secure payment</h4><p>You see the plan and price before you pay. Card payments go through Paymob, a licensed Egyptian payment provider.</p></div>
+      <div class="par rv"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9M2 7h20v5H2zM12 21V7M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg></span><h4>Try it before you pay</h4><p>The free account includes real, full-length exams. Pay only if your child finds it useful.</p></div>
+    </div>
+
+    <div class="faq-wrap">
+      <div class="side rv">
+        <h3 class="h">Questions parents ask</h3>
+        <p>Something else? Email us at <b>support@16hundred.app</b> and a person will reply.</p>
+      </div>
+      <div class="rv">
+        <details open><summary>Is this the official EST?<span class="pm">+</span></summary><p>No. 16hundred is an independent practice platform. Our exams are original questions written to match the official EST blueprint: the same topics, question types, number of questions and timing.</p></details>
+        <details><summary>Which exams are available?<span class="pm">+</span></summary><p>EST I Math (50 questions, 75 minutes) and EST I Literacy (85 questions in 3 modules, 90 minutes), as full mocks and shorter topic practice sets. EST II Math Level 1 and 2, Biology and Chemistry are being prepared.</p></details>
+        <details><summary>What's free and what needs a subscription?<span class="pm">+</span></summary><p>Exams marked FREE only need a free account, no card. Pro unlocks every exam in the library. Plans and prices are shown on the pricing page before you pay.</p></details>
+        <details><summary>How can I follow my child's progress?<span class="pm">+</span></summary><p>Every exam your child submits is saved to their dashboard with the score, the time used, a breakdown by topic and an explanation for every question.</p></details>
+        <details><summary>How do we pay?<span class="pm">+</span></summary><p>By card, through Paymob's secure checkout. We never see or store your card details.</p></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCESS -->
+<section class="sec tint" id="access">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="eyebrow">Access</div>
+        <h2 class="h">Start free. <span class="serif">Go Pro</span> when you're ready.</h2>
+      </div>
+      <p>Free gets you real exams, not a demo. Pro unlocks the whole library.</p>
+    </div>
+    <div class="plans">
+      <div class="plan rv">
+        <div class="top"><h3 class="h">Free</h3><span class="access free">NO CARD</span></div>
+        <p class="tl">Create a free account and take your first full exam today.</p>
+        <ul>
+          <li>Every exam marked FREE in the library</li>
+          <li>The real timer and exam layout</li>
+          <li>Topic breakdown and explanations</li>
+          <li>Every attempt saved to your dashboard</li>
+        </ul>
+        <a href="/signup" class="btn btn-ink">Create free account</a>
+      </div>
+      <div class="plan pro rv">
+        <div class="top"><h3 class="h">Pro <span class="serif">access</span></h3><span class="access">ALL EXAMS</span></div>
+        <p class="tl">Every full-length mock and every practice set in the library.</p>
+        <ul>
+          <li>Everything in Free</li>
+          <li>Every EST I Math and Literacy full mock</li>
+          <li>All topic and skill practice sets</li>
+          <li>New exams as soon as they're published</li>
+        </ul>
+        <a href="/pricing" class="btn btn-blue">See plans &amp; prices</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="ghost" aria-hidden="true">1600</div>
+  <div class="wrap">
+    <h2 class="h rv">Your road to 1600<br><span class="serif">starts today.</span></h2>
+    <div class="row rv">
+      <p>One free mock exam. 50 questions, 75 minutes, and a clear picture of where you stand.</p>
+      <a href="/exams/foundational-algebra-practice-1" class="btn btn-white">Start a free exam <svg width="16" height="16" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div><a href="/" class="logo"><span class="mk">16</span><span>hundred</span></a><p>EST mock exams for American Diploma students. Practise the real format and aim for 1600.</p></div>
+      <div><h6>Exams</h6><a href="/exams?subject=math">EST I Math</a><a href="/exams?subject=literacy">EST I Literacy</a><a href="/exams?access=free">Free exams</a><a href="/exams">All exams</a></div>
+      <div><h6>Account</h6><a href="/signup">Sign up</a><a href="/login">Log in</a><a href="/dashboard">Dashboard</a><a href="/pricing">Pricing</a></div>
+      <div><h6>Help</h6><a href="#parents">For parents</a><a href="/terms">Terms</a><a href="/privacy">Privacy</a></div>
+    </div>
+    <div class="wordmark" aria-hidden="true"><b>16</b>hundred</div>
+    <div class="legal"><span>© 2026 16hundred</span><span>Independent practice platform. Not affiliated with the official EST provider.</span></div>
+  </div>
+</footer>
+
+<script>
+const SUBJECTS={
+  math:{label:"EST I · Math",c:"#1559ED"},
+  lit:{label:"EST I · Literacy",c:"#0A0F1C",shades:["#0A0F1C","#3B4458","#7A8499"]},
+  m1:{label:"EST II · Math L1",c:"#6AA4FF"},m2:{label:"EST II · Math L2",c:"#6AA4FF"},
+  bio:{label:"EST II · Biology",c:"#14A6B8"},chem:{label:"EST II · Chemistry",c:"#7C8BFF"}
+};
+const mm=(id,s,a)=>({id,s:"math",title:`Math Full Mock: ${s} format`,kind:"Full-length mock",q:50,min:75,modules:[50],access:a});
+const lm=(id,s,a)=>({id,s:"lit",title:`Literacy Full Mock: ${s} format`,kind:"Full-length mock · 3 modules",q:85,min:90,modules:[35,25,25],access:a});
+const EXAMS=[
+  {id:"foundational-algebra-practice-1",s:"math",title:"Foundational Algebra Practice 1",kind:"Topic practice set",q:10,min:15,modules:[10],access:"free",live:true},
+  mm("est1-math-sample","Sample","free"),lm("est1-lit-sample","Sample","free"),
+  mm("est1-math-jan26","January 2026","pro"),mm("est1-math-mar26","March 2026","pro"),mm("est1-math-may26","May 2026","pro"),
+  lm("est1-lit-jan26","January 2026","pro"),lm("est1-lit-mar26","March 2026","pro"),lm("est1-lit-may26","May 2026","pro"),
+  {id:"est2-math1",s:"m1",title:"EST II Math Level 1",q:40,min:60,modules:[40],access:"soon"},
+  {id:"est2-math2",s:"m2",title:"EST II Math Level 2",q:40,min:60,modules:[40],access:"soon"},
+  {id:"est2-bio",s:"bio",title:"EST II Biology",q:60,min:60,modules:[60],access:"soon"},
+  {id:"est2-chem",s:"chem",title:"EST II Chemistry",q:60,min:60,modules:[60],access:"soon"}
+];
+const FILTERS=[
+  {k:"all",label:"All exams",f:()=>true},{k:"free",label:"Free",f:e=>e.access==="free"},
+  {k:"math",label:"EST I Math",f:e=>e.s==="math"},{k:"lit",label:"EST I Literacy",f:e=>e.s==="lit"},
+  {k:"est2",label:"EST II",f:e=>["m1","m2","bio","chem"].includes(e.s)}
+];
+const ARROW='<svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const CLOCK='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="9" r="5.5"/><path d="M8 6v3l2 1.5"/></svg>';
+const QS='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="5" cy="5" r="2.5"/><circle cx="11" cy="5" r="2.5"/><circle cx="5" cy="11" r="2.5"/><circle cx="11" cy="11" r="2.5" fill="currentColor"/></svg>';
+function sheet(e){const S=SUBJECTS[e.s],sh=S.shades||[S.c];let i=0,o="";e.modules.forEach((n,mi)=>{for(let k=0;k<n;k++)o+=`<s class="${e.modules.length>1?"mod":""}" style="--i:${i++};--c:${sh[mi%sh.length]}"></s>`});return `<div class="sheet" style="--cols:${e.q>=60?30:25}" aria-hidden="true">${o}</div>`}
+const shelf=document.getElementById("shelf"),filt=document.getElementById("filters"),soonRow=document.getElementById("soonRow");
+shelf.innerHTML=EXAMS.filter(e=>e.access!=="soon").map(e=>{const S=SUBJECTS[e.s],free=e.access==="free";
+return `<a class="exam rv ${free?"free-x":""}" href="/exams/${e.id}" data-id="${e.id}">
+<div class="exam-top"><span class="subj" style="--c:${S.c}"><i></i>${S.label}</span><span class="access ${e.access}">${free?"FREE":"PRO"}</span></div>
+<h3>${e.title}</h3><div class="kind">${e.kind}${e.live?' · <span class="live">● Live now</span>':""}</div>${sheet(e)}
+<div class="meta"><span>${QS}${e.q} QUESTIONS</span><span>${CLOCK}${e.min} MIN</span>${e.modules.length>1?`<span>${e.modules.length} MODULES</span>`:""}</div>
+<div class="exam-cta"><span class="go">${free?"Start free exam":"Unlock with Pro"} ${ARROW}</span><span class="tiny">${free?"Free account":"Subscription"}</span></div></a>`}).join("");
+soonRow.innerHTML='<span class="lab">EST II, coming soon:</span>'+EXAMS.filter(e=>e.access==="soon").map(e=>`<span class="soon-pill" style="--c:${SUBJECTS[e.s].c}"><i></i>${e.title.replace("EST II ","")}<small>${e.q} Q · ${e.min} MIN</small></span>`).join("")+'<span class="access soon">SOON</span>';
+filt.innerHTML=FILTERS.map((f,i)=>`<button class="chip" aria-pressed="${i===0}" data-k="${f.k}"><i></i>${f.label}<span class="ct">${EXAMS.filter(f.f).length}</span></button>`).join("");
+filt.addEventListener("click",ev=>{const b=ev.target.closest(".chip");if(!b)return;filt.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed",c===b));const F=FILTERS.find(f=>f.k===b.dataset.k);
+  shelf.querySelectorAll(".exam").forEach(el=>{el.style.display=F.f(EXAMS.find(x=>x.id===el.dataset.id))?"":"none";el.classList.add("in")});
+  soonRow.style.display=EXAMS.some(e=>e.access==="soon"&&F.f(e))?"":"none";shelf.style.display=EXAMS.some(e=>e.access!=="soon"&&F.f(e))?"":"none"});
+
+document.getElementById("ticker").innerHTML=(["Foundational Algebra","Data Analysis and Probability","Advanced Algebra and Functions","Geometry and Trigonometry","Words in Context","Expression of Ideas","Standard English Conventions","Analysis in Science","Analysis in History","Analysis in Literature"].map(t=>`<span>${t}</span>`).join("")).repeat(2);
+
+/* try-it */
+const TRY=[
+ {subj:"EST I · Math",c:"#6AA4FF",label:"Foundational Algebra",stem:'If <span class="m">3(x − 2) = 2x + 5</span>, what is the value of <span class="m">x</span>?',opts:["3","7","11","13"],a:2,why:"<b>11.</b> Expand to 3x − 6 = 2x + 5, then subtract 2x and add 6."},
+ {subj:"EST I · Literacy",c:"#fff",label:"Standard English Conventions",stem:'<span class="passage">The researchers\' findings, which were published last spring, <u>has changed</u> how cities plan for flooding.</span>Which choice completes the sentence correctly?',opts:["NO CHANGE","have changed","having changed","is changing"],a:1,why:"<b>have changed.</b> The subject is “findings”, which is plural. The clause in the middle doesn't change that."},
+ {subj:"EST I · Math",c:"#6AA4FF",label:"Data Analysis and Probability",stem:"A bag holds 4 red and 6 blue marbles. One marble is drawn at random. What is the probability that it is red?",opts:['<span class="m">2/5</span>','<span class="m">3/5</span>','<span class="m">2/3</span>','<span class="m">1/4</span>'],a:0,why:"<b>2/5.</b> 4 red out of 10 marbles in total is 4/10, which simplifies to 2/5."}
+];
+let qi=0,score=0,t=90;const qBody=document.getElementById("qBody"),qProg=[...document.querySelectorAll("#qProg span")];
+function renderQ(){const Q=TRY[qi],s=document.getElementById("qSubj");s.style.setProperty("--c",Q.c);s.querySelector("span").textContent=Q.subj;qProg[qi].classList.add("on");
+ qBody.innerHTML=`<div class="q-label">Question ${qi+1} of 3 · ${Q.label}</div><div class="q-stem">${Q.stem}</div>
+ <div class="opts">${Q.opts.map((o,i)=>`<button class="opt" data-i="${i}"><span class="bub"><b>${"ABCD"[i]}</b></span><span>${o}</span></button>`).join("")}</div>
+ <div class="q-foot"><div class="explain" id="why"></div><button class="btn btn-ink btn-sm" id="nextQ">${qi<2?"Next":"See score"} ${ARROW}</button></div>`}
+qBody.addEventListener("click",ev=>{const o=ev.target.closest(".opt");
+ if(o&&!o.disabled){const Q=TRY[qi],i=+o.dataset.i,os=[...qBody.querySelectorAll(".opt")];o.classList.add("picked");os.forEach(b=>b.disabled=true);
+  setTimeout(()=>{os[Q.a].classList.add("right");if(i!==Q.a)o.classList.add("wrong");else score++;qProg[qi].classList.add(i===Q.a?"ok":"no");
+   document.getElementById("qScore").textContent=`${score}/3`;const w=document.getElementById("why");w.innerHTML=Q.why;w.classList.add("show");document.getElementById("nextQ").classList.add("show")},380)}
+ if(ev.target.closest("#nextQ")){qi++;qi<3?renderQ():finish()}
+ if(ev.target.closest("#again")){qi=0;score=0;t=90;qProg.forEach(s=>s.className="");document.getElementById("qScore").textContent="0/3";renderQ()}});
+function finish(){qBody.innerHTML=`<div class="done"><div class="eyebrow">Warm-up complete</div><div class="big">${score}/3</div>
+ <p>${score===3?"A perfect warm-up. That's the 1600 mindset.":"Good start. Now you know what to practise."} The full EST I Math mock is 50 questions in 75 minutes, and your first one is free.</p>
+ <a class="btn btn-blue" href="/exams/foundational-algebra-practice-1">Start a free exam ${ARROW}</a>
+ <div style="margin-top:14px"><button class="link" id="again">Try again</button></div></div>`}
+renderQ();setInterval(()=>{if(t>0)t--;document.getElementById("qTime").textContent=`0${Math.floor(t/60)}:${String(t%60).padStart(2,"0")}`},1000);
+
+/* hero graph paper + rising score line */
+(()=>{const cv=document.getElementById("grid"),ctx=cv.getContext("2d"),reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+ let W,H,mx=-999,my=-999,p=reduce?1:0;const g=26;
+ function size(){const d=Math.min(devicePixelRatio||1,2),b=cv.getBoundingClientRect();W=b.width;H=b.height;cv.width=W*d;cv.height=H*d;ctx.setTransform(d,0,0,d,0,0)}
+ size();addEventListener("resize",size);
+ cv.parentElement.addEventListener("pointermove",e=>{const b=cv.getBoundingClientRect();mx=e.clientX-b.left;my=e.clientY-b.top});
+ cv.parentElement.addEventListener("pointerleave",()=>{mx=my=-999});
+ const pts=[[0,.92],[.12,.86],[.22,.88],[.33,.74],[.45,.7],[.55,.58],[.66,.6],[.76,.42],[.87,.3],[1,.12]];
+ function frame(){ctx.clearRect(0,0,W,H);
+  for(let x=0;x<W;x+=g)for(let y=0;y<H;y+=g){const d=Math.hypot(x+g/2-mx,y+g/2-my);if(d<110){ctx.fillStyle=`rgba(21,89,237,${.09*(1-d/110)})`;ctx.fillRect(x+1,y+1,g-1,g-1)}}
+  ctx.lineWidth=1;for(let x=0,i=0;x<W;x+=g,i++){ctx.strokeStyle=i%5?"rgba(21,89,237,.06)":"rgba(21,89,237,.12)";ctx.beginPath();ctx.moveTo(x+.5,0);ctx.lineTo(x+.5,H);ctx.stroke()}
+  for(let y=0,i=0;y<H;y+=g,i++){ctx.strokeStyle=i%5?"rgba(21,89,237,.06)":"rgba(21,89,237,.12)";ctx.beginPath();ctx.moveTo(0,y+.5);ctx.lineTo(W,y+.5);ctx.stroke()}
+  // score line along the bottom-right band
+  const x0=W*.03,x1=W*.97,y0=H*.86,y1=H*.985,P=pts.map(([a,b])=>[x0+a*(x1-x0),y0+b*(y1-y0)]);
+  const n=Math.max(1,p*(P.length-1));ctx.strokeStyle="rgba(21,89,237,.3)";ctx.lineWidth=2;ctx.lineJoin="round";ctx.beginPath();ctx.moveTo(...P[0]);
+  let last=P[0];for(let i=1;i<=Math.ceil(n);i++){const f=Math.min(1,n-(i-1)),a=P[i-1],b=P[i];last=[a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f];ctx.lineTo(...last)}ctx.stroke();
+  for(let i=0;i<=Math.floor(n);i++){ctx.fillStyle="#fff";ctx.strokeStyle="rgba(21,89,237,.5)";ctx.lineWidth=2;ctx.beginPath();ctx.arc(P[i][0],P[i][1],4,0,7);ctx.fill();ctx.stroke()}
+  if(p>=1){ctx.fillStyle="rgba(21,89,237,.55)";ctx.beginPath();ctx.arc(last[0],last[1],6,0,7);ctx.fill();ctx.font="italic 22px 'Instrument Serif'";ctx.textAlign="right";ctx.fillText("1600",last[0]-12,last[1]+7)}
+  if(p<1)p=Math.min(1,p+.006);if(!reduce)requestAnimationFrame(frame)}
+ frame()})();
+
+/* exam room */
+(()=>{const nav=document.getElementById("appNav");let h="";for(let i=1;i<=35;i++)h+=`<b class="${i<5?"a":i===5?"c":i===9?"f":""}">${i}</b>`;nav.innerHTML=h+'<span class="save">SAVED</span>';
+ const os=[...document.querySelectorAll("#appOpts .app-opt")];os.forEach(o=>o.addEventListener("click",()=>{os.forEach(x=>x.classList.remove("sel"));o.classList.add("sel")}));
+ document.getElementById("flagBtn").addEventListener("click",e=>e.currentTarget.classList.toggle("on"));
+ let s=89*60+59;setInterval(()=>{s--;document.getElementById("clock").textContent=`${Math.floor(s/60)}:${String(s%60).padStart(2,"0")}`},1000)})();
+
+/* reveal, counter, nav */
+function countUp(el){const r=matchMedia("(prefers-reduced-motion: reduce)").matches;if(r)return;const st=performance.now(),from=400,to=1600;(function f(n){const k=Math.min(1,(n-st)/1800),e=1-Math.pow(1-k,3);el.textContent=Math.round(from+(to-from)*e);if(k<1)requestAnimationFrame(f)})(st)}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add("in");
+ if(e.target.id==="report")document.getElementById("ringArc").style.strokeDashoffset=226.2*(1-.82);
+ if(e.target.querySelector&&e.target.querySelector("#count"))countUp(document.getElementById("count"));io.unobserve(e.target)}),{threshold:.2});
+document.querySelectorAll(".rv").forEach((el,i)=>{el.style.transitionDelay=(i%3)*70+"ms";io.observe(el)});
+addEventListener("scroll",()=>document.getElementById("nav").classList.toggle("scrolled",scrollY>10),{passive:true});
+</script>
+</body>
+</html>
