@@ -6,7 +6,7 @@ import { ReadyExamForm } from "./ready-exam-form";
 import { BulkImport } from "./bulk-import";
 import { UploadForm } from "./upload-form";
 
-export const maxDuration = 800;
+export const maxDuration = 300; // Vercel Hobby limit
 
 export const metadata = { title: "Knowledge base" };
 
