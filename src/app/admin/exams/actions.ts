@@ -97,6 +97,16 @@ export async function setExamStatus(formData: FormData) {
   redirect(`/admin/exams/${id}?ok=${encodeURIComponent(`Exam is now ${status.replace("_", " ")}.`)}`);
 }
 
+/** One-click switch between Free and Premium from the exam list. */
+export async function setExamAccess(formData: FormData) {
+  const { supabase } = await adminClient();
+  const id = uuid.parse(formData.get("id"));
+  const access = z.enum(["free", "premium"]).parse(formData.get("access"));
+  const { error } = await supabase.from("exams").update({ access }).eq("id", id);
+  if (error) throw new Error(error.message);
+  updateTag(CATALOG_TAG);
+}
+
 /** Approve every draft question in an exam (after review) so it can be published. */
 export async function approveAllQuestions(formData: FormData) {
   const { supabase } = await adminClient();

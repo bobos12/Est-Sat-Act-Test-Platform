@@ -31,26 +31,53 @@ function Sheet({ e }: { e: ShelfExam }) {
   );
 }
 
+const Lock = ({ s = 14 }: { s?: number }) => (
+  <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <rect x="4.5" y="10.5" width="15" height="10" rx="2.5" />
+    <path d="M8 10.5V7.5a4 4 0 018 0v3" />
+  </svg>
+);
+
 function ExamCard({ e }: { e: ShelfExam }) {
   const S = SUBJECTS[e.subject];
-  const [cta, note] = e.access === "free" ? ["Start free exam", "Free account"] : ["Unlock with Pro", "Subscription"];
+  const free = e.access === "free";
   return (
-    <a className={`exam${e.access === "free" ? " free-x" : ""}`} href={examHref(e)}>
+    <a className={`exam ${free ? "free-x" : "locked"}`} href={examHref(e)}>
+      {free ? <span className="free-ribbon">FREE · NO CARD</span> : null}
       <div className="exam-top">
         <span className="subj" style={css({ "--c": S.color })}><i />{S.label}</span>
-        <span className={`access ${e.access}`}>{e.access === "free" ? "FREE" : "PRO"}</span>
+        {free ? <span className="access free">FREE</span> : <span className="access pro"><Lock s={11} /> PRO</span>}
       </div>
       <h3>{e.title}</h3>
       <div className="kind">{e.kind}{e.live && <> · <span className="live">● Live now</span></>}</div>
-      <Sheet e={e} />
+      {free ? (
+        <Sheet e={e} />
+      ) : (
+        <div className="lockwrap">
+          <Sheet e={e} />
+          <div className="lock-over">
+            <span className="lock-ic"><Lock s={18} /></span>
+            <span>Members only</span>
+          </div>
+        </div>
+      )}
       <div className="meta">
         <span><Bubbles />{e.questions} QUESTIONS</span>
         <span><Clock />{e.minutes} MIN</span>
         {e.modules.length > 1 && <span>{e.modules.length} MODULES</span>}
       </div>
       <div className="exam-cta">
-        <span className="go">{cta} <Arrow /></span>
-        <span className="tiny">{note}</span>
+        {free ? (
+          <>
+            <span className="go-btn free">Start free exam <Arrow /></span>
+            <span className="tiny">Free account</span>
+          </>
+        ) : (
+          <>
+            <span className="go-btn pro"><Lock s={14} /> Unlock with Pro</span>
+            <span className="tiny">from 192 EGP/mo</span>
+          </>
+        )}
       </div>
     </a>
   );
@@ -61,6 +88,7 @@ export function ExamShelf({ exams }: { exams: ShelfExam[] }) {
   const F = FILTERS.find((f) => f.k === k)!;
   const open = useMemo(() => exams.filter((e) => e.access !== "soon" && F.f(e)), [exams, F]);
   const soon = useMemo(() => exams.filter((e) => e.access === "soon" && F.f(e)), [exams, F]);
+  const locked = open.filter((e) => e.access === "pro").length;
 
   return (
     <>
@@ -72,9 +100,16 @@ export function ExamShelf({ exams }: { exams: ShelfExam[] }) {
         ))}
       </div>
       {open.length > 0 && <div className="shelf">{open.map((e) => <ExamCard key={e.id} e={e} />)}</div>}
+      {locked > 0 && (
+        <a href="#pricing" className="unlock-strip">
+          <span className="lock-ic"><Lock s={18} /></span>
+          <span className="txt"><b>{locked} full {locked === 1 ? "exam is" : "exams are"} waiting for you.</b> Unlock every EST, SAT and ACT mock with one membership.</span>
+          <span className="btn btn-blue btn-sm">See plans <Arrow /></span>
+        </a>
+      )}
       {soon.length > 0 && (
         <div className="soon-row">
-          <span className="lab">EST II, coming soon:</span>
+          <span className="lab">Coming soon:</span>
           {soon.map((e) => (
             <span key={e.id} className="soon-pill" style={css({ "--c": SUBJECTS[e.subject].color })}>
               <i />{e.title.replace("EST II ", "")}<small>{e.questions} Q · {e.minutes} MIN</small>

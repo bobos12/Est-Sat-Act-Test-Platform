@@ -5,6 +5,7 @@ import { GraphPaper } from "./GraphPaper";
 import { TryQuestion } from "./TryQuestion";
 import { ExamShelf } from "./ExamShelf";
 import { RevealOnScroll } from "./Reveal";
+import { StickyNote } from "./StickyNote";
 import { Arrow } from "./Icons";
 import { FREE_START_HREF, TRACKS, TRACK_OF, type ShelfExam } from "@/lib/exam-catalog";
 import { formatPrice, type Plan } from "@/lib/catalog";
@@ -49,6 +50,7 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
   <GraphPaper />
   <div className="wrap">
     <div>
+      <StickyNote color="yellow" rotate={4} className="note-hero" doodle="arrow">Your first exam is <b>free</b>, no card needed!</StickyNote>
       <span className="pill"><b>EST · SAT · ACT</b>Take every EST exam online</span>
       <h1 className="h">
         <span className="ln"><span>Train smarter. Score higher.</span></span>
@@ -67,7 +69,10 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
       </dl>
     </div>
 
-    <TryQuestion />
+    <div className="hero-card">
+      <TryQuestion />
+      <StickyNote color="pink" rotate={-6} className="note-card" doodle="underline">Tip: open the brackets first</StickyNote>
+    </div>
   </div>
 </section>
 
@@ -77,6 +82,7 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
 <section className="sec" id="tracks">
   <div className="wrap">
     <div className="sec-head rv">
+      <StickyNote color="blue" rotate={-4} className="note-tracks" doodle="star">SAT &amp; ACT mocks coming soon!</StickyNote>
       <div>
         <div className="eyebrow">Courses</div>
         <h2 className="h">One platform, <span className="serif">every exam</span> you need.</h2>
@@ -165,6 +171,7 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
     </div>
     <div className="results-grid">
       <div className="report rv" id="report">
+        <StickyNote color="orange" rotate={4} className="note-results" doodle="check">Weakest topic = fastest points</StickyNote>
         <span className="sample">SAMPLE RESULT</span>
         <div className="score-row">
           <div className="score-big">41<small>/50</small></div>
@@ -192,6 +199,7 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
 <section className="sec" id="pricing">
   <div className="wrap">
     <div className="sec-head rv">
+      <StickyNote color="green" rotate={-3} className="note-pricing" doodle="heart"><s>600</s> 400 EGP a month. 3 months is the sweet spot</StickyNote>
       <div>
         <div className="eyebrow">Membership</div>
         <h2 className="h">Simple, <span className="serif">honest</span> pricing.</h2>

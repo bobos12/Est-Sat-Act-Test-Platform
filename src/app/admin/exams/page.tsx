@@ -3,6 +3,7 @@ import { ButtonLink } from "@/components/ui/button";
 import { DataTable, Empty, Panel, PageHeader, StatusBadge, Td, Th, adminDay } from "@/components/admin/ui";
 import { adminClient } from "@/lib/admin/server";
 import { cn } from "@/lib/utils";
+import { setExamAccess } from "./actions";
 
 export const metadata = { title: "Exams" };
 
@@ -82,7 +83,25 @@ export default async function AdminExams({ searchParams }: PageProps<"/admin/exa
                       </p>
                     </Td>
                     <Td className="tabular">{e.question_count}</Td>
-                    <Td className="capitalize">{e.access}</Td>
+                    <Td>
+                      <form action={setExamAccess} className="inline-flex rounded-full bg-paper-2 p-0.5 text-xs font-semibold">
+                        <input type="hidden" name="id" value={e.id} />
+                        {(["free", "premium"] as const).map((a) => (
+                          <button
+                            key={a}
+                            name="access"
+                            value={a}
+                            disabled={e.access === a}
+                            className={cn(
+                              "rounded-full px-3 py-1 capitalize transition",
+                              e.access === a ? (a === "free" ? "bg-success-600 text-white" : "bg-ink-950 text-paper") : "text-ink-500 hover:text-ink-950",
+                            )}
+                          >
+                            {a === "premium" ? "🔒 Premium" : "Free"}
+                          </button>
+                        ))}
+                      </form>
+                    </Td>
                     <Td>
                       <StatusBadge status={e.status} />
                     </Td>
