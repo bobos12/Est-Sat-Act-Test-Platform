@@ -524,7 +524,8 @@ html{scroll-behavior:smooth}
   .ctas .link{flex-basis:100%;margin:4px 0 0;display:block;text-align:center}
   .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:26px;padding:14px 8px;background:rgba(255,255,255,.85);border:1px solid var(--line);border-radius:16px}
   .stats dd{font-size:26px}
-  .stats dt{font-size:10px;letter-spacing:.06em}
+  .stats div{justify-content:flex-end}
+  .stats dt{font-size:9.5px;letter-spacing:.05em;line-height:1.3}
   .try{text-align:left}
   .try-note{font-size:13px}
   .ticker{font-size:12px}
@@ -536,9 +537,9 @@ html{scroll-behavior:smooth}
   .sec-head p{font-size:15.5px;max-width:34ch}
 
   /* swipe rows: tracks, exams, features, plans */
-  .tracks,.shelf,.sys-grid,.plans.three{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:0 -16px;padding:16px 16px 20px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-  .tracks::-webkit-scrollbar,.shelf::-webkit-scrollbar,.sys-grid::-webkit-scrollbar,.plans.three::-webkit-scrollbar{display:none}
-  .tracks>*,.shelf>*,.sys-grid>*,.plans.three>*{flex:0 0 84%;scroll-snap-align:center}
+  .tracks,.shelf,.sys-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:0 -16px;padding:16px 16px 20px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .tracks::-webkit-scrollbar,.shelf::-webkit-scrollbar,.sys-grid::-webkit-scrollbar{display:none}
+  .tracks>*,.shelf>*,.sys-grid>*{flex:0 0 84%;scroll-snap-align:center}
   .sh .swipe-hint{display:flex}
 
   .track{padding:22px}
@@ -575,8 +576,11 @@ html{scroll-behavior:smooth}
   .point p{font-size:14.5px}
 
   /* pricing: popular plan first, swipe for the others */
-  .plans.three{padding-top:24px}
-  .plans.three .plan.pro{order:-1;transform:none;margin-top:0}
+  .plans.three{display:block;padding-top:18px}
+  .plans.three .plan.pro{transform:none;margin-top:0}
+  .sh .plan-tabs{display:grid}
+  .plan-slot[data-on="false"]{display:none}
+  .plan-slot[data-on="true"]{display:block;animation:fade .35s var(--ease)}
   .plan{padding:24px}
   .plan h3{font-size:28px}
   .plan .price b{font-size:40px}
@@ -606,8 +610,19 @@ html{scroll-behavior:smooth}
 }
 
 /* "Swipe" hint shown above swipe rows on phones */
-.swipe-hint{display:none;justify-content:center;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin:-12px 0 -6px}
+.swipe-hint{display:none;justify-content:center;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin:14px 0 2px}
 .note-track{right:-26px;bottom:-34px;width:150px;font-size:22px;padding:22px 12px 10px}
 .sys-grid .par,.contact-grid .par{position:relative}
 .note-sys{right:-58px;top:-14px;width:150px;font-size:22px;padding:22px 12px 10px}
 .note-help{right:-34px;top:-38px;width:140px;font-size:22px;padding:22px 12px 10px}
+
+/* plan tabs (phones only) */
+.plan-slot{display:contents}
+.plan-tabs{display:none;grid-template-columns:repeat(3,1fr);gap:6px;padding:5px;background:var(--bg-2);border-radius:18px}
+.plan-tab{position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;padding:12px 4px 10px;border-radius:14px;color:var(--ink-2);transition:background .2s,box-shadow .2s}
+.plan-tab b{font-weight:700;font-size:14.5px;color:var(--ink)}
+.plan-tab span{font-family:var(--mono);font-size:11px;color:var(--mute)}
+.plan-tab em{position:absolute;top:-9px;left:50%;transform:translateX(-50%);white-space:nowrap;font-style:normal;font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px;background:var(--ok);color:#fff}
+.plan-tab[aria-selected="true"]{background:#fff;box-shadow:0 4px 12px -4px rgba(10,15,28,.2)}
+.plan-tab[aria-selected="true"] span{color:var(--blue)}
+.plan-tab[aria-selected="true"] em{background:var(--blue)}

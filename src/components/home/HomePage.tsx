@@ -6,6 +6,7 @@ import { TryQuestion } from "./TryQuestion";
 import { ExamShelf } from "./ExamShelf";
 import { RevealOnScroll } from "./Reveal";
 import { StickyNote } from "./StickyNote";
+import { PlanTabs } from "./PlanTabs";
 import { Arrow } from "./Icons";
 import { FREE_START_HREF, TRACKS, TRACK_OF, type ShelfExam } from "@/lib/exam-catalog";
 import { formatPrice, type Plan } from "@/lib/catalog";
@@ -220,8 +221,17 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
     </div>
     {plans.length ? (
       <>
-      <p className="swipe-hint" aria-hidden="true">Swipe to see more →</p>
-    <div className="plans three">
+      <PlanTabs
+        initial={Math.max(0, plans.findIndex((p) => planPitch(p).popular))}
+        tabs={plans.map((p) => {
+          const pitch = planPitch(p, plans.find((x) => x.interval_months === 1)?.price_cents);
+          return {
+            label: p.name,
+            sub: `${formatPrice(p.interval_months > 1 ? pitch.perMonth : p.price_cents, p.currency)}/mo`,
+            badge: pitch.popular ? "★ Popular" : pitch.save > 0 && p.interval_months > 1 ? `−${pitch.save}%` : undefined,
+          };
+        })}
+      >
         {plans.map((p) => {
           const pitch = planPitch(p, plans.find((x) => x.interval_months === 1)?.price_cents);
           return (
@@ -247,7 +257,7 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
             </div>
           );
         })}
-      </div>
+      </PlanTabs>
       <div className="assure rv">
         <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>Secure checkout by Paymob</span>
         <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg>Instant access after payment</span>
