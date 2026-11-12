@@ -34,7 +34,7 @@ export async function PlanList() {
               key={plan.id}
               className={cn(
                 "relative flex flex-col rounded-[var(--radius-lg)] p-7",
-                dark ? "bg-ink-950 text-paper shadow-2xl ring-2 ring-mark-500 md:-my-4 md:py-11" : "bg-white ring-1 ring-line",
+                dark ? "order-first mt-3 bg-ink-950 text-paper shadow-2xl ring-2 ring-mark-500 md:order-none md:-my-4 md:mt-0 md:py-11" : "bg-white ring-1 ring-line",
               )}
             >
               {dark ? (

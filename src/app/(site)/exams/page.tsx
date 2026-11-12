@@ -84,7 +84,7 @@ async function Library({ searchParams }: { searchParams: PageProps<"/exams">["se
 
   return (
     <div className="mt-12 grid gap-10 lg:grid-cols-[220px_1fr]">
-      <aside aria-label="Filters" className="space-y-8">
+      <aside aria-label="Filters" className="min-w-0 space-y-5 lg:space-y-8">
         <FilterGroup title="Track">
           <FilterLink href={href({ track: "" })} active={!track}>All tracks</FilterLink>
           {Object.entries(TRACK_LABEL).map(([k, label]) => (
@@ -131,7 +131,7 @@ async function Library({ searchParams }: { searchParams: PageProps<"/exams">["se
         </FilterGroup>
       </aside>
 
-      <section aria-live="polite">
+      <section aria-live="polite" className="min-w-0">
         <p className="mb-4 text-sm text-ink-500">
           {visible.length} {visible.length === 1 ? "exam" : "exams"}
         </p>
@@ -201,7 +201,7 @@ function FilterGroup({ title, children }: { title: string; children: React.React
   return (
     <div>
       <h2 className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-ink-500">{title}</h2>
-      <ul className="flex flex-wrap gap-1.5 lg:flex-col lg:gap-0.5">{children}</ul>
+      <ul className="-mx-5 flex gap-1.5 overflow-x-auto px-5 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:px-0 lg:flex-col lg:gap-0.5 lg:overflow-visible">{children}</ul>
     </div>
   );
 }
@@ -214,7 +214,7 @@ function FilterLink({ href, active, children }: { href: string; active: boolean;
         scroll={false}
         aria-current={active ? "true" : undefined}
         className={cn(
-          "block rounded-[var(--radius-sm)] px-3 py-1.5 text-sm transition-colors lg:-mx-3",
+          "block whitespace-nowrap rounded-full px-3 py-1.5 text-sm ring-1 ring-inset ring-line transition-colors lg:-mx-3 lg:rounded-[var(--radius-sm)] lg:ring-0",
           active ? "bg-ink-950 text-paper lg:bg-paper-2 lg:font-medium lg:text-ink-950" : "text-ink-600 hover:bg-paper-2 hover:text-ink-950",
         )}
       >

@@ -99,6 +99,7 @@ export function ExamShelf({ exams }: { exams: ShelfExam[] }) {
           </button>
         ))}
       </div>
+      {open.length > 1 && <p className="swipe-hint" aria-hidden="true">Swipe to see more →</p>}
       {open.length > 0 && <div className="shelf">{open.map((e) => <ExamCard key={e.id} e={e} />)}</div>}
       {locked > 0 && (
         <a href="#pricing" className="unlock-strip">

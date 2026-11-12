@@ -42,6 +42,18 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
     <div className="nav-right">
       <Link href="/sign-in" className="login">Log in</Link>
       <a href={FREE_START_HREF} className="btn btn-blue btn-sm">Free exams</a>
+      <details className="mnav">
+        <summary aria-label="Open menu"><span /><span /><span /></summary>
+        <nav className="mnav-panel" aria-label="Mobile">
+          <Link href="/exams?track=est">EST</Link>
+          <Link href="/exams?track=sat">SAT</Link>
+          <Link href="/exams?track=act">ACT</Link>
+          <a href="#exams">Exam library</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#contact">Contact</a>
+          <Link href="/sign-in" className="mnav-login">Log in</Link>
+        </nav>
+      </details>
     </div>
   </div>
 </header>
@@ -87,6 +99,7 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
       </div>
       <p>EST is live now. SAT and ACT open as soon as their first full mocks are published.</p>
     </div>
+    <p className="swipe-hint" aria-hidden="true">Swipe to see more →</p>
     <div className="tracks">
       {TRACKS.map((t) => {
         const count = live.filter((e) => TRACK_OF[e.subject] === t.key).length;
@@ -97,7 +110,7 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
               {count ? <span className="live-dot"><i />LIVE · {count} EXAMS</span> : <span className="access soon">COMING SOON</span>}
             </div>
             <div className="logo-tile">
-              <Image src={t.logo.src} alt={`${t.name} logo`} width={t.logo.w} height={t.logo.h} className="logo-img" />
+              <Image src={t.logo.src} alt={`${t.name} logo`} width={t.logo.w} height={t.logo.h} className="logo-img" loading="eager" />
             </div>
             <h3 className="h">{t.name} <span className="serif">prep</span></h3>
             <p className="fmt">{t.format}</p>
@@ -146,6 +159,7 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
       </div>
       <p>Built around how students actually improve: practise under real conditions, see what went wrong, fix it.</p>
     </div>
+    <p className="swipe-hint" aria-hidden="true">Swipe to see more →</p>
     <div className="sys-grid">
       <div className="par rv"><span className="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5V5a2 2 0 012-2h13v16H6a2 2 0 00-2 2zM8 7h7M8 11h5"/></svg></span><h4>A question bank that keeps growing</h4><p>Hundreds of questions from full papers, with new exams added every month.</p></div>
       <div className="par rv"><span className="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg></span><h4>Full, timed practice tests</h4><p>The real timer, module breaks and layout. When time runs out, your test is submitted.</p></div>
@@ -174,7 +188,7 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
         <div className="score-row">
           <div className="score-big">41<small>/50</small></div>
           <div><div className="t">EST I Math · Full mock</div><div className="s">72:14 used of 75:00</div></div>
-          <svg className="ring" viewBox="0 0 86 86"><circle cx="43" cy="43" r="36" fill="none" stroke="#ECF0F8" strokeWidth="9"/><circle id="ringArc" cx="43" cy="43" r="36" fill="none" stroke="#1559ED" strokeWidth="9" strokeLinecap="round" strokeDasharray="226.2" strokeDashoffset="226.2" transform="rotate(-90 43 43)" style={{transition:"strokeDashoffset 1.4s cubic-bezier(.2,.8,.2,1)"} as React.CSSProperties}/><text x="43" y="48" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontWeight="600" fontSize="15" fill="#0A0F1C">82%</text></svg>
+          <svg className="score-ring" viewBox="0 0 86 86"><circle cx="43" cy="43" r="36" fill="none" stroke="#ECF0F8" strokeWidth="9"/><circle id="ringArc" cx="43" cy="43" r="36" fill="none" stroke="#1559ED" strokeWidth="9" strokeLinecap="round" strokeDasharray="226.2" strokeDashoffset="226.2" transform="rotate(-90 43 43)" style={{transition:"strokeDashoffset 1.4s cubic-bezier(.2,.8,.2,1)"} as React.CSSProperties}/><text x="43" y="48" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontWeight="600" fontSize="15" fill="#0A0F1C">82%</text></svg>
         </div>
         <div className="bars">
           <div><div className="bar-l"><span>Foundational Algebra</span><span>13/14</span></div><div className="bar"><i style={css({"--w":"93%","--c":"var(--blue)"})}></i></div></div>
@@ -205,7 +219,8 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
     </div>
     {plans.length ? (
       <>
-      <div className="plans three">
+      <p className="swipe-hint" aria-hidden="true">Swipe to see more →</p>
+    <div className="plans three">
         {plans.map((p) => {
           const pitch = planPitch(p, plans.find((x) => x.interval_months === 1)?.price_cents);
           return (
