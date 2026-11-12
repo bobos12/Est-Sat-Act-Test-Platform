@@ -118,6 +118,7 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
             <div className="chips">
               {t.sections.map((s) => <Link key={s.code} href={`/exams?subject=${s.code}`}>{s.label}</Link>)}
             </div>
+            {t.key === "sat" ? <StickyNote color="orange" rotate={-5} className="note-track" doodle="star">Future you will thank present you</StickyNote> : null}
             <Link href={`/exams?track=${t.key}`} className="track-go">
               {count ? `Start practising ${t.name}` : `See what's coming`} <Arrow s={14} />
             </Link>
@@ -166,7 +167,7 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
       <div className="par rv"><span className="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 00-4 12.7V17h8v-2.3A7 7 0 0012 2z"/></svg></span><h4>Explanations for every answer</h4><p>Not just the right letter. See why it&apos;s right and where the other options go wrong.</p></div>
       <div className="par rv"><span className="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><h4>Progress you can actually see</h4><p>Every attempt is saved with its score, so you can compare this month with last month.</p></div>
       <div className="par rv"><span className="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg></span><h4>Scored by official topics</h4><p>Your weakest topic is named after every test, so you know exactly what to practise next.</p></div>
-      <div className="par rv"><span className="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg></span><h4>Built for EST, SAT and ACT</h4><p>One account and one dashboard for every exam you&apos;re preparing for.</p></div>
+      <div className="par rv"><span className="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg></span><StickyNote color="yellow" rotate={5} className="note-sys" doodle="check">Wrong answers = free lessons</StickyNote><h4>Built for EST, SAT and ACT</h4><p>One account and one dashboard for every exam you&apos;re preparing for.</p></div>
     </div>
   </div>
 </section>
@@ -329,7 +330,7 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
       </div>
     </div>
     <div className="contact-grid">
-      <a className="par rv" href={`mailto:${CONTACT.email}`}><span className="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><h4>Email</h4><p>{CONTACT.email}</p></a>
+      <a className="par rv" href={`mailto:${CONTACT.email}`}><span className="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><h4>Email</h4><p>{CONTACT.email}</p><StickyNote color="pink" rotate={6} className="note-help" doodle="heart">Stuck? Real humans reply!</StickyNote></a>
       {CONTACT.whatsapp ? <a className="par rv" href={`https://wa.me/${CONTACT.whatsapp}`} target="_blank" rel="noreferrer"><span className="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 01-13.5 7.8L3 21l1.3-4.4A9 9 0 1121 12z"/></svg></span><h4>WhatsApp</h4><p>Direct support</p></a> : null}
       {CONTACT.instagram ? <a className="par rv" href={`https://instagram.com/${CONTACT.instagram}`} target="_blank" rel="noreferrer"><span className="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg></span><h4>Instagram</h4><p>@{CONTACT.instagram}</p></a> : null}
       {CONTACT.tiktok ? <a className="par rv" href={`https://tiktok.com/@${CONTACT.tiktok}`} target="_blank" rel="noreferrer"><span className="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M14 3v11a4 4 0 11-4-4M14 3c0 3 2 5 5 5"/></svg></span><h4>TikTok</h4><p>@{CONTACT.tiktok}</p></a> : null}

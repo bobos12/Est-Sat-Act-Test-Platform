@@ -607,3 +607,7 @@ html{scroll-behavior:smooth}
 
 /* "Swipe" hint shown above swipe rows on phones */
 .swipe-hint{display:none;justify-content:center;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin:-12px 0 -6px}
+.note-track{right:-26px;bottom:-34px;width:150px;font-size:22px;padding:22px 12px 10px}
+.sys-grid .par,.contact-grid .par{position:relative}
+.note-sys{right:-58px;top:-14px;width:150px;font-size:22px;padding:22px 12px 10px}
+.note-help{right:-34px;top:-38px;width:140px;font-size:22px;padding:22px 12px 10px}
