@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useActionState, useState, useTransition } from "react";
 import { FormMessage } from "@/components/ui/field";
 import { cn } from "@/lib/utils";
-import { resendConfirmation, sendMagicLink, signIn, signInWithGoogle, signUp, type AuthState } from "./actions";
+import { resendConfirmation, sendMagicLink, signIn, signUp, type AuthState } from "./actions";
 
 const q = (next?: string) => (next ? `?next=${encodeURIComponent(next)}` : "");
 
@@ -51,21 +51,12 @@ export function AuthForm({ mode, next }: { mode: "sign-in" | "sign-up"; next?: s
       </p>
 
       {/* Quick sign-in */}
-      <form action={signInWithGoogle}>
-        {next ? <input type="hidden" name="next" value={next} /> : null}
-        <button
-          type="submit"
-          className="flex h-12 w-full items-center justify-center gap-3 rounded-xl bg-white text-[0.9375rem] font-semibold text-ink-950 ring-1 ring-inset ring-line-strong transition hover:bg-paper-2 hover:ring-ink-400"
-        >
-          <GoogleIcon />
-          Continue with Google
-        </button>
-      </form>
+      {/* Google sign-in is ready (signInWithGoogle) but hidden until the provider is set up in Supabase. */}
       <button
         type="button"
         onClick={() => setMagic((m) => !m)}
         className={cn(
-          "mt-2.5 flex h-12 w-full items-center justify-center gap-3 rounded-xl text-[0.9375rem] font-semibold ring-1 ring-inset transition",
+          "flex h-12 w-full items-center justify-center gap-3 rounded-xl text-[0.9375rem] font-semibold ring-1 ring-inset transition",
           magic ? "bg-mark-50 text-mark-600 ring-mark-500" : "bg-white text-ink-950 ring-line-strong hover:bg-paper-2 hover:ring-ink-400",
         )}
       >
