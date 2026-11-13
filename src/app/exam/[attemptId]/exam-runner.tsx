@@ -8,6 +8,7 @@ import type { AttemptPayload } from "@/lib/exam-types";
 import { cn } from "@/lib/utils";
 import { saveAnswer, submitAttempt } from "../actions";
 import { SelectionToolbar, SplitHandle, ToolsMenu, useHighlights, useStored } from "./tools";
+import { BoardToolbar, DrawLayer, INK, type BoardSettings, type Shape } from "./board";
 
 type QState = { option: string | null; flagged: boolean };
 type SyncStatus = "saved" | "saving" | "retrying";
@@ -55,6 +56,11 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
     return initial;
   });
   const dirty = useRef<Record<string, QState>>({});
+  const [boardOn, setBoardOn] = useState(false);
+  const boardOnRef = useRef(false);
+  useEffect(() => {
+    boardOnRef.current = boardOn;
+  }, [boardOn]);
   const [syncStatus, setSyncStatus] = useState<SyncStatus>("saved");
   const [closed, setClosed] = useState(false);
   const flushing = useRef(false);
@@ -238,7 +244,7 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
         if (e.key === "Enter") setIntro(null);
         return;
       }
-      if (confirmOpen || navOpen || e.metaKey || e.ctrlKey || e.altKey) return;
+      if (confirmOpen || navOpen || boardOnRef.current || e.metaKey || e.ctrlKey || e.altKey) return;
       const target = e.target as HTMLElement | null;
       if (target && /input|textarea|select/i.test(target.tagName)) return;
       if (e.key === "ArrowRight") next();
@@ -267,6 +273,43 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
     return group.length > 1 ? [group[0].position, group[group.length - 1].position] : null;
   }, [current.stimulus_id, questions]);
 
+  // ---------- teaching board ----------
+  const [board, setBoard] = useStored<BoardSettings>("16h:board", { tool: "pen", color: INK[2], size: 4 });
+  const [ink, setInk] = useStored<Record<string, Shape[]>>(`16h:ink:${attemptId}`, {});
+  const undoStack = useRef<{ scope: string; prev: Shape[] }[]>([]);
+  const redoStack = useRef<{ scope: string; prev: Shape[] }[]>([]);
+  const [stackSize, setStackSize] = useState({ u: 0, r: 0 });
+  const syncStacks = () => setStackSize({ u: undoStack.current.length, r: redoStack.current.length });
+  const commitInk = (scope: string, next: Shape[]) => {
+    undoStack.current.push({ scope, prev: ink[scope] ?? [] });
+    redoStack.current = [];
+    setInk((all) => ({ ...all, [scope]: next }));
+    syncStacks();
+  };
+  const clearInk = (scopes: string[]) => {
+    const live = scopes.filter((sc) => ink[sc]?.length);
+    live.forEach((sc) => undoStack.current.push({ scope: sc, prev: ink[sc] }));
+    redoStack.current = [];
+    setInk((all) => ({ ...all, ...Object.fromEntries(live.map((sc) => [sc, []])) }));
+    syncStacks();
+  };
+  const undoInk = () => {
+    const step = undoStack.current.pop();
+    if (!step) return;
+    redoStack.current.push({ scope: step.scope, prev: ink[step.scope] ?? [] });
+    setInk((all) => ({ ...all, [step.scope]: step.prev }));
+    syncStacks();
+  };
+  const redoInk = () => {
+    const step = redoStack.current.pop();
+    if (!step) return;
+    undoStack.current.push({ scope: step.scope, prev: ink[step.scope] ?? [] });
+    setInk((all) => ({ ...all, [step.scope]: step.prev }));
+    syncStacks();
+  };
+  const drawing = boardOn && board.tool !== "hand";
+  const [leaveOpen, setLeaveOpen] = useState(false);
+
   // ---------- paper tools ----------
   const [ratio, setRatio] = useStored("16h:split", 0.5);
   const [fontScale, setFontScale] = useStored("16h:fs", 1);
@@ -294,10 +337,44 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
 
   return (
     <div className="flex h-dvh flex-col bg-paper">
-      <SelectionToolbar onApply={hl.apply} />
+      {drawing ? null : <SelectionToolbar onApply={hl.apply} />}
+      {boardOn ? (
+        <BoardToolbar
+          settings={board}
+          setSettings={setBoard}
+          onUndo={undoInk}
+          onRedo={redoInk}
+          canUndo={stackSize.u > 0}
+          canRedo={stackSize.r > 0}
+          inkCount={(ink[`q:${current.id}`]?.length ?? 0) + (stimulus ? ink[`p:${stimulus.id}`]?.length ?? 0 : 0)}
+          onClear={() => clearInk(stimulus ? [`q:${current.id}`, `p:${stimulus.id}`] : [`q:${current.id}`])}
+          onClose={() => setBoardOn(false)}
+        />
+      ) : null}
+      {leaveOpen ? (
+        <LeaveDialog
+          answered={answeredCount}
+          total={total}
+          onStay={() => setLeaveOpen(false)}
+          onLeave={async () => {
+            await flush();
+            if (document.fullscreenElement) await document.exitFullscreen().catch(() => {});
+            router.push("/dashboard");
+          }}
+        />
+      ) : null}
       {/* Top bar */}
       <header className="flex h-14 shrink-0 items-center gap-3 border-b border-line bg-white px-3 sm:px-5">
-        <LogoMark className="h-7 w-7 shrink-0" />
+        <button
+          type="button"
+          onClick={() => setLeaveOpen(true)}
+          aria-label="Leave exam"
+          title="Leave exam"
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[var(--radius-md)] text-ink-600 ring-1 ring-inset ring-line-strong hover:bg-paper-2 hover:text-ink-950"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"><path d="M6 6l12 12M18 6L6 18" /></svg>
+        </button>
+        <LogoMark className="hidden h-7 w-7 shrink-0 sm:block" />
         <div className="min-w-0 flex-1">
           <p className="truncate text-sm font-medium text-ink-950">{payload.exam.title}</p>
           <p className="truncate text-xs text-ink-500">
@@ -305,6 +382,18 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
             {payload.sections.length > 1 && section ? ` · ${section.title}` : ""}
           </p>
         </div>
+        <button
+          type="button"
+          onClick={() => setBoardOn((b) => !b)}
+          aria-pressed={boardOn}
+          className={cn(
+            "flex h-9 items-center gap-1.5 rounded-[var(--radius-md)] px-3 text-sm font-medium ring-1 ring-inset transition",
+            boardOn ? "bg-mark-500 text-white ring-mark-500" : "ring-line-strong hover:bg-paper-2",
+          )}
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><rect x="3" y="4" width="18" height="12" rx="2" /><path d="M7 20l3-4M17 20l-3-4M8 9l3 2 5-4" /></svg>
+          <span className="hidden sm:inline">Board</span>
+        </button>
         <ToolsMenu
           fontScale={fontScale}
           setFontScale={setFontScale}
@@ -374,6 +463,13 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
                 {stimulus.attribution ? <p className="mt-1 text-sm italic text-ink-500">{stimulus.attribution}</p> : null}
                 <PassageBody content={stimulus.content} marker={current.stimulus_marker} scope={`p:${stimulus.id}`} container={passageRef} />
               </div>
+              <DrawLayer
+                key={`p:${stimulus.id}`}
+                shapes={ink[`p:${stimulus.id}`] ?? []}
+                onCommit={(next) => commitInk(`p:${stimulus.id}`, next)}
+                settings={board}
+                active={drawing}
+              />
             </section>
             <button
               type="button"
@@ -383,7 +479,8 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
               {passageTall ? "▲ Show more question" : "▼ Show more passage"}
             </button>
             <SplitHandle onChange={setRatio} onReset={() => setRatio(0.5)} />
-            <div ref={questionRef} className="min-h-0 flex-1 overflow-y-auto">
+            <div ref={questionRef} className="relative min-h-0 flex-1 overflow-y-auto">
+              <DrawLayer key={`q:${current.id}`} shapes={ink[`q:${current.id}`] ?? []} onCommit={(next) => commitInk(`q:${current.id}`, next)} settings={board} active={drawing} />
               <div style={{ zoom: fontScale }}>
                 <QuestionPane
                   key={current.id}
@@ -401,7 +498,8 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
             </div>
           </div>
         ) : (
-          <div ref={questionRef} className="h-full overflow-y-auto">
+          <div ref={questionRef} className="relative h-full overflow-y-auto">
+            <DrawLayer key={`q:${current.id}`} shapes={ink[`q:${current.id}`] ?? []} onCommit={(next) => commitInk(`q:${current.id}`, next)} settings={board} active={drawing} />
             <div className="mx-auto max-w-3xl" style={{ zoom: fontScale }}>
               <QuestionPane
                 key={current.id}
@@ -1016,6 +1114,37 @@ function SubmitDialog({
             </div>
           </>
         )}
+      </div>
+    </div>
+  );
+}
+
+function LeaveDialog({ answered, total, onStay, onLeave }: { answered: number; total: number; onStay: () => void; onLeave: () => Promise<void> }) {
+  const [busy, setBusy] = useState(false);
+  useEscape(onStay);
+  return (
+    <div className="fixed inset-0 z-[70] flex items-center justify-center bg-ink-950/50 p-4" onClick={onStay}>
+      <div role="alertdialog" aria-modal="true" aria-labelledby="leave-title" className="w-full max-w-md rounded-[var(--radius-xl)] bg-white p-7 shadow-[var(--shadow-pop)]" onClick={(e) => e.stopPropagation()}>
+        <h2 id="leave-title" className="font-display text-2xl font-medium text-ink-950">Leave the exam?</h2>
+        <p className="mt-2 text-ink-600">
+          Your {answered} of {total} answers are saved. <b className="text-ink-950">The timer keeps running</b>, so come back from My exams to finish before it ends.
+        </p>
+        <div className="mt-6 flex gap-3">
+          <button type="button" onClick={onStay} className="h-11 flex-1 rounded-[var(--radius-md)] bg-ink-950 text-sm font-medium text-paper hover:bg-ink-800">
+            Keep going
+          </button>
+          <button
+            type="button"
+            disabled={busy}
+            onClick={async () => {
+              setBusy(true);
+              await onLeave();
+            }}
+            className="h-11 flex-1 rounded-[var(--radius-md)] text-sm font-medium text-ink-800 ring-1 ring-inset ring-line-strong hover:bg-paper-2 disabled:opacity-50"
+          >
+            {busy ? "Saving…" : "Save and leave"}
+          </button>
+        </div>
       </div>
     </div>
   );
