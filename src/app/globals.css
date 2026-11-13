@@ -115,3 +115,10 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Exam highlighter (CSS Custom Highlight API) */
+::highlight(hl-yellow) { background-color: #fde68a; color: inherit; }
+::highlight(hl-green) { background-color: #bbf7d0; color: inherit; }
+::highlight(hl-pink) { background-color: #fbcfe8; color: inherit; }
+::highlight(hl-blue) { background-color: #bfdbfe; color: inherit; }
+::highlight(hl-under) { text-decoration: underline 2px #e23b3b; text-underline-offset: 3px; }

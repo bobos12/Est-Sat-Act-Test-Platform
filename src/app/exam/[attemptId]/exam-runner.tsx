@@ -1,12 +1,13 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, useTransition } from "react";
 import { RichContentView } from "@/components/exam/rich-content";
 import { LogoMark } from "@/components/brand/logo";
 import type { AttemptPayload } from "@/lib/exam-types";
 import { cn } from "@/lib/utils";
 import { saveAnswer, submitAttempt } from "../actions";
+import { SelectionToolbar, SplitHandle, ToolsMenu, useHighlights, useStored } from "./tools";
 
 type QState = { option: string | null; flagged: boolean };
 type SyncStatus = "saved" | "saving" | "retrying";
@@ -266,8 +267,34 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
     return group.length > 1 ? [group[0].position, group[group.length - 1].position] : null;
   }, [current.stimulus_id, questions]);
 
+  // ---------- paper tools ----------
+  const [ratio, setRatio] = useStored("16h:split", 0.5);
+  const [fontScale, setFontScale] = useStored("16h:fs", 1);
+  const [crossed, setCrossed] = useStored<Record<string, string[]>>(`16h:x:${attemptId}`, {});
+  const [notes, setNotes] = useStored<Record<string, string>>(`16h:notes:${attemptId}`, {});
+  const [passageTall, setPassageTall] = useState(false);
+  const hl = useHighlights(attemptId, [current.id, stimulus?.id, intro, fontScale]);
+  const toggleCross = (optionId: string) =>
+    setCrossed((all) => {
+      const list = all[current.id] ?? [];
+      return { ...all, [current.id]: list.includes(optionId) ? list.filter((x) => x !== optionId) : [...list, optionId] };
+    });
+
+  // Keep each passage's scroll position while moving between its questions; new questions start at the top.
+  const passageRef = useRef<HTMLElement>(null);
+  const questionRef = useRef<HTMLDivElement>(null);
+  const scrollMemory = useRef<Record<string, number>>({});
+  const stimulusId = stimulus?.id;
+  useLayoutEffect(() => {
+    if (passageRef.current && stimulusId) passageRef.current.scrollTop = scrollMemory.current[stimulusId] ?? 0;
+  }, [stimulusId, intro]);
+  useEffect(() => {
+    questionRef.current?.scrollTo({ top: 0 });
+  }, [current.id]);
+
   return (
     <div className="flex h-dvh flex-col bg-paper">
+      <SelectionToolbar onApply={hl.apply} />
       {/* Top bar */}
       <header className="flex h-14 shrink-0 items-center gap-3 border-b border-line bg-white px-3 sm:px-5">
         <LogoMark className="h-7 w-7 shrink-0" />
@@ -278,6 +305,15 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
             {payload.sections.length > 1 && section ? ` · ${section.title}` : ""}
           </p>
         </div>
+        <ToolsMenu
+          fontScale={fontScale}
+          setFontScale={setFontScale}
+          highlightCount={hl.count}
+          onClearHighlights={hl.clearAll}
+          highlightSupported={hl.supported}
+          hasPassage={!!stimulus}
+          onLayout={setRatio}
+        />
         <SyncIndicator status={syncStatus} />
         <div
           role="timer"
@@ -315,34 +351,58 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
             }}
           />
         ) : stimulus ? (
-          <div className="grid h-full lg:grid-cols-2">
+          <div
+            className="flex h-full flex-col md:grid md:grid-cols-[var(--pa)_14px_minmax(0,1fr)]"
+            style={{ "--pa": `${ratio * 100}%` } as React.CSSProperties}
+          >
             <section
+              ref={passageRef}
               aria-label="Passage"
-              className="max-h-[38vh] overflow-y-auto border-b border-line bg-white px-5 py-6 lg:max-h-none lg:border-b-0 lg:border-r sm:px-8 lg:py-10"
+              onScroll={(e) => (scrollMemory.current[stimulus.id] = e.currentTarget.scrollTop)}
+              className={cn(
+                "relative shrink-0 overflow-y-auto border-b border-line bg-white px-5 py-6 sm:px-8 md:max-h-none md:border-b-0 md:py-10",
+                passageTall ? "max-h-[68vh]" : "max-h-[40vh]",
+              )}
             >
-              {groupRange ? (
-                <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-ink-500">
-                  Questions {groupRange[0]}–{groupRange[1]} refer to the following
-                </p>
-              ) : null}
-              {stimulus.title ? <h2 className="font-display text-xl font-medium text-ink-950">{stimulus.title}</h2> : null}
-              {stimulus.attribution ? <p className="mt-1 text-sm italic text-ink-500">{stimulus.attribution}</p> : null}
-              <PassageBody content={stimulus.content} marker={current.stimulus_marker} />
+              <div style={{ zoom: fontScale }}>
+                {groupRange ? (
+                  <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-ink-500">
+                    Questions {groupRange[0]}–{groupRange[1]} refer to the following
+                  </p>
+                ) : null}
+                {stimulus.title ? <h2 className="font-display text-xl font-medium text-ink-950">{stimulus.title}</h2> : null}
+                {stimulus.attribution ? <p className="mt-1 text-sm italic text-ink-500">{stimulus.attribution}</p> : null}
+                <PassageBody content={stimulus.content} marker={current.stimulus_marker} scope={`p:${stimulus.id}`} container={passageRef} />
+              </div>
             </section>
-            <div className="overflow-y-auto">
-              <QuestionPane
-                key={current.id}
-                question={current}
-                total={total}
-                state={currentState}
-                onSelect={(optionId) => update(current.id, { option: optionId })}
-                disabled={closed || timeUp}
-              />
+            <button
+              type="button"
+              onClick={() => setPassageTall((t) => !t)}
+              className="flex shrink-0 items-center justify-center gap-1.5 border-b border-line bg-paper-2 py-1.5 text-xs font-semibold text-ink-600 md:hidden"
+            >
+              {passageTall ? "▲ Show more question" : "▼ Show more passage"}
+            </button>
+            <SplitHandle onChange={setRatio} onReset={() => setRatio(0.5)} />
+            <div ref={questionRef} className="min-h-0 flex-1 overflow-y-auto">
+              <div style={{ zoom: fontScale }}>
+                <QuestionPane
+                  key={current.id}
+                  question={current}
+                  total={total}
+                  state={currentState}
+                  onSelect={(optionId) => update(current.id, { option: optionId })}
+                  disabled={closed || timeUp}
+                  crossed={crossed[current.id] ?? []}
+                  onCross={toggleCross}
+                  note={notes[current.id] ?? ""}
+                  onNote={(v) => setNotes((all) => ({ ...all, [current.id]: v }))}
+                />
+              </div>
             </div>
           </div>
         ) : (
-          <div className="h-full overflow-y-auto">
-            <div className="mx-auto max-w-3xl">
+          <div ref={questionRef} className="h-full overflow-y-auto">
+            <div className="mx-auto max-w-3xl" style={{ zoom: fontScale }}>
               <QuestionPane
                 key={current.id}
                 question={current}
@@ -350,6 +410,10 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
                 state={currentState}
                 onSelect={(optionId) => update(current.id, { option: optionId })}
                 disabled={closed || timeUp}
+                  crossed={crossed[current.id] ?? []}
+                  onCross={toggleCross}
+                  note={notes[current.id] ?? ""}
+                  onNote={(v) => setNotes((all) => ({ ...all, [current.id]: v }))}
               />
             </div>
           </div>
@@ -466,15 +530,24 @@ function QuestionPane({
   state,
   onSelect,
   disabled,
+  crossed,
+  onCross,
+  note,
+  onNote,
 }: {
   question: AttemptPayload["questions"][number];
   total: number;
   state: QState;
   onSelect: (optionId: string | null) => void;
   disabled: boolean;
+  crossed: string[];
+  onCross: (optionId: string) => void;
+  note: string;
+  onNote: (v: string) => void;
 }) {
+  const [notesOpen, setNotesOpen] = useState(Boolean(note));
   return (
-    <section aria-labelledby="question-heading" className="px-5 py-8 sm:px-10 sm:py-12">
+    <section aria-labelledby="question-heading" className="px-5 py-7 sm:px-10 sm:py-10">
       <div className="flex items-center justify-between">
         <h1 id="question-heading" className="text-sm font-medium text-ink-500">
           Question {question.position} <span className="sr-only">of {total}</span>
@@ -485,53 +558,90 @@ function QuestionPane({
           </span>
         ) : null}
       </div>
-      <RichContentView content={question.stem} className="mt-4 font-reading text-[1.1875rem] leading-relaxed text-ink-950" />
+      <div data-hl-scope={`q:${question.id}`}>
+        <RichContentView content={question.stem} className="mt-4 font-reading text-[1.1875rem] leading-relaxed text-ink-950" />
+      </div>
 
-      <fieldset className="mt-8" disabled={disabled}>
+      <fieldset className="mt-7" disabled={disabled}>
         <legend className="sr-only">Answer choices</legend>
-        <div className="grid gap-2.5">
+        <div className="grid gap-2.5" data-hl-scope={`qo:${question.id}`}>
           {question.options.map((o) => {
             const selected = state.option === o.id;
+            const out = crossed.includes(o.id) && !selected;
             return (
-              <label
-                key={o.id}
-                className={cn(
-                  "group flex cursor-pointer items-start gap-4 rounded-[var(--radius-md)] px-4 py-3.5 ring-1 ring-inset transition-colors",
-                  selected ? "bg-ink-950 text-paper ring-ink-950" : "bg-white ring-line-strong hover:ring-ink-700",
-                  disabled && "cursor-not-allowed opacity-60",
-                )}
-              >
-                <input
-                  type="radio"
-                  name={`q-${question.id}`}
-                  value={o.id}
-                  checked={selected}
-                  onChange={() => onSelect(o.id)}
-                  className="sr-only"
-                />
-                <span
-                  aria-hidden="true"
+              <div key={o.id} className="flex items-stretch gap-2">
+                <label
                   className={cn(
-                    "mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-sm font-semibold",
-                    selected ? "bg-paper text-ink-950" : "bg-paper-2 text-ink-700 group-hover:bg-paper-3",
+                    "group flex min-w-0 flex-1 cursor-pointer items-start gap-4 rounded-[var(--radius-md)] px-4 py-3.5 ring-1 ring-inset transition",
+                    selected ? "bg-ink-950 text-paper ring-ink-950" : "bg-white ring-line-strong hover:ring-ink-700",
+                    out && "opacity-45",
+                    disabled && "cursor-not-allowed opacity-60",
                   )}
                 >
-                  {o.label}
-                </span>
-                <RichContentView content={o.content} className="min-w-0 flex-1 font-reading text-[1.0625rem] leading-relaxed [&_p]:my-0" />
-              </label>
+                  <input
+                    type="radio"
+                    name={`q-${question.id}`}
+                    value={o.id}
+                    checked={selected}
+                    onChange={() => {
+                      if (crossed.includes(o.id)) onCross(o.id);
+                      onSelect(o.id);
+                    }}
+                    className="sr-only"
+                  />
+                  <span
+                    aria-hidden="true"
+                    className={cn(
+                      "mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-sm font-semibold",
+                      selected ? "bg-paper text-ink-950" : "bg-paper-2 text-ink-700 group-hover:bg-paper-3",
+                    )}
+                  >
+                    {o.label}
+                  </span>
+                  <RichContentView
+                    content={o.content}
+                    className={cn("min-w-0 flex-1 font-reading text-[1.0625rem] leading-relaxed [&_p]:my-0", out && "line-through decoration-danger-600 decoration-2")}
+                  />
+                </label>
+                <button
+                  type="button"
+                  onClick={() => onCross(o.id)}
+                  disabled={disabled}
+                  aria-pressed={out}
+                  aria-label={out ? `Bring back choice ${o.label}` : `Cross out choice ${o.label}`}
+                  title={out ? "Bring back" : "Cross out"}
+                  className={cn(
+                    "flex w-10 shrink-0 items-center justify-center rounded-[var(--radius-md)] text-sm font-bold ring-1 ring-inset transition",
+                    out ? "bg-danger-50 text-danger-600 ring-danger-600/40" : "text-ink-400 ring-line hover:text-danger-600 hover:ring-danger-600/40",
+                  )}
+                >
+                  {out ? "↺" : "✕"}
+                </button>
+              </div>
             );
           })}
         </div>
       </fieldset>
-      {state.option && !disabled ? (
-        <button
-          type="button"
-          onClick={() => onSelect(null)}
-          className="mt-4 text-sm text-ink-500 underline-offset-4 hover:text-ink-950 hover:underline"
-        >
-          Clear answer
+
+      <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
+        {state.option && !disabled ? (
+          <button type="button" onClick={() => onSelect(null)} className="text-sm text-ink-500 underline-offset-4 hover:text-ink-950 hover:underline">
+            Clear answer
+          </button>
+        ) : null}
+        <button type="button" onClick={() => setNotesOpen((o) => !o)} className="text-sm font-medium text-mark-500 hover:underline">
+          {notesOpen ? "Hide my notes" : note ? "📝 Show my notes" : "📝 Add a note"}
         </button>
+      </div>
+      {notesOpen ? (
+        <textarea
+          value={note}
+          onChange={(e) => onNote(e.target.value)}
+          rows={4}
+          placeholder="Scratch work, reminders, why you picked an answer… (saved on this device)"
+          className="mt-3 w-full resize-y rounded-[var(--radius-md)] bg-[#FFFBEA] px-4 py-3 leading-relaxed ring-1 ring-inset ring-[#F2E2A0] outline-none focus:ring-2 focus:ring-warning-500"
+          style={{ fontFamily: "var(--f-hand), cursive", fontSize: "1.25rem" }}
+        />
       ) : null}
     </section>
   );
@@ -635,14 +745,30 @@ function ModuleIntro({
   );
 }
 
-function PassageBody({ content, marker }: { content: AttemptPayload["stimuli"][number]["content"]; marker: number | null }) {
+function PassageBody({
+  content,
+  marker,
+  scope,
+  container,
+}: {
+  content: AttemptPayload["stimuli"][number]["content"];
+  marker: number | null;
+  scope: string;
+  container: React.RefObject<HTMLElement | null>;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (marker == null) return;
-    ref.current?.querySelector(`[data-marker="${marker}"]`)?.scrollIntoView({ block: "center", behavior: "smooth" });
-  }, [marker]);
+    const el = ref.current?.querySelector<HTMLElement>(`[data-marker="${marker}"]`);
+    const box = container.current;
+    if (!el || !box) return;
+    const a = el.getBoundingClientRect();
+    const b = box.getBoundingClientRect();
+    // Only move the passage when the tested words are out of view, so the reader keeps their place.
+    if (a.top < b.top + 24 || a.bottom > b.bottom - 24) el.scrollIntoView({ block: "center", behavior: "smooth" });
+  }, [marker, container]);
   return (
-    <div ref={ref}>
+    <div ref={ref} data-hl-scope={scope}>
       <RichContentView content={content} activeMarker={marker} className="mt-5 font-reading text-[1.0625rem] leading-[1.8] text-ink-900" />
     </div>
   );
