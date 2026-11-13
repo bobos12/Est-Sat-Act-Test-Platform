@@ -15,6 +15,7 @@ export default async function Students({ searchParams }: PageProps<"/admin/stude
   const q = typeof sp.q === "string" ? sp.q.trim().slice(0, 100) : "";
   const access = typeof sp.access === "string" ? sp.access : "";
   const page = Math.max(1, Number(sp.page) || 1);
+  const deleted = typeof sp.deleted === "string" ? sp.deleted : "";
 
   const now = requestTime();
   const nowIso = new Date(now).toISOString();
@@ -60,7 +61,8 @@ export default async function Students({ searchParams }: PageProps<"/admin/stude
 
   return (
     <>
-      <PageHeader title="Students" description="Search and filter every account. Open a student to grant or remove access." />
+      <PageHeader title="Students" description="Search and filter every account. Open a student to edit, grant access, suspend or delete." />
+      {deleted ? <p className="mb-4 rounded-[var(--radius-md)] bg-success-50 px-4 py-3 text-sm text-success-700">Deleted {deleted}.</p> : null}
       <div className="grid grid-cols-2 gap-px overflow-hidden rounded-[var(--radius-lg)] bg-line ring-1 ring-line sm:grid-cols-5">
         {[
           { k: "", label: "All students", v: totalAll ?? 0 },
@@ -99,6 +101,7 @@ export default async function Students({ searchParams }: PageProps<"/admin/stude
                 <Th>Access</Th>
                 <Th>Attempts</Th>
                 <Th>Joined</Th>
+                <Th className="text-right"> </Th>
               </tr>
             </thead>
             <tbody>
@@ -124,6 +127,11 @@ export default async function Students({ searchParams }: PageProps<"/admin/stude
                   </Td>
                   <Td className="tabular">{s.attempts}</Td>
                   <Td className="text-ink-500">{adminDay.format(new Date(s.created_at))}</Td>
+                  <Td className="text-right">
+                    <Link href={`/admin/students/${s.id}`} className="rounded-md px-2.5 py-1 text-xs font-semibold text-ink-700 ring-1 ring-line hover:bg-paper-2">
+                      Manage
+                    </Link>
+                  </Td>
                 </tr>
               ))}
             </tbody>

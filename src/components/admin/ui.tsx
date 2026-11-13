@@ -30,7 +30,7 @@ export function Panel({ title, actions, children, className }: { title?: string;
 export function DataTable({ children, className }: { children: ReactNode; className?: string }) {
   return (
     <div className={cn("overflow-x-auto", className)}>
-      <table className="w-full min-w-[640px] text-left text-sm">{children}</table>
+      <table className="w-full text-left text-sm">{children}</table>
     </div>
   );
 }

@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { DataTable, Empty, Panel, PageHeader, StatusBadge, Td, Th, adminDate, adminDay, money } from "@/components/admin/ui";
 import { adminClient } from "@/lib/admin/server";
 import { GrantForm, RevokeForm, RoleForm } from "../access-forms";
+import { DeleteStudentForm, EditStudentForm, SuspendForm } from "../manage-forms";
+import { createServiceClient } from "@/lib/supabase/server";
 
 export const metadata = { title: "Student" };
 
@@ -19,6 +21,16 @@ export default async function StudentProfile({ params }: PageProps<"/admin/stude
     supabase.from("exam_attempts").select("id, status, percent, correct_count, question_count, started_at, exams(title)").eq("user_id", id).order("started_at", { ascending: false }).limit(50),
     supabase.from("admin_audit_log").select("id, action, details, created_at, profiles:actor_id(full_name, email)").eq("target_type", "profile").eq("target_id", id).order("created_at", { ascending: false }).limit(50),
   ]);
+
+  // Suspension lives on the login (auth), readable only with the service key.
+  let suspended = false;
+  let canManageLogin = true;
+  try {
+    const { data } = await createServiceClient().auth.admin.getUserById(id);
+    suspended = Boolean(data.user?.banned_until && Date.parse(data.user.banned_until) > requestTime());
+  } catch {
+    canManageLogin = false;
+  }
 
   const now = requestTime();
   const active = (subs ?? []).find((s) => s.status === "active" && Date.parse(s.current_period_start!) <= now && Date.parse(s.current_period_end!) > now);
@@ -37,6 +49,7 @@ export default async function StudentProfile({ params }: PageProps<"/admin/stude
             {p.email}
             {p.phone ? ` · ${p.phone}` : ""} · joined {adminDay.format(new Date(p.created_at))}
             {p.role === "admin" ? " · Administrator" : ""}
+            {suspended ? <span className="ml-2 rounded-full bg-warning-50 px-2 py-0.5 text-xs font-semibold text-warning-700">Suspended</span> : null}
           </>
         }
       />
@@ -165,6 +178,11 @@ export default async function StudentProfile({ params }: PageProps<"/admin/stude
         </div>
 
         <div className="space-y-6">
+          <Panel title="Edit details">
+            <div className="p-5">
+              <EditStudentForm p={p} />
+            </div>
+          </Panel>
           <Panel title="Grant access">
             <div className="p-5">
               <GrantForm userId={p.id} />
@@ -182,6 +200,21 @@ export default async function StudentProfile({ params }: PageProps<"/admin/stude
             <Panel title="Role">
               <div className="p-5">
                 <RoleForm userId={p.id} role={p.role} />
+              </div>
+            </Panel>
+          ) : null}
+          {p.id !== viewer.id ? (
+            <Panel title="Danger zone" className="ring-danger-600/30">
+              <div className="space-y-5 p-5">
+                {canManageLogin ? null : (
+                  <p className="rounded-[var(--radius-md)] bg-warning-50 px-3 py-2 text-xs text-warning-700">
+                    Suspend and delete need SUPABASE_SERVICE_ROLE_KEY in the server environment.
+                  </p>
+                )}
+                <SuspendForm userId={p.id} suspended={suspended} />
+                <div className="border-t border-line pt-5">
+                  <DeleteStudentForm userId={p.id} email={p.email} />
+                </div>
               </div>
             </Panel>
           ) : null}
