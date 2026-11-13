@@ -77,6 +77,12 @@ function drawShape(ctx: CanvasRenderingContext2D, sh: Shape) {
   ctx.restore();
 }
 
+/** Pen-shaped cursor in the current ink colour, with the tip as the hotspot. */
+function penCursor(color: string) {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z" fill="${color}" stroke="white" stroke-width="1.6" stroke-linejoin="round"/></svg>`;
+  return `url("data:image/svg+xml,${encodeURIComponent(svg)}") 3 25, crosshair`;
+}
+
 /** Points along a shape, for the eraser's hit test. */
 function samples(sh: Shape): number[] {
   const p = sh.p;
@@ -293,7 +299,7 @@ export function DrawLayer({
         ? "text"
         : settings.tool === "laser"
           ? "none"
-          : "crosshair";
+          : penCursor(settings.color);
 
   return (
     <>
