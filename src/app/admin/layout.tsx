@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { Logo } from "@/components/brand/logo";
 import { AdminNav, AdminNavFallback } from "@/components/admin/nav";
 import { requireAdmin } from "@/lib/auth/session";
+import { createClient } from "@/lib/supabase/server";
 
 export const metadata = { title: { default: "Admin", template: "%s · Admin" }, robots: { index: false } };
 
@@ -20,7 +21,7 @@ export default function AdminLayout({ children }: LayoutProps<"/admin">) {
         </div>
         <div className="mt-4 lg:mt-8">
           <Suspense fallback={<AdminNavFallback />}>
-            <AdminNav />
+            <AdminNavWithBadges />
           </Suspense>
         </div>
         <div className="mt-8 hidden px-3 text-sm lg:block">
@@ -41,4 +42,15 @@ export default function AdminLayout({ children }: LayoutProps<"/admin">) {
 async function AdminGate({ children }: { children: React.ReactNode }) {
   await requireAdmin();
   return <main className="mx-auto max-w-6xl px-5 py-8 sm:px-8 lg:py-10">{children}</main>;
+}
+
+/** Menu with a live count of payments waiting for review. */
+async function AdminNavWithBadges() {
+  const supabase = await createClient();
+  const { count } = await supabase
+    .from("payments")
+    .select("id", { count: "exact", head: true })
+    .eq("status", "pending")
+    .in("provider", ["instapay", "vodafone_cash"]);
+  return <AdminNav badges={{ "/admin/billing": count ?? 0 }} />;
 }

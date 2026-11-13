@@ -1,6 +1,6 @@
 "use server";
 
-import { updateTag } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { adminClient } from "@/lib/admin/server";
@@ -296,4 +296,52 @@ export async function uploadQuestionImage(formData: FormData): Promise<{ markdow
   const { data } = supabase.storage.from("question-media").getPublicUrl(path);
   const alt = String(formData.get("alt") ?? "").trim() || "Figure";
   return { markdown: `![${alt.replace(/[[\]]/g, "")}](${data.publicUrl})` };
+}
+
+const backTo = (formData: FormData) => {
+  const qs = String(formData.get("back") ?? "");
+  return `/admin/exams${qs.startsWith("?") ? qs : ""}`;
+};
+const withMsg = (url: string, key: "ok" | "error", msg: string) => `${url}${url.includes("?") ? "&" : "?"}${key}=${encodeURIComponent(msg)}`;
+
+/** One row's quick action, sent as "id:field:value" (access free/premium, status published/draft/archived). */
+export async function examRowAction(formData: FormData) {
+  const { supabase } = await adminClient();
+  const [id, field, value] = String(formData.get("row") ?? "").split(":");
+  uuid.parse(id);
+  const patch =
+    field === "access"
+      ? { access: z.enum(["free", "premium"]).parse(value) }
+      : { status: z.enum(["draft", "published", "archived"]).parse(value) };
+  const { error } = await supabase.from("exams").update(patch).eq("id", id);
+  updateTag(CATALOG_TAG);
+  revalidatePath("/admin/exams");
+  redirect(error ? withMsg(backTo(formData), "error", error.message) : backTo(formData));
+}
+
+/** Apply one change to every ticked exam. */
+export async function bulkExams(formData: FormData) {
+  // Row buttons (Free/Premium, Publish/Unpublish) submit through the same form.
+  if (formData.get("row")) return examRowAction(formData);
+  const { supabase } = await adminClient();
+  const ids = formData.getAll("ids").map(String).filter((v) => uuid.safeParse(v).success);
+  const op = String(formData.get("op") ?? "");
+  const back = backTo(formData);
+  if (!ids.length) redirect(withMsg(back, "error", "Tick at least one exam first."));
+  const patch: Record<string, string> | null =
+    op === "free" ? { access: "free" } : op === "premium" ? { access: "premium" } : op === "publish" ? { status: "published" } : op === "unpublish" ? { status: "draft" } : op === "archive" ? { status: "archived" } : null;
+  if (!patch) redirect(back);
+  const failed: string[] = [];
+  for (const id of ids) {
+    const { error } = await supabase.from("exams").update(patch).eq("id", id);
+    if (error) failed.push(error.message);
+  }
+  updateTag(CATALOG_TAG);
+  revalidatePath("/admin/exams");
+  const done = ids.length - failed.length;
+  redirect(
+    failed.length
+      ? withMsg(back, "error", `${done} updated, ${failed.length} could not be changed: ${failed[0]}`)
+      : withMsg(back, "ok", `${done} ${done === 1 ? "exam" : "exams"} updated.`),
+  );
 }

@@ -25,7 +25,7 @@ function revenue(map: Record<string, number>) {
 
 export default async function AdminOverview() {
   const { supabase } = await adminClient();
-  const [{ data: stats, error }, { data: attempts }, { data: payments }] = await Promise.all([
+  const [{ data: stats, error }, { data: attempts }, { data: payments }, { count: toReview }, { count: drafts }, { count: failedDocs }] = await Promise.all([
     supabase.rpc("admin_dashboard_stats"),
     supabase
       .from("exam_attempts")
@@ -37,6 +37,9 @@ export default async function AdminOverview() {
       .select("id, status, amount_cents, currency, created_at, profiles(full_name, email)")
       .order("created_at", { ascending: false })
       .limit(8),
+    supabase.from("payments").select("id", { count: "exact", head: true }).eq("status", "pending").in("provider", ["instapay", "vodafone_cash"]),
+    supabase.from("exams").select("id", { count: "exact", head: true }).in("status", ["draft", "in_review"]),
+    supabase.from("source_documents").select("id", { count: "exact", head: true }).eq("status", "failed"),
   ]);
   if (error) throw new Error(error.message);
   const s = stats as Stats;
@@ -51,6 +54,56 @@ export default async function AdminOverview() {
   return (
     <>
       <PageHeader title="Overview" description="Students, content and revenue at a glance." />
+
+      <div className="mb-6 grid gap-4 lg:grid-cols-[1.3fr_1fr]">
+        <div className="rounded-[var(--radius-lg)] bg-white p-5 ring-1 ring-line">
+          <p className="text-xs font-semibold uppercase tracking-[0.1em] text-ink-500">Needs your attention</p>
+          <ul className="mt-3 divide-y divide-line">
+            {[
+              { n: toReview ?? 0, label: "payments waiting for review", href: "/admin/billing", cta: "Review", urgent: true },
+              { n: drafts ?? 0, label: "exams in draft or review", href: "/admin/exams?status=draft", cta: "Open" },
+              { n: failedDocs ?? 0, label: "PDF imports that failed", href: "/admin/knowledge", cta: "Retry" },
+            ].map((r) => (
+              <li key={r.label} className="flex items-center gap-3 py-2.5">
+                <span
+                  className={
+                    r.n && r.urgent
+                      ? "flex h-8 min-w-8 items-center justify-center rounded-full bg-danger-600 px-2 text-sm font-bold text-white"
+                      : r.n
+                        ? "flex h-8 min-w-8 items-center justify-center rounded-full bg-warning-50 px-2 text-sm font-bold text-warning-700"
+                        : "flex h-8 min-w-8 items-center justify-center rounded-full bg-success-50 px-2 text-sm font-bold text-success-700"
+                  }
+                >
+                  {r.n || "✓"}
+                </span>
+                <span className="flex-1 text-sm text-ink-700">{r.n ? r.label : `No ${r.label}`}</span>
+                {r.n ? (
+                  <Link href={r.href} className="rounded-md px-3 py-1.5 text-xs font-semibold text-ink-800 ring-1 ring-line hover:bg-paper-2">
+                    {r.cta} →
+                  </Link>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="rounded-[var(--radius-lg)] bg-ink-950 p-5 text-paper">
+          <p className="text-xs font-semibold uppercase tracking-[0.1em] text-ink-400">Quick actions</p>
+          <div className="mt-3 grid grid-cols-2 gap-2 text-sm font-medium">
+            {[
+              { label: "Upload exam PDF", href: "/admin/knowledge" },
+              { label: "New exam", href: "/admin/exams/new" },
+              { label: "Discount codes", href: "/admin/billing" },
+              { label: "Find a student", href: "/admin/students" },
+              { label: "Free exams", href: "/admin/exams?access=free" },
+              { label: "View site", href: "/" },
+            ].map((a) => (
+              <Link key={a.label} href={a.href} className="rounded-[var(--radius-md)] bg-white/10 px-3 py-2.5 transition hover:bg-white/20">
+                {a.label} →
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
 
       <div className="grid gap-px overflow-hidden rounded-[var(--radius-lg)] bg-line ring-1 ring-line sm:grid-cols-2 lg:grid-cols-4">
         {tiles.map((t) => {

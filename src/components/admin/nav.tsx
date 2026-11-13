@@ -13,8 +13,8 @@ const items = [
   { href: "/admin/billing", label: "Plans & payments" },
 ];
 
-export function AdminNav() {
-  return <NavList pathname={usePathname()} />;
+export function AdminNav({ badges }: { badges?: Record<string, number> }) {
+  return <NavList pathname={usePathname()} badges={badges} />;
 }
 
 /** Static version used while the current path is resolved. */
@@ -22,7 +22,7 @@ export function AdminNavFallback() {
   return <NavList pathname="" />;
 }
 
-function NavList({ pathname }: { pathname: string }) {
+function NavList({ pathname, badges }: { pathname: string; badges?: Record<string, number> }) {
   return (
     <nav aria-label="Admin" className="flex gap-1 overflow-x-auto lg:flex-col">
       {items.map((item) => {
@@ -37,7 +37,12 @@ function NavList({ pathname }: { pathname: string }) {
               active ? "bg-ink-950 text-paper" : "text-ink-600 hover:bg-paper-2 hover:text-ink-950",
             )}
           >
-            {item.label}
+            <span className="flex items-center justify-between gap-2">
+              {item.label}
+              {badges?.[item.href] ? (
+                <span className="rounded-full bg-danger-600 px-1.5 text-[0.6875rem] font-bold leading-5 text-white">{badges[item.href]}</span>
+              ) : null}
+            </span>
           </Link>
         );
       })}
