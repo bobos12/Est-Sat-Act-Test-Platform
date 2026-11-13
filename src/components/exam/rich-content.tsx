@@ -46,8 +46,8 @@ export function InlineText({ text, options }: { text: string; options?: InlineOp
                 active ? "bg-mark-100 ring-1 ring-mark-500" : "bg-transparent",
               )}
             >
-              <span className="mr-0.5 align-super text-[0.65em] font-semibold text-ink-500 not-italic">[{n}]</span>
-              {label ? <span className="underline decoration-ink-700 decoration-1 underline-offset-[3px]">{label}</span> : <span className="inline-block w-10 border-b border-ink-700" />}
+              <span className="mk-n mr-0.5 align-super text-[0.65em] font-semibold text-ink-500 not-italic">[{n}]</span>
+              {label ? <span className="mk-l underline decoration-ink-700 decoration-1 underline-offset-[3px]">{label}</span> : <span className="mk-blank inline-block w-10 border-b border-ink-700" />}
             </span>
           );
         }

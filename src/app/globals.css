@@ -122,3 +122,17 @@
 ::highlight(hl-pink) { background-color: #fbcfe8; color: inherit; }
 ::highlight(hl-blue) { background-color: #bfdbfe; color: inherit; }
 ::highlight(hl-under) { text-decoration: underline 2px #e23b3b; text-underline-offset: 3px; }
+
+/* EST paper mode: matches the printed EST booklet (Cambria-style serif, justified passage, inline [n] markers) */
+.paper main { background: #fff; }
+.paper .font-reading, .paper .p-title, .paper .p-attr, .paper .q-num { font-family: var(--f-paper), Cambria, Georgia, serif; color: #111; }
+.paper section[aria-label="Passage"] .font-reading { text-align: justify; hyphens: auto; font-size: 1.125rem; line-height: 1.6; }
+.paper section[aria-label="Passage"] .font-reading p { text-indent: 2.2em; margin-bottom: .2em; }
+.paper .p-title { font-size: 1.35rem; font-weight: 700; text-align: center; letter-spacing: 0; }
+.paper .p-attr { font-size: 1rem; font-style: normal; font-weight: 700; color: #111; text-align: left; margin-top: .9rem; }
+.paper .mk-n { vertical-align: baseline; font-size: 1em; font-weight: 700; color: #111; margin-right: .25em; }
+.paper .mk-l { text-decoration-color: #111; text-underline-offset: 2px; }
+.paper .mk-blank { border-color: #111; }
+.paper .q-stem .font-reading, .paper .q-num { font-size: 1.1875rem; line-height: 1.5; }
+.paper .q-stem .font-reading, .paper .q-stem .font-reading * { font-weight: 400; }
+.paper .opt-letter { background: #fff; }

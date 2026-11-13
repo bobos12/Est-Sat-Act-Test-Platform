@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { saveAnswer, submitAttempt } from "../actions";
 import { SelectionToolbar, SplitHandle, ToolsMenu, useHighlights, useStored } from "./tools";
 import { BoardToolbar, DrawLayer, INK, type BoardSettings, type Shape } from "./board";
+import { paperFont } from "../fonts";
 
 type QState = { option: string | null; flagged: boolean };
 type SyncStatus = "saved" | "saving" | "retrying";
@@ -273,6 +274,9 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
     return group.length > 1 ? [group[0].position, group[group.length - 1].position] : null;
   }, [current.stimulus_id, questions]);
 
+  // EST exams look like the printed EST paper; SAT and ACT keep the standard design.
+  const paper = payload.exam.subject.code.startsWith("est");
+
   // ---------- teaching board ----------
   const [board, setBoard] = useStored<BoardSettings>("16h:board", { tool: "pen", color: INK[2], size: 4 });
   const [ink, setInk] = useStored<Record<string, Shape[]>>(`16h:ink:${attemptId}`, {});
@@ -336,7 +340,7 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
   }, [current.id]);
 
   return (
-    <div className="flex h-dvh flex-col bg-paper">
+    <div className={cn("flex h-dvh flex-col bg-paper", paper && `paper ${paperFont.variable}`)}>
       {drawing ? null : <SelectionToolbar onApply={hl.apply} />}
       {boardOn ? (
         <BoardToolbar
@@ -459,8 +463,8 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
                     Questions {groupRange[0]}–{groupRange[1]} refer to the following
                   </p>
                 ) : null}
-                {stimulus.title ? <h2 className="font-display text-xl font-medium text-ink-950">{stimulus.title}</h2> : null}
-                {stimulus.attribution ? <p className="mt-1 text-sm italic text-ink-500">{stimulus.attribution}</p> : null}
+                {stimulus.title ? <h2 className="p-title font-display text-xl font-medium text-ink-950">{stimulus.title}</h2> : null}
+                {stimulus.attribution ? <p className="p-attr mt-1 text-sm italic text-ink-500">{stimulus.attribution}</p> : null}
                 <PassageBody content={stimulus.content} marker={current.stimulus_marker} scope={`p:${stimulus.id}`} container={passageRef} />
               </div>
               <DrawLayer
@@ -489,6 +493,7 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
                   state={currentState}
                   onSelect={(optionId) => update(current.id, { option: optionId })}
                   disabled={closed || timeUp}
+                  paper={paper}
                   crossed={crossed[current.id] ?? []}
                   onCross={toggleCross}
                   note={notes[current.id] ?? ""}
@@ -508,6 +513,7 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
                 state={currentState}
                 onSelect={(optionId) => update(current.id, { option: optionId })}
                 disabled={closed || timeUp}
+                  paper={paper}
                   crossed={crossed[current.id] ?? []}
                   onCross={toggleCross}
                   note={notes[current.id] ?? ""}
@@ -632,6 +638,7 @@ function QuestionPane({
   onCross,
   note,
   onNote,
+  paper,
 }: {
   question: AttemptPayload["questions"][number];
   total: number;
@@ -642,12 +649,13 @@ function QuestionPane({
   onCross: (optionId: string) => void;
   note: string;
   onNote: (v: string) => void;
+  paper?: boolean;
 }) {
   const [notesOpen, setNotesOpen] = useState(Boolean(note));
   return (
     <section aria-labelledby="question-heading" className="px-5 py-7 sm:px-10 sm:py-10">
       <div className="flex items-center justify-between">
-        <h1 id="question-heading" className="text-sm font-medium text-ink-500">
+        <h1 id="question-heading" className={cn("text-sm font-medium text-ink-500", paper && "sr-only")}>
           Question {question.position} <span className="sr-only">of {total}</span>
         </h1>
         {state.flagged ? (
@@ -656,8 +664,9 @@ function QuestionPane({
           </span>
         ) : null}
       </div>
-      <div data-hl-scope={`q:${question.id}`}>
-        <RichContentView content={question.stem} className="mt-4 font-reading text-[1.1875rem] leading-relaxed text-ink-950" />
+      <div data-hl-scope={`q:${question.id}`} className={cn(paper && "q-stem mt-4 flex gap-2.5")}>
+        {paper ? <span className="q-num shrink-0 font-bold">{question.position}.</span> : null}
+        <RichContentView content={question.stem} className={cn("font-reading text-[1.1875rem] leading-relaxed text-ink-950", !paper && "mt-4")} />
       </div>
 
       <fieldset className="mt-7" disabled={disabled}>
@@ -671,7 +680,13 @@ function QuestionPane({
                 <label
                   className={cn(
                     "group flex min-w-0 flex-1 cursor-pointer items-start gap-4 rounded-[var(--radius-md)] px-4 py-3.5 ring-1 ring-inset transition",
-                    selected ? "bg-ink-950 text-paper ring-ink-950" : "bg-white ring-line-strong hover:ring-ink-700",
+                    paper
+                      ? selected
+                        ? "opt-on bg-mark-50 ring-mark-500"
+                        : "bg-transparent ring-transparent hover:bg-paper-2"
+                      : selected
+                        ? "bg-ink-950 text-paper ring-ink-950"
+                        : "bg-white ring-line-strong hover:ring-ink-700",
                     out && "opacity-45",
                     disabled && "cursor-not-allowed opacity-60",
                   )}
@@ -691,7 +706,13 @@ function QuestionPane({
                     aria-hidden="true"
                     className={cn(
                       "mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-sm font-semibold",
-                      selected ? "bg-paper text-ink-950" : "bg-paper-2 text-ink-700 group-hover:bg-paper-3",
+                      paper
+                        ? selected
+                          ? "bg-mark-500 text-white"
+                          : "opt-letter ring-1 ring-ink-400 text-ink-900"
+                        : selected
+                          ? "bg-paper text-ink-950"
+                          : "bg-paper-2 text-ink-700 group-hover:bg-paper-3",
                     )}
                   >
                     {o.label}
