@@ -72,7 +72,7 @@ export async function signUp(_: AuthState, formData: FormData): Promise<AuthStat
     password: parsed.data.password,
     options: {
       data: { full_name: parsed.data.fullName },
-      emailRedirectTo: `${await siteOrigin()}/auth/confirm?next=${encodeURIComponent(next)}`,
+      emailRedirectTo: `${await siteOrigin()}/auth/confirm?welcome=1&next=${encodeURIComponent(next)}`,
     },
   });
   if (error) {
@@ -103,7 +103,7 @@ export async function resendConfirmation(email: string): Promise<{ ok?: boolean;
   const { error } = await supabase.auth.resend({
     type: "signup",
     email: parsed.data,
-    options: { emailRedirectTo: `${await siteOrigin()}/auth/confirm?next=/dashboard` },
+    options: { emailRedirectTo: `${await siteOrigin()}/auth/confirm?welcome=1&next=/dashboard` },
   });
   if (error) return { error: error.message.includes("seconds") ? "Please wait a minute before asking again." : "We couldn't resend the email. Try again in a minute." };
   return { ok: true };
@@ -132,4 +132,32 @@ export async function updatePassword(_: AuthState, formData: FormData): Promise<
   const { error } = await supabase.auth.updateUser({ password: parsed.data });
   if (error) return { error: error.message.includes("session") ? "This reset link has expired. Ask for a new one." : error.message };
   redirect("/dashboard");
+}
+
+/** "Continue with Google": send the browser to Google, then back to /auth/confirm. */
+export async function signInWithGoogle(formData: FormData) {
+  if (!isSupabaseConfigured()) redirect("/sign-in");
+  const next = safeNext(formData.get("next"));
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: { redirectTo: `${await siteOrigin()}/auth/confirm?next=${encodeURIComponent(next)}`, queryParams: { prompt: "select_account" } },
+  });
+  if (error || !data.url) redirect(`/sign-in?error=google`);
+  redirect(data.url);
+}
+
+/** Passwordless: email a one-tap sign-in link (also creates the account if it's new). */
+export async function sendMagicLink(_: AuthState, formData: FormData): Promise<AuthState> {
+  if (!isSupabaseConfigured()) return { error: "Sign-in is not available yet." };
+  const parsed = z.string().trim().toLowerCase().email().safeParse(formData.get("email"));
+  if (!parsed.success) return { fieldErrors: { email: "Enter a valid email address." }, email: String(formData.get("email") ?? "") };
+  const next = safeNext(formData.get("next"));
+  const supabase = await createClient();
+  const { error } = await supabase.auth.signInWithOtp({
+    email: parsed.data,
+    options: { emailRedirectTo: `${await siteOrigin()}/auth/confirm?next=${encodeURIComponent(next)}`, shouldCreateUser: true },
+  });
+  if (error) return { email: parsed.data, error: error.message.includes("seconds") ? "Please wait a minute before asking for another link." : "We couldn't send the link. Try again in a minute." };
+  return { notice: "magic", email: parsed.data };
 }

@@ -1,0 +1,73 @@
+<!-- Supabase → Authentication → Email Templates → "Magic Link"
+     Subject: Your 16hundred sign-in link 🔑 -->
+<!doctype html>
+<html lang="en">
+  <body style="margin:0;padding:0;background:#F5F7FC;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#0A0F1C;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F5F7FC;padding:32px 12px;">
+      <tr>
+        <td align="center">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;">
+            <!-- Logo -->
+            <tr>
+              <td style="padding:0 8px 20px;">
+                <table role="presentation" cellpadding="0" cellspacing="0"><tr>
+                  <td style="width:34px;height:34px;border-radius:17px;background:#1559ED;color:#ffffff;font-weight:800;font-size:14px;text-align:center;line-height:34px;">16</td>
+                  <td style="padding-left:6px;font-weight:800;font-size:21px;letter-spacing:-0.5px;color:#0A0F1C;">hundred</td>
+                </tr></table>
+              </td>
+            </tr>
+            <!-- Card -->
+            <tr>
+              <td style="background:#ffffff;border-radius:20px;border:1px solid #E2E7F1;overflow:hidden;">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                  <tr><td style="height:6px;background:#1559ED;font-size:0;line-height:0;">&nbsp;</td></tr>
+                  <tr>
+                    <td style="padding:36px 36px 8px;">
+                      <p style="margin:0 0 6px;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#1559ED;">One-tap sign-in</p>
+                      <h1 style="margin:0;font-size:28px;line-height:1.2;font-weight:800;letter-spacing:-0.5px;color:#0A0F1C;">Here's your sign-in link</h1>
+                      <p style="margin:16px 0 0;font-size:16px;line-height:1.6;color:#3B4458;">
+                        Tap the button to sign in to 16hundred. No password needed.
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:28px 36px 8px;">
+                      <table role="presentation" cellpadding="0" cellspacing="0"><tr>
+                        <td style="border-radius:14px;background:#1559ED;">
+                          <a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=email&next=/dashboard"
+                             style="display:inline-block;padding:16px 34px;font-size:17px;font-weight:700;color:#ffffff;text-decoration:none;border-radius:14px;">
+                            Sign me in &rarr;
+                          </a>
+                        </td>
+                      </tr></table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:24px 36px 0;">
+                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FFF8E1;border-radius:14px;">
+                        <tr><td style="padding:16px 20px;font-size:14px;line-height:1.6;color:#5C4A12;">🔒 The link works once and expires in 1 hour. Open it on the device where you want to be signed in.</td></tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:24px 36px 32px;font-size:13px;line-height:1.6;color:#7A8499;">
+                      Button not working? Copy this link into your browser:<br />
+                      <a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=email&next=/dashboard" style="color:#1559ED;word-break:break-all;">{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&amp;type=email</a>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <!-- Footer -->
+            <tr>
+              <td style="padding:22px 8px 0;font-size:12px;line-height:1.6;color:#7A8499;text-align:center;">
+                You're getting this because someone asked to sign in to 16hundred with this email. If it wasn't you, ignore this email.<br />
+                16hundred · Train smarter. Score higher. Reach 1600.
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
