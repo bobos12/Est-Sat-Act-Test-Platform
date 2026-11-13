@@ -5,6 +5,7 @@ import { requireViewer } from "@/lib/auth/session";
 import type { AttemptPayload, ClosedPayload } from "@/lib/exam-types";
 import { createClient } from "@/lib/supabase/server";
 import { ExamRunner } from "./exam-runner";
+import { ExamLoader } from "@/components/exam/exam-loader";
 
 export const metadata: Metadata = { title: "Exam in progress", robots: { index: false } };
 
@@ -33,9 +34,5 @@ async function Exam({ params }: { params: PageProps<"/exam/[attemptId]">["params
 }
 
 function ExamLoading() {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-paper">
-      <p className="text-sm text-ink-500">Loading your exam…</p>
-    </div>
-  );
+  return <ExamLoader />;
 }

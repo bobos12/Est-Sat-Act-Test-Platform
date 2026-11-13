@@ -136,3 +136,5 @@
 .paper .q-stem .font-reading, .paper .q-num { font-size: 1.1875rem; line-height: 1.5; }
 .paper .q-stem .font-reading, .paper .q-stem .font-reading * { font-weight: 400; }
 .paper .opt-letter { background: #fff; }
+
+@keyframes loaderStep { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }

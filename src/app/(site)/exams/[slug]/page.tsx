@@ -3,11 +3,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Button, ButtonLink } from "@/components/ui/button";
+import { ButtonLink } from "@/components/ui/button";
 import { getViewer } from "@/lib/auth/session";
 import { difficultyLabel, getExamBySlug, getSubjects, getTopics, type CatalogExam } from "@/lib/catalog";
 import { createClient } from "@/lib/supabase/server";
 import { startExam } from "../actions";
+import { StartExamButton } from "../start-button";
 
 export async function generateMetadata({ params }: PageProps<"/exams/[slug]">): Promise<Metadata> {
   const { slug } = await params;
@@ -146,9 +147,7 @@ async function StartPanel({ exam }: { exam: CatalogExam }) {
           ? "Pick up exactly where you left off. The timer has kept running."
           : `The ${exam.duration_minutes}-minute timer starts as soon as you press Start.`}
       </p>
-      <Button type="submit" size="lg" className="mt-5 w-full">
-        {open ? "Resume exam" : "Start exam"}
-      </Button>
+      <StartExamButton resume={Boolean(open)} title={exam.title} />
     </form>
   );
 }
