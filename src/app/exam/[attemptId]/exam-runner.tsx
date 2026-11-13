@@ -683,7 +683,7 @@ function QuestionPane({
                     paper
                       ? selected
                         ? "opt-on bg-mark-50 ring-mark-500"
-                        : "bg-transparent ring-transparent hover:bg-paper-2"
+                        : "bg-white ring-line-strong hover:ring-ink-700"
                       : selected
                         ? "bg-ink-950 text-paper ring-ink-950"
                         : "bg-white ring-line-strong hover:ring-ink-700",
@@ -742,7 +742,7 @@ function QuestionPane({
         </div>
       </fieldset>
 
-      <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
+      <div className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-line pt-5">
         {state.option && !disabled ? (
           <button type="button" onClick={() => onSelect(null)} className="text-sm text-ink-500 underline-offset-4 hover:text-ink-950 hover:underline">
             Clear answer
