@@ -626,3 +626,5 @@ html{scroll-behavior:smooth}
 .plan-tab[aria-selected="true"]{background:#fff;box-shadow:0 4px 12px -4px rgba(10,15,28,.2)}
 .plan-tab[aria-selected="true"] span{color:var(--blue)}
 .plan-tab[aria-selected="true"] em{background:var(--blue)}
+
+.note-head{right:2%;top:-92px;width:156px;font-size:21px;padding:20px 12px 8px}
