@@ -138,3 +138,29 @@
 .paper .opt-letter { background: #fff; }
 
 @keyframes loaderStep { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* ---------- Student dashboard motion ---------- */
+@keyframes dashRise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes dashDraw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes dashGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes dashFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes dashFloat { 0%, 100% { transform: translate3d(0, 0, 0) scale(1); } 50% { transform: translate3d(18px, -14px, 0) scale(1.06); } }
+@keyframes dashGlow { 0%, 100% { box-shadow: 0 0 0 0 rgba(21, 89, 237, .35); } 50% { box-shadow: 0 0 0 6px rgba(21, 89, 237, 0); } }
+@keyframes dashPop { 0% { transform: scale(0); } 70% { transform: scale(1.25); } 100% { transform: scale(1); } }
+.dash-rise { opacity: 0; animation: dashRise .7s cubic-bezier(.2, .8, .2, 1) forwards; animation-delay: var(--d, 0s); }
+.dash-draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: dashDraw 1.4s cubic-bezier(.4, 0, .2, 1) forwards; animation-delay: var(--d, .2s); }
+.dash-grow { transform-origin: left; transform: scaleX(0); animation: dashGrow 1s cubic-bezier(.2, .8, .2, 1) forwards; animation-delay: var(--d, .3s); }
+.dash-fade { opacity: 0; animation: dashFade .8s ease forwards; animation-delay: var(--d, .6s); }
+.dash-pop { transform: scale(0); animation: dashPop .45s cubic-bezier(.2, .8, .2, 1) forwards; animation-delay: var(--d, 1s); transform-box: fill-box; transform-origin: center; }
+.dash-float { animation: dashFloat 12s ease-in-out infinite; }
+.dash-glow { animation: dashGlow 2.2s ease-in-out infinite; }
+.dash-lift { transition: transform .25s cubic-bezier(.2, .8, .2, 1), box-shadow .25s ease; }
+.dash-lift:hover { transform: translateY(-3px); box-shadow: 0 18px 40px -22px rgba(10, 26, 58, .35); }
+@media (prefers-reduced-motion: reduce) {
+  .dash-rise, .dash-fade { opacity: 1; animation: none; }
+  .dash-draw { stroke-dashoffset: 0; animation: none; }
+  .dash-grow, .dash-pop { transform: none; animation: none; }
+  .dash-float, .dash-glow { animation: none; }
+  .dash-lift:hover { transform: none; }
+}
+@keyframes wave { 0%,100% { transform: rotate(0); } 20% { transform: rotate(16deg); } 40% { transform: rotate(-8deg); } 60% { transform: rotate(14deg); } 80% { transform: rotate(-4deg); } }
