@@ -13,11 +13,9 @@
   --ease:cubic-bezier(.2,.8,.2,1);
   --shadow:0 1px 2px rgba(10,15,28,.06),0 12px 32px -12px rgba(10,15,28,.16);
 }
-:where(.sh) *,:where(.sh) *:before,:where(.sh) *:after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
+@layer base{:where(.sh) *,:where(.sh) *:before,:where(.sh) *:after{box-sizing:border-box;margin:0;padding:0}:where(.sh) a{color:inherit;text-decoration:none}:where(.sh) button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}}
 .sh{background:var(--white);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-:where(.sh) a{color:inherit;text-decoration:none}
-:where(.sh) button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 ::selection{background:var(--blue);color:#fff}
 .wrap{width:min(1220px,100% - 40px);margin-inline:auto}
 .serif{font-family:var(--serif);font-weight:400;font-style:italic;letter-spacing:-.01em}
@@ -628,3 +626,5 @@ html{scroll-behavior:smooth}
 .plan-tab[aria-selected="true"] em{background:var(--blue)}
 
 .note-head{right:2%;top:-92px;width:156px;font-size:21px;padding:20px 12px 8px}
+
+.unlock-wrap{margin-top:22px}

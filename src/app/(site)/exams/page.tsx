@@ -7,6 +7,7 @@ import { difficultyLabel, getPublishedExams, getSubjects, getTopics, type Catalo
 import { TRACKS } from "@/lib/exam-catalog";
 import { createClient } from "@/lib/supabase/server";
 import { cn } from "@/lib/utils";
+import { UnlockBanner } from "@/components/site/unlock-banner";
 
 export const metadata: Metadata = {
   title: "Exam library",
@@ -109,7 +110,6 @@ async function Library({ searchParams }: { searchParams: PageProps<"/exams">["se
   const filtered = Boolean(f.subject || f.topic || f.difficulty || f.access || f.q);
   const free = exams.filter((e) => e.access === "free").length;
   const questions = exams.reduce((n, e) => n + e.question_count, 0);
-  const locked = viewer?.hasPremium ? 0 : visible.filter((e) => e.access === "premium").length;
   const soonName = subject && !examCount.get(subject.id) ? `${subject.name} exams` : track && !exams.some((e) => trackOfExam(e) === track) ? `${track.toUpperCase()} exams` : undefined;
 
   return (
@@ -269,16 +269,11 @@ async function Library({ searchParams }: { searchParams: PageProps<"/exams">["se
         <EmptyState hasAny={exams.length > 0} soon={soonName} />
       )}
 
-      {locked > 0 ? (
-        <Link href="/pricing" className="dash-lift flex flex-col items-center gap-4 rounded-[24px] bg-ink-950 p-6 text-center text-paper sm:flex-row sm:text-left">
-          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-mark-500 text-xl">🔓</span>
-          <span className="flex-1">
-            <b className="block text-lg">{locked} premium {locked === 1 ? "exam is" : "exams are"} waiting for you</b>
-            <span className="text-sm text-ink-300">One membership unlocks every EST, SAT and ACT mock, from 192 EGP a month.</span>
-          </span>
-          <span className="rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-ink-950">See plans →</span>
-        </Link>
-      ) : null}
+      {viewer?.hasPremium ? null : (
+        <div className="dash-rise pt-4" style={css({ "--d": ".5s" })}>
+          <UnlockBanner locked={exams.filter((e) => e.access === "premium").map((e) => ({ title: e.title, questions: e.question_count, minutes: e.duration_minutes }))} />
+        </div>
+      )}
     </div>
   );
 }

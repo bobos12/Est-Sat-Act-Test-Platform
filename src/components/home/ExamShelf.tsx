@@ -88,7 +88,6 @@ export function ExamShelf({ exams }: { exams: ShelfExam[] }) {
   const F = FILTERS.find((f) => f.k === k)!;
   const open = useMemo(() => exams.filter((e) => e.access !== "soon" && F.f(e)), [exams, F]);
   const soon = useMemo(() => exams.filter((e) => e.access === "soon" && F.f(e)), [exams, F]);
-  const locked = open.filter((e) => e.access === "pro").length;
 
   return (
     <>
@@ -101,13 +100,6 @@ export function ExamShelf({ exams }: { exams: ShelfExam[] }) {
       </div>
       {open.length > 1 && <p className="swipe-hint" aria-hidden="true">Swipe to see more →</p>}
       {open.length > 0 && <div className="shelf">{open.map((e) => <ExamCard key={e.id} e={e} />)}</div>}
-      {locked > 0 && (
-        <a href="#pricing" className="unlock-strip">
-          <span className="lock-ic"><Lock s={18} /></span>
-          <span className="txt"><b>{locked} full {locked === 1 ? "exam is" : "exams are"} waiting for you.</b> Unlock every EST, SAT and ACT mock with one membership.</span>
-          <span className="btn btn-blue btn-sm">See plans <Arrow /></span>
-        </a>
-      )}
       {soon.length > 0 && (
         <div className="soon-row">
           <span className="lab">Coming soon:</span>

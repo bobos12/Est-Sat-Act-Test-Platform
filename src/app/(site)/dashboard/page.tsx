@@ -7,6 +7,8 @@ import { requireViewer } from "@/lib/auth/session";
 import { createClient } from "@/lib/supabase/server";
 import { requestTime } from "@/lib/time";
 import { cn } from "@/lib/utils";
+import { UnlockBanner } from "@/components/site/unlock-banner";
+import { getPublishedExams } from "@/lib/catalog";
 
 export const metadata: Metadata = { title: "My dashboard", robots: { index: false } };
 
@@ -50,14 +52,16 @@ type Attempt = {
 async function Dashboard() {
   const viewer = await requireViewer("/dashboard");
   const supabase = await createClient();
-  const [{ data }, { data: subs }] = await Promise.all([
+  const [{ data }, { data: subs }, library] = await Promise.all([
     supabase
       .from("exam_attempts")
       .select("id, status, started_at, submitted_at, deadline_at, percent, correct_count, question_count, result_summary, exams(title, slug, subjects(name, code))")
       .order("started_at", { ascending: false })
       .limit(100),
     supabase.from("subscriptions").select("id, current_period_end").eq("status", "active").order("current_period_end", { ascending: false }).limit(1),
+    getPublishedExams(),
   ]);
+  const lockedExams = library.filter((e) => e.access === "premium").map((e) => ({ title: e.title, questions: e.question_count, minutes: e.duration_minutes }));
   const now = requestTime();
   const attempts = ((data ?? []) as unknown as Attempt[]).map((a) => {
     const exam = Array.isArray(a.exams) ? a.exams[0] : a.exams;
@@ -238,6 +242,12 @@ async function Dashboard() {
           </div>
         ))}
       </section>
+
+      {viewer.hasPremium ? null : (
+        <div className="dash-rise" style={css({ "--d": ".22s" })}>
+          <UnlockBanner locked={lockedExams} compact />
+        </div>
+      )}
 
       {/* ---------------- Trend + topics ---------------- */}
       <section className="grid gap-5 lg:grid-cols-[1.5fr_1fr]">

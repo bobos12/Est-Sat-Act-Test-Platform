@@ -6,6 +6,7 @@ import { TryQuestion } from "./TryQuestion";
 import { ExamShelf } from "./ExamShelf";
 import { RevealOnScroll } from "./Reveal";
 import { StickyNote } from "./StickyNote";
+import { UnlockBanner } from "@/components/site/unlock-banner";
 import { PlanTabs } from "./PlanTabs";
 import { Arrow } from "./Icons";
 import { FREE_START_HREF, TRACKS, TRACK_OF, type ShelfExam } from "@/lib/exam-catalog";
@@ -140,6 +141,9 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
       <p>Each card shows the subject, how long it takes and whether it&apos;s free. Each dot on a card is one question.</p>
     </div>
     <ExamShelf exams={exams} />
+    <div className="unlock-wrap">
+      <UnlockBanner locked={exams.filter((e) => e.access === "pro").map((e) => ({ title: e.title, questions: e.questions, minutes: e.minutes }))} />
+    </div>
     <div className="shelf-foot rv">
       <div className="legend">
         <span><span className="access free">FREE</span> with a free account</span>
