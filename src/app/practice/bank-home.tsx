@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useActionState, useMemo, useState, useTransition } from "react";
 import { useFormStatus } from "react-dom";
 import type { BankCategory, BankMode, BankOverview, BankSubject } from "@/lib/bank-types";
 import { modeLabel } from "@/lib/bank-types";
 import { cn } from "@/lib/utils";
-import { createPracticeSession, type CreateState } from "./actions";
+import { createPracticeSession, resetProgress, type CreateState } from "./actions";
 
 const FAMILY_ORDER = ["EST I", "EST II", "SAT", "ACT"];
 const COUNTS = [5, 10, 20, 30, 50];
@@ -34,6 +35,12 @@ export function BankHome({
   const subject = subjects.find((s) => s.id === subjectId);
   const categories = useMemo(() => overview.categories.filter((c) => c.subject_id === subjectId && c.total > 0), [overview.categories, subjectId]);
   const [selected, setSelected] = useState<Set<string>>(() => new Set(initialTopic ? [initialTopic] : []));
+
+  const router = useRouter();
+  const [builderKey, setBuilderKey] = useState(0);
+  const [confirmReset, setConfirmReset] = useState(false);
+  const [resetError, setResetError] = useState<string | null>(null);
+  const [resetting, startReset] = useTransition();
 
   const pickSubject = (id: string) => {
     setSubjectId(id);
@@ -111,14 +118,75 @@ export function BankHome({
               selected={selected}
               onToggle={toggle}
               onClear={() => setSelected(new Set())}
+              onResetProgress={() => setConfirmReset(true)}
               premium={overview.premium}
             />
-            {subject ? <Builder key={subject.id} subject={subject} categories={categories} selected={selected} /> : null}
+            {subject ? (
+              <Builder
+                key={`${subject.id}-${builderKey}`}
+                subject={subject}
+                categories={categories}
+                selected={selected}
+                onReset={() => {
+                  setSelected(new Set());
+                  setBuilderKey((k) => k + 1);
+                }}
+              />
+            ) : null}
           </div>
         </>
       )}
 
       {overview.recent.length ? <RecentSessions sessions={overview.recent} /> : null}
+
+      {confirmReset && subject ? (
+        <div className="fixed inset-0 z-50 flex items-end justify-center p-4 sm:items-center" role="alertdialog" aria-modal="true" aria-labelledby="reset-h">
+          <button type="button" aria-label="Cancel" className="absolute inset-0 cursor-default bg-ink-950/40 backdrop-blur-[2px]" onClick={() => setConfirmReset(false)} />
+          <div className="relative w-full max-w-md rounded-[24px] bg-white p-6 shadow-2xl animate-[dashRise_.3s_cubic-bezier(.2,.8,.2,1)]">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-danger-50 text-danger-600">
+              <RetryIcon className="h-5 w-5" />
+            </span>
+            <h2 id="reset-h" className="mt-4 font-display text-2xl text-ink-950">
+              Reset your {subject.name} progress?
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed text-ink-600">
+              This deletes your {subject.answered} answered {subject.answered === 1 ? "question" : "questions"}, mistakes and sessions in {subject.name}, so every question counts as new again. Your bookmarks stay. This can&apos;t be undone.
+            </p>
+            {resetError ? <p className="mt-3 rounded-xl bg-danger-50 px-3.5 py-2.5 text-sm text-danger-600">{resetError}</p> : null}
+            <div className="mt-6 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+              <button
+                type="button"
+                autoFocus
+                onClick={() => setConfirmReset(false)}
+                className="h-11 cursor-pointer rounded-xl px-4 text-sm font-semibold text-ink-800 ring-1 ring-inset ring-line hover:ring-ink-400"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                disabled={resetting}
+                onClick={() =>
+                  startReset(async () => {
+                    const res = await resetProgress(subject.id);
+                    if (!res.ok) {
+                      setResetError("We couldn't reset your progress. Please try again.");
+                      return;
+                    }
+                    setResetError(null);
+                    setConfirmReset(false);
+                    setSelected(new Set());
+                    setBuilderKey((k) => k + 1);
+                    router.refresh();
+                  })
+                }
+                className="h-11 cursor-pointer rounded-xl bg-danger-600 px-4 text-sm font-semibold text-white hover:bg-danger-600/90 disabled:opacity-60"
+              >
+                {resetting ? "Resetting…" : "Reset progress"}
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -210,6 +278,7 @@ function TopicList({
   selected,
   onToggle,
   onClear,
+  onResetProgress,
   premium,
 }: {
   subject: BankSubject | undefined;
@@ -217,6 +286,7 @@ function TopicList({
   selected: Set<string>;
   onToggle: (id: string) => void;
   onClear: () => void;
+  onResetProgress: () => void;
   premium: boolean;
 }) {
   const locked = subject ? subject.total - subject.available : 0;
@@ -232,11 +302,18 @@ function TopicList({
             {selected.size ? `${selected.size} selected` : `Tap ${kindLabel} to focus on them, or practise across all of them`}
           </p>
         </div>
-        {selected.size ? (
-          <button type="button" onClick={onClear} className="cursor-pointer text-sm font-semibold text-mark-500 hover:underline">
-            Clear selection
-          </button>
-        ) : null}
+        <div className="flex items-center gap-4">
+          {selected.size ? (
+            <button type="button" onClick={onClear} className="cursor-pointer text-sm font-semibold text-mark-500 hover:underline">
+              Clear selection
+            </button>
+          ) : null}
+          {subject && subject.answered > 0 ? (
+            <button type="button" onClick={onResetProgress} className="cursor-pointer text-sm font-semibold text-ink-500 hover:text-danger-600">
+              ↻ Reset progress
+            </button>
+          ) : null}
+        </div>
       </div>
 
       <ul className="mt-5 grid gap-2.5">
@@ -351,7 +428,17 @@ function DifficultyMix({ easy, medium, hard }: { easy: number; medium: number; h
 /* Session builder                                                     */
 /* ------------------------------------------------------------------ */
 
-function Builder({ subject, categories, selected }: { subject: BankSubject; categories: BankCategory[]; selected: Set<string> }) {
+function Builder({
+  subject,
+  categories,
+  selected,
+  onReset,
+}: {
+  subject: BankSubject;
+  categories: BankCategory[];
+  selected: Set<string>;
+  onReset: () => void;
+}) {
   const [state, action] = useActionState<CreateState, FormData>(createPracticeSession, undefined);
   const scope = selected.size ? categories.filter((c) => c.id && selected.has(c.id)) : categories;
   const sum = (k: keyof Pick<BankCategory, "available" | "answered" | "mistakes">) => scope.reduce((n, c) => n + c[k], 0);
@@ -369,6 +456,9 @@ function Builder({ subject, categories, selected }: { subject: BankSubject; cate
   // If the picked mode runs dry after a topic change, fall back to mixed practice.
   const mode: BankMode = counts[pickedMode] === 0 && pickedMode !== "all" ? "all" : pickedMode;
   const modeCount = counts[mode];
+
+  const defaultMode: BankMode = counts.new > 0 ? "new" : "all";
+  const dirty = selected.size > 0 || difficulties.size > 0 || count !== 10 || !tutor || pickedMode !== defaultMode;
 
   const max = modeCount ?? 100;
   const effective = Math.min(count, Math.max(max, 1));
@@ -394,11 +484,18 @@ function Builder({ subject, categories, selected }: { subject: BankSubject; cate
           <input key={d} type="hidden" name="difficulty" value={d} />
         ))}
 
-        <div className="border-b border-line px-5 py-4 sm:px-6">
-          <h2 className="text-lg font-semibold text-ink-950">Build a session</h2>
-          <p className="text-sm text-ink-500">
-            {subject.name} · {selected.size ? `${selected.size} ${selected.size === 1 ? "topic" : "topics"}` : "all topics"}
-          </p>
+        <div className="flex items-start justify-between gap-3 border-b border-line px-5 py-4 sm:px-6">
+          <div>
+            <h2 className="text-lg font-semibold text-ink-950">Build a session</h2>
+            <p className="text-sm text-ink-500">
+              {subject.name} · {selected.size ? `${selected.size} ${selected.size === 1 ? "topic" : "topics"}` : "all topics"}
+            </p>
+          </div>
+          {dirty ? (
+            <button type="button" onClick={onReset} className="mt-1 cursor-pointer rounded-lg px-2.5 py-1 text-sm font-semibold text-ink-500 ring-1 ring-inset ring-line transition hover:text-ink-950 hover:ring-ink-400">
+              ↻ Reset
+            </button>
+          ) : null}
         </div>
 
         <div className="space-y-6 px-5 py-5 sm:px-6">

@@ -7,7 +7,7 @@ import { RichContentView } from "@/components/exam/rich-content";
 import type { BankAnswer, BankQuestion, BankSessionPayload } from "@/lib/bank-types";
 import { modeLabel } from "@/lib/bank-types";
 import { cn } from "@/lib/utils";
-import { finishPracticeSession, submitPracticeAnswer, toggleBookmark } from "../actions";
+import { finishPracticeSession, restartSession, submitPracticeAnswer, toggleBookmark } from "../actions";
 
 type Status = "correct" | "incorrect" | "answered" | "open";
 
@@ -392,13 +392,7 @@ export function SessionRunner({ payload }: { payload: BankSessionPayload }) {
           >
             ← <span className="hidden sm:inline">Previous</span>
           </button>
-          <div className="mx-auto hidden items-center gap-3 text-xs text-ink-400 md:flex">
-            <Kbd>A</Kbd>–<Kbd>D</Kbd> choose
-            <span className="text-line-strong">·</span>
-            <Kbd>Shift</Kbd>+<Kbd>A</Kbd> eliminate
-            <span className="text-line-strong">·</span>
-            <Kbd>Enter</Kbd> {tutor && !q.answer ? "check" : "next"}
-            <span className="text-line-strong">·</span>
+          <div className="mx-auto hidden items-center text-xs text-ink-400 md:flex">
             <span className="tabular">
               {tutor ? `${correctCount}/${answeredCount} correct` : `${answeredCount}/${questions.length} answered`}
             </span>
@@ -494,6 +488,12 @@ export function SessionRunner({ payload }: { payload: BankSessionPayload }) {
               >
                 Finish session &amp; see results
               </button>
+              <form action={restartSession} className="mt-2">
+                <input type="hidden" name="session" value={session.id} />
+                <button className="h-11 w-full cursor-pointer rounded-xl text-sm font-semibold text-ink-800 ring-1 ring-inset ring-line transition hover:ring-ink-400">
+                  ↻ Restart from question 1
+                </button>
+              </form>
               <Link href="/practice" className="mt-2 block py-2 text-center text-sm font-medium text-ink-500 hover:text-ink-950">
                 Save &amp; exit. Continue later.
               </Link>
@@ -652,10 +652,6 @@ function IconButton({ label, onClick, active, children }: { label: string; onCli
       {children}
     </button>
   );
-}
-
-function Kbd({ children }: { children: React.ReactNode }) {
-  return <kbd className="rounded-md bg-paper-2 px-1.5 py-0.5 font-mono text-[0.6875rem] font-semibold text-ink-600 ring-1 ring-inset ring-line">{children}</kbd>;
 }
 
 function Pill({ children }: { children: React.ReactNode }) {

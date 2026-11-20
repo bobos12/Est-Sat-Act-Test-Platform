@@ -3,7 +3,7 @@ import { QuestionReviewer, type ReviewQuestion } from "@/components/exam/questio
 import type { BankSessionPayload } from "@/lib/bank-types";
 import { modeLabel } from "@/lib/bank-types";
 import { cn } from "@/lib/utils";
-import { quickSession } from "../actions";
+import { quickSession, restartSession } from "../actions";
 
 const fmtTime = (ms: number) => {
   const s = Math.round(ms / 1000);
@@ -105,6 +105,12 @@ export function SessionResults({ payload }: { payload: BankSessionPayload }) {
                   </button>
                 </form>
               ) : null}
+              <form action={restartSession}>
+                <input type="hidden" name="session" value={session.id} />
+                <button className="inline-flex h-11 cursor-pointer items-center rounded-xl px-5 text-sm font-semibold text-ink-800 ring-1 ring-inset ring-line transition hover:ring-ink-400">
+                  ↻ Restart session
+                </button>
+              </form>
               <Link
                 href={`/practice?subject=${session.subject.code}`}
                 className="inline-flex h-11 items-center rounded-xl px-5 text-sm font-semibold text-ink-800 ring-1 ring-inset ring-line transition hover:ring-ink-400"

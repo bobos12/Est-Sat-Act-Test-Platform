@@ -113,6 +113,24 @@ export async function finishPracticeSession(sessionId: string): Promise<{ ok: bo
   return { ok: !error };
 }
 
+/** Wipe the student's answers and sessions for one subject (bookmarks stay). */
+export async function resetProgress(subjectId: string): Promise<{ ok: boolean }> {
+  if (!uuid.safeParse(subjectId).success) return { ok: false };
+  const supabase = await createClient();
+  const { error } = await supabase.rpc("bank_reset_progress", { p_subject: subjectId });
+  return { ok: !error };
+}
+
+/** Same questions, fresh start. */
+export async function restartSession(formData: FormData) {
+  const id = uuid.safeParse(formData.get("session"));
+  if (!id.success) redirect("/practice");
+  const supabase = await createClient();
+  const { data, error } = await supabase.rpc("bank_restart_session", { p_session: id.data });
+  if (error) redirect(`/practice?error=${encodeURIComponent("We couldn't restart that session. Please try again.")}`);
+  redirect(`/practice/${data as string}`);
+}
+
 export async function toggleBookmark(questionId: string): Promise<{ ok: boolean; bookmarked?: boolean }> {
   if (!uuid.safeParse(questionId).success) return { ok: false };
   const supabase = await createClient();
