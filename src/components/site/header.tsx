@@ -10,6 +10,7 @@ const nav = [
   { href: "/exams?track=act", label: "ACT" },
   { href: "/exams?track=est", label: "EST" },
   { href: "/exams", label: "Exams" },
+  { href: "/practice", label: "Question bank" },
   { href: "/pricing", label: "Pricing" },
   { href: "/#contact", label: "Contact" },
 ];

@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { updateSession } from "@/lib/supabase/proxy-session";
 
 // Optimistic gate only: real authorization happens in server code and RLS.
-const PROTECTED = ["/dashboard", "/exam", "/results", "/account", "/admin", "/checkout"];
+const PROTECTED = ["/dashboard", "/exam", "/results", "/account", "/admin", "/checkout", "/practice"];
 
 export async function proxy(request: NextRequest) {
   const { response, userId } = await updateSession(request);

@@ -147,6 +147,7 @@
 @keyframes dashFloat { 0%, 100% { transform: translate3d(0, 0, 0) scale(1); } 50% { transform: translate3d(18px, -14px, 0) scale(1.06); } }
 @keyframes dashGlow { 0%, 100% { box-shadow: 0 0 0 0 rgba(21, 89, 237, .35); } 50% { box-shadow: 0 0 0 6px rgba(21, 89, 237, 0); } }
 @keyframes dashPop { 0% { transform: scale(0); } 70% { transform: scale(1.25); } 100% { transform: scale(1); } }
+@keyframes navIn { from { transform: translateX(100%); } to { transform: none; } }
 .dash-rise { opacity: 0; animation: dashRise .7s cubic-bezier(.2, .8, .2, 1) forwards; animation-delay: var(--d, 0s); }
 .dash-draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: dashDraw 1.4s cubic-bezier(.4, 0, .2, 1) forwards; animation-delay: var(--d, .2s); }
 .dash-grow { transform-origin: left; transform: scaleX(0); animation: dashGrow 1s cubic-bezier(.2, .8, .2, 1) forwards; animation-delay: var(--d, .3s); }

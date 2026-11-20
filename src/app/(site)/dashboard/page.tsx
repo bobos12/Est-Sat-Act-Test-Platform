@@ -157,7 +157,7 @@ async function Dashboard() {
                 </Link>
               )}
               {weakest ? (
-                <Link href="/exams" className="inline-flex h-12 items-center rounded-xl bg-white/10 px-5 font-semibold text-white ring-1 ring-inset ring-white/15 transition hover:bg-white/15">
+                <Link href="/practice" className="inline-flex h-12 items-center rounded-xl bg-white/10 px-5 font-semibold text-white ring-1 ring-inset ring-white/15 transition hover:bg-white/15">
                   Practise {weakest.topic.length > 26 ? "your weakest topic" : weakest.topic}
                 </Link>
               ) : null}

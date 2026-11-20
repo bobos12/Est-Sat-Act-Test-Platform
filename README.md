@@ -18,6 +18,7 @@ and a private admin dashboard. Next.js 16 (App Router, Cache Components) + Supab
 | 6 | AI exam generation → review → publish | ✅ (needs `ANTHROPIC_API_KEY`) |
 | 7 | Plans, Paymob checkout, verified webhooks, renewals | ✅ (needs Paymob keys + sandbox test) |
 | 8 | End-to-end testing | in progress — see "Launch checklist" |
+| 9 | Question bank: student practice (`/practice`) + admin bank (`/admin/questions`) | ✅ (apply migration `20261120000001_question_bank.sql`) |
 
 ## Setup
 

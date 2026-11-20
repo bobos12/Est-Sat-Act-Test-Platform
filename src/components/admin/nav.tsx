@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 const items = [
   { href: "/admin", label: "Overview", exact: true },
   { href: "/admin/exams", label: "Exams" },
+  { href: "/admin/questions", label: "Question bank" },
   { href: "/admin/generate", label: "Generate exams" },
   { href: "/admin/knowledge", label: "Knowledge base" },
   { href: "/admin/students", label: "Students" },
