@@ -1,0 +1,439 @@
+# SAT Practice Test 7 — Math (transcribed; explanations written for 16hundred)
+
+## M1 Q1 | PSDA | easy
+The scatterplot shows the temperature, in degrees Fahrenheit ($^\circ$F), and the distance above sea level, in feet, measured at $6$ locations on Mount Jefferson. A line of best fit is also shown.
+
+At a distance of $4{,}000$ feet above sea level, what is the temperature, in $^\circ$F, predicted by the line of best fit?
+A) $47$
+B) $35$
+C) $25$
+D) $0$
+> At $x = 4{,}000$ the line of best fit is at about $35^\circ$F.
+
+## M1 Q2 | GEO | easy
+Rectangle P has an area of $72$ square inches. If a rectangle with an area of $20$ square inches is removed from rectangle P, what is the area, in square inches, of the resulting figure?
+A) $92$
+B) $84$
+C) $80$
+D) $52$
+> $72 - 20 = 52$ square inches.
+
+## M1 Q3 | ALG | easy
+$$ |p| + 61 = 65 $$
+
+Which value is a solution to the given equation?
+A) $\dfrac{65}{61}$
+B) $4$
+C) $126$
+D) $130$
+> $|p| = 4$, so $p = 4$ or $p = -4$. Only $4$ is listed.
+
+## M1 Q4 | ALG | easy | nofig
+Lorenzo purchased a box of cereal and some strawberries at the grocery store. Lorenzo paid $\$2$ for the box of cereal and $\$1.90$ per pound for the strawberries. If Lorenzo paid a total of $\$9.60$ for the box of cereal and the strawberries, which of the following equations can be used to find $p$, the number of pounds of strawberries Lorenzo purchased? (Assume there is no sales tax.)
+A) $1.90p + 2 = 9.60$
+B) $1.90p - 2 = 9.60$
+C) $1.90 + 2p = 9.60$
+D) $1.90 - 2p = 9.60$
+> The strawberries cost $1.90p$ dollars and the cereal $2$ dollars, for a total of $9.60$: $1.90p + 2 = 9.60$.
+
+## M1 Q5 | PSDA | easy
+The bar graph summarizes the charge, in kilowatt-hours (kWh), a battery received each day for $15$ days.
+
+For how many of these $15$ days did the battery receive a charge of $0$ kWh?
+A) $0$
+B) $1$
+C) $4$
+D) $6$
+> The bar above $0$ kWh reaches $6$ days.
+
+## M1 Q6 | ALG | easy
+A line in the $xy$-plane has a slope of $9$ and passes through the point $(0, -5)$. The equation $y = px + r$ defines the line, where $p$ and $r$ are constants. What is the value of $p$?
+> In $y = px + r$, $p$ is the slope, so $p = 9$.
+
+## M1 Q7 | ADV | easy
+What is an $x$-coordinate of an $x$-intercept of the graph of $y = 3(x - 14)(x + 5)(x + 4)$ in the $xy$-plane?
+> $y = 0$ when $x = 14$, $x = -5$, or $x = -4$. Any of these is correct.
+
+## M1 Q8 | ADV | easy
+The graph shown gives the estimated value, in dollars, of a tablet as a function of the number of months since it was purchased. What is the best interpretation of the $y$-intercept of the graph in this context?
+A) The estimated value of the tablet was $\$225$ when it was purchased.
+B) The estimated value of the tablet $24$ months after it was purchased was $\$225$.
+C) The estimated value of the tablet had decreased by $\$225$ in the $24$ months after it was purchased.
+D) The estimated value of the tablet decreased by approximately $2.25\%$ each year after it was purchased.
+> The $y$-intercept is at $0$ months, the time of purchase, where the value is about $\$225$.
+
+## M1 Q9 | GEO | easy
+Triangles $EFG$ and $JKL$ are congruent, where $E$, $F$, and $G$ correspond to $J$, $K$, and $L$, respectively. The measure of angle $E$ is $45^\circ$ and the measure of angle $F$ is $20^\circ$. What is the measure of angle $J$?
+A) $20^\circ$
+B) $45^\circ$
+C) $135^\circ$
+D) $160^\circ$
+> Angle $J$ corresponds to angle $E$, so it measures $45^\circ$.
+
+## M1 Q10 | ALG | easy
+The function $f$ is defined by $f(x) = \dfrac{1}{2}(x + 6)$. What is the value of $f(4)$?
+A) $20$
+B) $12$
+C) $10$
+D) $5$
+> $f(4) = \tfrac{1}{2}(10) = 5$.
+
+## M1 Q11 | ALG | medium
+The graph of a system of an absolute value function and a linear function is shown. What is the solution $(x, y)$ to this system of two equations?
+A) $(0, 8)$
+B) $\left(\dfrac{7}{2}, \dfrac{9}{2}\right)$
+C) $\left(-\dfrac{7}{2}, \dfrac{9}{2}\right)$
+D) $(-3, 4)$
+> The graphs intersect halfway between $x = -4$ and $x = -3$, at height halfway between $4$ and $5$: $\left(-\tfrac{7}{2}, \tfrac{9}{2}\right)$.
+
+## M1 Q12 | ALG | medium | nofig
+$$ y = 6x + 3 $$
+
+One of the two equations in a system of linear equations is given. The system has infinitely many solutions. Which equation could be the second equation in this system?
+A) $y = 2(6x) + 3$
+B) $y = 2(6x + 3)$
+C) $2(y) = 2(6x) + 3$
+D) $2(y) = 2(6x + 3)$
+> Infinitely many solutions means the second equation is the same line. Dividing $2y = 2(6x + 3)$ by $2$ gives $y = 6x + 3$.
+
+## M1 Q13 | ALG | easy
+If $\dfrac{6}{7}p + 18 = 54$, what is the value of $7p$?
+> $\tfrac{6}{7}p = 36$, so $p = 42$ and $7p = 294$.
+
+## M1 Q14 | ALG | medium
+$$ \begin{aligned} y &= 9x + 12 \\ x + 7y &= 20 \end{aligned} $$
+
+The solution to the given system of equations is $(x, y)$. What is the value of $y$?
+> Substitute: $x + 7(9x + 12) = 20$, so $64x = -64$ and $x = -1$. Then $y = 9(-1) + 12 = 3$.
+
+## M1 Q15 | GEO | easy
+A circle in the $xy$-plane has the equation $(x - 13)^2 + (y - k)^2 = 64$. Which of the following gives the center of the circle and its radius?
+A) The center is at $(13, k)$ and the radius is $8$.
+B) The center is at $(k, 13)$ and the radius is $8$.
+C) The center is at $(k, 13)$ and the radius is $64$.
+D) The center is at $(13, k)$ and the radius is $64$.
+> $(x - h)^2 + (y - k)^2 = r^2$ has center $(h, k)$ and radius $r$. Here the center is $(13, k)$ and $r = \sqrt{64} = 8$.
+
+## M1 Q16 | ADV | medium
+The function $f$ is defined by $f(x) = |x - 4x|$. What value of $a$ satisfies $f(5) - f(a) = -15$?
+A) $-20$
+B) $5$
+C) $10$
+D) $45$
+> $f(x) = |-3x| = 3|x|$, so $f(5) = 15$. Then $15 - f(a) = -15$ gives $f(a) = 30$, so $|a| = 10$. Only $10$ is listed.
+
+## M1 Q17 | ADV | medium | nofig
+For the exponential function $f$, the value of $f(0)$ is $c$, where $c$ is a constant. Of the following equations that define the function $f$, which equation shows the value of $c$ as the coefficient or the base?
+A) $f(x) = 22(1.5)^{x+1}$
+B) $f(x) = 33(1.5)^x$
+C) $f(x) = 49.5(1.5)^{x-1}$
+D) $f(x) = 74.25(1.5)^{x-2}$
+> In $f(x) = 33(1.5)^x$, $f(0) = 33(1) = 33$, which is the coefficient. (All four equations define the same function, with $f(0) = 33$.)
+
+## M1 Q18 | ADV | easy
+The function $f(t) = 40{,}000(2)^{\frac{t}{790}}$ gives the number of bacteria in a population $t$ minutes after an initial observation. How much time, in minutes, does it take for the number of bacteria in the population to double?
+A) $2$
+B) $790$
+C) $1{,}580$
+D) $40{,}000$
+> The base $2$ is raised to $\tfrac{t}{790}$, so the population doubles each time $t$ increases by $790$ minutes.
+
+## M1 Q19 | ADV | hard | nofig
+$$ \frac{12}{n} - \frac{2}{t} = -\frac{2}{w} $$
+
+The given equation relates the variables $n$, $t$, and $w$, where $n > 0$, $t > 0$, and $w > t$. Which expression is equivalent to $n$?
+A) $12tw$
+B) $6(t - w)$
+C) $\dfrac{w - t}{6tw}$
+D) $\dfrac{6tw}{w - t}$
+> $\dfrac{12}{n} = \dfrac{2}{t} - \dfrac{2}{w} = \dfrac{2(w - t)}{tw}$, so $n = \dfrac{12tw}{2(w - t)} = \dfrac{6tw}{w - t}$.
+
+## M1 Q20 | PSDA | medium
+During a study, the temperature, in degrees Celsius ($^\circ$C), of the air in a chamber was recorded to the nearest integer at certain times. The scatterplot shows the recorded temperature $y$, in $^\circ$C, of the air in the chamber $x$ minutes after the start of the study.
+
+What was the average rate of change, in $^\circ$C per minute, of the recorded temperature of the air in the chamber from $x = 5$ to $x = 7$?
+> At $x = 5$ the temperature is $14$ and at $x = 7$ it is $24$: $\dfrac{24 - 14}{7 - 5} = 5$.
+
+## M1 Q21 | ALG | medium
+In August, a car dealer completed $15$ more than $3$ times the number of sales the car dealer completed in September. In August and September, the car dealer completed $363$ sales. How many sales did the car dealer complete in September?
+> If September had $s$ sales, August had $3s + 15$: $s + 3s + 15 = 363$, so $4s = 348$ and $s = 87$.
+
+## M1 Q22 | GEO | medium
+Points $Q$ and $R$ lie on a circle with center $P$. The radius of this circle is $9$ inches. Triangle $PQR$ has a perimeter of $31$ inches. What is the length, in inches, of $\overline{QR}$?
+A) $13\sqrt{2}$
+B) $13$
+C) $9\sqrt{2}$
+D) $9$
+> $PQ$ and $PR$ are radii, $9$ inches each, so $QR = 31 - 18 = 13$.
+
+## M1 Q23 | ALG | hard | nofig
+In a set of four consecutive odd integers, where the integers are ordered from least to greatest, the first integer is represented by $x$. The product of $12$ and the fourth odd integer is at most $26$ less than the sum of the first and third odd integers. Which inequality represents this situation?
+A) $12(x + 6) \le x + (x + 4) - 26$
+B) $12(x + 6) \ge 26 - (x + (x + 4))$
+C) $12(x + 4) \le x + (x + 3) - 26$
+D) $12(x + 4) \ge 26 - (x + (x + 3))$
+> The odd integers are $x$, $x + 2$, $x + 4$, $x + 6$. "At most $26$ less than the sum of the first and third" is $\le x + (x + 4) - 26$, and the product of $12$ and the fourth is $12(x + 6)$.
+
+## M1 Q24 | ALG | hard | nofig
+| $x$ | $y$ |
+| --- | --- |
+| $-2s$ | $24$ |
+| $-s$ | $21$ |
+| $s$ | $15$ |
+
+The table shows three values of $x$ and their corresponding values of $y$, where $s$ is a constant. There is a linear relationship between $x$ and $y$. Which of the following equations represents this relationship?
+A) $sx + 3y = 18s$
+B) $3x + sy = 18s$
+C) $3x + sy = 18$
+D) $sx + 3y = 18$
+> The slope is $\dfrac{21 - 24}{-s - (-2s)} = -\dfrac{3}{s}$. Using $(s, 15)$: $15 = -3 + b$, so $b = 18$ and $y = -\dfrac{3}{s}x + 18$. Multiply by $s$: $sy = -3x + 18s$, or $3x + sy = 18s$.
+
+## M1 Q25 | GEO | hard | nofig
+Which of the following expressions is equivalent to $(\sin 24^\circ)(\cos 66^\circ) + (\cos 24^\circ)(\sin 66^\circ)$?
+A) $2(\cos 66^\circ)(\sin 24^\circ)$
+B) $2(\cos 66^\circ) + 2(\cos 24^\circ)$
+C) $(\cos 66^\circ)^2 + (\cos 24^\circ)^2$
+D) $(\cos 66^\circ)^2 + (\sin 24^\circ)^2$
+> $24^\circ$ and $66^\circ$ are complementary, so $\sin 24^\circ = \cos 66^\circ$ and $\sin 66^\circ = \cos 24^\circ$. The expression becomes $(\cos 66^\circ)^2 + (\cos 24^\circ)^2$.
+
+## M1 Q26 | ALG | medium | nofig
+The cost of renting a carpet cleaner is $\$52$ for the first day and $\$26$ for each additional day. Which of the following functions gives the cost $C(d)$, in dollars, of renting the carpet cleaner for $d$ days, where $d$ is a positive integer?
+A) $C(d) = 26d + 26$
+B) $C(d) = 26d + 52$
+C) $C(d) = 52d - 26$
+D) $C(d) = 52d + 78$
+> $C(d) = 52 + 26(d - 1) = 26d + 26$.
+
+## M1 Q27 | ADV | hard
+$$ f(x) = (x - 2)(x + 15) $$
+
+The function $f$ is defined by the given equation. For what value of $x$ does $f(x)$ reach its minimum?
+> The zeros are $2$ and $-15$. The parabola opens upward, so the minimum is halfway between them: $x = \dfrac{2 + (-15)}{2} = -\dfrac{13}{2}$.
+
+## M2 Q1 | ALG | easy
+A total of $165$ people contributed to a charity event as either a donor or a volunteer. $130$ people contributed as a donor. How many people contributed as a volunteer?
+A) $35$
+B) $130$
+C) $165$
+D) $330$
+> $165 - 130 = 35$.
+
+## M2 Q2 | PSDA | easy
+There are $250$ trees in a park. Of these trees, $6\%$ are birch trees. How many birch trees are in the park?
+A) $6$
+B) $15$
+C) $75$
+D) $244$
+> $0.06 \times 250 = 15$.
+
+## M2 Q3 | ADV | easy
+The graph of the quadratic function $y = f(x)$ is shown. What is the vertex of the graph?
+A) $(0, -2)$
+B) $(0, -3)$
+C) $(0, 2)$
+D) $(0, 3)$
+> The lowest point of the parabola is at $(0, 2)$.
+
+## M2 Q4 | PSDA | easy
+The number of raccoons in a $131$-square-mile area is estimated to be $2{,}358$. What is the estimated population density, in raccoons per square mile, of this area?
+A) $18$
+B) $131$
+C) $149$
+D) $2{,}376$
+> $2{,}358 \div 131 = 18$ raccoons per square mile.
+
+## M2 Q5 | PSDA | easy
+$$ -11, -9, 26 $$
+
+A data set of three numbers is shown. If a number from this data set is selected at random, what is the probability of selecting a positive number?
+A) $0$
+B) $\dfrac{1}{3}$
+C) $\dfrac{2}{3}$
+D) $1$
+> Only $26$ is positive, so the probability is $\tfrac{1}{3}$.
+
+## M2 Q6 | ALG | easy
+$$ f(x) = 45x + 600 $$
+
+The function $f$ gives the monthly fee $f(x)$, in dollars, a facility charges to keep $x$ crates in storage. What is the monthly fee, in dollars, the facility charges to keep $50$ crates in storage?
+> $f(50) = 45(50) + 600 = 2{,}850$.
+
+## M2 Q7 | ADV | easy | nofig
+The function $f$ is defined by $f(x) = 5\left(\dfrac{1}{4} - x\right)^2 + \dfrac{11}{4}$. What is the value of $f\left(\dfrac{1}{4}\right)$?
+> $f\left(\tfrac{1}{4}\right) = 5(0)^2 + \tfrac{11}{4} = \tfrac{11}{4}$ (or $2.75$).
+
+## M2 Q8 | ALG | easy
+If $8x = 6$, what is the value of $72x$?
+A) $3$
+B) $15$
+C) $54$
+D) $57$
+> $72x = 9(8x) = 9(6) = 54$.
+
+## M2 Q9 | ADV | easy | nofig
+Which expression is equivalent to $23x^3 + 2x^2 + 9x$?
+A) $23x(x^2 + 2x + 9)$
+B) $9x(23x^3 + 2x^2 + 1)$
+C) $x(23x^2 + 2x + 9)$
+D) $34(x^3 + x^2 + x)$
+> Factor $x$ out of each term: $x(23x^2 + 2x + 9)$.
+
+## M2 Q10 | ADV | easy | nofig
+Which expression is equivalent to $(9x^3 + 5x + 7) + (6x^3 + 5x^2 - 5)$?
+A) $15x^6 + 5x^2 - 5x - 35$
+B) $15x^3 + 10x^2 + 2$
+C) $15x^6 + 5x^2 + 5x + 2$
+D) $15x^3 + 5x^2 + 5x + 2$
+> Combine like terms: $15x^3 + 5x^2 + 5x + 2$.
+
+## M2 Q11 | ALG | easy
+At a state fair, attendees can win tokens that are worth a different number of points depending on the shape. One attendee won $S$ square tokens and $C$ circle tokens worth a total of $1{,}120$ points. The equation $80S + 90C = 1{,}120$ represents this situation. How many more points is a circle token worth than a square token?
+A) $950$
+B) $90$
+C) $80$
+D) $10$
+> A square token is worth $80$ points and a circle token $90$, so a circle token is worth $10$ more.
+
+## M2 Q12 | PSDA | easy
+In the given scatterplot, a line of best fit for the data is shown.
+
+Which of the following is closest to the slope of the line of best fit shown?
+A) $0$
+B) $\dfrac{1}{2}$
+C) $1$
+D) $2$
+> The line rises from about $y = 1.5$ at $x = 0$ to about $y = 14$ at $x = 7$, a slope of roughly $\tfrac{12.5}{7} \approx 2$.
+
+## M2 Q13 | GEO | easy
+A circle has a radius of $2.1$ inches. The area of the circle is $b\pi$ square inches, where $b$ is a constant. What is the value of $b$?
+> Area $= \pi r^2 = \pi(2.1)^2 = 4.41\pi$, so $b = 4.41$.
+
+## M2 Q14 | GEO | medium
+In triangle $XYZ$, angle $Y$ is a right angle, point $P$ lies on $\overline{XZ}$, and point $Q$ lies on $\overline{YZ}$ such that $\overline{PQ}$ is parallel to $\overline{XY}$. If the measure of angle $XZY$ is $63^\circ$, what is the measure, in degrees, of angle $XPQ$?
+> Angle $X = 180 - 90 - 63 = 27^\circ$. Since $\overline{PQ} \parallel \overline{XY}$, angle $ZPQ$ equals angle $ZXY = 27^\circ$, so angle $XPQ = 180 - 27 = 153^\circ$.
+
+## M2 Q15 | ADV | medium | nofig
+An investment account was opened with an initial value of $\$890$. The value of the account doubled every $10$ years. Which equation represents the value of the account $M(t)$, in dollars, $t$ years after the account was opened?
+A) $M(t) = 890\left(\dfrac{1}{2}\right)^{\frac{t}{10}}$
+B) $M(t) = 890\left(\dfrac{1}{10}\right)^{\frac{t}{2}}$
+C) $M(t) = 890(2)^{\frac{t}{10}}$
+D) $M(t) = 890(10)^{\frac{t}{2}}$
+> Doubling every $10$ years means a factor of $2$ for each $10$ years: $M(t) = 890(2)^{t/10}$.
+
+## M2 Q16 | ALG | medium | nofig
+$$ \begin{aligned} y &< x \\ x &< 22 \end{aligned} $$
+
+For which of the following tables are all the values of $x$ and their corresponding values of $y$ solutions to the given system of inequalities?
+A) | $x$ | $y$ |
+| --- | --- |
+| $19$ | $18$ |
+| $20$ | $19$ |
+| $21$ | $20$ |
+B) | $x$ | $y$ |
+| --- | --- |
+| $19$ | $20$ |
+| $20$ | $21$ |
+| $21$ | $22$ |
+C) | $x$ | $y$ |
+| --- | --- |
+| $23$ | $22$ |
+| $24$ | $23$ |
+| $25$ | $24$ |
+D) | $x$ | $y$ |
+| --- | --- |
+| $23$ | $24$ |
+| $24$ | $25$ |
+| $25$ | $26$ |
+> Every pair needs $y < x$ and $x < 22$. In table A each $y$ is one less than $x$ and every $x$ is below $22$. Tables C and D have $x > 22$, and B has $y > x$.
+
+## M2 Q17 | ADV | medium
+Which expression is equivalent to $\dfrac{h^{15}q^7}{h^5q^{21}}$, where $h > 0$ and $q > 0$?
+A) $\dfrac{h^{10}}{q^{14}}$
+B) $\dfrac{h^3}{q^3}$
+C) $h^{10}q^{14}$
+D) $h^3q^3$
+> Subtract exponents: $h^{15-5} = h^{10}$ and $q^{7-21} = q^{-14}$, giving $\dfrac{h^{10}}{q^{14}}$.
+
+## M2 Q18 | ALG | medium
+$$ \begin{aligned} 3y &= 4x + 17 \\ -3y &= 9x - 23 \end{aligned} $$
+
+The solution to the given system of equations is $(x, y)$. What is the value of $39x$?
+A) $-18$
+B) $-6$
+C) $6$
+D) $18$
+> Add the equations: $0 = 13x - 6$, so $13x = 6$ and $39x = 18$.
+
+## M2 Q19 | ADV | medium
+$$ h(t) = -16t^2 + b $$
+
+The function $h$ estimates an object's height, in feet, above the ground $t$ seconds after the object is dropped, where $b$ is a constant. The function estimates that the object is $3{,}364$ feet above the ground when it is dropped at $t = 0$. Approximately how many seconds after being dropped does the function estimate the object will hit the ground?
+A) $7.25$
+B) $14.50$
+C) $105.13$
+D) $210.25$
+> $h(0) = b = 3{,}364$. The object hits the ground when $16t^2 = 3{,}364$: $t^2 = 210.25$, so $t = 14.5$ seconds.
+
+## M2 Q20 | ADV | hard
+$$ 2x^2 - 8x - 7 = 0 $$
+
+One solution to the given equation can be written as $\dfrac{8 - \sqrt{k}}{4}$, where $k$ is a constant. What is the value of $k$?
+> By the quadratic formula, $x = \dfrac{8 \pm \sqrt{64 - 4(2)(-7)}}{2(2)} = \dfrac{8 \pm \sqrt{120}}{4}$, so $k = 120$.
+
+## M2 Q21 | GEO | hard
+A line intersects two parallel lines, forming four acute angles and four obtuse angles. The measure of one of the acute angles is $(9x - 560)^\circ$. The sum of the measures of one of the acute angles and three of the obtuse angles is $(-18x + w)^\circ$. What is the value of $w$?
+> All acute angles are equal and each obtuse angle is $180 - (9x - 560)$. The sum is $(9x - 560) + 3(740 - 9x) = 1{,}660 - 18x$, so $w = 1{,}660$.
+
+## M2 Q22 | ALG | medium | nofig
+| $x$ | $f(x)$ |
+| --- | --- |
+| $-4$ | $0$ |
+| $-\dfrac{19}{5}$ | $1$ |
+| $-\dfrac{18}{5}$ | $2$ |
+
+For the linear function $f$, the table shows three values of $x$ and their corresponding values of $f(x)$. If $h(x) = f(x) - 13$, which equation defines $h$?
+A) $h(x) = 5x - 4$
+B) $h(x) = 5x + 7$
+C) $h(x) = 5x + 9$
+D) $h(x) = 5x + 20$
+> $f$ rises $1$ for every $\tfrac{1}{5}$ increase in $x$, a slope of $5$, and $f(-4) = 0$, so $f(x) = 5x + 20$. Then $h(x) = 5x + 7$.
+
+## M2 Q23 | ALG | hard
+The linear function $g$ is defined by $g(x) = b - 15x$, where $b$ is a constant. If $g(c + 7) = \dfrac{c}{4}$, where $c$ is a constant, which of the following expressions represents the value of $b$?
+A) $\dfrac{15c}{4}$
+B) $\dfrac{19c}{4} + 7$
+C) $\dfrac{61c}{4} + 105$
+D) $15c + 105$
+> $b - 15(c + 7) = \tfrac{c}{4}$, so $b = \tfrac{c}{4} + 15c + 105 = \tfrac{61c}{4} + 105$.
+
+## M2 Q24 | GEO | hard
+In triangle $XYZ$, angle $Z$ is a right angle and the length of $\overline{YZ}$ is $24$ units. If $\tan X = \dfrac{12}{35}$, what is the perimeter, in units, of triangle $XYZ$?
+A) $188$
+B) $168$
+C) $84$
+D) $71$
+> $\tan X = \dfrac{YZ}{XZ} = \dfrac{12}{35}$, so $XZ = 70$. The hypotenuse is $\sqrt{24^2 + 70^2} = 74$, and the perimeter is $24 + 70 + 74 = 168$.
+
+## M2 Q25 | GEO | hard
+$$ x^2 + 14x + y^2 = 6y + 109 $$
+
+In the $xy$-plane, the graph of the given equation is a circle. What is the length of the circle's radius?
+A) $\sqrt{109}$
+B) $\sqrt{149}$
+C) $\sqrt{167}$
+D) $\sqrt{341}$
+> Complete the squares: $(x + 7)^2 + (y - 3)^2 = 109 + 49 + 9 = 167$, so the radius is $\sqrt{167}$.
+
+## M2 Q26 | PSDA | hard
+The speed of a vehicle is increasing at a rate of $7.3$ meters per second squared. What is this rate, in **miles per minute squared**, rounded to the nearest tenth? (Use $1$ mile $= 1{,}609$ meters.)
+A) $0.3$
+B) $16.3$
+C) $195.8$
+D) $220.4$
+> $7.3 \dfrac{\text{m}}{\text{s}^2} \times \dfrac{(60\text{ s})^2}{1\text{ min}^2} \times \dfrac{1\text{ mi}}{1{,}609\text{ m}} = \dfrac{7.3 \times 3{,}600}{1{,}609} \approx 16.3$.
+
+## M2 Q27 | ADV | hard
+$$ \begin{aligned} y &= -2.5 \\ y &= x^2 + 8x + k \end{aligned} $$
+
+In the given system of equations, $k$ is a positive integer constant. The system has no real solutions. What is the least possible value of $k$?
+> Set equal: $x^2 + 8x + k + 2.5 = 0$. No real solutions requires $64 - 4(k + 2.5) < 0$, so $k > 13.5$. The least integer is $14$.

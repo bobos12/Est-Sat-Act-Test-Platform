@@ -1,0 +1,641 @@
+[
+ {
+  "module": 1,
+  "n": 1,
+  "page": 34,
+  "col": 0,
+  "key": "B",
+  "figure": "math-m1-q01.png",
+  "figure_size": [
+   215,
+   172
+  ],
+  "text": "The scatterplot shows the temperature, in degrees\nFahrenheit (°F), and the distance above sea level, in\nfeet, measured at 6 locations on Mount Jefferson. A\nline of best fit is also shown.\nAt a distance of 4,000 feet above sea level, what is the\ntemperature, in °F, predicted by the line of best fit?\nA) 47\nB) 35\nC) 25\nD) 0"
+ },
+ {
+  "module": 1,
+  "n": 2,
+  "page": 34,
+  "col": 0,
+  "key": "D",
+  "figure": null,
+  "figure_size": null,
+  "text": "Rectangle P has an area of 72 square inches. If a\nrectangle with an area of 20 square inches is removed\nfrom rectangle P, what is the area, in square inches,\nof the resulting figure?\nA) 92\nB) 84\nC) 80\nD) 52"
+ },
+ {
+  "module": 1,
+  "n": 3,
+  "page": 34,
+  "col": 1,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "I I\np + 61 = 65\nWhich value is a solution to the given equation?\nA) 65\nB) 4\nC) 126\nD) 130"
+ },
+ {
+  "module": 1,
+  "n": 4,
+  "page": 34,
+  "col": 1,
+  "key": "A",
+  "figure": "math-m1-q04.png",
+  "figure_size": [
+   71,
+   66
+  ],
+  "text": "Lorenzo purchased a box of cereal and some\nstrawberries at the grocery store. Lorenzo paid $2 for\nthe box of cereal and $1.90 per pound for the\nstrawberries. If Lorenzo paid a total of $9.60 for the\nbox of cereal and the strawberries, which of the\nfollowing equations can be used to find p, the\nnumber of pounds of strawberries Lorenzo\npurchased? (Assume there is no sales tax.)\nA)\nB)\nC)\nD)"
+ },
+ {
+  "module": 1,
+  "n": 5,
+  "page": 35,
+  "col": 0,
+  "key": "D",
+  "figure": "math-m1-q05.png",
+  "figure_size": [
+   197,
+   139
+  ],
+  "text": "The bar graph summarizes the charge, in\nkilowatt-hours (kWh), a battery received each day\nfor 15 days.\nFor how many of these 15 days did the battery\nreceive a charge of 0 kWh?\nA) 0\nB) 1\nC) 4\nD) 6"
+ },
+ {
+  "module": 1,
+  "n": 6,
+  "page": 35,
+  "col": 0,
+  "key": [
+   "9"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "A line in the xy-plane has a slope of 9 and passes\nthrough the point (0, −5). The equation y\n=\n+\npx\nr\ndefines the line, where p and r are constants. What\nis the value of p ?"
+ },
+ {
+  "module": 1,
+  "n": 7,
+  "page": 35,
+  "col": 1,
+  "key": [
+   "14",
+   "-5",
+   "-4"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "What is an x-coordinate of an x-intercept of the\n= 3( −14)( + 5)( + 4) in the xy-plane?\ngraph of y\nx\nx\nx"
+ },
+ {
+  "module": 1,
+  "n": 8,
+  "page": 35,
+  "col": 1,
+  "key": "A",
+  "figure": "math-m1-q08.png",
+  "figure_size": [
+   215,
+   174
+  ],
+  "text": "The graph shown gives the estimated value, in\ndollars, of a tablet as a function of the number of\nmonths since it was purchased. What is the best\ninterpretation of the y-intercept of the graph in this\ncontext?\nA) The estimated value of the tablet was $225 when\nit was purchased.\nB) The estimated value of the tablet 24 months after\nit was purchased was $225.\nC) The estimated value of the tablet had decreased\nby $225 in the 24 months after it was purchased.\nD) The estimated value of the tablet decreased by\napproximately 2.25% each year after it was\npurchased."
+ },
+ {
+  "module": 1,
+  "n": 9,
+  "page": 36,
+  "col": 0,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "Triangles EFG and JKL are congruent, where E, F,\nand G correspond to J, K, and L, respectively. The\nmeasure of angle E is 45° and the measure of\nangle F is 20°. What is the measure of angle J ?\nA) 20°\nB) 45°\nC) 135°\nD) 160°"
+ },
+ {
+  "module": 1,
+  "n": 10,
+  "page": 36,
+  "col": 0,
+  "key": "D",
+  "figure": null,
+  "figure_size": null,
+  "text": "= 1\n+ 6\n( )\n(\n). What\nThe function f is defined by f x\nx\nis the value of f 4\n( ) ?\nA) 20\nB) 12\nC) 10\nD) 5"
+ },
+ {
+  "module": 1,
+  "n": 11,
+  "page": 36,
+  "col": 1,
+  "key": "C",
+  "figure": "math-m1-q11.png",
+  "figure_size": [
+   169,
+   176
+  ],
+  "text": "The graph of a system of an absolute value function\nand a linear function is shown. What is the solution\n( , ) to this system of two equations?\nx y\nA) (0, 8)\n2, 9\n\n\n\n\nB)\n\n−7\n2, 9\n\n\n\n\nC)\n\nD) (−3, 4)"
+ },
+ {
+  "module": 1,
+  "n": 12,
+  "page": 37,
+  "col": 0,
+  "key": "D",
+  "figure": "math-m1-q12.png",
+  "figure_size": [
+   73,
+   69
+  ],
+  "text": "= 6 + 3\ny\nx\nOne of the two equations in a system of linear\nequations is given. The system has infinitely many\nsolutions. Which equation could be the second\nequation in this system?\nA) y\nB)\nC)\nD)"
+ },
+ {
+  "module": 1,
+  "n": 13,
+  "page": 37,
+  "col": 0,
+  "key": [
+   "294"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "+ 18 = 54, what is the value of p\np\nIf\n?"
+ },
+ {
+  "module": 1,
+  "n": 14,
+  "page": 37,
+  "col": 0,
+  "key": [
+   "3"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "= 9 + 12\ny\nx\n+ 7\n= 20\nx\ny\nThe solution to the given system of equations is\n( , ). What is the value of y ?\nx y"
+ },
+ {
+  "module": 1,
+  "n": 15,
+  "page": 37,
+  "col": 1,
+  "key": "A",
+  "figure": null,
+  "figure_size": null,
+  "text": "A circle in the xy-plane has the equation\n−13\n+\n−\n= 64\n(\nx\n)\n(\ny\nk\n)\n. Which of the following\ngives the center of the circle and its radius?\n(\n) and the radius is 8.\nA) The center is at\nk\nB) The center is at k, 13\n(\n) and the radius is 8.\nC) The center is at k, 13\n(\n) and the radius is 64.\nD) The center is at\n(\nk\n) and the radius is 64."
+ },
+ {
+  "module": 1,
+  "n": 16,
+  "page": 37,
+  "col": 1,
+  "key": "C",
+  "figure": null,
+  "figure_size": null,
+  "text": "=\n−4\nThe function f is defined by f x\n( )\nx\nx\n. What\nI\n5 −\n= −15\nvalue of a satisfies f\n( )\nf a\n( )\n?\nA) −20\nB) 5\nC) 10\nD) 45"
+ },
+ {
+  "module": 1,
+  "n": 17,
+  "page": 37,
+  "col": 1,
+  "key": "B",
+  "figure": "math-m1-q17.png",
+  "figure_size": [
+   89,
+   78
+  ],
+  "text": "For the exponential function f, the value of f (0) is c,\nwhere c is a constant. Of the following equations that\ndefine the function f, which equation shows the value\nof c as the coefficient or the base?\nA)\nB)\nC)\nD) f x"
+ },
+ {
+  "module": 1,
+  "n": 18,
+  "page": 38,
+  "col": 0,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "t\n790 gives the number\nThe function f t( ) = 40,000(2)\nof bacteria in a population t minutes after an initial\nobservation. How much time, in minutes, does it\ntake for the number of bacteria in the population to\ndouble?\nA) 2\nB) 790\nC) 1,580\nD) 40,000"
+ },
+ {
+  "module": 1,
+  "n": 19,
+  "page": 38,
+  "col": 0,
+  "key": "D",
+  "figure": "math-m1-q19.png",
+  "figure_size": [
+   217,
+   57
+  ],
+  "text": "equivalent to n ?\nA)\ntw\n6( −\n)\nB)\nt\nw\n−\nC) w\nt\ntw\ntw\nD)\n−\nw\nt"
+ },
+ {
+  "module": 1,
+  "n": 20,
+  "page": 38,
+  "col": 1,
+  "key": [
+   "5"
+  ],
+  "figure": "math-m1-q20.png",
+  "figure_size": [
+   218,
+   177
+  ],
+  "text": "During a study, the temperature, in degrees\nCelsius (°C), of the air in a chamber was recorded to\nthe nearest integer at certain times. The scatterplot\nshows the recorded temperature y, in °C, of the air in\nthe chamber x minutes after the start of the study.\nX\nWhat was the average rate of change, in °C per\nminute, of the recorded temperature of the air in the\nchamber from x = 5 to x = 7 ?"
+ },
+ {
+  "module": 1,
+  "n": 21,
+  "page": 38,
+  "col": 1,
+  "key": [
+   "87"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "In August, a car dealer completed 15 more than\n3 times the number of sales the car dealer completed\nin September. In August and September, the car\ndealer completed 363 sales. How many sales did the\ncar dealer complete in September?"
+ },
+ {
+  "module": 1,
+  "n": 22,
+  "page": 39,
+  "col": 0,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "Points Q and R lie on a circle with center P. The\nradius of this circle is 9 inches. Triangle PQR has a\nperimeter of 31 inches. What is the length, in inches,\nof QR ?\nA) 13 2\nB) 13\nC) 9 2\nD) 9"
+ },
+ {
+  "module": 1,
+  "n": 23,
+  "page": 39,
+  "col": 0,
+  "key": "A",
+  "figure": "math-m1-q23.png",
+  "figure_size": [
+   127,
+   67
+  ],
+  "text": "In a set of four consecutive odd integers, where the\nintegers are ordered from least to greatest, the first\ninteger is represented by x. The product of 12 and\nthe fourth odd integer is at most 26 less than the sum\nof the first and third odd integers. Which inequality\nrepresents this situation?\nA)\nB)\nC)\nD)"
+ },
+ {
+  "module": 1,
+  "n": 24,
+  "page": 39,
+  "col": 1,
+  "key": "B",
+  "figure": "math-m1-q24.png",
+  "figure_size": [
+   59,
+   66
+  ],
+  "text": "x\ny\n−2\ns\n−\ns\ns\nThe table shows three values of x and their\ncorresponding values of y, where s is a constant.\nThere is a linear relationship between x and y.\nWhich of the following equations represents this\nrelationship?\nA) sx\nB)\nC)\nD) sx"
+ },
+ {
+  "module": 1,
+  "n": 25,
+  "page": 39,
+  "col": 1,
+  "key": "C",
+  "figure": "math-m1-q25.png",
+  "figure_size": [
+   171,
+   100
+  ],
+  "text": "Which of the following expressions is equivalent"
+ },
+ {
+  "module": 1,
+  "n": 26,
+  "page": 40,
+  "col": 0,
+  "key": "A",
+  "figure": "math-m1-q26.png",
+  "figure_size": [
+   71,
+   69
+  ],
+  "text": "The cost of renting a carpet cleaner is $52 for the first\nday and $26 for each additional day. Which of the\n( ), in dollars, of\nfollowing functions gives the cost C d\nrenting the carpet cleaner for d days, where d is a\npositive integer?\nA) C d\nB) C d\nC) C d\nD) C d\nSTOP\nIf you finish before time is called, you may check your work on this module only.\nDo not turn to any other module in the test."
+ },
+ {
+  "module": 1,
+  "n": 27,
+  "page": 40,
+  "col": 1,
+  "key": [
+   "-13/2",
+   "-6.5"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "=\n−2\n+ 15\nf x\n( )\n(\nx\n)(\nx\n)\nThe function f is defined by the given equation. For\n( ) reach its minimum?\nwhat value of x does f x"
+ },
+ {
+  "module": 2,
+  "n": 1,
+  "page": 44,
+  "col": 0,
+  "key": "A",
+  "figure": null,
+  "figure_size": null,
+  "text": "A total of 165 people contributed to a charity event as\neither a donor or a volunteer. 130 people contributed\nas a donor. How many people contributed as a\nvolunteer?\nA) 35\nB) 130\nC) 165\nD) 330"
+ },
+ {
+  "module": 2,
+  "n": 2,
+  "page": 44,
+  "col": 0,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "There are 250 trees in a park. Of these trees, 6% are\nbirch trees. How many birch trees are in the park?\nA) 6\nB) 15\nC) 75\nD) 244"
+ },
+ {
+  "module": 2,
+  "n": 3,
+  "page": 44,
+  "col": 1,
+  "key": "C",
+  "figure": "math-m2-q03.png",
+  "figure_size": [
+   178,
+   176
+  ],
+  "text": "f\n= ( ) is\nThe graph of the quadratic function y\nf x\nshown. What is the vertex of the graph?\n0, −2\nA)\n(\n)\n0, −3\n(\n)\nB)\n0, 2\nC)\n(\n)\n0, 3\n(\n)\nD)"
+ },
+ {
+  "module": 2,
+  "n": 4,
+  "page": 44,
+  "col": 1,
+  "key": "A",
+  "figure": null,
+  "figure_size": null,
+  "text": "The number of raccoons in a 131-square-mile area is\nestimated to be 2,358. What is the estimated\npopulation density, in raccoons per square mile, of\nthis area?\nA) 18\nB) 131\nC) 149\nD) 2,376"
+ },
+ {
+  "module": 2,
+  "n": 5,
+  "page": 45,
+  "col": 0,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "−11, −9, 26\nA data set of three numbers is shown. If a number\nfrom this data set is selected at random, what is the\nprobability of selecting a positive number?\nA) 0\nB)\nC) 2\nD) 1"
+ },
+ {
+  "module": 2,
+  "n": 6,
+  "page": 45,
+  "col": 0,
+  "key": [
+   "2850"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "= 45 + 600\nf x\n( )\nx\n( ), in dollars,\nThe function f gives the monthly fee f x\na facility charges to keep x crates in storage. What is\nthe monthly fee, in dollars, the facility charges to\nkeep 50 crates in storage?"
+ },
+ {
+  "module": 2,
+  "n": 7,
+  "page": 45,
+  "col": 0,
+  "key": [
+   "11/4",
+   "2.75"
+  ],
+  "figure": "math-m2-q07.png",
+  "figure_size": [
+   218,
+   62
+  ],
+  "text": ""
+ },
+ {
+  "module": 2,
+  "n": 8,
+  "page": 45,
+  "col": 1,
+  "key": "C",
+  "figure": null,
+  "figure_size": null,
+  "text": "= 6, what is the value of\nIf x\nx\n?\nA) 3\nB) 15\nC) 54\nD) 57"
+ },
+ {
+  "module": 2,
+  "n": 9,
+  "page": 45,
+  "col": 1,
+  "key": "C",
+  "figure": "math-m2-q09.png",
+  "figure_size": [
+   81,
+   76
+  ],
+  "text": "+ 2\n+ 9\nWhich expression is equivalent to\nx\nx\nx\n?\nA)\nB)\nC) x\nD)"
+ },
+ {
+  "module": 2,
+  "n": 10,
+  "page": 45,
+  "col": 1,
+  "key": "D",
+  "figure": "math-m2-q10.png",
+  "figure_size": [
+   146,
+   109
+  ],
+  "text": "D)"
+ },
+ {
+  "module": 2,
+  "n": 11,
+  "page": 46,
+  "col": 0,
+  "key": "D",
+  "figure": null,
+  "figure_size": null,
+  "text": "At a state fair, attendees can win tokens that are\nworth a different number of points depending on the\nshape. One attendee won S square tokens and\nC circle tokens worth a total of 1,120 points. The\n80 + 90\n= 1,120 represents this\nS\nC\nequation\nsituation. How many more points is a circle token\nworth than a square token?\nA) 950\nB) 90\nC) 80\nD) 10"
+ },
+ {
+  "module": 2,
+  "n": 12,
+  "page": 46,
+  "col": 1,
+  "key": "D",
+  "figure": "math-m2-q12.png",
+  "figure_size": [
+   171,
+   175
+  ],
+  "text": "In the given scatterplot, a line of best fit for the data\nis shown.\nWhich of the following is closest to the slope of the\nline of best fit shown?\nA) 0\nB)\nC) 1\nD) 2"
+ },
+ {
+  "module": 2,
+  "n": 13,
+  "page": 46,
+  "col": 1,
+  "key": [
+   "4.41",
+   "441/100"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "A circle has a radius of 2.1 inches. The area of the\ncircle is bπ square inches, where b is a constant.\nWhat is the value of b ?"
+ },
+ {
+  "module": 2,
+  "n": 14,
+  "page": 47,
+  "col": 0,
+  "key": [
+   "153"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "In triangle XYZ, angle Y is a right angle, point P lies\non XZ, and point Q lies on YZ such that PQ is\nparallel to XY . If the measure of angle XZY is 63°,\nwhat is the measure, in degrees, of angle XPQ ?"
+ },
+ {
+  "module": 2,
+  "n": 15,
+  "page": 47,
+  "col": 0,
+  "key": "C",
+  "figure": "math-m2-q15.png",
+  "figure_size": [
+   78,
+   126
+  ],
+  "text": "An investment account was opened with an initial\nvalue of $890. The value of the account doubled\nevery 10 years. Which equation represents the value\nof the account M t( ), in dollars, t years after the\naccount was opened?\nA) M t = 890 1\nB) M t = 890 1\nC) M t = 890 2\nt\nD) M t = 890 10\n( )\n(\n)"
+ },
+ {
+  "module": 2,
+  "n": 16,
+  "page": 47,
+  "col": 1,
+  "key": "A",
+  "figure": "math-m2-q16.png",
+  "figure_size": [
+   63,
+   247
+  ],
+  "text": "<\ny\nx\n< 22\nx\nFor which of the following tables are all the values of\nx and their corresponding values of y solutions to the\ngiven system of inequalities?\nA)\nB)\nC)\nD)"
+ },
+ {
+  "module": 2,
+  "n": 17,
+  "page": 48,
+  "col": 0,
+  "key": "A",
+  "figure": null,
+  "figure_size": null,
+  "text": "15 7\nWhich expression is equivalent to h q\n5 21,\nh q\nwhere h > 0 and q > 0 ?\nA) h\nq\nh\nB)\nq\n10 14\nC) h q\n3 3\nD) h q"
+ },
+ {
+  "module": 2,
+  "n": 18,
+  "page": 48,
+  "col": 0,
+  "key": "D",
+  "figure": null,
+  "figure_size": null,
+  "text": "= 4 + 17\ny\nx\n−3\n= 9 −23\ny\nx\nThe solution to the given system of equations is\n(\nx y\n). What is the value of\nx\n?\nA) −18\nB) −6\nC) 6\nD) 18"
+ },
+ {
+  "module": 2,
+  "n": 19,
+  "page": 48,
+  "col": 1,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "= −16\n+\nh t\n( )\nt\nb\nThe function h estimates an object’s height, in feet,\nabove the ground t seconds after the object is\ndropped, where b is a constant. The function\nestimates that the object is 3,364 feet above the\nground when it is dropped at t = 0. Approximately\nhow many seconds after being dropped does the\nfunction estimate the object will hit the ground?\nA) 7.25\nB) 14.50\nC) 105.13\nD) 210.25"
+ },
+ {
+  "module": 2,
+  "n": 20,
+  "page": 48,
+  "col": 1,
+  "key": [
+   "120"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "−8 −7 = 0\nx\nx\nOne solution to the given equation can be written as\n8 −\nk\n, where k is a constant. What is the value\nof k ?"
+ },
+ {
+  "module": 2,
+  "n": 21,
+  "page": 48,
+  "col": 1,
+  "key": [
+   "1660"
+  ],
+  "figure": "math-m2-q21.png",
+  "figure_size": [
+   219,
+   44
+  ],
+  "text": "A line intersects two parallel lines, forming\nfour acute angles and four obtuse angles. The\nis the value of w ?"
+ },
+ {
+  "module": 2,
+  "n": 22,
+  "page": 49,
+  "col": 0,
+  "key": "B",
+  "figure": "math-m2-q22.png",
+  "figure_size": [
+   195,
+   102
+  ],
+  "text": "f(x)\nx\n–4\n–\n–\nFor the linear function f, the table shows three values"
+ },
+ {
+  "module": 2,
+  "n": 23,
+  "page": 49,
+  "col": 0,
+  "key": "C",
+  "figure": null,
+  "figure_size": null,
+  "text": "=\n−15\nThe linear function g is defined by g x\n( )\nb\nx\nc\n+ 7 = 4\nwhere b is a constant. If g c\n(\n)\n, where c is a\nconstant, which of the following expressions\nrepresents the value of b ?\nc\nA)\nc\n+ 7\nB)\nc\n+ 105\nC)\n15 + 105\nD)\nc"
+ },
+ {
+  "module": 2,
+  "n": 24,
+  "page": 49,
+  "col": 1,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "In triangle XYZ, angle Z is a right angle and the\n= 12\ntan\nlength of YZ is 24 units. If\nX\n35 , what is the\nperimeter, in units, of triangle XYZ ?\nA) 188\nB) 168\nC) 84\nD) 71"
+ },
+ {
+  "module": 2,
+  "n": 25,
+  "page": 49,
+  "col": 1,
+  "key": "C",
+  "figure": null,
+  "figure_size": null,
+  "text": "+ 14 +\n= 6 + 109\nx\nx\ny\ny\nIn the xy-plane, the graph of the given equation is a\ncircle. What is the length of the circle’s radius?\n109\nA)\n149\nB)\n167\nC)\n341\nD)"
+ },
+ {
+  "module": 2,
+  "n": 26,
+  "page": 50,
+  "col": 0,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "The speed of a vehicle is increasing at a rate of\n7.3 meters per second squared. What is this rate, in\nmiles per minute squared, rounded to the nearest\ntenth? (Use 1 mile = 1,609 meters.)\nA) 0.3\nB) 16.3\nC) 195.8\nD) 220.4\nSTOP\nIf you finish before time is called, you may check your work on this module only.\nDo not turn to any other module in the test."
+ },
+ {
+  "module": 2,
+  "n": 27,
+  "page": 50,
+  "col": 1,
+  "key": [
+   "14"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "= −2.5\ny\n=\n+ 8 +\ny\nx\nx\nk\nIn the given system of equations, k is a positive\ninteger constant. The system has no real solutions.\nWhat is the least possible value of k ?\n[continued]\nGENERAL DIRECTIONS\n• You may work on only one module at a time.\n• If you finish a module before time is called, check your work on that module only.\nYou may NOT turn to any other module.\nTIMING\nReading and Writing, Module 1 : 39 minutes\nReading and Writing, Module 2: 39 minutes\n10-minute break\nMath, Module 1: 43 minutes\nMath, Module 2: 43 minutes\nThe above are standard times. If you are approved for accommodations involving\nadditional time, you should give yourself that time when you practice.\nMARKING YOUR ANSWERS\n• Be sure to answer your questions properly in this book.\n• Circle only one answer to each question. If you change your mind, completely\nerase the circle. You will not get credit for questions with more than one answer\ncircled, or for questions with no answers circled.\nUSING YOUR TEST BOOK\n• You may use the test book for scratch work.\n• You may not fold or remove pages or portions of a page from this book,\nor take the book from the testing room."
+ }
+]

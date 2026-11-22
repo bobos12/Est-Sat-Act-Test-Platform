@@ -1,0 +1,631 @@
+[
+ {
+  "module": 1,
+  "n": 1,
+  "page": 34,
+  "col": 0,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "The lengths of two sides of a triangle are\n4 centimeters and 6 centimeters. If the perimeter of\nthe triangle is 18 centimeters, what is the length, in\ncentimeters, of the third side of this triangle?\nA) 2\nB) 8\nC) 10\nD) 24"
+ },
+ {
+  "module": 1,
+  "n": 2,
+  "page": 34,
+  "col": 0,
+  "key": "C",
+  "figure": null,
+  "figure_size": null,
+  "text": "16 + 30 = 190\nx\nWhich equation has the same solution as the given\nequation?\nx\n= 30\nA)\nx\n= 130\nB)\nx\n= 160\nC)\nx\n= 190\nD)"
+ },
+ {
+  "module": 1,
+  "n": 3,
+  "page": 34,
+  "col": 0,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "Ty set a goal to walk at least 24 kilometers every day\nto prepare for a multiday hike. On a certain day, Ty\nplans to walk at an average speed of 4 kilometers per\nhour. What is the minimum number of hours Ty\nmust walk on that day to fulfill the daily goal?\nA) 4\nB) 6\nC) 20\nD) 24"
+ },
+ {
+  "module": 1,
+  "n": 4,
+  "page": 34,
+  "col": 1,
+  "key": "A",
+  "figure": null,
+  "figure_size": null,
+  "text": "The function g is defined by g x\n=\nx\n+ 9\n( )\n. For\nwhich value of x is g x = 25\n( )\n?\nA) 4\nB) 5\nC) 9\nD) 13"
+ },
+ {
+  "module": 1,
+  "n": 5,
+  "page": 34,
+  "col": 1,
+  "key": "A",
+  "figure": null,
+  "figure_size": null,
+  "text": "Which expression is equivalent to x\n+ 5\nx\n?\nA) x\n(9 + 5)\nx\n5 (9 + 1)\nx\nx\nB)\n9 ( + 5)\nx x\nC)\nD) x\n(9 + 5)\nx"
+ },
+ {
+  "module": 1,
+  "n": 6,
+  "page": 34,
+  "col": 1,
+  "key": [
+   "9"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "Each value in the data set shown represents the\nheight, in centimeters, of a plant.\n6, 10, 13, 2, 15, 22, 10, 4, 4, 4\nWhat is the mean height, in centimeters, of these\nplants?"
+ },
+ {
+  "module": 1,
+  "n": 7,
+  "page": 35,
+  "col": 0,
+  "key": [
+   "224"
+  ],
+  "figure": "math-m1-q07.png",
+  "figure_size": [
+   223,
+   43
+  ],
+  "text": "A student council group is selling school posters for a\nhow many school posters must they sell?"
+ },
+ {
+  "module": 1,
+  "n": 8,
+  "page": 35,
+  "col": 0,
+  "key": "A",
+  "figure": "math-m1-q08.png",
+  "figure_size": [
+   70,
+   112
+  ],
+  "text": "Jay walks at a speed of 3 miles per hour and runs at a\nspeed of 5 miles per hour. He walks for w hours and\nruns for r hours for a combined total of 14 miles.\nWhich equation represents this situation?\nA)\nB)\nC)\nD)"
+ },
+ {
+  "module": 1,
+  "n": 9,
+  "page": 35,
+  "col": 1,
+  "key": "C",
+  "figure": "math-m1-q09.png",
+  "figure_size": [
+   67,
+   66
+  ],
+  "text": "John paid a total of $165 for a microscope by making\na down payment of $37 plus p monthly payments of\n$16 each. Which of the following equations\nrepresents this situation?\nA)\nB)\nC)\nD)"
+ },
+ {
+  "module": 1,
+  "n": 10,
+  "page": 35,
+  "col": 1,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "y\n−57 =\npx\nThe given equation relates the positive numbers p, x,\nand y. Which equation correctly expresses y in terms\nof p and x ?\nA) y\n= 57 +\nx\np\ny\n=\npx\n+ 57\nB)\nC) y\n= 57\npx\npx\nD) y\n= 57"
+ },
+ {
+  "module": 1,
+  "n": 11,
+  "page": 36,
+  "col": 0,
+  "key": "A",
+  "figure": "math-m1-q11.png",
+  "figure_size": [
+   101,
+   76
+  ],
+  "text": "A company opens an account with an initial balance\nof $36,100.00. The account earns interest, and no\nadditional deposits or withdrawals are made. The\naccount balance is given by an exponential\nfunction A, where A t( ) is the account balance, in\ndollars, t years after the account is opened. The\naccount balance after 13 years is $68,071.93. Which\nequation could define A ?\nA) A t = 36,100.00 1.05 t\nB) A t = 31,971.93 1.05 t\nC) A t = 31,971.93 0.05 t\nD) A t = 36,100.00 0.05 t"
+ },
+ {
+  "module": 1,
+  "n": 12,
+  "page": 36,
+  "col": 0,
+  "key": "B",
+  "figure": "math-m1-q12.png",
+  "figure_size": [
+   192,
+   133
+  ],
+  "text": "144 ,\nπ\nThe circle shown has center O, circumference\nand diameters PR and QS. The length of arc PS is\ntwice the length of arc PQ. What is the length of\narc QR ?\nπ\nA)\nπ\nB)\nπ\nC)\nπ\nD)"
+ },
+ {
+  "module": 1,
+  "n": 13,
+  "page": 36,
+  "col": 1,
+  "key": [
+   "40"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "y\n= −2\nx\n3 +\nx\ny\n= 40\nThe solution to the given system of equations is\nx y\n(\n). What is the value of x ?"
+ },
+ {
+  "module": 1,
+  "n": 14,
+  "page": 36,
+  "col": 1,
+  "key": [
+   "14"
+  ],
+  "figure": "math-m1-q14.png",
+  "figure_size": [
+   102,
+   130
+  ],
+  "text": "The frequency table summarizes the 57 data values in\na data set. What is the maximum data value in the\ndata set?"
+ },
+ {
+  "module": 1,
+  "n": 15,
+  "page": 36,
+  "col": 1,
+  "key": "C",
+  "figure": null,
+  "figure_size": null,
+  "text": "One leg of a right triangle has a length of\n43.2 millimeters. The hypotenuse of the triangle has a\nlength of 196.8 millimeters. What is the length of the\nother leg of the triangle, in millimeters?\nA) 43.2\nB) 120\nC) 192\nD) 201.5"
+ },
+ {
+  "module": 1,
+  "n": 16,
+  "page": 37,
+  "col": 0,
+  "key": "D",
+  "figure": null,
+  "figure_size": null,
+  "text": "A wire with a length of 106 inches is cut into\ntwo parts. One part has a length of x inches, and the\nother part has a length of y inches. The value of x is\n6 more than 4 times the value of y. What is the value\nof x ?\nA) 25\nB) 28\nC) 56\nD) 86"
+ },
+ {
+  "module": 1,
+  "n": 17,
+  "page": 37,
+  "col": 0,
+  "key": "B",
+  "figure": "math-m1-q17.png",
+  "figure_size": [
+   106,
+   317
+  ],
+  "text": "f x\n=\nx\n+ 6\nx\n+ 5\nx\n−4\n( )\n(\n)(\n)(\n)\nThe function f is given. Which table of values"
+ },
+ {
+  "module": 1,
+  "n": 18,
+  "page": 37,
+  "col": 1,
+  "key": "D",
+  "figure": null,
+  "figure_size": null,
+  "text": "x\nA landscaper uses a hose that puts\nounces of\nwater in a bucket in y\nminutes. Which expression\nrepresents the number of ounces of water the hose\nputs in the bucket in y\nminutes at this rate?\nx\nA)\n440\n440\nx\nB)\nx\nC)\n792\n792\nx\nD)"
+ },
+ {
+  "module": 1,
+  "n": 19,
+  "page": 37,
+  "col": 1,
+  "key": "D",
+  "figure": null,
+  "figure_size": null,
+  "text": "4 −9\n= 9 + 5\nx\ny\ny\n= 2 + 4\nhy\nx\nIn the given system of equations, h is a constant. If\nthe system has no solution, what is the value of h ?\nA) −9\nB) 0\nC) 9\nD) 18"
+ },
+ {
+  "module": 1,
+  "n": 20,
+  "page": 37,
+  "col": 1,
+  "key": [
+   "52"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "13 is p% of 25. What is the value of p ?"
+ },
+ {
+  "module": 1,
+  "n": 21,
+  "page": 38,
+  "col": 0,
+  "key": [
+   "-3"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "( −2)\nx\n=\n3 + 34\nx\nWhat is the smallest solution to the given equation?"
+ },
+ {
+  "module": 1,
+  "n": 22,
+  "page": 38,
+  "col": 0,
+  "key": "B",
+  "figure": "math-m1-q22.png",
+  "figure_size": [
+   218,
+   152
+  ],
+  "text": "D) 15"
+ },
+ {
+  "module": 1,
+  "n": 23,
+  "page": 38,
+  "col": 0,
+  "key": "D",
+  "figure": null,
+  "figure_size": null,
+  "text": "For x > 0, the function f is defined as follows:\nf x\n( ) equals 201% of x\nWhich of the following could describe this function?\nA) Decreasing exponential\nB) Decreasing linear\nC) Increasing exponential\nD) Increasing linear"
+ },
+ {
+  "module": 1,
+  "n": 24,
+  "page": 38,
+  "col": 1,
+  "key": "A",
+  "figure": "math-m1-q24.png",
+  "figure_size": [
+   208,
+   50
+  ],
+  "text": "A) −13\nB) −8\nC) −5\nD) −3"
+ },
+ {
+  "module": 1,
+  "n": 25,
+  "page": 38,
+  "col": 1,
+  "key": "D",
+  "figure": null,
+  "figure_size": null,
+  "text": "One gallon of stain will cover 170 square feet of a\nsurface. A yard has a total fence area of w square feet.\nWhich equation represents the total amount of\nstain S, in gallons, needed to stain the fence in this\nyard twice?\nw\nA) S\n= 170\nB) S\n= 170\nw\nC) S\n= 340\nw\nw\nD) S\n= 85"
+ },
+ {
+  "module": 1,
+  "n": 26,
+  "page": 39,
+  "col": 0,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "Poll Results\nAngel Cruz\n483\nI I\nTerry Smith 320\nThe table shows the results of a poll. A total of\n803 voters selected at random were asked which\ncandidate they would vote for in the upcoming\nelection. According to the poll, if 6,424 people vote in\nthe election, by how many votes would Angel Cruz\nbe expected to win?\nA) 163\nB) 1,304\nC) 3,864\nD) 5,621\nSTOP\nIf you finish before time is called, you may check your work on this module only.\nDo not turn to any other module in the test."
+ },
+ {
+  "module": 1,
+  "n": 27,
+  "page": 39,
+  "col": 1,
+  "key": [
+   "1260"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "Right rectangular prism X is similar to right\nrectangular prism Y. The surface area of right\nrectangular prism X is 58 square centimeters cm2\n(\n),\nand the surface area of right rectangular prism Y\nis 1,450 cm2. The volume of right rectangular\nprism Y is 1,250 cubic centimeters cm3\n(\n). What is the\nsum of the volumes, in cm3, of right rectangular\nprism X and right rectangular prism Y?"
+ },
+ {
+  "module": 2,
+  "n": 1,
+  "page": 42,
+  "col": 0,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "w + 7 = 357\nWhat value of w is the solution to the given\nequation?\nA) 51\nB) 350\nC) 364\nD) 3,577"
+ },
+ {
+  "module": 2,
+  "n": 2,
+  "page": 42,
+  "col": 0,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "16( + 15) ?\nx\nWhich expression is equivalent to\n16 + 31\nx\nA)\n16 + 240\nx\nB)\n16 + 1\nx\nC)\n16 + 15\nx\nD)"
+ },
+ {
+  "module": 2,
+  "n": 3,
+  "page": 42,
+  "col": 1,
+  "key": "D",
+  "figure": null,
+  "figure_size": null,
+  "text": "Live east\nLive west\nof the river\nof the river Total\nLess than\n40 years old\nAt least\n107\n40 years old\nTotal\n100\n135\nThe table summarizes members of a local\norganization by age and whether they live east or\nwest of the river. If a member of the organization is\nselected at random, what is the probability that the\nselected member is at least 40 years old?\nA)\n135\nB)\n135\nC) 100\n135\nD) 107\n135"
+ },
+ {
+  "module": 2,
+  "n": 4,
+  "page": 42,
+  "col": 1,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "x\n= 12\n−3 +\nx\ny\n= −6\nThe solution to the given system of equations\nis x y\n( , ). What is the value of y ?\nA) −3\nB) 6\nC) 18\nD) 30"
+ },
+ {
+  "module": 2,
+  "n": 5,
+  "page": 43,
+  "col": 0,
+  "key": "D",
+  "figure": "math-m2-q05.png",
+  "figure_size": [
+   62,
+   126
+  ],
+  "text": "A line in the xy-plane has a slope of 1\n9 and passes\nthrough the point (0, 14). Which equation represents\nthis line?\nA) y\nB)\nC) y\nD) y"
+ },
+ {
+  "module": 2,
+  "n": 6,
+  "page": 43,
+  "col": 0,
+  "key": [
+   "70"
+  ],
+  "figure": "math-m2-q06.png",
+  "figure_size": [
+   152,
+   68
+  ],
+  "text": "Note: Figure not drawn to scale.\nIn the figure shown, line c intersects parallel lines s\nand t. What is the value of x ?"
+ },
+ {
+  "module": 2,
+  "n": 7,
+  "page": 43,
+  "col": 1,
+  "key": [
+   "1"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "+ 8\nf x\n( ) =\nx\nThe function f is defined by the given equation.\n( ) when x = 3\nWhat is the value of f x\n11 ?"
+ },
+ {
+  "module": 2,
+  "n": 8,
+  "page": 43,
+  "col": 1,
+  "key": "D",
+  "figure": "math-m2-q08.png",
+  "figure_size": [
+   57,
+   66
+  ],
+  "text": "x\ny\nThe table shows three values of x and their\ncorresponding values of y. There is a linear\nrelationship between x and y. Which of the\nfollowing equations represents this relationship?\nA) y\nB)\nC) y\nD) y"
+ },
+ {
+  "module": 2,
+  "n": 9,
+  "page": 44,
+  "col": 0,
+  "key": "A",
+  "figure": "math-m2-q09.png",
+  "figure_size": [
+   214,
+   58
+  ],
+  "text": "system of equations?\n3, 100\n(\n)\nA)\n3, 3\nB)\n(\n)\n3, 10\nC)\n(\n)\n3, 70\n(\n)\nD)"
+ },
+ {
+  "module": 2,
+  "n": 10,
+  "page": 44,
+  "col": 0,
+  "key": "D",
+  "figure": null,
+  "figure_size": null,
+  "text": "The function f is defined by f x\n= 7 −84\nx\n( )\n. What is\n= ( ) in the\nthe x-intercept of the graph of y\nf x\nxy-plane?\nA) (−12, 0)\nB) (−7, 0)\nC) (7, 0)\nD) (12, 0)"
+ },
+ {
+  "module": 2,
+  "n": 11,
+  "page": 44,
+  "col": 1,
+  "key": "C",
+  "figure": "math-m2-q11.png",
+  "figure_size": [
+   162,
+   52
+  ],
+  "text": "Rosa opened a savings account at a bank. The table\nshows the exponential relationship between the\ntime t, in years, since Rosa opened the account and\nthe total amount n, in dollars, in the account. If Rosa\nmade no additional deposits or withdrawals, which\nof the following equations best represents the\nrelationship between t and n ?\nA) n = (1 + 604)t\nB) n = (1 + 0.004)t\nC) n = 604(1 + 0.004)t\nD) n = 0.004(1 + 604)t"
+ },
+ {
+  "module": 2,
+  "n": 12,
+  "page": 44,
+  "col": 1,
+  "key": "D",
+  "figure": null,
+  "figure_size": null,
+  "text": "w t\n= 300 −4\nt\n( )\nThe function w models the volume of liquid, in\nmilliliters, in a container t seconds after it begins\ndraining from a hole at the bottom. According to the\nmodel, what is the predicted volume, in milliliters,\ndraining from the container each second?\nA) 300\nB) 296\nC) 75\nD) 4"
+ },
+ {
+  "module": 2,
+  "n": 13,
+  "page": 45,
+  "col": 0,
+  "key": [
+   "45"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "h x\n=\nx\n+\nb\n( )\nFor the linear function h, b is a constant and\nh 0 = 45\n( )\n. What is the value of b ?"
+ },
+ {
+  "module": 2,
+  "n": 14,
+  "page": 45,
+  "col": 0,
+  "key": [
+   "2",
+   "-12"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "z\n+ 10 −24 = 0\nz\nWhat is one of the solutions to the given equation?"
+ },
+ {
+  "module": 2,
+  "n": 15,
+  "page": 45,
+  "col": 0,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "Triangle FGH is similar to triangle JKL, where\nangle F corresponds to angle J and angles G and K\nsin( ) = 308\nF\nare right angles. If\n317, what is the value of\nsin( ) ?\nJ\nA)\n317\n308\nB)\n317\nC) 317\n308\nD) 317"
+ },
+ {
+  "module": 2,
+  "n": 16,
+  "page": 45,
+  "col": 1,
+  "key": "C",
+  "figure": null,
+  "figure_size": null,
+  "text": "The population of Greenville increased by 7%\nfrom 2015 to 2016. If the 2016 population is k times\nthe 2015 population, what is the value of k ?\nA) 0.07\nB) 0.7\nC) 1.07\nD) 1.7"
+ },
+ {
+  "module": 2,
+  "n": 17,
+  "page": 45,
+  "col": 1,
+  "key": "B",
+  "figure": "math-m2-q17.png",
+  "figure_size": [
+   204,
+   88
+  ],
+  "text": "Each of the dot plots shown represents the number of\nglue sticks brought in by each student for two classes,\nclass A and class B. Which statement best compares\nthe standard deviations of the numbers of glue sticks\nbrought in by each student for these two classes?\nA) The standard deviation of the number of glue\nsticks brought in by each student for class A is\nless than the standard deviation of the number of\nglue sticks brought in by each student for class B.\nB) The standard deviation of the number of glue\nsticks brought in by each student for class A is\nequal to the standard deviation of the number of\nglue sticks brought in by each student for class B.\nC) The standard deviation of the number of glue\nsticks brought in by each student for class A is\ngreater than the standard deviation of the\nnumber of glue sticks brought in by each student\nfor class B.\nD) There is not enough information to compare\nthese standard deviations."
+ },
+ {
+  "module": 2,
+  "n": 18,
+  "page": 46,
+  "col": 0,
+  "key": "B",
+  "figure": "math-m2-q18.png",
+  "figure_size": [
+   220,
+   103
+  ],
+  "text": "this context?\nA) The predicted body mass of the animal was\napproximately 330 kg 362 days after it was born.\nB) The predicted body mass of the animal was\napproximately 362 kg 330 days after it was born.\nC) The predicted body mass of the animal was\napproximately 362 kg 330\ndays after it was born.\nD) The predicted body mass of the animal was\napproximately 330\nkg 362 days after it was born."
+ },
+ {
+  "module": 2,
+  "n": 19,
+  "page": 46,
+  "col": 0,
+  "key": "C",
+  "figure": "math-m2-q19.png",
+  "figure_size": [
+   222,
+   120
+  ],
+  "text": "D) 40°"
+ },
+ {
+  "module": 2,
+  "n": 20,
+  "page": 46,
+  "col": 1,
+  "key": [
+   "410"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "t\n410 gives the number\nThe function f t( ) = 60,000(2)\nof bacteria in a population t minutes after an initial\nobservation. How much time, in minutes, does it\ntake for the number of bacteria in the population to\ndouble?"
+ },
+ {
+  "module": 2,
+  "n": 21,
+  "page": 46,
+  "col": 1,
+  "key": [
+   "-19"
+  ],
+  "figure": "math-m2-q21.png",
+  "figure_size": [
+   221,
+   74
+  ],
+  "text": ""
+ },
+ {
+  "module": 2,
+  "n": 22,
+  "page": 47,
+  "col": 0,
+  "key": "D",
+  "figure": "math-m2-q22.png",
+  "figure_size": [
+   63,
+   247
+  ],
+  "text": "y\n> 13 −18\nx\nFor which of the following tables are all the values of\nx and their corresponding values of y solutions to the\ngiven inequality?\nA)\nB)\nC)\nD)"
+ },
+ {
+  "module": 2,
+  "n": 23,
+  "page": 47,
+  "col": 0,
+  "key": "D",
+  "figure": null,
+  "figure_size": null,
+  "text": "A certain town has an area of 4.36 square miles.\nWhat is the area, in square yards, of this town?\n(1 mile = 1,760 yards)\nA) 404\nB) 7,674\nC) 710,459\nD) 13,505,536"
+ },
+ {
+  "module": 2,
+  "n": 24,
+  "page": 47,
+  "col": 1,
+  "key": "A",
+  "figure": null,
+  "figure_size": null,
+  "text": "A square is inscribed in a circle. The radius of the\ncircle is 20 2\ninches. What is the side length, in\ninches, of the square?\nA) 20\n20 2\nB)\nC) 20 2\nD) 40"
+ },
+ {
+  "module": 2,
+  "n": 25,
+  "page": 47,
+  "col": 1,
+  "key": "C",
+  "figure": "math-m2-q25.png",
+  "figure_size": [
+   103,
+   191
+  ],
+  "text": "Which expression is equivalent"
+ },
+ {
+  "module": 2,
+  "n": 26,
+  "page": 48,
+  "col": 0,
+  "key": "D",
+  "figure": null,
+  "figure_size": null,
+  "text": "x\nb\nThe function f is defined by f x\n( ) =\na\n2.2 + 2.2\n(\n),\n0 <\na\n<\nb\nwhere a and b are integer constants and\nThe functions g and h are equivalent to function f,\nwhere k and m are constants. Which of the\nfollowing equations displays the y-coordinate of the\n= ( ) in the xy-plane\ny-intercept of the graph of y\nf x\nas a constant or coefficient?\nx\n( ) =\n(2.2 + )\nI. g x\na\nk\nx\nII. h x\n( ) =\na\n(2.2) +\nm\nA) I only\nB) II only\nC) I and II\nD) Neither I nor II\nSTOP\nIf you finish before time is called, you may check your work on this module only.\nDo not turn to any other module in the test."
+ },
+ {
+  "module": 2,
+  "n": 27,
+  "page": 48,
+  "col": 1,
+  "key": [
+   "50"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "x kx\n(\n−56) = −16\nIn the given equation, k is an integer constant. If\nthe equation has no real solution, what is the least\npossible value of k ?\n[continued]\nGENERAL DIRECTIONS\n• You may work on only one module at a time.\n• If you finish a module before time is called, check your work on that module only.\nYou may NOT turn to any other module.\nTIMING\nReading and Writing, Module 1 : 39 minutes\nReading and Writing, Module 2: 39 minutes\n10-minute break\nMath, Module 1: 43 minutes\nMath, Module 2: 43 minutes\nThe above are standard times. If you are approved for accommodations involving\nadditional time, you should give yourself that time when you practice.\nMARKING YOUR ANSWERS\n• Be sure to answer your questions properly in this book.\n• Circle only one answer to each question. If you change your mind, completely\nerase the circle. You will not get credit for questions with more than one answer\ncircled, or for questions with no answers circled.\nUSING YOUR TEST BOOK\n• You may use the test book for scratch work.\n• You may not fold or remove pages or portions of a page from this book,\nor take the book from the testing room."
+ }
+]

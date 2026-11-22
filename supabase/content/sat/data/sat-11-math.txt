@@ -1,0 +1,430 @@
+# SAT Practice Test 11 — Math (transcribed; explanations written for 16hundred)
+
+## M1 Q1 | GEO | easy
+In the triangle shown, $PQ = QR$. What is the value of $x$?
+A) $156$
+B) $66$
+C) $48$
+D) $24$
+> Since $PQ = QR$, the angles opposite those sides are equal: angle $R$ equals angle $P$, so $x = 24$. (Check: $24 + 24 + 132 = 180$.)
+
+## M1 Q2 | ALG | easy
+$$ 4x + 1 = 33 $$
+
+Which equation has the same solution as the given equation?
+A) $4x = 32$
+B) $4x = 5$
+C) $4x = 1$
+D) $4x = -32$
+> Subtracting $1$ from both sides gives $4x = 32$.
+
+## M1 Q3 | ALG | easy
+For the linear function $f$, the graph of $y = f(x)$ in the $xy$-plane has a slope of $7$ and passes through the point $(0, 5)$. Which equation defines $f$?
+A) $f(x) = 5x$
+B) $f(x) = 35x$
+C) $f(x) = 7x + 5$
+D) $f(x) = 12x + 5$
+> Slope $7$ and $y$-intercept $5$: $f(x) = 7x + 5$.
+
+## M1 Q4 | ADV | easy
+$$ 8x^2 - 40 = 32 $$
+
+What is the positive solution to the given equation?
+A) $3$
+B) $4$
+C) $9$
+D) $72$
+> $8x^2 = 72$, so $x^2 = 9$ and the positive solution is $3$.
+
+## M1 Q5 | PSDA | easy
+A total of $50$ children attended a summer camp and were offered $4$ types of sandwiches. The table shows the number of children who chose each type of sandwich.
+
+If one of these children is selected at random, what is the probability of selecting a child who chose a vegetarian sandwich?
+A) $\dfrac{9}{100}$
+B) $\dfrac{9}{50}$
+C) $\dfrac{1}{4}$
+D) $\dfrac{9}{10}$
+> $9$ of the $50$ children chose vegetarian: $\tfrac{9}{50}$.
+
+## M1 Q6 | PSDA | easy
+Amara grows cherry tomatoes in her backyard. This year, she harvested $750$ cherry tomatoes and gave $10\%$ of them to her neighbor. How many of the harvested cherry tomatoes did Amara give to her neighbor?
+> $0.10 \times 750 = 75$.
+
+## M1 Q7 | ALG | easy
+$$ \begin{aligned} x + y &= 125 \\ x + y + y &= 155 \end{aligned} $$
+
+The solution to the given system of equations is $(x, y)$. What is the value of $y$?
+> The second equation is the first plus $y$: $125 + y = 155$, so $y = 30$.
+
+## M1 Q8 | ALG | easy
+In a chess tournament, each participant earns $1$ point for each game the participant plays that ends in a draw and $3$ points for each game the participant wins. A certain participant in this tournament has earned $41$ points. Which equation represents this situation, where $d$ represents the number of games this participant has played that ended in a draw and $w$ represents the number of games this participant has won?
+A) $d + 3w = 41$
+B) $3d + w = 41$
+C) $d + \dfrac{w}{3} = 41$
+D) $\dfrac{d}{3} + w = 41$
+> Draws earn $1$ point each ($d$) and wins $3$ points each ($3w$): $d + 3w = 41$.
+
+## M1 Q9 | ADV | easy
+The function $g$ is defined by $g(x) = \sqrt{x} + 300$. What is the value of $g(x)$ when $x = 81$?
+A) $9$
+B) $300$
+C) $309$
+D) $381$
+> $g(81) = 9 + 300 = 309$.
+
+## M1 Q10 | PSDA | easy
+A cable provider wanted to know how many of its $30{,}000$ customers would be interested in a new service plan. The provider selected $300$ customers at random and asked each customer whether the customer would be interested in the new plan. Of those surveyed, $8$ said they would be interested. Which of the following is the best estimate of the total number of customers who would be interested in the new service plan?
+A) $8$
+B) $80$
+C) $800$
+D) $8{,}000$
+> The sample is $\tfrac{300}{30{,}000} = \tfrac{1}{100}$ of all customers, so the estimate is $8 \times 100 = 800$.
+
+## M1 Q11 | ADV | medium
+Which expression is equivalent to $64t^2s^3 - 56t^3s$?
+A) $4ts(16s^2 - 14ts)$
+B) $4ts(16t^2s^2 - 14t)$
+C) $4t^2s(16ts - 14s)$
+D) $4t^2s(16s^2 - 14t)$
+> Expand D: $4t^2s \cdot 16s^2 = 64t^2s^3$ and $4t^2s \cdot 14t = 56t^3s$. The other choices expand to different terms.
+
+## M1 Q12 | ADV | easy
+$$ \begin{aligned} x + 5 &= 14 \\ y &= 4x^2 + 4 \end{aligned} $$
+
+At what point $(x, y)$ do the graphs of the equations in the given system intersect?
+A) $(9, 324)$
+B) $(9, 328)$
+C) $(14, 4)$
+D) $(14, 788)$
+> $x = 9$, so $y = 4(81) + 4 = 328$.
+
+## M1 Q13 | ALG | easy
+$$ 8x + 11y = 170 $$
+
+The equation gives the possible combinations of the number of $2009$ premium grade Log Cabin Pennies, $x$, and the number of $1996$ select grade Lincoln Pennies, $y$, in a collection that is worth a total of $\$170$. If there are $6$ $1996$ select grade Lincoln Pennies in the collection, how many $2009$ premium grade Log Cabin Pennies are in the collection?
+> $8x + 66 = 170$, so $8x = 104$ and $x = 13$.
+
+## M1 Q14 | ADV | medium
+The population of the town of Smithville doubled every $75$ years from $1659$ to $1959$. The population of this town was $240{,}000$ in $1959$. What was the population of this town in $1659$?
+> $300$ years is $4$ doubling periods, so the population grew by a factor of $2^4 = 16$: $\tfrac{240{,}000}{16} = 15{,}000$.
+
+## M1 Q15 | PSDA | easy
+The scatterplot shows the relationship between $x$ and $y$. A line of best fit is also shown.
+
+Which of the following is closest to the slope of this line of best fit?
+A) $0.60$
+B) $2.50$
+C) $7.80$
+D) $8.00$
+> The line rises from about $3.2$ at $x = 0$ to about $9.2$ at $x = 10$: a slope of about $\tfrac{6}{10} = 0.6$.
+
+## M1 Q16 | ADV | medium
+Which quadratic equation has exactly one distinct real solution?
+A) $(x + 15)^2 = 0$
+B) $(x + 15)^2 = -45$
+C) $(x + 15)^2 = 45$
+D) $(x + 15)^2 = 135$
+> $(x + 15)^2 = 0$ only when $x = -15$. B has no real solutions, and C and D have two.
+
+## M1 Q17 | ALG | medium
+The cost to rent a bus from Company X is $\$950$ for the first $3$ hours and an additional $\$50$ per hour for each hour after the first $3$ hours. If the total cost to rent the bus from Company X for $t$ hours, where $t > 3$, is $\$1{,}150$, which equation represents this situation?
+A) $950(t - 3) + 50t = 1{,}150$
+B) $950(3t) + 50t = 1{,}150$
+C) $950 + 50(t - 3) = 1{,}150$
+D) $950 + 50(3t) = 1{,}150$
+> The first $3$ hours cost $\$950$, and each of the remaining $t - 3$ hours costs $\$50$: $950 + 50(t - 3) = 1{,}150$.
+
+## M1 Q18 | ALG | medium | nofig
+$$ \begin{aligned} x + y &= 53 \\ 11x + 18y &= 730 \end{aligned} $$
+
+The given equations represent the possible numbers of beach chairs, $x$, and umbrellas, $y$, rented at a park last month and the total spent, in dollars, to rent those beach chairs and umbrellas. Which of the following graphs represents this situation?
+A) ![Graph A](/sat/test-11/math-m1-q18-A.png)
+B) ![Graph B](/sat/test-11/math-m1-q18-B.png)
+C) ![Graph C](/sat/test-11/math-m1-q18-C.png)
+D) ![Graph D](/sat/test-11/math-m1-q18-D.png)
+> $x + y = 53$ has both intercepts at $53$, and $11x + 18y = 730$ has intercepts near $(66.4, 0)$ and $(0, 40.6)$. Both lines slope downward; graph B shows exactly these two lines.
+
+## M1 Q19 | GEO | medium
+In triangle $QRS$ shown, $QR < RS$. Which expression represents the length of $\overline{QS}$?
+A) $18\cos Q$
+B) $18\sin Q$
+C) $\dfrac{18}{\cos Q}$
+D) $\dfrac{18}{\sin Q}$
+> $RS = 18$ is opposite angle $Q$ and $QS$ is the hypotenuse, so $\sin Q = \dfrac{18}{QS}$ and $QS = \dfrac{18}{\sin Q}$.
+
+## M1 Q20 | GEO | medium
+Circle A in the $xy$-plane has the equation $(x + 5)^2 + (y - 5)^2 = 25$. Circle B has the same center as circle A. The radius of circle B is two times the radius of circle A. The equation defining circle B in the $xy$-plane is $(x + 5)^2 + (y - 5)^2 = k$, where $k$ is a constant. What is the value of $k$?
+> Circle A's radius is $5$, so circle B's radius is $10$ and $k = 10^2 = 100$.
+
+## M1 Q21 | ADV | medium
+$$ x^2 + 7x + 5 = 0 $$
+
+One solution to the given equation can be written as $x = \dfrac{-7 + \sqrt{k}}{2}$, where $k$ is a constant. What is the value of $k$?
+> By the quadratic formula, $x = \dfrac{-7 \pm \sqrt{49 - 20}}{2} = \dfrac{-7 \pm \sqrt{29}}{2}$, so $k = 29$.
+
+## M1 Q22 | PSDA | medium
+A scientist measured the lengths of $240$ gray seals from Muskeget Island and $120$ gray seals from Sable Island. The scientist determined that the mean length of the $240$ gray seals from Muskeget Island was $88$ inches and the mean length of the $120$ gray seals from Sable Island was $94$ inches. What was the mean length of all $360$ gray seals the scientist measured for this study?
+A) $89$
+B) $90$
+C) $91$
+D) $92$
+> Total length $= 240(88) + 120(94) = 21{,}120 + 11{,}280 = 32{,}400$, and $\tfrac{32{,}400}{360} = 90$.
+
+## M1 Q23 | ADV | hard
+The graph of $y = f(x) + 4$ is shown. Which equation defines function $f$?
+A) $f(x) = -3^x + 1$
+B) $f(x) = -3^x + 5$
+C) $f(x) = -3^x + 8$
+D) $f(x) = -3^x + 9$
+> The graph crosses the $y$-axis at $8$, so $f(0) + 4 = 8$ and $f(0) = 4$. For $f(x) = -3^x + c$, $f(0) = -1 + c = 4$ gives $c = 5$.
+
+## M1 Q24 | GEO | hard
+Two lines intersect at exactly one point, forming two acute angles and two obtuse angles. The measure of one of these angles is $(9x - 140)^\circ$. Which of the following could **NOT** be the sum of the measures of any two of these angles?
+A) $(-18x + 280)^\circ$
+B) $(-18x + 640)^\circ$
+C) $(18x - 280)^\circ$
+D) $180^\circ$
+> If $(9x - 140)^\circ$ is one angle, the other angles are $(9x - 140)^\circ$ and $(320 - 9x)^\circ$ twice each. The possible sums are $18x - 280$, $640 - 18x$, and $180$. $(-18x + 280)^\circ$ is not one of them.
+
+## M1 Q25 | ALG | hard
+$$ 2x + 9y = 7 $$
+
+The given equation is one equation in a system of two linear equations. If the system of equations has at least one solution, which of the following equations could be the other equation in the system?
+
+$$ \begin{aligned} &\text{I. } 3x + 13.5y = 10.5 \\ &\text{II. } 3x - 13.5y = 10.5 \end{aligned} $$
+A) I only
+B) II only
+C) I and II
+D) Neither I nor II
+> Equation I is $1.5$ times the given equation, the same line, so the system has infinitely many solutions. Equation II has a different slope, so it meets the given line at exactly one point. Both work.
+
+## M1 Q26 | GEO | hard
+A right rectangular prism has a base area of $24t$ square centimeters (cm$^2$). The length of the base of the rectangular prism is $\dfrac{8}{3}$ cm, and the height of the rectangular prism is $15$ cm. Which expression represents the surface area, in cm$^2$, of the right rectangular prism?
+A) $48t + 160$
+B) $318t + 80$
+C) $1{,}968t + 80$
+D) $360t$
+> The base width is $24t \div \tfrac{8}{3} = 9t$. Surface area $= 2(24t) + 2\left(\tfrac{8}{3}\right)(15) + 2(9t)(15) = 48t + 80 + 270t = 318t + 80$.
+
+## M1 Q27 | ALG | hard
+For a particular car, the linear function $f$ gives the predicted power, in brake horsepower (bhp), for engine speeds between $1{,}000$ revolutions per minute (rpm) and $6{,}000$ rpm. According to this function, the car's predicted power is $433$ bhp at an engine speed of $3{,}331$ rpm and $600$ bhp at an engine speed of $4{,}500$ rpm. The equation $f(x) = \dfrac{1}{7}(x - a) + 433$ defines $f$, where $x$ is the engine speed, in rpm, and $a$ is a constant. What is the value of $a$?
+> $f(a) = 433$, and we know $f(3{,}331) = 433$, so $a = 3{,}331$. (The slope $\tfrac{600 - 433}{4{,}500 - 3{,}331} = \tfrac{167}{1{,}169} = \tfrac{1}{7}$ confirms the form.)
+
+## M2 Q1 | ADV | easy
+Which expression is equivalent to $6x + 5x + 4y$?
+A) $15x$
+B) $15y$
+C) $11x + 4y$
+D) $30x + 4y$
+> Combine the like terms $6x + 5x = 11x$; $4y$ stays: $11x + 4y$.
+
+## M2 Q2 | PSDA | easy
+To study the characteristics of sea stars in a group of tide pools, researchers measured the diameter of the sea stars within the tide pools. The dot plot gives the diameter, to the nearest inch, of each of the sea stars in these tide pools.
+
+Based on the dot plot, how many sea stars had a diameter, to the nearest inch, of $16$ inches?
+A) $16$
+B) $6$
+C) $4$
+D) $1$
+> There are $6$ dots above $16$.
+
+## M2 Q3 | GEO | easy
+A rectangle has a length of $56$ inches and a width of $28$ inches. What is the area, in square inches, of the rectangle?
+A) $28$
+B) $84$
+C) $168$
+D) $1{,}568$
+> $56 \times 28 = 1{,}568$.
+
+## M2 Q4 | ALG | easy
+$$ \begin{aligned} 10x &= 110 \\ 6x - 63 &= y \end{aligned} $$
+
+The solution to the given system of equations is $(x, y)$. What is the value of $y$?
+A) $63$
+B) $11$
+C) $10$
+D) $3$
+> $x = 11$, so $y = 66 - 63 = 3$.
+
+## M2 Q5 | ALG | easy
+The function $f$ is defined by $f(x) = 9(2x + 3)$. For what value of $x$ does $f(x) = 63$?
+A) $2$
+B) $5$
+C) $7$
+D) $30$
+> $2x + 3 = 7$, so $x = 2$.
+
+## M2 Q6 | ALG | easy
+$$ 10x = 86 $$
+
+What value of $x$ is the solution to the given equation?
+> $x = \tfrac{86}{10} = 8.6$.
+
+## M2 Q7 | ADV | easy
+$$ y = 3{,}600(a)^x $$
+
+The given equation, where $a$ is a positive constant, gives the predicted number of bacteria, $y$, in a growth medium $x$ hours after the number of bacteria was initially measured. According to the equation, what was the predicted number of bacteria initially measured in the growth medium?
+> At $x = 0$, $y = 3{,}600(a)^0 = 3{,}600$.
+
+## M2 Q8 | ALG | easy
+Leo goes to a packing store to buy containers and tape. Leo has $\$15$. Each container costs $\$1.87$ and each roll of tape costs $\$2.40$. Which inequality represents the relationship between the number of containers, $c$, and the number of rolls of tape, $t$, Leo can buy?
+A) $1.87c + 2.40t \le 15$
+B) $1.87c + 2.40t \ge 15$
+C) $2.40c + 1.87t \le 15$
+D) $2.40c + 1.87t \ge 15$
+> Containers cost $1.87c$, tape costs $2.40t$, and the total can be at most $\$15$: $1.87c + 2.40t \le 15$.
+
+## M2 Q9 | ADV | easy
+The graph of the function $f$ is shown, where $y = f(x)$.
+
+Which of the following best describes the function $f$?
+A) Decreasing exponential
+B) Increasing exponential
+C) Decreasing linear
+D) Increasing linear
+> The curve stays near $0$ on the left, then rises more and more steeply: increasing exponential.
+
+## M2 Q10 | ALG | easy
+The shaded region shown in the graph represents all the solutions to which inequality?
+A) $x \le 36$
+B) $x \ge 36$
+C) $y \le 36$
+D) $y \ge 36$
+> The region is everything on or above the horizontal line $y = 36$: $y \ge 36$.
+
+## M2 Q11 | ADV | medium
+There are $240$ players in a tennis competition that includes $4$ rounds of matches. Each player in the competition will play a match against another player in round 1. At the end of each round, the player who loses the match is eliminated and the player who won the match advances to the next round to play a match against another winning player. Which equation gives the number of players, $p$, eliminated at the end of round $r$, where $r \le 4$?
+A) $p = 15\left(\dfrac{1}{2}\right)^r$
+B) $p = 15(2)^r$
+C) $p = 240\left(\dfrac{1}{2}\right)^r$
+D) $p = 240(2)^r$
+> Half the remaining players are eliminated each round: $120$, $60$, $30$, $15$. That is $p = 240\left(\tfrac{1}{2}\right)^r$.
+
+## M2 Q12 | ALG | easy
+Line $k$ is defined by $y = 6x + 4$. Line $j$ is parallel to line $k$ in the $xy$-plane and passes through the point $(0, 5)$. Which equation defines line $j$?
+A) $y = 6x + 5$
+B) $y = -5x + 5$
+C) $y = -6x + 5$
+D) $y = 5x + 5$
+> Same slope, $6$, and $y$-intercept $5$: $y = 6x + 5$.
+
+## M2 Q13 | GEO | easy
+In the triangle shown, what is the value of $x$?
+> The legs are equal ($15$ and $15$), so it is an isosceles right triangle and both acute angles are $45^\circ$: $x = 45$.
+
+## M2 Q14 | GEO | easy
+What is the radius of the circle in the $xy$-plane defined by $(x + 2)^2 + (y + 5)^2 = 169$?
+> $r^2 = 169$, so $r = 13$.
+
+## M2 Q15 | ADV | easy
+The graph shows the estimated boiling point $y$, in degrees Celsius, of a normal paraffin with a molecular weight of $x$ grams per mole, where $1 \le x \le 280$. Which statement is the best interpretation of the point $(149.02, 186.05)$?
+A) A normal paraffin with a molecular weight of $186.05$ grams per mole has an estimated boiling point of $149.02$ degrees Celsius.
+B) A normal paraffin with a molecular weight of $149.02$ grams per mole has an estimated boiling point of $186.05$ degrees Celsius.
+C) The minimum estimated boiling point for normal paraffins corresponds to a paraffin with a molecular weight of $149.02$ grams per mole and an estimated boiling point of $186.05$ degrees Celsius.
+D) The maximum estimated boiling point for normal paraffins corresponds to a paraffin with a molecular weight of $149.02$ grams per mole and an estimated boiling point of $186.05$ degrees Celsius.
+> $x = 149.02$ is the molecular weight and $y = 186.05$ is the boiling point. The point is neither the lowest nor the highest on the curve.
+
+## M2 Q16 | ADV | easy
+For the polynomial function $f$, the graph of $y = f(x)$ in the $xy$-plane passes through the points $(-5, 0)$, $(1, 0)$, and $(4, 0)$. Which of the following must be a factor of $f(x)$?
+A) $x + 1$
+B) $x + 4$
+C) $x - 1$
+D) $x - 5$
+> $f(1) = 0$, so $x - 1$ is a factor. (The other factors are $x + 5$ and $x - 4$.)
+
+## M2 Q17 | ALG | medium | nofig
+| $x$ | $g(x)$ |
+| --- | --- |
+| $1$ | $32$ |
+| $2$ | $28$ |
+| $3$ | $24$ |
+| $4$ | $20$ |
+
+For the linear function $g$, the table shows four values of $x$ and their corresponding values of $g(x)$. The function can be written as $g(x) = mx + b$, where $m$ and $b$ are constants. What is the value of $b$?
+A) $4$
+B) $16$
+C) $32$
+D) $36$
+> The slope is $-4$, and going back one step from $x = 1$ gives $g(0) = 32 + 4 = 36$, so $b = 36$.
+
+## M2 Q18 | ADV | medium
+| $x$ | $24$ | $30$ | $32$ |
+| --- | --- | --- | --- |
+| $f(x)$ | $-8$ | $-8$ | $8$ |
+
+For the quadratic function $f$, the table shows three values of $x$ and their corresponding values of $f(x)$. Which equation defines $f$?
+A) $f(x) = (x - 24)(x - 30) + 4$
+B) $f(x) = (x - 24)(x - 30) - 8$
+C) $f(x) = (x - 8)(x - 32) + 32$
+D) $f(x) = (x - 8)(x - 32) - 32$
+> B gives $f(24) = f(30) = -8$ and $f(32) = (8)(2) - 8 = 8$, matching all three values. A gives $4$ at $x = 24$, and C and D don't give $-8$ at both $24$ and $30$.
+
+## M2 Q19 | ALG | hard
+A certain open star cluster contains M-type stars and K-type stars. The estimated total mass of M-type and K-type stars in this open star cluster is $127{,}882$ quettagrams. The graph shown models the possible combinations of the number of M-type stars, $x$, and K-type stars, $y$, that could be in this open star cluster if all the M-type stars have the same estimated mass and all the K-type stars have the same estimated mass. Based on the graph, which of the following is closest to the estimated mass, in quettagrams, of each M-type star in this cluster?
+A) $811$
+B) $938$
+C) $51{,}904$
+D) $75{,}978$
+> The $x$-intercept (about $158$) is the number of M-type stars if there are no K-type stars, so each M-type star has mass about $\tfrac{127{,}882}{158} \approx 811$ quettagrams.
+
+## M2 Q20 | ADV | hard
+$$ \sqrt[3]{p^2} = t^{\frac{9}{7}} $$
+
+In the given equation, $p > 1$ and $t > 1$. If $t = p^{3n - 1}$, where $n$ is a constant, what is the value of $n$?
+> $p^{2/3} = \left(p^{3n - 1}\right)^{9/7}$, so $\tfrac{9}{7}(3n - 1) = \tfrac{2}{3}$. Then $3n - 1 = \tfrac{14}{27}$, $3n = \tfrac{41}{27}$, and $n = \tfrac{41}{81}$ (about $0.5062$).
+
+## M2 Q21 | PSDA | hard
+The number $a$ is $55\%$ less than the number $b$. The number $b$ is $320\%$ greater than $160$. What is the value of $a$?
+> $b = 160(1 + 3.2) = 672$, and $a = 672(1 - 0.55) = 302.4$.
+
+## M2 Q22 | ADV | medium | nofig
+$$ f(x) = -6x^2 + 60x - 126 $$
+
+The function $f$ is defined by the given equation. Which of the following equivalent forms of the equation displays the maximum value of the function as a constant or coefficient?
+A) $f(x) = -6x^2 + 42x + 18x - 126$
+B) $f(x) = -6x(x - 7) + 18(x - 7)$
+C) $f(x) = -6(x - 5)^2 + 24$
+D) $f(x) = -6(x - 7)(x - 3)$
+> Vertex form $-6(x - 5)^2 + 24$ shows the maximum, $24$, as a constant.
+
+## M2 Q23 | GEO | hard
+In the figure shown, $\overline{WZ}$ and $\overline{XY}$ intersect at point $Q$. $YQ = 21$, $WQ = 70$, $WX = 60$, and $XQ = 120$. What is the length of $\overline{YZ}$?
+A) $18$
+B) $36$
+C) $120$
+D) $200$
+> The angles marked $a^\circ$ are equal and the angles at $Q$ are vertical, so triangles $QWX$ and $QYZ$ are similar with ratio $\tfrac{WQ}{YQ} = \tfrac{70}{21} = \tfrac{10}{3}$. So $YZ = \tfrac{3}{10}(60) = 18$.
+
+## M2 Q24 | ADV | hard
+$$ 52(x^3 + 64)(x^4 - 81) = 0 $$
+
+How many distinct real solutions does the given equation have?
+A) Exactly two
+B) Exactly three
+C) Exactly five
+D) Exactly seven
+> $x^3 = -64$ gives $x = -4$, and $x^4 = 81$ gives $x = 3$ or $x = -3$. That is three distinct real solutions.
+
+## M2 Q25 | PSDA | hard
+The histogram summarizes data set A, which represents the number of points per player earned by $50$ players of a game. A new player earns $18$ points playing the game, and this number of points is added to data set A to create data set B with $51$ values. Which of the following must be true?
+
+I. The median number of points per player for data set B is less than the median number of points per player for data set A.
+
+II. The mean number of points per player for data set B is less than the mean number of points per player for data set A.
+A) I only
+B) II only
+C) I and II
+D) Neither I nor II
+> Every original value is at least $30$, so adding $18$ lowers the mean: II is true. The old median is the average of the $25$th and $26$th values and the new median is the old $25$th value. Both are in the $50$ to $60$ bar and could be equal, so I need not be true.
+
+## M2 Q26 | GEO | hard
+In triangle $XYZ$, the measure of angle $X$ is $90^\circ$. Point $W$ lies on segment $YZ$, and segment $WX$ is perpendicular to segment $YZ$. The length of segment $WY$ is $572$, and the length of segment $WX$ is $429$. What is the value of $\tan Z$?
+A) $\dfrac{3}{5}$
+B) $\dfrac{3}{4}$
+C) $\dfrac{4}{5}$
+D) $\dfrac{4}{3}$
+> In right triangle $XWY$, $\tan Y = \tfrac{429}{572} = \tfrac{3}{4}$. Angles $Y$ and $Z$ are complementary, so $\tan Z = \tfrac{4}{3}$.
+
+## M2 Q27 | PSDA | hard
+An area of $46.00$ square nautical miles is equivalent to $k$ square kilometers. To the nearest tenth, what is the value of $k$? ($1$ nautical mile $= 1.852$ kilometers)
+> One square nautical mile is $1.852^2 \approx 3.4299$ square kilometers, so $k = 46 \times 3.4299 \approx 157.8$.

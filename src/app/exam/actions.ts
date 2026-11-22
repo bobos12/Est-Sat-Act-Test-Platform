@@ -8,6 +8,7 @@ const saveInput = z.object({
   attemptId: z.string().uuid(),
   questionId: z.string().uuid(),
   optionId: z.string().uuid().nullable(),
+  response: z.string().max(12).nullable().default(null),
   setOption: z.boolean(),
   flagged: z.boolean().nullable(),
 });
@@ -18,7 +19,7 @@ export type SaveOutcome = { ok: true; result: SaveResult } | { ok: false; retry:
 export async function saveAnswer(input: z.input<typeof saveInput>): Promise<SaveOutcome> {
   const parsed = saveInput.safeParse(input);
   if (!parsed.success) return { ok: false, retry: false, message: "Invalid answer" };
-  const { attemptId, questionId, optionId, setOption, flagged } = parsed.data;
+  const { attemptId, questionId, optionId, response, setOption, flagged } = parsed.data;
 
   try {
     const supabase = await createClient();
@@ -28,6 +29,7 @@ export async function saveAnswer(input: z.input<typeof saveInput>): Promise<Save
       p_option: optionId,
       p_set_option: setOption,
       p_flagged: flagged,
+      p_response: response,
     });
     if (error) {
       const permanent = /INVALID_|ATTEMPT_NOT_FOUND/.test(error.message);

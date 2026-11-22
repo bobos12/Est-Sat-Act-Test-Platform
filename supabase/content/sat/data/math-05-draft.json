@@ -1,0 +1,642 @@
+[
+ {
+  "module": 1,
+  "n": 1,
+  "page": 34,
+  "col": 0,
+  "key": "C",
+  "figure": "math-m1-q01.png",
+  "figure_size": [
+   178,
+   181
+  ],
+  "text": "The graph of a system of a linear equation and a\nnonlinear equation is shown. What is the solution\n(x, y) to this system?\nA) (0, 0)\nB) (0, 4)\nC) (4, 5)\nD) (5, 0)"
+ },
+ {
+  "module": 1,
+  "n": 2,
+  "page": 34,
+  "col": 0,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "On the first day of a semester, a film club has\n90 members. Each day after the first day of the\nsemester, 10 new members join the film club. If\nno members leave the film club, how many total\nmembers will the film club have 4 days after the\nfirst day of the semester?\nA) 400\nB) 130\nC) 94\nD) 90"
+ },
+ {
+  "module": 1,
+  "n": 3,
+  "page": 34,
+  "col": 1,
+  "key": "D",
+  "figure": "math-m1-q03.png",
+  "figure_size": [
+   173,
+   177
+  ],
+  "text": "1 '\nX\n+-1\nThe graph of the linear function f is shown, where\ny = f(x). What is the y-intercept of the graph of f ?\nA) (0, 0)\n0, −16\n\n\n\n\nB)\n\n\n\n\nC) (0, −8)\nD) (0, 8)"
+ },
+ {
+  "module": 1,
+  "n": 4,
+  "page": 35,
+  "col": 0,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "s + 7r = 27\nr = 3\nWhat is the solution (r, s) to the given system of\nequations?\nA) (6, 3)\nB) (3, 6)\nC) (3, 27)\nD) (27, 3)"
+ },
+ {
+  "module": 1,
+  "n": 5,
+  "page": 35,
+  "col": 0,
+  "key": "B",
+  "figure": "math-m1-q05.png",
+  "figure_size": [
+   53,
+   67
+  ],
+  "text": "The table shows selected values from function f.\nWhich of the following is the best description of\nfunction f ?\nA) Decreasing linear\nB) Increasing linear\nC) Decreasing exponential\nD) Increasing exponential"
+ },
+ {
+  "module": 1,
+  "n": 6,
+  "page": 35,
+  "col": 1,
+  "key": [
+   "4"
+  ],
+  "figure": "math-m1-q06.png",
+  "figure_size": [
+   170,
+   178
+  ],
+  "text": "X\n\\\n•\nThe graph of a system of linear equations is shown.\nThe solution to the system is (x, y). What is the value\nof x ?"
+ },
+ {
+  "module": 1,
+  "n": 7,
+  "page": 35,
+  "col": 1,
+  "key": [
+   "29"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "23, 27, 27, 32, 35, 36, 52\nWhat is the range of the 7 scores shown?"
+ },
+ {
+  "module": 1,
+  "n": 8,
+  "page": 36,
+  "col": 0,
+  "key": "C",
+  "figure": "math-m1-q08.png",
+  "figure_size": [
+   185,
+   192
+  ],
+  "text": "In the figure, line m is parallel to line n, and line k\nintersects both lines. Which of the following\nstatements is true?\nA) The value of x is less than 145.\nB) The value of x is greater than 145.\nC) The value of x is equal to 145.\nD) The value of x cannot be determined."
+ },
+ {
+  "module": 1,
+  "n": 9,
+  "page": 36,
+  "col": 0,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "The equation x + y = 1,440 represents the number\nof minutes of daylight (between sunrise and sunset),\nx, and the number of minutes of non-daylight, y, on\na particular day in Oak Park, Illinois. If this day has\n670 minutes of daylight, how many minutes of\nnon-daylight does it have?\nA) 670\nB) 770\nC) 1,373\nD) 1,440"
+ },
+ {
+  "module": 1,
+  "n": 10,
+  "page": 36,
+  "col": 1,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "Scott selected 20 employees at random from all\n400 employees at a company. He found that 16 of\nthe employees in this sample are enrolled in exactly\nthree professional development courses this year.\nBased on Scott’s findings, which of the following is\nthe best estimate of the number of employees at the\ncompany who are enrolled in exactly three\nprofessional development courses this year?\nA) 4\nB) 320\nC) 380\nD) 384"
+ },
+ {
+  "module": 1,
+  "n": 11,
+  "page": 36,
+  "col": 1,
+  "key": "C",
+  "figure": "math-m1-q11.png",
+  "figure_size": [
+   189,
+   81
+  ],
+  "text": "A) −24\nD) −1"
+ },
+ {
+  "module": 1,
+  "n": 12,
+  "page": 37,
+  "col": 0,
+  "key": "D",
+  "figure": "math-m1-q12.png",
+  "figure_size": [
+   56,
+   61
+  ],
+  "text": "For a snowstorm in a certain town, the minimum\nrate of snowfall recorded was 0.6 inches per hour,\nand the maximum rate of snowfall recorded was\n1.8 inches per hour. Which inequality is true for all\nvalues of s, where s represents a rate of snowfall, in\ninches per hour, recorded for this snowstorm?\nA) s ≥2.4\nB) s ≥1.8\nC)\nD)"
+ },
+ {
+  "module": 1,
+  "n": 13,
+  "page": 37,
+  "col": 0,
+  "key": [
+   "6"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "y = 4x\ny = x2 −12\nA solution to the given system of equations is (x, y),\nwhere x > 0. What is the value of x ?"
+ },
+ {
+  "module": 1,
+  "n": 14,
+  "page": 37,
+  "col": 1,
+  "key": [
+   "4.51",
+   "451/100"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "A store sells two different-sized containers of\nblueberries. The store’s sales of these blueberries\ntotaled 896.86 dollars last month. The equation\n4.51x + 6.07y = 896.86 represents this situation,\nwhere x is the number of smaller containers sold\nand y is the number of larger containers sold.\nAccording to the equation, what is the price, in\ndollars, of each smaller container?"
+ },
+ {
+  "module": 1,
+  "n": 15,
+  "page": 37,
+  "col": 1,
+  "key": "C",
+  "figure": null,
+  "figure_size": null,
+  "text": "A right circular cylinder has a base diameter of\n22 centimeters and a height of 6 centimeters. What is\nthe volume, in cubic centimeters, of the cylinder?\nA) 132π\nB) 264π\nC) 726π\nD) 2,904π"
+ },
+ {
+  "module": 1,
+  "n": 16,
+  "page": 38,
+  "col": 0,
+  "key": "D",
+  "figure": "math-m1-q16.png",
+  "figure_size": [
+   218,
+   169
+  ],
+  "text": "The graph of the rational function f is shown, where y = f(x)\nand x ≥0. Which of the following is the graph of y = f(x) + 5,\nwhere x ≥0 ?\ny\nA)\nB)\n\\\n\\\n\\\nX\n4--6--8-~10\n'\nI _ -\ny\nC)\nD)\n\\\n\\\n\\\n\\\n' '\\.\nr-...\ni,.._ ---\nX\n~4--6--8-~10\n[continued]\ny\n\\\n\\\nr-...\n2-_4_ -6-~8-~10\nX\ny\n\\\n\\\n' .._ -\n2-_4_ -6-~8-~10\nX"
+ },
+ {
+  "module": 1,
+  "n": 17,
+  "page": 39,
+  "col": 0,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "At a particular track meet, the ratio of coaches to\nathletes is 1 to 26. If there are x coaches at the track\nmeet, which of the following expressions represents\nthe number of athletes at the track meet?\nA) x\nB) 26x\nC) x + 26\nD) 26\nx"
+ },
+ {
+  "module": 1,
+  "n": 18,
+  "page": 39,
+  "col": 0,
+  "key": "D",
+  "figure": null,
+  "figure_size": null,
+  "text": "Kaylani used fabric measuring 5 yards in length to\nmake each suit for a men’s choir. The relationship\nbetween the number of suits that Kaylani made, x,\nand the total length of fabric that she purchased y, in\nyards, is represented by the equation y −5x = 6.\nWhat is the best interpretation of 6 in this context?\nA) Kaylani made 6 suits.\nB) Kaylani purchased a total of 6 yards of fabric.\nC) Kaylani used a total of 6 yards of fabric to make\nthe suits.\nD) Kaylani purchased 6 yards more fabric than she\nused to make the suits."
+ },
+ {
+  "module": 1,
+  "n": 19,
+  "page": 39,
+  "col": 1,
+  "key": "A",
+  "figure": null,
+  "figure_size": null,
+  "text": "What is the value of tan 92π\n?\nA) −3\nB) −\nC)\nD)"
+ },
+ {
+  "module": 1,
+  "n": 20,
+  "page": 39,
+  "col": 1,
+  "key": [
+   ".3928",
+   ".3929",
+   "11/28"
+  ],
+  "figure": "math-m1-q20.png",
+  "figure_size": [
+   198,
+   158
+  ],
+  "text": "In the triangle shown, what is the value of cos x° ?"
+ },
+ {
+  "module": 1,
+  "n": 21,
+  "page": 40,
+  "col": 0,
+  "key": [
+   "336"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "The function g is defined by g(x) = (x + 14)(t −x),\nwhere t is a constant. In the xy-plane, the graph of\ny = g(x) passes through the point (24, 0). What is\nthe value of g(0) ?"
+ },
+ {
+  "module": 1,
+  "n": 22,
+  "page": 40,
+  "col": 0,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "(x + 4)2 + (y −19)2 = 121\nThe graph of the given equation is a circle in the\nxy-plane. The point (a, b) lies on the circle. Which of\nthe following is a possible value for a ?\nA) −16\nB) −14\nC) 11\nD) 19"
+ },
+ {
+  "module": 1,
+  "n": 23,
+  "page": 40,
+  "col": 1,
+  "key": "D",
+  "figure": "math-m1-q23.png",
+  "figure_size": [
+   96,
+   65
+  ],
+  "text": "A right rectangular prism has a height of 9 inches.\nThe length of the prism’s base is x inches, which is\n7 inches more than the width of the prism’s base.\nWhich function V gives the volume of the prism,\nin cubic inches, in terms of the length of the\nprism’s base?\nA) V(x) = x(x + 9)(x + 7)\nB) V(x) = x(x + 9)(x −7)\nC) V(x) = 9x(x + 7)\nD) V(x) = 9x(x −7)"
+ },
+ {
+  "module": 1,
+  "n": 24,
+  "page": 40,
+  "col": 1,
+  "key": "D",
+  "figure": "math-m1-q24.png",
+  "figure_size": [
+   120,
+   49
+  ],
+  "text": "Which of the following functions has(have) a\nA) I only\nB) II only\nC) I and II\nD) Neither I nor II"
+ },
+ {
+  "module": 1,
+  "n": 25,
+  "page": 41,
+  "col": 0,
+  "key": "A",
+  "figure": null,
+  "figure_size": null,
+  "text": "The result of increasing the quantity x by 400% is\n60. What is the value of x ?\nA) 12\nB) 15\nC) 240\nD) 340"
+ },
+ {
+  "module": 1,
+  "n": 26,
+  "page": 41,
+  "col": 0,
+  "key": "A",
+  "figure": null,
+  "figure_size": null,
+  "text": "The function f is defined by f (x) = ax2 + bx + c,\nwhere a, b, and c are constants. The graph of\ny = f (x)\nin the xy-plane passes through the points\n(7, 0) and (−3, 0). If a is an integer greater than 1,\nwhich of the following could be the value of a + b ?\nA) −6\nB) −3\nC) 4\nD) 5\nSTOP\nIf you finish before time is called, you may check your work on this module only.\nDo not turn to any other module in the test."
+ },
+ {
+  "module": 1,
+  "n": 27,
+  "page": 41,
+  "col": 1,
+  "key": [
+   "25"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "The function g is defined by g(x) = x(x −2)(x + 6)2.\nThe value of g(7 −w) is 0, where w is a constant.\nWhat is the sum of all possible values of w ?"
+ },
+ {
+  "module": 2,
+  "n": 1,
+  "page": 44,
+  "col": 0,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "What is 20% of 440?\nA) 44\nB) 88\nC) 880\nD) 1,760"
+ },
+ {
+  "module": 2,
+  "n": 2,
+  "page": 44,
+  "col": 0,
+  "key": "B",
+  "figure": "math-m2-q02.png",
+  "figure_size": [
+   196,
+   190
+  ],
+  "text": "Argon is placed inside a container with a constant\nvolume. The graph shows the estimated pressure y,\nin pounds per square inch (psi), of the argon when\nits temperature is x kelvins.\nWhat is the estimated pressure of the argon, in psi,\nwhen the temperature is 600 kelvins?\nA) 6\nB) 12\nC) 300\nD) 600"
+ },
+ {
+  "module": 2,
+  "n": 3,
+  "page": 44,
+  "col": 1,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "The function f is defined by f(x) = 4x −3. What is\nthe value of f(10) ?\nA) −30\nB) 37\nC) 40\nD) 43"
+ },
+ {
+  "module": 2,
+  "n": 4,
+  "page": 44,
+  "col": 1,
+  "key": "B",
+  "figure": "math-m2-q04.png",
+  "figure_size": [
+   63,
+   74
+  ],
+  "text": "Which expression is equivalent to 16x3y2 + 14xy ?\nA) 2xy(8xy + 7)\nB) 2xy(8x2y + 7)\nC) 14xy(2x2y + 1)\nD) 14xy(8x2y + 1)"
+ },
+ {
+  "module": 2,
+  "n": 5,
+  "page": 44,
+  "col": 1,
+  "key": "D",
+  "figure": "math-m2-q05.png",
+  "figure_size": [
+   55,
+   60
+  ],
+  "text": "A veterinarian recommends that each day a certain\nrabbit should eat 25 calories per pound of the rabbit’s\nweight, plus an additional 11 calories. Which\nequation represents this situation, where c is the\ntotal number of calories the veterinarian\nrecommends the rabbit should eat each day if the\nrabbit’s weight is x pounds?\nA) c = 25x\nB) c = 36x\nC) c = 11x + 25\nD) c = 25x + 11"
+ },
+ {
+  "module": 2,
+  "n": 6,
+  "page": 45,
+  "col": 0,
+  "key": [
+   "6"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "If 6n = 12, what is the value of n + 4 ?"
+ },
+ {
+  "module": 2,
+  "n": 7,
+  "page": 45,
+  "col": 0,
+  "key": [
+   "30",
+   "-30"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "(d −30)(d + 30) −7 = −7\nWhat is a solution to the given equation?"
+ },
+ {
+  "module": 2,
+  "n": 8,
+  "page": 45,
+  "col": 0,
+  "key": "D",
+  "figure": "math-m2-q08.png",
+  "figure_size": [
+   52,
+   64
+  ],
+  "text": "Line r in the xy-plane has a slope of 4 and passes\nthrough the point (0, 6). Which equation defines\nline r ?\nA) y = −6x + 4\nB) y = 6x + 4\nC) y = 4x −6\nD) y = 4x + 6"
+ },
+ {
+  "module": 2,
+  "n": 9,
+  "page": 45,
+  "col": 1,
+  "key": "B",
+  "figure": "math-m2-q09.png",
+  "figure_size": [
+   194,
+   188
+  ],
+  "text": "A competitive diver dives from a platform into the\nwater. The graph shown gives the height above the\nwater y, in meters, of the diver x seconds after diving\nfrom the platform. What is the best interpretation of\nthe x-intercept of the graph?\nA) The diver reaches a maximum height above the\nwater at 1.6 seconds.\nB) The diver hits the water at 1.6 seconds.\nC) The diver reaches a maximum height above the\nwater at 0.2 seconds.\nD) The diver hits the water at 0.2 seconds."
+ },
+ {
+  "module": 2,
+  "n": 10,
+  "page": 46,
+  "col": 0,
+  "key": "A",
+  "figure": null,
+  "figure_size": null,
+  "text": "The kinetic energy, in joules, of an object with mass\n9 kilograms traveling at a speed of v meters per\nsecond is given by the function K, where\nK(v) = 9\n2 v2. Which of the following is the best\ninterpretation of K(34) = 5,202 in this context?\nA) The object traveling at 34 meters per second has\na kinetic energy of 5,202 joules.\nB) The object traveling at 340 meters per second has\na kinetic energy of 5,202 joules.\nC) The object traveling at 5,202 meters per second\nhas a kinetic energy of 34 joules.\nD) The object traveling at 23,409 meters per second\nhas a kinetic energy of 34 joules."
+ },
+ {
+  "module": 2,
+  "n": 11,
+  "page": 46,
+  "col": 1,
+  "key": "C",
+  "figure": "math-m2-q11.png",
+  "figure_size": [
+   172,
+   176
+  ],
+  "text": "The scatterplot shows the relationship between\ntwo variables x and y. A line of best fit for the data is\nalso shown.\nFor how many of the 10 data points is the actual\ny-value greater than the y-value predicted by the line\nof best fit?\nA) 3\nB) 4\nC) 6\nD) 7"
+ },
+ {
+  "module": 2,
+  "n": 12,
+  "page": 47,
+  "col": 0,
+  "key": "D",
+  "figure": null,
+  "figure_size": null,
+  "text": "At a movie theater, there are a total of 350 customers.\nEach customer is located in either theater A,\ntheater B, or theater C. If one of these customers is\nselected at random, the probability of selecting a\ncustomer who is located in theater A is 0.48, and the\nprobability of selecting a customer who is located in\ntheater B is 0.24. How many customers are located in\ntheater C?\nA) 28\nB) 40\nC) 84\nD) 98"
+ },
+ {
+  "module": 2,
+  "n": 13,
+  "page": 47,
+  "col": 0,
+  "key": [
+   "14.66",
+   "14.67",
+   "44/3"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "What is the slope of the graph of\ny = 1\n3(29x + 10) + 5x in the xy-plane?"
+ },
+ {
+  "module": 2,
+  "n": 14,
+  "page": 47,
+  "col": 0,
+  "key": [
+   "4205"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "The length of each edge of a box is 29 inches. Each\nside of the box is in the shape of a square. The box\ndoes not have a lid. What is the exterior surface area,\nin square inches, of this box without a lid?"
+ },
+ {
+  "module": 2,
+  "n": 15,
+  "page": 47,
+  "col": 1,
+  "key": "A",
+  "figure": "math-m2-q15.png",
+  "figure_size": [
+   99,
+   78
+  ],
+  "text": "Five Eretmochelys imbricata, a type of sea turtle, each\nhave a nest. The table shows an original data set of\nthe number of eggs that each turtle laid in its nest.\nA sixth nest with 121 eggs is added to create a new\ndata set. Which of the following correctly compares\nthe means of the two data sets?\nA) The mean of the original data set is greater than\nthe mean of the new data set.\nB) The mean of the original data set is less than the\nmean of the new data set.\nC) The means of both data sets are equal.\nD) There is not enough information to compare the\nmeans."
+ },
+ {
+  "module": 2,
+  "n": 16,
+  "page": 47,
+  "col": 1,
+  "key": "A",
+  "figure": null,
+  "figure_size": null,
+  "text": "In △RST, the measure of ∠R is 63°. Which of the\nfollowing could be the measure, in degrees, of ∠S ?\nA) 116\nB) 118\nC) 126\nD) 180"
+ },
+ {
+  "module": 2,
+  "n": 17,
+  "page": 48,
+  "col": 0,
+  "key": "B",
+  "figure": "math-m2-q17.png",
+  "figure_size": [
+   92,
+   97
+  ],
+  "text": "Which expression is equivalent to\nD) 7x3 + 6"
+ },
+ {
+  "module": 2,
+  "n": 18,
+  "page": 48,
+  "col": 0,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "If 4 2x = 16, what is the value of 6x ?\nA) 24\nB) 48\nC) 72\nD) 96"
+ },
+ {
+  "module": 2,
+  "n": 19,
+  "page": 48,
+  "col": 1,
+  "key": "D",
+  "figure": "math-m2-q19.png",
+  "figure_size": [
+   63,
+   286
+  ],
+  "text": "2x −y > 883\nFor which of the following tables are all the values of\nx and their corresponding values of y solutions to the\ngiven inequality?\nA)\nB)\nC)\nD)"
+ },
+ {
+  "module": 2,
+  "n": 20,
+  "page": 48,
+  "col": 1,
+  "key": [
+   "20"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "5y = 10x + 11\n−5y = 5x −21\nThe solution to the given system of equations is\n(x, y). What is the value of 30x ?"
+ },
+ {
+  "module": 2,
+  "n": 21,
+  "page": 49,
+  "col": 0,
+  "key": [
+   "66"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "A rectangle is inscribed in a circle, such that each\nvertex of the rectangle lies on the circumference of\nthe circle. The diagonal of the rectangle is twice the\nlength of the shortest side of the rectangle. The area\nof the rectangle is 1,089 3 square units. What is the\nlength, in units, of the diameter of the circle?"
+ },
+ {
+  "module": 2,
+  "n": 22,
+  "page": 49,
+  "col": 0,
+  "key": "D",
+  "figure": null,
+  "figure_size": null,
+  "text": "Rectangles ABCD and EFGH are similar. The length\nof each side of EFGH is 6 times the length of the\ncorresponding side of ABCD. The area of ABCD is\n54 square units. What is the area, in square units, of\nEFGH?\nA) 9\nB) 36\nC) 324\nD) 1,944"
+ },
+ {
+  "module": 2,
+  "n": 23,
+  "page": 49,
+  "col": 1,
+  "key": "D",
+  "figure": "math-m2-q23.png",
+  "figure_size": [
+   70,
+   169
+  ],
+  "text": "Which expression is equivalent to 42a\n+ 42ak,\nk"
+ },
+ {
+  "module": 2,
+  "n": 24,
+  "page": 49,
+  "col": 1,
+  "key": "D",
+  "figure": "math-m2-q24.png",
+  "figure_size": [
+   81,
+   71
+  ],
+  "text": "Which quadratic equation has no real solutions?\nA) x2 + 14x −49 = 0\nB) x2 −14x + 49 = 0\nC) 5x2 −14x −49 = 0\nD) 5x2 −14x + 49 = 0"
+ },
+ {
+  "module": 2,
+  "n": 25,
+  "page": 50,
+  "col": 0,
+  "key": "A",
+  "figure": null,
+  "figure_size": null,
+  "text": "P(t) = 260(1.04)( 6\n4 t)\nThe function P models the population, in thousands,\nof a certain city t years after 2003. According to the\nmodel, the population is predicted to increase by 4%\nevery n months. What is the value of n ?\nA) 8\nB) 12\nC) 18\nD) 72"
+ },
+ {
+  "module": 2,
+  "n": 26,
+  "page": 50,
+  "col": 0,
+  "key": "C",
+  "figure": null,
+  "figure_size": null,
+  "text": "A circle in the xy-plane has its center at (−1, 1).\nLine t is tangent to this circle at the point (5, −4).\nWhich of the following points also lies on line t ?\nA) 0, 6\n\n\n\n\n\n\nB) (4, 7)\nC) (10, 2)\nD) (11, 1)\nSTOP\nIf you finish before time is called, you may check your work on this module only.\nDo not turn to any other module in the test."
+ },
+ {
+  "module": 2,
+  "n": 27,
+  "page": 50,
+  "col": 1,
+  "key": [
+   "4176"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "For an electric field passing through a flat surface\nperpendicular to it, the electric flux of the electric\nfield through the surface is the product of the electric\nfield’s strength and the area of the surface. A certain\nflat surface consists of two adjacent squares, where\nthe side length, in meters, of the larger square is\n3 times the side length, in meters, of the smaller\nsquare. An electric field with strength 29.00 volts per\nmeter passes uniformly through this surface, which is\nperpendicular to the electric field. If the total electric\nflux of the electric field through this surface is\n4,640 volts\n·\nmeters, what is the electric flux, in\nvolts\n·\nmeters, of the electric field through the larger\nsquare?\n[continued]\nGENERAL DIRECTIONS\n• You may work on only one module at a time.\n• If you finish a module before time is called, check your work on that module only.\nYou may NOT turn to any other module.\nTIMING\nReading and Writing, Module 1 : 39 minutes\nReading and Writing, Module 2: 39 minutes\n10-minute break\nMath, Module 1: 43 minutes\nMath, Module 2: 43 minutes\nThe above are standard times. If you are approved for accommodations involving\nadditional time, you should give yourself that time when you practice.\nMARKING YOUR ANSWERS\n• Be sure to answer your questions properly in this book.\n• Circle only one answer to each question. If you change your mind, completely\nerase the circle. You will not get credit for questions with more than one answer\ncircled, or for questions with no answers circled.\nUSING YOUR TEST BOOK\n• You may use the test book for scratch work.\n• You may not fold or remove pages or portions of a page from this book,\nor take the book from the testing room."
+ }
+]

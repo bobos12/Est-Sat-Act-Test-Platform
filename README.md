@@ -19,6 +19,7 @@ and a private admin dashboard. Next.js 16 (App Router, Cache Components) + Supab
 | 7 | Plans, Paymob checkout, verified webhooks, renewals | ✅ (needs Paymob keys + sandbox test) |
 | 8 | End-to-end testing | in progress — see "Launch checklist" |
 | 9 | Question bank: student practice (`/practice`) + admin bank (`/admin/questions`) | ✅ (apply migration `20261120000001_question_bank.sql`) |
+| 10 | Typed (grid-in) answers + official SAT Practice Tests 4–11 (16 exams) | ✅ apply migration `20261121000001_student_produced_responses.sql`, then run `supabase/content/sat/sat_practice_tests.sql` (see [`supabase/content/sat`](supabase/content/sat/README.md)) |
 
 ## Setup
 

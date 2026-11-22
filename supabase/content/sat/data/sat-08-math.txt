@@ -1,0 +1,415 @@
+# SAT Practice Test 8 — Math (transcribed; explanations written for 16hundred)
+
+## M1 Q1 | ALG | easy
+A bus is traveling at a constant speed along a straight portion of road. The equation $d = 30t$ gives the distance $d$, in feet from a road marker, that the bus will be $t$ seconds after passing the marker. How many feet from the marker will the bus be $2$ seconds after passing the marker?
+A) $30$
+B) $32$
+C) $60$
+D) $90$
+> $d = 30(2) = 60$ feet.
+
+## M1 Q2 | PSDA | easy
+For a particular machine that produces beads, $29$ out of every $100$ beads it produces have a defect. A bead produced by the machine will be selected at random. What is the probability of selecting a bead that has a defect?
+A) $\dfrac{1}{2{,}900}$
+B) $\dfrac{1}{29}$
+C) $\dfrac{29}{100}$
+D) $\dfrac{29}{10}$
+> $29$ of every $100$ beads are defective, so the probability is $\tfrac{29}{100}$.
+
+## M1 Q3 | ADV | easy
+What is the $y$-intercept of the graph shown?
+A) $(-8, 0)$
+B) $(-6, 0)$
+C) $(0, 6)$
+D) $(0, 8)$
+> The curve crosses the $y$-axis at $y = 8$, so the $y$-intercept is $(0, 8)$.
+
+## M1 Q4 | ADV | easy | nofig
+Which expression is equivalent to $(2x^2 + x - 9) + (x^2 + 6x + 1)$?
+A) $2x^2 + 7x + 10$
+B) $2x^2 + 6x - 8$
+C) $3x^2 + 7x - 10$
+D) $3x^2 + 7x - 8$
+> Combine like terms: $3x^2 + 7x - 8$.
+
+## M1 Q5 | PSDA | medium | nofig
+An analyst collected data on the price of a carton of grape tomatoes at $30$ locations selected at random in Utah. The mean price of a carton of grape tomatoes in Utah was estimated to be $\$4.23$, with an associated margin of error of $\$0.08$. Which of the following is a plausible statement about the mean price of a carton of grape tomatoes for all locations that sell this product in Utah?
+A) It is between $\$4.15$ and $\$4.31$.
+B) It is either less than $\$4.15$ or greater than $\$4.31$.
+C) It is less than $\$4.15$.
+D) It is greater than $\$4.31$.
+> The plausible values are the estimate plus or minus the margin of error: $4.23 \pm 0.08$, from $\$4.15$ to $\$4.31$.
+
+## M1 Q6 | ALG | easy
+$$ 2.6 + x = 2.8 $$
+
+What value of $x$ is the solution to the given equation?
+> $x = 2.8 - 2.6 = 0.2$.
+
+## M1 Q7 | PSDA | easy
+Out of $300$ seeds that were planted, $80\%$ sprouted. How many of these seeds sprouted?
+> $0.80 \times 300 = 240$.
+
+## M1 Q8 | ALG | easy
+$$ f(x) = 4x + b $$
+
+For the linear function $f$, $b$ is a constant and $f(7) = 28$. What is the value of $b$?
+A) $0$
+B) $1$
+C) $4$
+D) $7$
+> $4(7) + b = 28$, so $b = 0$.
+
+## M1 Q9 | GEO | easy
+Right triangles $LMN$ and $PQR$ are similar, where $L$ and $M$ correspond to $P$ and $Q$, respectively. Angle $M$ has a measure of $53^\circ$. What is the measure of angle $Q$?
+A) $37^\circ$
+B) $53^\circ$
+C) $127^\circ$
+D) $143^\circ$
+> Corresponding angles of similar triangles are equal, so angle $Q$ measures $53^\circ$.
+
+## M1 Q10 | ALG | easy | nofig
+What is the equation of the line that passes through the point $(0, 5)$ and is parallel to the graph of $y = 7x + 4$ in the $xy$-plane?
+A) $y = 5x$
+B) $y = 7x + 5$
+C) $y = 7x$
+D) $y = 5x + 7$
+> A parallel line has the same slope, $7$, and the $y$-intercept $5$: $y = 7x + 5$.
+
+## M1 Q11 | PSDA | easy
+Which of the following equations is the most appropriate linear model for the data shown in the scatterplot?
+A) $y = -1.9x - 10.1$
+B) $y = -1.9x + 10.1$
+C) $y = 1.9x - 10.1$
+D) $y = 1.9x + 10.1$
+> The points fall from about $10$ near $x = 0$, so the model needs a negative slope and a positive $y$-intercept near $10$: $y = -1.9x + 10.1$.
+
+## M1 Q12 | ADV | medium | nofig
+A model predicts that the population of Bergen was $15{,}000$ in $2005$. The model also predicts that each year for the next $5$ years, the population $p$ increased by $4\%$ of the previous year's population. Which equation best represents this model, where $x$ is the number of years after $2005$, for $x \le 5$?
+A) $p = 0.96(15{,}000)^x$
+B) $p = 1.04(15{,}000)^x$
+C) $p = 15{,}000(0.96)^x$
+D) $p = 15{,}000(1.04)^x$
+> Starting at $15{,}000$ and growing by $4\%$ a year multiplies by $1.04$ each year: $p = 15{,}000(1.04)^x$.
+
+## M1 Q13 | ALG | easy
+$$ \begin{aligned} 2a + 8b &= 198 \\ 2a + 4b &= 98 \end{aligned} $$
+
+The solution to the given system of equations is $(a, b)$. What is the value of $b$?
+> Subtract the second equation from the first: $4b = 100$, so $b = 25$.
+
+## M1 Q14 | ADV | medium
+The expression $90y^5 - 54y^4$ is equivalent to $ry^4(15y - 9)$, where $r$ is a constant. What is the value of $r$?
+> $ry^4(15y - 9) = 15ry^5 - 9ry^4$. Matching $15r = 90$ (and $9r = 54$) gives $r = 6$.
+
+## M1 Q15 | ADV | medium
+The graph of $y = f(x)$ is shown, where the function $f$ is defined by $f(x) = ax^3 + bx^2 + cx + d$ and $a$, $b$, $c$, and $d$ are constants. For how many values of $x$ does $f(x) = 0$?
+A) One
+B) Two
+C) Three
+D) Four
+> $f(x) = 0$ where the graph meets the $x$-axis. It crosses at three points (near $0$, $4$, and $7$).
+
+## M1 Q16 | ADV | easy
+The area $A$, in square centimeters, of a rectangular cutting board can be represented by the expression $w(w + 9)$, where $w$ is the width, in centimeters, of the cutting board. Which expression represents the length, in centimeters, of the cutting board?
+A) $w(w + 9)$
+B) $w$
+C) $9$
+D) $(w + 9)$
+> Area $=$ width $\times$ length, and the width is $w$, so the length is $w + 9$.
+
+## M1 Q17 | ADV | easy
+$$ p = \frac{k}{4j + 9} $$
+
+The given equation relates the distinct positive numbers $p$, $k$, and $j$. Which equation correctly expresses $4j + 9$ in terms of $p$ and $k$?
+A) $4j + 9 = \dfrac{k}{p}$
+B) $4j + 9 = kp$
+C) $4j + 9 = k - p$
+D) $4j + 9 = \dfrac{p}{k}$
+> Multiply both sides by $4j + 9$ and divide by $p$: $4j + 9 = \dfrac{k}{p}$.
+
+## M1 Q18 | GEO | medium
+Circle $A$ has a radius of $3n$ and circle $B$ has a radius of $129n$, where $n$ is a positive constant. The area of circle $B$ is how many times the area of circle $A$?
+A) $43$
+B) $86$
+C) $129$
+D) $1{,}849$
+> The radius of $B$ is $43$ times the radius of $A$, so its area is $43^2 = 1{,}849$ times as large.
+
+## M1 Q19 | GEO | medium
+The measure of angle $R$ is $\dfrac{2\pi}{3}$ radians. The measure of angle $T$ is $\dfrac{5\pi}{12}$ radians greater than the measure of angle $R$. What is the measure of angle $T$, in **degrees**?
+A) $75$
+B) $120$
+C) $195$
+D) $390$
+> $T = \dfrac{2\pi}{3} + \dfrac{5\pi}{12} = \dfrac{13\pi}{12}$ radians $= \dfrac{13}{12} \times 180^\circ = 195^\circ$.
+
+## M1 Q20 | ADV | medium
+$$ y = x^2 - 14x + 22 $$
+
+The given equation relates the variables $x$ and $y$. For what value of $x$ does the value of $y$ reach its minimum?
+> The parabola opens upward, with vertex at $x = -\dfrac{-14}{2(1)} = 7$.
+
+## M1 Q21 | ALG | hard
+A small business owner budgets $\$2{,}200$ to purchase candles. The owner must purchase a minimum of $200$ candles to maintain the discounted pricing. If the owner pays $\$4.90$ per candle to purchase small candles and $\$11.60$ per candle to purchase large candles, what is the maximum number of large candles the owner can purchase to stay within the budget and maintain the discounted pricing?
+> To maximize large candles, buy exactly $200$ in total: $L$ large and $200 - L$ small. Then $4.90(200 - L) + 11.60L \le 2{,}200$, so $980 + 6.70L \le 2{,}200$ and $L \le 182.08\ldots$. The maximum is $182$.
+
+## M1 Q22 | ALG | medium | nofig
+$$ \begin{aligned} y &\le x + 7 \\ y &\ge -2x - 1 \end{aligned} $$
+
+Which point $(x, y)$ is a solution to the given system of inequalities in the $xy$-plane?
+A) $(-14, 0)$
+B) $(0, -14)$
+C) $(0, 14)$
+D) $(14, 0)$
+> For $(14, 0)$: $0 \le 21$ and $0 \ge -29$, both true. Each other point fails one inequality.
+
+## M1 Q23 | PSDA | hard
+The frequency table summarizes a data set of the weights, rounded to the nearest pound, of $71$ tortoises. A weight of $39$ pounds is added to the original data set, creating a new data set of the weights, rounded to the nearest pound, of $72$ tortoises. Which statement best compares the mean and median of the new data set to the mean and median of the original data set?
+A) The mean of the new data set is greater than the mean of the original data set, and the median of the new data set is greater than the median of the original data set.
+B) The mean of the new data set is greater than the mean of the original data set, and the medians of the two data sets are equal.
+C) The mean of the new data set is less than the mean of the original data set, and the median of the new data set is less than the median of the original data set.
+D) The mean of the new data set is less than the mean of the original data set, and the medians of the two data sets are equal.
+> $39$ is above every original value, so the mean increases. The original median is the $36$th value; the cumulative counts are $12, 20, 25, 32, 41$, so the $36$th and $37$th values are both $17$. The new median (average of the $36$th and $37$th) is still $17$.
+
+## M1 Q24 | ADV | hard
+$$ x - 29 = (x - a)(x - 29) $$
+
+Which of the following are solutions to the given equation, where $a$ is a constant and $a > 30$?
+
+$$ \begin{aligned} &\text{I. } a \\ &\text{II. } a + 1 \\ &\text{III. } 29 \end{aligned} $$
+A) I and II only
+B) I and III only
+C) II and III only
+D) I, II, and III
+> $x = 29$ makes both sides $0$. Otherwise divide by $x - 29$: $1 = x - a$, so $x = a + 1$. Checking $x = a$ gives $a - 29 = 0$, false since $a > 30$. So II and III only.
+
+## M1 Q25 | ADV | hard
+In the $xy$-plane, the graph of the equation $y = -x^2 + 9x - 100$ intersects the line $y = c$ at exactly one point. What is the value of $c$?
+A) $-\dfrac{481}{4}$
+B) $-100$
+C) $-\dfrac{319}{4}$
+D) $-\dfrac{9}{2}$
+> A horizontal line meets a parabola once only at the vertex. The vertex is at $x = \tfrac{9}{2}$, where $y = -\tfrac{81}{4} + \tfrac{81}{2} - 100 = -\tfrac{319}{4}$.
+
+## M1 Q26 | ADV | hard
+The functions $f$ and $g$ are defined by the given equations, where $x \ge 0$. Which of the following equations displays, as a constant or coefficient, the maximum value of the function it defines, where $x \ge 0$?
+
+$$ \begin{aligned} &\text{I. } f(x) = 18(1.25)^x + 41 \\ &\text{II. } g(x) = 9(0.73)^x \end{aligned} $$
+A) I only
+B) II only
+C) I and II
+D) Neither I nor II
+> $f$ grows without bound, so it has no maximum. $g$ decreases for $x \ge 0$, so its maximum is $g(0) = 9$, which appears as the coefficient. Only II.
+
+## M1 Q27 | GEO | hard
+The perimeter of an equilateral triangle is $852$ centimeters. The three vertices of the triangle lie on a circle. The radius of the circle is $w\sqrt{3}$ centimeters. What is the value of $w$?
+> Each side is $284$. The radius of the circle through the vertices of an equilateral triangle is $\dfrac{s}{\sqrt{3}} = \dfrac{284}{\sqrt{3}} = \dfrac{284\sqrt{3}}{3}$, so $w = \dfrac{284}{3}$ (about $94.67$).
+
+## M2 Q1 | ALG | easy
+What is the $y$-intercept of the line graphed?
+A) $(-5, 0)$
+B) $(0, 0)$
+C) $(0, 5)$
+D) $(0, 9)$
+> The line crosses the $y$-axis at $y = 5$, so the $y$-intercept is $(0, 5)$.
+
+## M2 Q2 | PSDA | easy
+| Type of store | Average number of employees |
+| --- | --- |
+| Warehouse store | $365$ |
+| Department store | $213$ |
+| Supermarket | $130$ |
+
+For a certain region, the table shows the average number of store employees in $2016$ by type of store. Based on the table, how much greater was the average number of store employees in warehouse stores than in supermarkets?
+A) $83$
+B) $152$
+C) $235$
+D) $495$
+> $365 - 130 = 235$.
+
+## M2 Q3 | GEO | easy
+In the figure, line $m$ is parallel to line $n$, and line $t$ intersects both lines. What is the value of $x$?
+A) $33$
+B) $57$
+C) $123$
+D) $147$
+> The $33^\circ$ angle at line $n$ corresponds to the acute angle at line $m$ on the same side of $t$. Angle $x$ forms a straight line with that acute angle, so $x = 180 - 33 = 147$.
+
+## M2 Q4 | ALG | easy | nofig
+Sean rents a tent at a cost of $\$11$ per day plus a onetime insurance fee of $\$10$. Which equation represents the total cost $c$, in dollars, to rent the tent with insurance for $d$ days?
+A) $c = 11(d + 10)$
+B) $c = 10(d + 11)$
+C) $c = 11d + 10$
+D) $c = 10d + 11$
+> $\$11$ for each of $d$ days is $11d$, plus the one-time $\$10$: $c = 11d + 10$.
+
+## M2 Q5 | GEO | easy
+For the right triangle shown, $a = 4$ and $b = 5$. Which expression represents the value of $c$?
+A) $4 + 5$
+B) $\sqrt{(4)(5)}$
+C) $\sqrt{4 + 5}$
+D) $\sqrt{4^2 + 5^2}$
+> By the Pythagorean theorem, $c^2 = a^2 + b^2$, so $c = \sqrt{4^2 + 5^2}$.
+
+## M2 Q6 | ALG | easy
+The function $g$ is defined by $g(x) = 6x$. For what value of $x$ is $g(x) = 54$?
+> $6x = 54$, so $x = 9$.
+
+## M2 Q7 | ADV | easy
+The function $f$ is defined by $f(x) = 8x^3 + 4$. What is the value of $f(2)$?
+> $f(2) = 8(8) + 4 = 68$.
+
+## M2 Q8 | ALG | easy | nofig
+The function $f$ is defined by $f(x) = \dfrac{1}{10}x - 2$. What is the $y$-intercept of the graph of $y = f(x)$ in the $xy$-plane?
+A) $(-2, 0)$
+B) $(0, -2)$
+C) $\left(0, \dfrac{1}{10}\right)$
+D) $\left(\dfrac{1}{10}, 0\right)$
+> $f(0) = -2$, so the $y$-intercept is $(0, -2)$.
+
+## M2 Q9 | ALG | easy | nofig
+A producer is creating a video with a length of $70$ minutes. The video will consist of segments that are $1$ minute long and segments that are $3$ minutes long. Which equation represents this situation, where $x$ represents the number of $1$-minute segments and $y$ represents the number of $3$-minute segments?
+A) $4xy = 70$
+B) $4(x + y) = 70$
+C) $3x + y = 70$
+D) $x + 3y = 70$
+> The $1$-minute segments take $x$ minutes and the $3$-minute segments take $3y$ minutes: $x + 3y = 70$.
+
+## M2 Q10 | ADV | easy | nofig
+The function $f$ is defined by $f(x) = 7x^3$. In the $xy$-plane, the graph of $y = g(x)$ is the result of shifting the graph of $y = f(x)$ down $2$ units. Which equation defines function $g$?
+A) $g(x) = \dfrac{7}{2}x^3$
+B) $g(x) = 7x^{\frac{3}{2}}$
+C) $g(x) = 7x^3 + 2$
+D) $g(x) = 7x^3 - 2$
+> Shifting down $2$ units subtracts $2$ from every output: $g(x) = 7x^3 - 2$.
+
+## M2 Q11 | ALG | easy
+$$ \begin{aligned} y &= -3x \\ 4x + y &= 15 \end{aligned} $$
+
+The solution to the given system of equations is $(x, y)$. What is the value of $x$?
+A) $1$
+B) $5$
+C) $15$
+D) $45$
+> Substitute: $4x - 3x = 15$, so $x = 15$.
+
+## M2 Q12 | GEO | easy
+In the right triangle shown, what is the value of $\sin A$?
+A) $\dfrac{1}{171}$
+B) $\dfrac{35}{171}$
+C) $\dfrac{171}{35}$
+D) $171$
+> $\sin A = \dfrac{\text{opposite}}{\text{hypotenuse}} = \dfrac{BC}{AB} = \dfrac{35}{171}$.
+
+## M2 Q13 | GEO | easy
+What is the area, in square centimeters, of a rectangle with a length of $34$ centimeters (cm) and a width of $29$ cm?
+> $34 \times 29 = 986$ square centimeters.
+
+## M2 Q14 | ALG | medium
+If $\dfrac{x}{y} = 4$ and $\dfrac{24x}{ny} = 4$, what is the value of $n$?
+> $\dfrac{24x}{ny} = \dfrac{24}{n} \cdot \dfrac{x}{y} = \dfrac{96}{n} = 4$, so $n = 24$.
+
+## M2 Q15 | ALG | medium
+A bowl contains $20$ ounces of water. When the bowl is uncovered, the amount of water in the bowl decreases by $1$ ounce every $4$ days. If $9$ ounces of water remain in this bowl, for how many days has it been uncovered?
+A) $3$
+B) $7$
+C) $36$
+D) $44$
+> $20 - 9 = 11$ ounces have evaporated, at $4$ days per ounce: $11 \times 4 = 44$ days.
+
+## M2 Q16 | ALG | medium | nofig
+If $9(4 - 3x) + 2 = 8(4 - 3x) + 18$, what is the value of $4 - 3x$?
+A) $-16$
+B) $-4$
+C) $4$
+D) $16$
+> Let $u = 4 - 3x$: $9u + 2 = 8u + 18$, so $u = 16$.
+
+## M2 Q17 | ALG | medium
+A certain township consists of a $5$-hectare industrial park and a $24$-hectare neighborhood. The total number of trees in the township is $4{,}529$. The equation $5x + 24y = 4{,}529$ represents this situation. Which of the following is the best interpretation of $x$ in this context?
+A) The average number of trees per hectare in the industrial park
+B) The average number of trees per hectare in the neighborhood
+C) The total number of trees in the industrial park
+D) The total number of trees in the neighborhood
+> $5x$ is the number of trees in the $5$-hectare industrial park, so $x$ is the average number of trees per hectare there.
+
+## M2 Q18 | ADV | medium
+Which expression is equivalent to $a^{\frac{11}{12}}$, where $a > 0$?
+A) $\sqrt[12]{a^{132}}$
+B) $\sqrt[144]{a^{132}}$
+C) $\sqrt[121]{a^{132}}$
+D) $\sqrt[11]{a^{132}}$
+> $\sqrt[144]{a^{132}} = a^{132/144} = a^{11/12}$.
+
+## M2 Q19 | PSDA | medium
+The dot plots represent the distributions of values in data sets A and B.
+
+Which of the following statements must be true?
+
+I. The median of data set A is equal to the median of data set B.
+
+II. The standard deviation of data set A is equal to the standard deviation of data set B.
+A) I only
+B) II only
+C) I and II
+D) Neither I nor II
+> Each set has $17$ values, so the median is the $9$th. Counting dots from the left, the $9$th value is $13$ in both sets, so I is true. The sets are spread differently (B has more values at the ends), so their standard deviations are not equal.
+
+## M2 Q20 | GEO | medium
+A circle has center $O$, and points $R$ and $S$ lie on the circle. In triangle $ORS$, the measure of $\angle ROS$ is $88^\circ$. What is the measure of $\angle RSO$, in degrees? (Disregard the degree symbol when entering your answer.)
+> $OR$ and $OS$ are radii, so the triangle is isosceles and its base angles are equal: $\dfrac{180 - 88}{2} = 46$.
+
+## M2 Q21 | PSDA | hard
+The regular price of a shirt at a store is $\$11.70$. The sale price of the shirt is $80\%$ less than the regular price, and the sale price is $30\%$ greater than the store's cost for the shirt. What was the store's cost, in dollars, for the shirt? (Disregard the $\$$ sign when entering your answer. For example, if your answer is $\$4.97$, enter $4.97$)
+> The sale price is $0.20 \times 11.70 = 2.34$ dollars, which is $1.30$ times the cost. So the cost is $2.34 \div 1.30 = 1.80$ dollars.
+
+## M2 Q22 | GEO | hard
+A cube has an edge length of $68$ inches. A solid sphere with a radius of $34$ inches is inside the cube, such that the sphere touches the center of each face of the cube. To the nearest cubic inch, what is the volume of the space in the cube **not** taken up by the sphere?
+A) $149{,}796$
+B) $164{,}500$
+C) $190{,}955$
+D) $310{,}800$
+> Cube: $68^3 = 314{,}432$. Sphere: $\tfrac{4}{3}\pi(34)^3 \approx 164{,}636$. The difference is about $149{,}796$ cubic inches.
+
+## M2 Q23 | ALG | medium | nofig
+$$ y = 6x + 18 $$
+
+One of the equations in a system of two linear equations is given. The system has no solution. Which equation could be the second equation in the system?
+A) $-6x + y = 18$
+B) $-6x + y = 22$
+C) $-12x + y = 36$
+D) $-12x + y = 18$
+> No solution means a parallel line with a different intercept. $-6x + y = 22$ is $y = 6x + 22$: same slope $6$, different intercept.
+
+## M2 Q24 | GEO | hard | nofig
+Triangles $PQR$ and $LMN$ are graphed in the $xy$-plane. Triangle $PQR$ has vertices $P$, $Q$, and $R$ at $(4, 5)$, $(4, 7)$, and $(6, 5)$, respectively. Triangle $LMN$ has vertices $L$, $M$, and $N$ at $(4, 5)$, $(4, 7 + k)$, and $(6 + k, 5)$, respectively, where $k$ is a positive constant. If the measure of $\angle Q$ is $t^\circ$, what is the measure of $\angle N$?
+A) $(90 - (t - k))^\circ$
+B) $(90 - (t + k))^\circ$
+C) $(90 - t)^\circ$
+D) $(90 + k)^\circ$
+> Both triangles have a right angle at $(4, 5)$ and two equal legs ($2$ and $2$; $2 + k$ and $2 + k$), so both are isosceles right triangles. Angles $Q$ and $N$ are complementary acute angles of such triangles, so $\angle N = (90 - t)^\circ$.
+
+## M2 Q25 | ALG | hard | nofig
+$$ \begin{aligned} 2x + 3y &= 7 \\ 10x + 15y &= 35 \end{aligned} $$
+
+For each real number $r$, which of the following points lies on the graph of each equation in the $xy$-plane for the given system?
+A) $\left(\dfrac{r}{5} + 7, -\dfrac{r}{5} + 35\right)$
+B) $\left(-\dfrac{3r}{2} + \dfrac{7}{2}, r\right)$
+C) $\left(r, \dfrac{2r}{3} + \dfrac{7}{3}\right)$
+D) $\left(r, -\dfrac{3r}{2} + \dfrac{7}{2}\right)$
+> The second equation is $5$ times the first, so both describe the line $2x + 3y = 7$. If $y = r$, then $x = \dfrac{7 - 3r}{2} = -\dfrac{3r}{2} + \dfrac{7}{2}$, which is choice B.
+
+## M2 Q26 | ADV | hard | nofig
+$$ \frac{x^2}{\sqrt{x^2 - c^2}} = \frac{c^2}{\sqrt{x^2 - c^2}} + 39 $$
+
+In the given equation, $c$ is a positive constant. Which of the following is one of the solutions to the given equation?
+A) $-c$
+B) $-c^2 - 39^2$
+C) $-\sqrt{39^2 - c^2}$
+D) $-\sqrt{c^2 + 39^2}$
+> Subtract: $\dfrac{x^2 - c^2}{\sqrt{x^2 - c^2}} = \sqrt{x^2 - c^2} = 39$, so $x^2 = c^2 + 39^2$ and $x = \pm\sqrt{c^2 + 39^2}$.
+
+## M2 Q27 | ADV | hard
+The quadratic function $g$ models the depth, in meters, below the surface of the water of a seal $t$ minutes after the seal entered the water during a dive. The function estimates that the seal reached its maximum depth of $302.4$ meters $6$ minutes after it entered the water and then reached the surface of the water $12$ minutes after it entered the water. Based on the function, what was the estimated depth, to the nearest meter, of the seal $10$ minutes after it entered the water?
+> $g(t) = a(t - 6)^2 + 302.4$ with $g(12) = 0$: $36a = -302.4$, so $a = -8.4$. Then $g(10) = -8.4(16) + 302.4 = 168$ meters.

@@ -1,0 +1,443 @@
+# SAT Practice Test 6 — Math (transcribed; explanations written for 16hundred)
+
+## M1 Q1 | ALG | easy
+$$ (p + 3) + 8 = 10 $$
+
+What value of $p$ is the solution to the given equation?
+A) $-1$
+B) $5$
+C) $15$
+D) $21$
+> $p + 11 = 10$, so $p = -1$.
+
+## M1 Q2 | PSDA | easy
+The scatterplot shows the relationship between two variables, $x$ and $y$.
+
+Which of the following graphs shows the most appropriate model for the data?
+A) ![Graph A](/sat/test-06/math-m1-q02-A.png)
+B) ![Graph B](/sat/test-06/math-m1-q02-B.png)
+C) ![Graph C](/sat/test-06/math-m1-q02-C.png)
+D) ![Graph D](/sat/test-06/math-m1-q02-D.png)
+> The data rise slowly at first and then more and more steeply, which is exponential growth. The curve in graph D passes through or close to every point; the curve in C sits well above the early points.
+
+## M1 Q3 | ADV | easy
+$$ k^2 - 53 = 91 $$
+
+What is the positive solution to the given equation?
+A) $144$
+B) $72$
+C) $38$
+D) $12$
+> $k^2 = 144$, so the positive solution is $k = 12$.
+
+## M1 Q4 | ALG | easy | nofig
+During a portion of a flight, a small airplane's cruising speed varied between $150$ miles per hour and $170$ miles per hour. Which inequality best represents this situation, where $s$ is the cruising speed, in miles per hour, during this portion of the flight?
+A) $s \le 20$
+B) $s \le 150$
+C) $s \le 170$
+D) $150 \le s \le 170$
+> The speed was never below $150$ or above $170$: $150 \le s \le 170$.
+
+## M1 Q5 | ADV | easy
+An object was launched upward from a platform. The graph shown models the height above ground, $y$, in meters, of the object $x$ seconds after it was launched. For which of the following intervals of time was the height of the object increasing for the entire interval?
+A) From $x = 0$ to $x = 2$
+B) From $x = 0$ to $x = 4$
+C) From $x = 2$ to $x = 3$
+D) From $x = 3$ to $x = 4$
+> The graph rises from $x = 0$ to its peak at $x = 2$ and falls after that, so the height increases on the whole interval from $0$ to $2$.
+
+## M1 Q6 | PSDA | easy
+How many **yards** are equivalent to $1{,}116$ inches? ($1$ yard $= 36$ inches)
+> $1{,}116 \div 36 = 31$ yards.
+
+## M1 Q7 | ALG | easy
+$$ f(x) = 14 + 4x $$
+
+The function $f$ represents the total cost, in dollars, of attending an arcade when $x$ games are played. How many games can be played for a total cost of $\$58$?
+> $14 + 4x = 58$, so $4x = 44$ and $x = 11$.
+
+## M1 Q8 | ALG | easy | nofig
+$$ f(x) = x + b $$
+
+For the linear function $f$, $b$ is a constant. When $x = 0$, $f(x) = 30$. What is the value of $b$?
+A) $-30$
+B) $-\dfrac{1}{30}$
+C) $\dfrac{1}{30}$
+D) $30$
+> $f(0) = 0 + b = 30$, so $b = 30$.
+
+## M1 Q9 | ADV | easy
+$$ P(t) = 1{,}800(1.02)^t $$
+
+The function $P$ gives the estimated number of marine mammals in a certain area, where $t$ is the number of years since a study began. What is the best interpretation of $P(0) = 1{,}800$ in this context?
+A) The estimated number of marine mammals in the area was $102$ when the study began.
+B) The estimated number of marine mammals in the area was $1{,}800$ when the study began.
+C) The estimated number of marine mammals in the area increased by $102$ each year during the study.
+D) The estimated number of marine mammals in the area increased by $1{,}800$ each year during the study.
+> $t = 0$ is when the study began, and $P(0) = 1{,}800$ is the estimated number of marine mammals at that time.
+
+## M1 Q10 | ALG | easy
+A manager is responsible for ordering supplies for a shaved ice shop. The shop's inventory starts with $4{,}500$ paper cups, and the manager estimates that $70$ of these paper cups are used each day. Based on this estimate, in how many days will the supply of paper cups reach $1{,}700$?
+A) $20$
+B) $40$
+C) $60$
+D) $80$
+> The shop must use $4{,}500 - 1{,}700 = 2{,}800$ cups, which takes $2{,}800 \div 70 = 40$ days.
+
+## M1 Q11 | ALG | medium | nofig
+$$ y > 4x + 8 $$
+
+For which of the following tables are all the values of $x$ and their corresponding values of $y$ solutions to the given inequality?
+A) | $x$ | $y$ |
+| --- | --- |
+| $2$ | $19$ |
+| $4$ | $30$ |
+| $6$ | $41$ |
+B) | $x$ | $y$ |
+| --- | --- |
+| $2$ | $8$ |
+| $4$ | $16$ |
+| $6$ | $24$ |
+C) | $x$ | $y$ |
+| --- | --- |
+| $2$ | $13$ |
+| $4$ | $18$ |
+| $6$ | $23$ |
+D) | $x$ | $y$ |
+| --- | --- |
+| $2$ | $13$ |
+| $4$ | $21$ |
+| $6$ | $29$ |
+> $4x + 8$ equals $16$, $24$, and $32$ at $x = 2$, $4$, $6$. Only table A has every $y$ greater: $19 > 16$, $30 > 24$, $41 > 32$.
+
+## M1 Q12 | ADV | medium | nofig
+Which expression is equivalent to $(x^2 + 11)^2 + (x - 5)(x + 5)$?
+A) $x^4 + 23x^2 - 14$
+B) $x^4 + 23x^2 + 96$
+C) $x^4 + 12x^2 + 121$
+D) $x^4 + x^2 + 146$
+> $(x^2 + 11)^2 = x^4 + 22x^2 + 121$ and $(x - 5)(x + 5) = x^2 - 25$. The sum is $x^4 + 23x^2 + 96$.
+
+## M1 Q13 | ADV | easy
+The function $h$ is defined by $h(x) = \dfrac{8}{5x + 6}$. What is the value of $h(2)$?
+> $h(2) = \dfrac{8}{10 + 6} = \dfrac{8}{16} = \dfrac{1}{2}$.
+
+## M1 Q14 | GEO | easy
+The figure shows the lengths, in inches, of two sides of a right triangle. What is the area of the triangle, in square inches?
+> The legs are $3$ and $5$, so the area is $\tfrac{1}{2}(3)(5) = 7.5$.
+
+## M1 Q15 | ADV | easy
+The graph models the number of active projects a company was working on $x$ months after the end of November $2012$, where $0 \le x \le 6$. According to the model, what is the predicted number of active projects the company was working on at the end of November $2012$?
+A) $0$
+B) $5$
+C) $8$
+D) $9$
+> The end of November $2012$ is $x = 0$, where the graph is at $y = 5$.
+
+## M1 Q16 | ALG | medium | nofig
+The relationship between two variables, $x$ and $y$, is linear. For every increase in the value of $x$ by $1$, the value of $y$ increases by $8$. When the value of $x$ is $2$, the value of $y$ is $18$. Which equation represents this relationship?
+A) $y = 2x + 18$
+B) $y = 2x + 8$
+C) $y = 8x + 2$
+D) $y = 3x + 26$
+> The slope is $8$. Using $(2, 18)$: $18 = 8(2) + b$, so $b = 2$ and $y = 8x + 2$.
+
+## M1 Q17 | ALG | medium | nofig
+$$ P = N(19 - C) $$
+
+The given equation relates the positive numbers $P$, $N$, and $C$. Which equation correctly expresses $C$ in terms of $P$ and $N$?
+A) $C = \dfrac{19 + P}{N}$
+B) $C = \dfrac{19 - P}{N}$
+C) $C = 19 + \dfrac{P}{N}$
+D) $C = 19 - \dfrac{P}{N}$
+> Divide by $N$: $\dfrac{P}{N} = 19 - C$, so $C = 19 - \dfrac{P}{N}$.
+
+## M1 Q18 | ADV | medium
+$$ w^2 + 12w - 40 = 0 $$
+
+Which of the following is a solution to the given equation?
+A) $6 - 2\sqrt{19}$
+B) $2\sqrt{19}$
+C) $\sqrt{19}$
+D) $-6 + 2\sqrt{19}$
+> Complete the square: $(w + 6)^2 = 76$, so $w = -6 \pm \sqrt{76} = -6 \pm 2\sqrt{19}$. One solution is $-6 + 2\sqrt{19}$.
+
+## M1 Q19 | PSDA | medium
+The table shown summarizes the number of employees at each of the $17$ restaurants in a town.
+
+Which of the following could be the median number of employees for the restaurants in this town?
+A) $2$
+B) $9$
+C) $15$
+D) $21$
+> With $17$ values the median is the $9$th. The first three rows hold $2 + 4 + 2 = 8$ restaurants, so the $9$th is in the $20$ to $25$ group. Only $21$ is in that range.
+
+## M1 Q20 | ALG | medium
+What is the $y$-coordinate of the $y$-intercept of the graph of $\dfrac{3x}{7} = -\dfrac{5y}{9} + 21$ in the $xy$-plane?
+> At the $y$-intercept $x = 0$: $\dfrac{5y}{9} = 21$, so $y = \dfrac{189}{5} = 37.8$.
+
+## M1 Q21 | ADV | hard
+The graph of $y = 2x^2 + bx + c$ is shown, where $b$ and $c$ are constants. What is the value of $bc$?
+> The graph crosses the $y$-axis at $-6$, so $c = -6$. It passes through $(-2, -6)$ and $(0, -6)$, so the vertex is at $x = -1$: $-\dfrac{b}{2(2)} = -1$ gives $b = 4$. Then $bc = -24$.
+
+## M1 Q22 | PSDA | medium
+In $2008$, Zinah earned $14\%$ more than in $2007$, and in $2009$ Zinah earned $4\%$ more than in $2008$. If Zinah earned $y$ times as much in $2009$ as in $2007$, what is the value of $y$?
+A) $0.5600$
+B) $1.0056$
+C) $1.1800$
+D) $1.1856$
+> Successive increases multiply: $1.14 \times 1.04 = 1.1856$.
+
+## M1 Q23 | GEO | medium
+Circle $A$ (shown) is defined by the equation $(x + 2)^2 + y^2 = 9$. Circle $B$ (not shown) is the result of shifting circle $A$ down $6$ units and increasing the radius so that the radius of circle $B$ is $2$ times the radius of circle $A$. Which equation defines circle $B$?
+A) $(x + 2)^2 + (y + 6)^2 = (4)(9)$
+B) $2(x + 2)^2 + 2(y + 6)^2 = 9$
+C) $(x + 2)^2 + (y - 6)^2 = (4)(9)$
+D) $2(x + 2)^2 + 2(y - 6)^2 = 9$
+> Circle $A$ has center $(-2, 0)$ and radius $3$. Circle $B$ has center $(-2, -6)$ and radius $6$, so $r^2 = 36 = (4)(9)$: $(x + 2)^2 + (y + 6)^2 = (4)(9)$.
+
+## M1 Q24 | GEO | medium
+Right triangle $ABC$ is shown. What is the value of $\tan A$?
+A) $\dfrac{\sqrt{3}}{54}$
+B) $\dfrac{1}{\sqrt{3}}$
+C) $\sqrt{3}$
+D) $27\sqrt{3}$
+> Angle $B$ is $30^\circ$ and $C$ is $90^\circ$, so $A = 60^\circ$ and $\tan 60^\circ = \sqrt{3}$.
+
+## M1 Q25 | ADV | hard | nofig
+At the time that an article was first featured on the home page of a news website, there were $40$ comments on the article. An exponential model estimates that at the end of each hour after the article was first featured on the home page, the number of comments on the article had increased by $190\%$ of the number of comments on the article at the end of the previous hour. Which of the following equations best represents this model, where $C$ is the estimated number of comments on the article $t$ hours after the article was first featured on the home page and $t \le 4$?
+A) $C = 40(1.19)^t$
+B) $C = 40(1.9)^t$
+C) $C = 40(19)^t$
+D) $C = 40(2.9)^t$
+> An increase of $190\%$ each hour multiplies the count by $1 + 1.90 = 2.9$: $C = 40(2.9)^t$.
+
+## M1 Q26 | ALG | hard | nofig
+| $x$ | $g(x)$ |
+| --- | --- |
+| $-27$ | $3$ |
+| $-9$ | $0$ |
+| $21$ | $5$ |
+
+The table shows three values of $x$ and their corresponding values of $g(x)$, where $g(x) = \dfrac{f(x)}{x + 3}$ and $f$ is a linear function. What is the $y$-intercept of the graph of $y = f(x)$ in the $xy$-plane?
+A) $(0, 36)$
+B) $(0, 12)$
+C) $(0, 4)$
+D) $(0, -9)$
+> $f(x) = (x + 3)g(x)$, so $f(-9) = (-6)(0) = 0$ and $f(-27) = (-24)(3) = -72$. The slope is $\dfrac{0 - (-72)}{-9 - (-27)} = 4$, so $f(x) = 4(x + 9) = 4x + 36$ and the $y$-intercept is $(0, 36)$.
+
+## M1 Q27 | GEO | hard
+In right triangle $ABC$, angle $C$ is the right angle and $BC = 162$. Point $D$ on side $AB$ is connected by a line segment with point $E$ on side $AC$ such that line segment $DE$ is parallel to side $BC$ and $CE = 2AE$. What is the length of line segment $DE$?
+> Triangles $ADE$ and $ABC$ are similar. Since $CE = 2AE$, $AE$ is one third of $AC$, so $DE$ is one third of $BC$: $\tfrac{162}{3} = 54$.
+
+## M2 Q1 | ALG | easy
+The function $f$ is defined by $f(x) = 8x$. For what value of $x$ does $f(x) = 72$?
+A) $8$
+B) $9$
+C) $64$
+D) $80$
+> $8x = 72$, so $x = 9$.
+
+## M2 Q2 | GEO | easy
+In the figure, two lines intersect at a point. Angle 1 and angle 2 are vertical angles. The measure of angle 1 is $72^\circ$. What is the measure of angle 2?
+A) $72^\circ$
+B) $108^\circ$
+C) $144^\circ$
+D) $288^\circ$
+> Vertical angles are equal, so angle 2 also measures $72^\circ$.
+
+## M2 Q3 | PSDA | easy
+On a street with $7$ houses, $2$ houses are blue. If a house from this street is selected at random, what is the probability of selecting a house that is blue?
+A) $\dfrac{1}{7}$
+B) $\dfrac{2}{7}$
+C) $\dfrac{5}{7}$
+D) $\dfrac{7}{7}$
+> $2$ of the $7$ houses are blue, so the probability is $\tfrac{2}{7}$.
+
+## M2 Q4 | ALG | easy
+The graph of function $f$ is shown, where $y = f(x)$.
+
+Which of the following describes function $f$?
+A) Increasing linear
+B) Decreasing linear
+C) Increasing exponential
+D) Decreasing exponential
+> The graph is a straight line that rises from left to right, so $f$ is increasing linear.
+
+## M2 Q5 | ALG | easy
+The graph of the function $f$ is shown, where $y = f(x)$. What is the $y$-intercept of the graph?
+A) $(0, -1)$
+B) $(0, -4)$
+C) $(0, 1)$
+D) $(0, 4)$
+> The line crosses the $y$-axis at $y = -4$.
+
+## M2 Q6 | ALG | easy
+$$ \begin{aligned} x &= 8 \\ x + 3y &= 26 \end{aligned} $$
+
+The solution to the given system of equations is $(x, y)$. What is the value of $y$?
+> Substitute $x = 8$: $3y = 18$, so $y = 6$.
+
+## M2 Q7 | PSDA | easy
+The amount of Hanna's bill for a food order was $\$50$. Hanna gave a tip of $20\%$ of the amount of the bill. What is the amount, in dollars, of the tip Hanna gave?
+> $0.20 \times 50 = 10$ dollars.
+
+## M2 Q8 | ADV | easy | nofig
+Which expression is equivalent to $5x^5 - 6x^4 + 8x^3$?
+A) $x^4(5x - 6)$
+B) $x^3(5x^2 - 6x + 8)$
+C) $8x^3(5x^2 - 6x + 1)$
+D) $6x^5(-6x^4 + 8x^3 + 1)$
+> Factor out the greatest common factor $x^3$: $x^3(5x^2 - 6x + 8)$.
+
+## M2 Q9 | PSDA | easy
+The ratio of the length of line segment $XY$ to the length of line segment $ZV$ is $6$ to $1$. If the length of line segment $XY$ is $102$ inches, what is the length, in inches, of line segment $ZV$?
+A) $17$
+B) $96$
+C) $102$
+D) $612$
+> $ZV$ is one sixth of $XY$: $102 \div 6 = 17$.
+
+## M2 Q10 | ALG | easy | nofig
+$$ 7(2x - 3) = 63 $$
+
+Which equation has the same solution as the given equation?
+A) $2x - 3 = 9$
+B) $2x - 3 = 56$
+C) $2x - 21 = 63$
+D) $2x - 21 = 70$
+> Dividing both sides by $7$ gives the equivalent equation $2x - 3 = 9$.
+
+## M2 Q11 | ALG | easy
+The function $f$ defined by $f(t) = 14t + 9$ gives the estimated length, in inches, of a vine plant $t$ months after Tavon purchased it. Which of the following is the best interpretation of $9$ in this context?
+A) Tavon will keep the vine plant for $9$ months.
+B) The vine plant is expected to grow $9$ inches each month.
+C) The vine plant is expected to grow to a maximum length of $9$ inches.
+D) The estimated length of the vine plant was $9$ inches when Tavon purchased it.
+> $f(0) = 9$: at $t = 0$, the purchase date, the plant's estimated length was $9$ inches.
+
+## M2 Q12 | ADV | easy
+$$ (x + 2)(x - 5)(x + 9) = 0 $$
+
+What is a positive solution to the given equation?
+A) $3$
+B) $4$
+C) $5$
+D) $18$
+> The solutions are $-2$, $5$, and $-9$. The positive one is $5$.
+
+## M2 Q13 | PSDA | easy
+Brian saves $\dfrac{2}{5}$ of the $\$215$ he earns each week from his job. If Brian continues to save at this rate, how much money, in dollars, will Brian save in $9$ weeks?
+> Each week he saves $\tfrac{2}{5}(215) = 86$ dollars, so in $9$ weeks he saves $9 \times 86 = 774$ dollars.
+
+## M2 Q14 | ADV | medium
+A rectangle has an area of $155$ square inches. The length of the rectangle is $4$ inches less than $7$ times the width of the rectangle. What is the width of the rectangle, in inches?
+> With width $w$: $w(7w - 4) = 155$, so $7w^2 - 4w - 155 = 0$, which factors as $(7w + 31)(w - 5) = 0$. The width is $5$ inches.
+
+## M2 Q15 | PSDA | easy
+$$ 4, 10, 18, 4, 4, 5, 6, 5 $$
+
+What is the median of the data set shown?
+A) $4$
+B) $5$
+C) $7$
+D) $14$
+> In order: $4, 4, 4, 5, 5, 6, 10, 18$. With $8$ values the median is the average of the $4$th and $5$th: $\tfrac{5 + 5}{2} = 5$.
+
+## M2 Q16 | GEO | easy
+A right circular cylinder has a volume of $432$ cubic centimeters. The area of the base of the cylinder is $24$ square centimeters. What is the height, in centimeters, of the cylinder?
+A) $18$
+B) $24$
+C) $216$
+D) $10{,}368$
+> Volume $=$ base area $\times$ height, so $h = \tfrac{432}{24} = 18$.
+
+## M2 Q17 | ADV | easy
+$$ x^2 = -841 $$
+
+How many distinct real solutions does the given equation have?
+A) Exactly one
+B) Exactly two
+C) Infinitely many
+D) Zero
+> A real number squared is never negative, so there are no real solutions.
+
+## M2 Q18 | ALG | medium
+Line $k$ is defined by $y = 7x + \dfrac{1}{8}$. Line $j$ is perpendicular to line $k$ in the $xy$-plane. What is the slope of line $j$?
+A) $-8$
+B) $-\dfrac{1}{7}$
+C) $\dfrac{1}{8}$
+D) $7$
+> Perpendicular slopes are negative reciprocals. Line $k$ has slope $7$, so line $j$ has slope $-\tfrac{1}{7}$.
+
+## M2 Q19 | ALG | medium
+| Number of cars | Maximum number of passengers and crew |
+| --- | --- |
+| $3$ | $174$ |
+| $5$ | $284$ |
+| $10$ | $559$ |
+
+The table shows the linear relationship between the number of cars, $c$, on a commuter train and the maximum number of passengers and crew, $p$, that the train can carry. Which equation represents the linear relationship between $c$ and $p$?
+A) $55c - p = -9$
+B) $55c - p = 9$
+C) $55p - c = -9$
+D) $55p - c = 9$
+> The slope is $\tfrac{284 - 174}{5 - 3} = 55$, and $174 = 55(3) + 9$, so $p = 55c + 9$, which rearranges to $55c - p = -9$.
+
+## M2 Q20 | ADV | medium
+If $4^{8c} = \sqrt[3]{4^7}$, what is the value of $c$?
+> $\sqrt[3]{4^7} = 4^{7/3}$, so $8c = \tfrac{7}{3}$ and $c = \tfrac{7}{24}$ (about $0.2917$).
+
+## M2 Q21 | ALG | medium
+$$ \begin{aligned} (x - 2) - 4(y + 7) &= 117 \\ (x - 2) + 4(y + 7) &= 442 \end{aligned} $$
+
+The solution to the given system of equations is $(x, y)$. What is the value of $6(x - 2)$?
+> Add the equations: $2(x - 2) = 559$. Multiply by $3$: $6(x - 2) = 1{,}677$.
+
+## M2 Q22 | GEO | medium | nofig
+In triangle $ABC$, angle $B$ is a right angle. The length of side $AB$ is $10\sqrt{37}$ and the length of side $BC$ is $24\sqrt{37}$. What is the length of side $AC$?
+A) $14\sqrt{37}$
+B) $26\sqrt{37}$
+C) $34\sqrt{37}$
+D) $\sqrt{34 \cdot 37}$
+> $AC$ is the hypotenuse: $AC^2 = 100(37) + 576(37) = 676(37)$, so $AC = 26\sqrt{37}$.
+
+## M2 Q23 | ADV | hard
+$$ f(x) = (1.84)^{\frac{x}{4}} $$
+
+The function $f$ is defined by the given equation. The equation can be rewritten as $f(x) = \left(1 + \dfrac{p}{100}\right)^x$, where $p$ is a constant. Which of the following is closest to the value of $p$?
+A) $16$
+B) $21$
+C) $46$
+D) $96$
+> $(1.84)^{x/4} = \left(1.84^{1/4}\right)^x \approx 1.165^x$, so $\tfrac{p}{100} \approx 0.165$ and $p$ is closest to $16$.
+
+## M2 Q24 | ADV | hard | nofig
+The function $f$ is defined by $f(x) = a\sqrt{x + b}$, where $a$ and $b$ are constants. In the $xy$-plane, the graph of $y = f(x)$ passes through the point $(-24, 0)$, and $f(24) < 0$. Which of the following must be true?
+A) $f(0) = 24$
+B) $f(0) = -24$
+C) $a > b$
+D) $a < b$
+> $f(-24) = a\sqrt{b - 24} = 0$ gives $b = 24$. Then $f(24) = a\sqrt{48} < 0$ means $a < 0$, so $a < b$.
+
+## M2 Q25 | GEO | hard | nofig
+In the $xy$-plane, a circle has center $C$ with coordinates $(h, k)$. Points $A$ and $B$ lie on the circle. Point $A$ has coordinates $\left(h + 1, k + \sqrt{102}\right)$, and $\angle ACB$ is a right angle. What is the length of $\overline{AB}$?
+A) $\sqrt{206}$
+B) $2\sqrt{102}$
+C) $103\sqrt{2}$
+D) $103\sqrt{3}$
+> The radius is $CA = \sqrt{1 + 102} = \sqrt{103}$. Triangle $ACB$ is an isosceles right triangle with legs $\sqrt{103}$, so $AB = \sqrt{103}\cdot\sqrt{2} = \sqrt{206}$.
+
+## M2 Q26 | PSDA | hard
+The scatterplot shows the relationship between two variables, $x$ and $y$, for data set E. A line of best fit is shown. Data set F is created by multiplying the $y$-coordinate of each data point from data set E by $3.9$. Which of the following could be an equation of a line of best fit for data set F?
+A) $y = 46.8 + 5.9x$
+B) $y = 46.8 + 1.5x$
+C) $y = 12 + 5.9x$
+D) $y = 12 + 1.5x$
+> The line for E is about $y = 12 + 1.5x$. Multiplying every $y$-value by $3.9$ multiplies the intercept and slope by $3.9$: about $y = 46.8 + 5.85x$, closest to $y = 46.8 + 5.9x$.
+
+## M2 Q27 | ALG | hard | nofig
+$$ \begin{aligned} 48x - 64y &= 48y + 24 \\ ry &= \frac{1}{8} - 12x \end{aligned} $$
+
+In the given system of equations, $r$ is a constant. If the system has no solution, what is the value of $r$?
+> Rewrite: $48x - 112y = 24$ and $12x + ry = \tfrac{1}{8}$. Multiplying the second by $4$ gives $48x + 4ry = \tfrac{1}{2}$. No solution means parallel lines with different constants, so $4r = -112$ and $r = -28$.

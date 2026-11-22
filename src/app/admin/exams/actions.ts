@@ -161,11 +161,13 @@ const questionSchema = z.object({
   stimulus_marker: z.preprocess((v) => (v === "" || v == null ? null : v), z.coerce.number().int().min(1).max(200).nullable()),
   stem: z.string().trim().min(1, "The question needs a stem."),
   explanation: z.string().trim().default(""),
-  option_A: z.string().trim().min(1, "Option A is empty."),
-  option_B: z.string().trim().min(1, "Option B is empty."),
+  answer_format: z.enum(["choice", "spr"]).default("choice"),
+  accepted_answers: z.string().trim().default(""),
+  option_A: z.string().trim().default(""),
+  option_B: z.string().trim().default(""),
   option_C: z.string().trim().default(""),
   option_D: z.string().trim().default(""),
-  correct: z.enum(["A", "B", "C", "D"], { message: "Mark the correct answer." }),
+  correct: z.preprocess((v) => (v === "" || v == null ? undefined : v), z.enum(["A", "B", "C", "D"]).optional()),
   topic_id: optionalUuid,
   skill_id: optionalUuid,
   cognitive_level: z.preprocess((v) => (v === "" ? null : v), z.enum(["knowledge", "application", "reasoning", "synthesis"]).nullable()),
@@ -179,8 +181,15 @@ export async function saveQuestion(_: ActionState, formData: FormData): Promise<
   if (!parsed.success) return { error: parsed.error.issues.map((i) => i.message).join(" ") };
   const v = parsed.data;
 
-  const labels = (["A", "B", "C", "D"] as const).filter((l) => v[`option_${l}`]);
-  if (!labels.includes(v.correct)) return { error: `Option ${v.correct} is marked correct but is empty.` };
+  const spr = v.answer_format === "spr";
+  const accepted = spr ? v.accepted_answers.split(";").map((a) => a.trim()).filter(Boolean) : [];
+  const labels = spr ? [] : (["A", "B", "C", "D"] as const).filter((l) => v[`option_${l}`]);
+  if (spr && !accepted.length) return { error: "Add at least one accepted answer." };
+  if (!spr) {
+    if (!v.option_A || !v.option_B) return { error: "Options A and B are required." };
+    if (!v.correct) return { error: "Mark the correct answer." };
+    if (!labels.includes(v.correct)) return { error: `Option ${v.correct} is marked correct but is empty.` };
+  }
 
   const { data: exam } = await supabase.from("exams").select("status, subject_id").eq("id", v.exam_id).single();
   if (!exam) return { error: "Exam not found." };
@@ -196,6 +205,8 @@ export async function saveQuestion(_: ActionState, formData: FormData): Promise<
     skill_id: v.skill_id,
     cognitive_level: v.cognitive_level,
     difficulty: v.difficulty,
+    answer_format: v.answer_format,
+    accepted_answers: accepted,
     ...(v.approve ? { status: "approved" as const } : {}),
   };
 
@@ -215,15 +226,17 @@ export async function saveQuestion(_: ActionState, formData: FormData): Promise<
     questionId = q.id;
   }
 
-  const { error: optErr } = await supabase.from("question_options").insert(
-    labels.map((l) => ({
-      question_id: questionId,
-      label: l,
-      content: textToContent(v[`option_${l}`]),
-      is_correct: l === v.correct,
-    })),
-  );
-  if (optErr) return { error: optErr.message };
+  if (labels.length) {
+    const { error: optErr } = await supabase.from("question_options").insert(
+      labels.map((l) => ({
+        question_id: questionId,
+        label: l,
+        content: textToContent(v[`option_${l}`]),
+        is_correct: l === v.correct,
+      })),
+    );
+    if (optErr) return { error: optErr.message };
+  }
 
   if (!v.question_id) {
     const { count } = await supabase.from("exam_questions").select("id", { count: "exact", head: true }).eq("exam_id", v.exam_id);

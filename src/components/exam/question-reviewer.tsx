@@ -13,6 +13,9 @@ export type ReviewQuestion = {
   topic: string | null;
   skill: string | null;
   selected_option_id: string | null;
+  format?: "choice" | "spr";
+  response?: string | null;
+  accepted_answers?: string[] | null;
   is_correct: boolean;
   options: { id: string; label: string; content: RichContent; is_correct: boolean }[];
   stimulus: { title: string | null; content: RichContent } | null;
@@ -22,7 +25,7 @@ type Status = "correct" | "incorrect" | "unanswered";
 type Filter = "all" | Status;
 
 const statusOf = (q: ReviewQuestion): Status =>
-  q.selected_option_id == null ? "unanswered" : q.is_correct ? "correct" : "incorrect";
+  q.selected_option_id == null && !q.response?.trim() ? "unanswered" : q.is_correct ? "correct" : "incorrect";
 
 const tone: Record<Status, string> = {
   correct: "bg-success-50 text-success-700 ring-success-600/30",
@@ -193,8 +196,21 @@ export function QuestionReviewer({ questions }: { questions: ReviewQuestion[] })
 
             <RichContentView content={q.stem} className="font-reading text-lg leading-relaxed text-ink-950" />
 
+            {q.format === "spr" ? (
+              <dl className="mt-6 grid gap-2.5 sm:grid-cols-2">
+                <div className={cn("rounded-[var(--radius-md)] px-4 py-3.5 ring-1 ring-inset", !q.response ? "ring-line" : q.is_correct ? "bg-success-50 ring-success-600" : "bg-danger-50 ring-danger-600")}>
+                  <dt className="text-xs font-semibold text-ink-500">Your answer</dt>
+                  <dd className="mt-1 font-reading text-xl tabular text-ink-950">{q.response || "—"}</dd>
+                </div>
+                <div className="rounded-[var(--radius-md)] bg-success-50 px-4 py-3.5 ring-1 ring-inset ring-success-600">
+                  <dt className="text-xs font-semibold text-success-700">Correct answer{(q.accepted_answers?.length ?? 0) > 1 ? "s" : ""}</dt>
+                  <dd className="mt-1 font-reading text-xl tabular text-ink-950">{(q.accepted_answers ?? []).join(", ")}</dd>
+                </div>
+              </dl>
+            ) : null}
+
             <ul className="mt-6 grid gap-2.5">
-              {q.options.map((o) => {
+              {(q.options ?? []).map((o) => {
                 const chosen = o.id === q.selected_option_id;
                 return (
                   <li

@@ -20,6 +20,9 @@ export type QuestionDraft = {
   explanation: string;
   options: Record<"A" | "B" | "C" | "D", string>;
   correct: "A" | "B" | "C" | "D" | "";
+  answer_format: "choice" | "spr";
+  /** Typed-answer questions: accepted answers separated by ";" (e.g. "7/2; 3.5"). */
+  accepted: string;
   topic_id: string | null;
   skill_id: string | null;
   cognitive_level: string | null;
@@ -51,6 +54,8 @@ export function QuestionForm({
   const [stem, setStem] = useState(draft.stem);
   const [options, setOptions] = useState(draft.options);
   const [correct, setCorrect] = useState(draft.correct);
+  const [format, setFormat] = useState(draft.answer_format);
+  const [accepted, setAccepted] = useState(draft.accepted);
   const [explanation, setExplanation] = useState(draft.explanation);
   const stemRef = useRef<HTMLTextAreaElement>(null);
   const [uploading, startUpload] = useTransition();
@@ -100,6 +105,21 @@ export function QuestionForm({
           </p>
         </div>
 
+        <div>
+          <Label htmlFor="answer_format">Answer type</Label>
+          <Select id="answer_format" name="answer_format" value={format} onChange={(e) => setFormat(e.target.value as QuestionDraft["answer_format"])}>
+            <option value="choice">Multiple choice</option>
+            <option value="spr">Typed answer (grid-in)</option>
+          </Select>
+        </div>
+
+        {format === "spr" ? (
+          <div>
+            <Label htmlFor="accepted_answers">Accepted answers</Label>
+            <Input id="accepted_answers" name="accepted_answers" value={accepted} onChange={(e) => setAccepted(e.target.value)} placeholder="e.g. 7/2; 3.5" required />
+            <p className="mt-1.5 text-xs text-ink-500">Separate with semicolons. Equal values match automatically (1/2 = .5 = 0.5); list rounded forms such as .6666; .6667 explicitly.</p>
+          </div>
+        ) : (
         <fieldset>
           <legend className="mb-1.5 text-sm font-medium text-ink-800">Answer choices — select the correct one</legend>
           <div className="space-y-2.5">
@@ -127,6 +147,7 @@ export function QuestionForm({
             ))}
           </div>
         </fieldset>
+        )}
 
         <div>
           <Label htmlFor="explanation">Explanation (shown after submission)</Label>
@@ -230,8 +251,13 @@ export function QuestionForm({
         <p className="mb-2 text-xs font-semibold uppercase tracking-[0.12em] text-ink-500">Student preview</p>
         <div className="rounded-[var(--radius-lg)] bg-white p-6 ring-1 ring-line">
           <RichContentView content={textToContent(stem)} className="font-reading text-lg leading-relaxed text-ink-950" />
+          {format === "spr" ? (
+            <p className="mt-5 rounded-[var(--radius-md)] bg-success-50 px-3.5 py-2.5 text-sm ring-1 ring-inset ring-success-600">
+              Typed answer · accepted: <span className="font-semibold tabular">{accepted || "—"}</span>
+            </p>
+          ) : null}
           <div className="mt-5 grid gap-2">
-            {LABELS.filter((l) => options[l].trim()).map((l) => (
+            {format === "spr" ? null : LABELS.filter((l) => options[l].trim()).map((l) => (
               <div
                 key={l}
                 className={cn(

@@ -32,6 +32,8 @@ export default async function QuestionEditor({ params }: PageProps<"/admin/exams
     explanation: "",
     options: { A: "", B: "", C: "", D: "" },
     correct: "",
+    answer_format: "choice",
+    accepted: "",
     topic_id: null,
     skill_id: null,
     cognitive_level: null,
@@ -42,7 +44,7 @@ export default async function QuestionEditor({ params }: PageProps<"/admin/exams
   if (!isNew) {
     const { data: q } = await supabase
       .from("questions")
-      .select("id, stem, explanation, stimulus_id, stimulus_marker, topic_id, skill_id, cognitive_level, difficulty, status, origin, question_options(label, content, is_correct), exam_questions(section_id, exam_id)")
+      .select("id, stem, explanation, stimulus_id, stimulus_marker, topic_id, skill_id, cognitive_level, difficulty, status, origin, answer_format, accepted_answers, question_options(label, content, is_correct), exam_questions(section_id, exam_id)")
       .eq("id", qid)
       .maybeSingle();
     if (!q) notFound();
@@ -62,6 +64,8 @@ export default async function QuestionEditor({ params }: PageProps<"/admin/exams
       explanation: contentToText(q.explanation as RichContent),
       options: opts,
       correct,
+      answer_format: q.answer_format === "spr" ? "spr" : "choice",
+      accepted: (q.accepted_answers ?? []).join("; "),
       topic_id: q.topic_id,
       skill_id: q.skill_id,
       cognitive_level: q.cognitive_level,
