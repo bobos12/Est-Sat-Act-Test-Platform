@@ -11,10 +11,12 @@ export type AttemptPayload = {
     stem: RichContent;
     stimulus_id: string | null;
     stimulus_marker: number | null;
+    /** "spr" = student-produced response: typed answer, no options. */
+    format: "choice" | "spr";
     options: { id: string; label: string; content: RichContent }[];
   }[];
   stimuli: { id: string; kind: string; title: string | null; attribution: string | null; content: RichContent }[];
-  answers: { question_id: string; option_id: string | null; flagged: boolean }[];
+  answers: { question_id: string; option_id: string | null; response: string | null; flagged: boolean }[];
 };
 
 export type ClosedPayload = { attempt: { id: string; status: "submitted" | "expired" } };

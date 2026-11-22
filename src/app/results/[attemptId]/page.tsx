@@ -25,7 +25,7 @@ type Review = {
     question_count: number;
     result_summary: { by_topic: { topic: string; correct: number; total: number }[] } | null;
   };
-  exam: { id: string; title: string; slug: string };
+  exam: { id: string; title: string; slug: string; score_scale: [number, number][] | null };
   questions: {
     id: string;
     position: number;
@@ -35,8 +35,11 @@ type Review = {
     topic: string | null;
     skill: string | null;
     selected_option_id: string | null;
+    format: "choice" | "spr";
+    response: string | null;
+    accepted_answers: string[] | null;
     is_correct: boolean;
-    options: { id: string; label: string; content: RichContent; is_correct: boolean }[];
+    options: { id: string; label: string; content: RichContent; is_correct: boolean }[] | null;
   }[];
   stimuli: { id: string; title: string | null; attribution: string | null; content: RichContent }[];
 };
@@ -68,9 +71,13 @@ async function Results({ params }: { params: PageProps<"/results/[attemptId]">["
   const review = data as Review;
   const a = review.attempt;
   const percent = Math.round(Number(a.percent));
-  // EST-style estimate: everyone starts at 400, correct answers add up to 800.
-  const scaled = Math.round((400 + (400 * Math.min(100, Math.max(0, Number(a.percent)))) / 100) / 10) * 10;
-  const scalePct = ((scaled - 400) / 400) * 100;
+  // SAT papers carry their official raw -> scaled table (a range, 200-800); EST uses an estimate from 400 to 800.
+  const range = review.exam.score_scale?.[Math.min(a.correct_count, review.exam.score_scale.length - 1)] ?? null;
+  const floor = range ? 200 : 400;
+  const scaled = range
+    ? Math.round((range[0] + range[1]) / 20) * 10
+    : Math.round((400 + (400 * Math.min(100, Math.max(0, Number(a.percent)))) / 100) / 10) * 10;
+  const scalePct = ((scaled - floor) / (800 - floor)) * 100;
   const topics = [...(a.result_summary?.by_topic ?? [])].sort((x, y) => x.correct / (x.total || 1) - y.correct / (y.total || 1));
   const weakest = topics[0];
   const incorrect = a.answered_count - a.correct_count;
@@ -78,7 +85,7 @@ async function Results({ params }: { params: PageProps<"/results/[attemptId]">["
   const stimuli = new Map(review.stimuli.map((s) => [s.id, s]));
   const questions: ReviewQuestion[] = review.questions.map((q) => {
     const st = q.stimulus_id ? stimuli.get(q.stimulus_id) : undefined;
-    return { ...q, stimulus: st ? { title: st.title, content: st.content } : null };
+    return { ...q, options: q.options ?? [], stimulus: st ? { title: st.title, content: st.content } : null };
   });
   const band =
     scaled >= 750 ? "Outstanding work!" : scaled >= 650 ? "Great job!" : scaled >= 550 ? "Solid progress!" : "Good start, keep going!";
@@ -94,7 +101,12 @@ async function Results({ params }: { params: PageProps<"/results/[attemptId]">["
         <div className="grid gap-10 p-8 sm:p-10 md:grid-cols-[1.1fr_1fr] md:items-center">
           <div className="text-center">
             <p className="text-sm text-ink-300">{review.exam.title}</p>
-            <ScoreGauge score={scaled} pct={scalePct} />
+            <ScoreGauge score={scaled} pct={scalePct} floor={floor} />
+            {range ? (
+              <p className="mt-2 text-sm text-ink-300">
+                Official score range <span className="font-semibold text-paper tabular">{range[0]}–{range[1]}</span>
+              </p>
+            ) : null}
             <p className="mt-5 text-lg font-semibold">{band}</p>
             <p className="mt-1 text-sm text-ink-300">
               {scaled >= 800 ? (
@@ -173,7 +185,7 @@ async function Results({ params }: { params: PageProps<"/results/[attemptId]">["
   );
 }
 
-function ScoreGauge({ score, pct }: { score: number; pct: number }) {
+function ScoreGauge({ score, pct, floor }: { score: number; pct: number; floor: number }) {
   const C = 120;
   const R = 96;
   const f = Math.min(1, Math.max(0, pct / 100));
@@ -216,7 +228,7 @@ function ScoreGauge({ score, pct }: { score: number; pct: number }) {
         <span className="mt-1 text-xs uppercase tracking-[0.14em] text-ink-400">out of 800</span>
       </div>
       <div className="mt-2 flex justify-between px-1 text-xs tabular text-ink-500">
-        <span>400</span>
+        <span>{floor}</span>
         <span>800</span>
       </div>
     </div>

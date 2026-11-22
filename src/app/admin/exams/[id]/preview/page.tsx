@@ -15,7 +15,7 @@ export default async function ExamPreviewPage({ params }: PageProps<"/admin/exam
   if (!exam) notFound();
   const { data: eqs } = await supabase
     .from("exam_questions")
-    .select("id, position, questions(id, stem, explanation, stimulus_id, status, question_options(id, label, content, is_correct))")
+    .select("id, position, questions(id, stem, explanation, stimulus_id, status, answer_format, accepted_answers, question_options(id, label, content, is_correct))")
     .eq("exam_id", id)
     .order("position");
   const qs = (eqs ?? []).map((eq) => ({ ...eq, q: Array.isArray(eq.questions) ? eq.questions[0] : eq.questions }));
@@ -56,6 +56,11 @@ export default async function ExamPreviewPage({ params }: PageProps<"/admin/exam
                   <StatusBadge status={q.status} />
                 </div>
                 <RichContentView content={q.stem as RichContent} className="mt-3 font-reading text-lg leading-relaxed" />
+                {q.answer_format === "spr" ? (
+                  <p className="mt-4 rounded-[var(--radius-md)] bg-success-50 px-3.5 py-2.5 text-sm ring-1 ring-inset ring-success-600">
+                    Typed answer · accepted: <span className="font-semibold tabular">{(q.accepted_answers ?? []).join("; ")}</span>
+                  </p>
+                ) : null}
                 <div className="mt-4 grid gap-2">
                   {(q.question_options ?? [])
                     .sort((a, b) => a.label.localeCompare(b.label))

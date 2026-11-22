@@ -30,7 +30,7 @@ export default async function EditExam({ params, searchParams }: PageProps<"/adm
     supabase.from("exam_sections").select("id, position, title").eq("exam_id", id).order("position"),
     supabase
       .from("exam_questions")
-      .select("id, position, section_id, questions(id, stem, status, origin, stimulus_id, difficulty, topic_id, skill_id, question_options(label, is_correct))")
+      .select("id, position, section_id, questions(id, stem, status, origin, stimulus_id, difficulty, topic_id, skill_id, answer_format, accepted_answers, question_options(label, is_correct))")
       .eq("exam_id", id)
       .order("position"),
     supabase.from("stimuli").select("id, kind, title, content, created_at").eq("subject_id", exam.subject_id).order("created_at", { ascending: false }).limit(200),
@@ -126,7 +126,7 @@ export default async function EditExam({ params, searchParams }: PageProps<"/adm
               <tbody>
                 {questions.map((x, i) => {
                   const q = x.q;
-                  const key = q?.question_options?.find((o) => o.is_correct)?.label ?? "—";
+                  const key = q?.answer_format === "spr" ? (q.accepted_answers ?? []).join("; ") || "—" : q?.question_options?.find((o) => o.is_correct)?.label ?? "—";
                   const section = (sections ?? []).find((s) => s.id === x.section_id);
                   return (
                     <tr key={x.id} className="align-top">

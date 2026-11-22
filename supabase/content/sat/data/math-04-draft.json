@@ -1,0 +1,610 @@
+[
+ {
+  "module": 1,
+  "n": 1,
+  "page": 34,
+  "col": 0,
+  "key": "B",
+  "figure": "math-m1-q01.png",
+  "figure_size": [
+   186,
+   148
+  ],
+  "text": "A group of students voted on five after-school\nactivities. The bar graph shows the number of\nstudents who voted for each of the five activities.\nHow many students chose activity 3?\nA) 25\nB) 39\nC) 48\nD) 50"
+ },
+ {
+  "module": 1,
+  "n": 2,
+  "page": 34,
+  "col": 0,
+  "key": "A",
+  "figure": null,
+  "figure_size": null,
+  "text": "What percentage of 300 is 75?\nA) 25%\nB) 50%\nC) 75%\nD) 225%"
+ },
+ {
+  "module": 1,
+  "n": 3,
+  "page": 34,
+  "col": 1,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "x = 36\nWhat is a solution to the given equation?\nA) 6\nB) 30\nC) 450\nD) 900"
+ },
+ {
+  "module": 1,
+  "n": 4,
+  "page": 34,
+  "col": 1,
+  "key": "D",
+  "figure": null,
+  "figure_size": null,
+  "text": "3 more than 8 times a number x is equal to 83.\nWhich equation represents this situation?\nA) ( )( )\n3 8 x = 8 3\nB) x\n= 83 + 3\nC) x\n3 + 8 83\n=\nD) x\n8 + 3 83\n="
+ },
+ {
+  "module": 1,
+  "n": 5,
+  "page": 35,
+  "col": 0,
+  "key": "A",
+  "figure": null,
+  "figure_size": null,
+  "text": "Hana deposited a fixed amount into her bank\naccount each month. The function f t( ) = 100 + 25t\ngives the amount, in dollars, in Hana’s bank account\nafter t monthly deposits. What is the best\ninterpretation of 25 in this context?\nA) With each monthly deposit, the amount in\nHana’s bank account increased by $25.\nB) Before Hana made any monthly deposits, the\namount in her bank account was $25.\nC) After 1 monthly deposit, the amount in Hana’s\nbank account was $25.\nD) Hana made a total of 25 monthly deposits."
+ },
+ {
+  "module": 1,
+  "n": 6,
+  "page": 35,
+  "col": 0,
+  "key": [
+   "9"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "A customer spent $27 to purchase oranges at $3 per\npound. How many pounds of oranges did the\ncustomer purchase?"
+ },
+ {
+  "module": 1,
+  "n": 7,
+  "page": 35,
+  "col": 0,
+  "key": [
+   "10"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "Nasir bought 9 storage bins that were each the same\nprice. He used a coupon for $63 off the entire\npurchase. The cost for the entire purchase after using\nthe coupon was $27. What was the original price, in\ndollars, for 1 storage bin?"
+ },
+ {
+  "module": 1,
+  "n": 8,
+  "page": 35,
+  "col": 1,
+  "key": "A",
+  "figure": "math-m1-q08.png",
+  "figure_size": [
+   63,
+   52
+  ],
+  "text": "For the linear function f, the table shows three values\nof x and their corresponding values of f x\n( ). Which\n( ) ?\nequation defines f x\nA) f x\n( ) = 3x + 29\n( ) = 29x + 32\nB) f x\nC) f x\n( ) = 35x + 29\n( ) = 32x + 35\nD) f x"
+ },
+ {
+  "module": 1,
+  "n": 9,
+  "page": 35,
+  "col": 1,
+  "key": "B",
+  "figure": "math-m1-q09.png",
+  "figure_size": [
+   198,
+   106
+  ],
+  "text": "Right triangles PQR and STU are similar, where P\ncorresponds to S. If the measure of angle Q is 18°,\nwhat is the measure of angle S ?\nA) 18°\nB) 72°\nC) 82°\nD) 162°"
+ },
+ {
+  "module": 1,
+  "n": 10,
+  "page": 36,
+  "col": 0,
+  "key": "D",
+  "figure": "math-m1-q10.png",
+  "figure_size": [
+   176,
+   185
+  ],
+  "text": "The scatterplot shows the relationship between\ntwo variables, x and y.\nWhich of the following equations is the most\nappropriate linear model for the data shown?\nA) y = 0.9 + 9.4x\nB) y = 0.9 − 9.4x\nC) y = 9.4 + 0.9x\nD) y = 9.4 − 0.9x"
+ },
+ {
+  "module": 1,
+  "n": 11,
+  "page": 36,
+  "col": 0,
+  "key": "A",
+  "figure": null,
+  "figure_size": null,
+  "text": "2.5b + 5r = 80\nThe given equation describes the relationship\nbetween the number of birds, b, and the number of\nreptiles, r, that can be cared for at a pet care business\non a given day. If the business cares for 16 reptiles on\na given day, how many birds can it care for on this\nday?\nA) 0\nB) 5\nC) 40\nD) 80"
+ },
+ {
+  "module": 1,
+  "n": 12,
+  "page": 36,
+  "col": 1,
+  "key": "C",
+  "figure": "math-m1-q12.png",
+  "figure_size": [
+   175,
+   184
+  ],
+  "text": "What is an equation of the graph shown?\nA) y = −2x −8\nB) y\n=\nx\n−8\nC) y = −x −8\nD) y = 2x −8"
+ },
+ {
+  "module": 1,
+  "n": 13,
+  "page": 36,
+  "col": 1,
+  "key": [
+   "1/5",
+   ".2"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "If x =\n5, what is the value of 8\n?\nx"
+ },
+ {
+  "module": 1,
+  "n": 14,
+  "page": 36,
+  "col": 1,
+  "key": [
+   "80"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "24x\n+\ny\n=\n6 +\nx\ny =\nThe solution to the given system of equations is\n(x, y). What is the value of y ?"
+ },
+ {
+  "module": 1,
+  "n": 15,
+  "page": 37,
+  "col": 0,
+  "key": "D",
+  "figure": null,
+  "figure_size": null,
+  "text": "Line t in the xy-plane has a slope of 1\n− 3 and passes\nthrough the point (9, 10). Which equation defines\nline t ?\nA)\ny = 13x − 3\nB) y = 9x + 10\nx\nC)\ny = − + 10\nx\nD)\ny = − + 13"
+ },
+ {
+  "module": 1,
+  "n": 16,
+  "page": 37,
+  "col": 0,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "( ) = 206(1.034)x models the value,\nThe function f x\nin dollars, of a certain bank account by the end of\neach year from 1957 through 1972, where x is the\nnumber of years after 1957. Which of the following is\nthe best interpretation of “ f(5 ) is approximately\nequal to 243” in this context?\nA) The value of the bank account is estimated to be\napproximately 5 dollars greater in 1962 than in\n1957.\nB) The value of the bank account is estimated to be\napproximately 243 dollars in 1962.\nC) The value, in dollars, of the bank account is\nestimated to be approximately 5 times greater in\n1962 than in 1957.\nD) The value of the bank account is estimated to\nincrease by approximately 243 dollars every\n5 years between 1957 and 1972."
+ },
+ {
+  "module": 1,
+  "n": 17,
+  "page": 37,
+  "col": 1,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "For a certain rectangular region, the ratio of its\nlength to its width is 35 to 10. If the width of the\nrectangular region increases by 7 units, how must the\nlength change to maintain this ratio?\nA) It must decrease by 24.5 units.\nB) It must increase by 24.5 units.\nC) It must decrease by 7 units.\nD) It must increase by 7 units."
+ },
+ {
+  "module": 1,
+  "n": 18,
+  "page": 37,
+  "col": 1,
+  "key": "A",
+  "figure": null,
+  "figure_size": null,
+  "text": "Square P has a side length of x inches. Square Q has\na perimeter that is 176 inches greater than the\nperimeter of square P. The function f gives the area\nof square Q, in square inches. Which of the following\ndefines f ?\n( ) = (x + 44)2\nA) f x\n( ) = (x + 176)2\nB) f x\n( ) = (176x + 44)2\nC) f x\n( ) = (176x + 176)2\nD) f x"
+ },
+ {
+  "module": 1,
+  "n": 19,
+  "page": 38,
+  "col": 0,
+  "key": "C",
+  "figure": null,
+  "figure_size": null,
+  "text": "14x = 2 w + 19\n7y\nThe given equation relates the distinct positive real\nnumbers w, x, and y. Which equation correctly\nexpresses w in terms of x and y ?\nf\nx\nw =\n−19\nA)\ny\nF\n28x\nw =\n−19\nB)\n14y\n2⎞⎟\n⎛x\nw =\n− 19\n⎜⎜⎜⎝\nC)\n⎟⎟⎠\ny\n⎟\n2⎞⎟\n⎛28x\nw = 14y ⎟⎟⎠\n⎜⎜⎜⎝\n− 19\nD)\n⎟"
+ },
+ {
+  "module": 1,
+  "n": 20,
+  "page": 38,
+  "col": 0,
+  "key": [
+   "100"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "Point O is the center of a circle. The measure of\narc RS on this circle is 100°. What is the measure, in\ndegrees, of its associated angle ROS ?"
+ },
+ {
+  "module": 1,
+  "n": 21,
+  "page": 38,
+  "col": 0,
+  "key": [
+   "361/8",
+   "45.12",
+   "45.13"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "5 45\n3 x\n2 x is equivalent to\nax ,\nb\n·\nThe expression\nwhere a and b are positive constants and x > 1.\nWhat is the value of a + b ?"
+ },
+ {
+  "module": 1,
+  "n": 22,
+  "page": 38,
+  "col": 1,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "A right triangle has sides of length 2 2 , 6 2 , and\n80 units. What is the area of the triangle, in square\nunits?\nA) 8 2 + 80\nB) 12\nC) 24 80\nD) 24"
+ },
+ {
+  "module": 1,
+  "n": 23,
+  "page": 38,
+  "col": 1,
+  "key": "D",
+  "figure": null,
+  "figure_size": null,
+  "text": "4x + bx − 45, where b is a constant,\nThe expression\ncan be rewritten as (hx + k)(x + j), where h, k, and j\nare integer constants. Which of the following must\nbe an integer?\nA) b\nh\nB) b\nk\nC) 45\nh\nD) 45\nk"
+ },
+ {
+  "module": 1,
+  "n": 24,
+  "page": 39,
+  "col": 0,
+  "key": "C",
+  "figure": null,
+  "figure_size": null,
+  "text": "y = 2x2 − 21x + 64\ny = 3x + a\nIn the given system of equations, a is a constant. The\ngraphs of the equations in the given system intersect\nat exactly one point, ( ,x y), in the xy\n-plane. What is\nthe value of x ?\nA) −8\nB) −6\nC) 6\nD) 8"
+ },
+ {
+  "module": 1,
+  "n": 25,
+  "page": 39,
+  "col": 0,
+  "key": "C",
+  "figure": null,
+  "figure_size": null,
+  "text": "An isosceles right triangle has a hypotenuse of length\n58 inches. What is the perimeter, in inches, of this\ntriangle?\nA) 29 2\nB) 58 2\nC) 58 + 58 2\nD) 58 + 116 2\nSTOP\nIf you finish before time is called, you may check your work on this module only.\nDo not turn to any other module in the test."
+ },
+ {
+  "module": 1,
+  "n": 26,
+  "page": 39,
+  "col": 1,
+  "key": "D",
+  "figure": null,
+  "figure_size": null,
+  "text": "In the xy-plane, a parabola has vertex (9, −14) and\nintersects the x-axis at two points. If the equation of\nthe parabola is written in the form y = ax2 + bx + c,\nwhere a, b, and c are constants, which of the\n?\nfollowing could be the value of a\n+\nb\n+\nc\nA) −23\nB) −19\nC) −14\nD) −12"
+ },
+ {
+  "module": 1,
+  "n": 27,
+  "page": 39,
+  "col": 1,
+  "key": [
+   "5"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "( ) = −ax + b, where a\nFunction f is defined by f x\nand b are constants. In the xy-plane, the graph of\nx − 15 has a y-intercept at ⎛ 99 ⎞\n⎜0, − ⎟\ny = f( )\n7 ⎠⎟. The\n⎟\n⎜\n⎝\nproduct of a and b is 65\n7 . What is the value of a?"
+ },
+ {
+  "module": 2,
+  "n": 1,
+  "page": 42,
+  "col": 0,
+  "key": "B",
+  "figure": "math-m2-q01.png",
+  "figure_size": [
+   195,
+   106
+  ],
+  "text": "The line graph shows the estimated number of\nchipmunks in a state park on April 1 of each year\nfrom 1989 to 1999.\nBased on the line graph, in which year was the\nestimated number of chipmunks in the state park the\ngreatest?\nA) 1989\nB) 1994\nC) 1995\nD) 1998"
+ },
+ {
+  "module": 2,
+  "n": 2,
+  "page": 42,
+  "col": 0,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "A fish swam a distance of 5,104 yards. How far did\nthe fish swim, in miles? (1 mile = 1,760 yards)\nA) 0.3\nB) 2.9\nC) 3,344\nD) 6,864"
+ },
+ {
+  "module": 2,
+  "n": 3,
+  "page": 42,
+  "col": 1,
+  "key": "C",
+  "figure": null,
+  "figure_size": null,
+  "text": "12x3 −5x ?\nWhich expression is equivalent to\nA) 7x6\nB) 17x3\nC) 7x3\nD) 17x6"
+ },
+ {
+  "module": 2,
+  "n": 4,
+  "page": 42,
+  "col": 1,
+  "key": "A",
+  "figure": null,
+  "figure_size": null,
+  "text": "x\n+\ny\n= 18\ny\n=\nx\nWhat is the solution ( ,x y) to the given system of\nequations?\nA) (15, 3)\nB) (16, 2)\nC) (17, 1)\nD) (18, 0)"
+ },
+ {
+  "module": 2,
+  "n": 5,
+  "page": 43,
+  "col": 0,
+  "key": "A",
+  "figure": null,
+  "figure_size": null,
+  "text": "The point (8, 2) in the xy-plane is a solution to\nwhich of the following systems of inequalities?\nA) x > 0\ny > 0\nB) x > 0\ny < 0\nC) x < 0\ny > 0\nD) x < 0\ny < 0"
+ },
+ {
+  "module": 2,
+  "n": 6,
+  "page": 43,
+  "col": 0,
+  "key": [
+   "15",
+   "-5"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "1 x −5 I = 10\nWhat is one possible solution to the given equation?"
+ },
+ {
+  "module": 2,
+  "n": 7,
+  "page": 43,
+  "col": 0,
+  "key": [
+   "50"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "( ) = 7x + 1\nf x\nThe function gives the total number of people on a\ncompany retreat with x managers. What is the total\nnumber of people on a company retreat with\n7 managers?"
+ },
+ {
+  "module": 2,
+  "n": 8,
+  "page": 43,
+  "col": 1,
+  "key": "B",
+  "figure": "math-m2-q08.png",
+  "figure_size": [
+   207,
+   153
+  ],
+  "text": "( ) = x2 −3\nh x\nWhich table gives three values of x and their\n( ) for the given\ncorresponding values of h x\nfunction h?\nA)\nB)\nC)\nD)"
+ },
+ {
+  "module": 2,
+  "n": 9,
+  "page": 43,
+  "col": 1,
+  "key": "D",
+  "figure": null,
+  "figure_size": null,
+  "text": "( ) = 270(0.1)x. What\nThe function f is defined by f x\nis the value of f (0) ?\nA) 0\nB) 1\nC) 27\nD) 270"
+ },
+ {
+  "module": 2,
+  "n": 10,
+  "page": 44,
+  "col": 0,
+  "key": "A",
+  "figure": null,
+  "figure_size": null,
+  "text": "To estimate the proportion of a population that has a\ncertain characteristic, a random sample was selected\nfrom the population. Based on the sample, it is\nestimated that the proportion of the population that\nhas the characteristic is 0.49, with an associated\nmargin of error of 0.04. Based on this estimate and\nmargin of error, which of the following is the most\nappropriate conclusion about the proportion of the\npopulation that has the characteristic?\nA) It is plausible that the proportion is between 0.45\nand 0.53.\nB) It is plausible that the proportion is less than\n0.45.\nC) The proportion is exactly 0.49.\nD) It is plausible that the proportion is greater than\n0.53."
+ },
+ {
+  "module": 2,
+  "n": 11,
+  "page": 44,
+  "col": 0,
+  "key": "A",
+  "figure": null,
+  "figure_size": null,
+  "text": "A moving truck can tow a trailer if the combined\nweight of the trailer and the boxes it contains is no\nmore than 4,600 pounds. What is the maximum\nnumber of boxes this truck can tow in a trailer with a\nweight of 500 pounds if each box weighs 120 pounds?\nA) 34\nB) 35\nC) 38\nD) 39"
+ },
+ {
+  "module": 2,
+  "n": 12,
+  "page": 44,
+  "col": 1,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "−4x −7x = −36\nWhat is the positive solution to the given equation?\nA) 7\nB) 9\nC) 4\nD) 7"
+ },
+ {
+  "module": 2,
+  "n": 13,
+  "page": 44,
+  "col": 1,
+  "key": [
+   ".3",
+   "3/10"
+  ],
+  "figure": "math-m2-q13.png",
+  "figure_size": [
+   169,
+   60
+  ],
+  "text": "The table summarizes the distribution of color and\nshape for 100 tiles of equal area.\nIf one of these tiles is selected at random, what is the\nprobability of selecting a red tile? (Express your\nanswer as a decimal or fraction, not as a percent.)"
+ },
+ {
+  "module": 2,
+  "n": 14,
+  "page": 44,
+  "col": 1,
+  "key": [
+   "2"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "( ) = 2x + 3\nf x\nFor the given function f, the graph of y = f (x ) in the\nxy-plane is parallel to line j. What is the slope of\nline j ?"
+ },
+ {
+  "module": 2,
+  "n": 15,
+  "page": 45,
+  "col": 0,
+  "key": "A",
+  "figure": null,
+  "figure_size": null,
+  "text": "A proposal for a new library was included on an\nelection ballot. A radio show stated that 3 times as\nmany people voted in favor of the proposal as people\nwho voted against it. A social media post reported\nthat 15,000 more people voted in favor of the\nproposal than voted against it. Based on these data,\nhow many people voted against the proposal?\nA) 7,500\nB) 15,000\nC) 22,500\nD) 45,000"
+ },
+ {
+  "module": 2,
+  "n": 16,
+  "page": 45,
+  "col": 0,
+  "key": "C",
+  "figure": "math-m2-q16.png",
+  "figure_size": [
+   163,
+   183
+  ],
+  "text": "In the figure, lines m and n are parallel. If\nx = 6k + 13 and y = 8k − 29, what is the value of z ?\nA) 3\nB) 21\nC) 41\nD) 139"
+ },
+ {
+  "module": 2,
+  "n": 17,
+  "page": 45,
+  "col": 1,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "−3x + 21px = 84\nIn the given equation, p is a constant. The equation\nhas no solution. What is the value of p ?\nA) 0\nB) 1\nC) 4\nD) 4"
+ },
+ {
+  "module": 2,
+  "n": 18,
+  "page": 45,
+  "col": 1,
+  "key": "D",
+  "figure": null,
+  "figure_size": null,
+  "text": "( ) = (x −\n10)(x +\n13)\nf x\nThe function f is defined by the given equation. For\nwhat value of x does f x\n( ) reach its minimum?\nA) −130\nB) −13\nC)\n− 2\nD)\n− 2"
+ },
+ {
+  "module": 2,
+  "n": 19,
+  "page": 46,
+  "col": 0,
+  "key": "A",
+  "figure": null,
+  "figure_size": null,
+  "text": "f x = 1 x\n2 +\nThe function ( )\n(\n−7)\ngives a metal\nball’s height above the ground f x\n( ), in inches,\nx seconds after it started moving on a track, where\n0 ≤ x ≤ 10. Which of the following is the best\ninterpretation of the vertex of the graph of\ny = (f x) in the xy-plane?\nA) The metal ball’s minimum height was 3 inches\nabove the ground.\nB) The metal ball’s minimum height was 7 inches\nabove the ground.\nC) The metal ball’s height was 3 inches above the\nground when it started moving.\nD) The metal ball’s height was 7 inches above the\nground when it started moving."
+ },
+ {
+  "module": 2,
+  "n": 20,
+  "page": 46,
+  "col": 0,
+  "key": [
+   "15/17",
+   ".8824",
+   ".8823"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "In triangle JKL,\ncos(K ) = 51 and angle J is a right\nangle. What is the value of cos(L) ?"
+ },
+ {
+  "module": 2,
+  "n": 21,
+  "page": 46,
+  "col": 1,
+  "key": [
+   "51"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "−x + bx\n−676 = 0\nIn the given equation, b is a positive integer. The\nequation has no real solution. What is the greatest\npossible value of b ?"
+ },
+ {
+  "module": 2,
+  "n": 22,
+  "page": 46,
+  "col": 1,
+  "key": "A",
+  "figure": "math-m2-q22.png",
+  "figure_size": [
+   178,
+   179
+  ],
+  "text": "If a new graph of three linear equations is created\nusing the system of equations shown and the\nequation x + 4y = −16, how many solutions (x y\n, )\nwill the resulting system of three equations have?\nA) Zero\nB) Exactly one\nC) Exactly two\nD) Infinitely many"
+ },
+ {
+  "module": 2,
+  "n": 23,
+  "page": 47,
+  "col": 0,
+  "key": "C",
+  "figure": null,
+  "figure_size": null,
+  "text": "x\n( ) = 5,470(0.64)12\nf x\nThe function f gives the value, in dollars, of a certain\npiece of equipment after x months of use. If the\nvalue of the equipment decreases each year by p% of\nits value the preceding year, what is the value of p ?\nA) 4\nB) 5\nC) 36\nD) 64"
+ },
+ {
+  "module": 2,
+  "n": 24,
+  "page": 47,
+  "col": 1,
+  "key": "C",
+  "figure": "math-m2-q24.png",
+  "figure_size": [
+   85,
+   72
+  ],
+  "text": "The dot plot represents the 15 values in data set A.\nData set B is created by adding 56 to each of the\nvalues in data set A. Which of the following correctly\ncompares the medians and the ranges of data sets A\nand B?\nA) The median of data set B is equal to the median\nof data set A, and the range of data set B is equal\nto the range of data set A.\nB) The median of data set B is equal to the median\nof data set A, and the range of data set B is\ngreater than the range of data set A.\nC) The median of data set B is greater than the\nmedian of data set A, and the range of data set B\nis equal to the range of data set A.\nD) The median of data set B is greater than the\nmedian of data set A, and the range of data set B\nis greater than the range of data set A."
+ },
+ {
+  "module": 2,
+  "n": 25,
+  "page": 48,
+  "col": 0,
+  "key": "D",
+  "figure": null,
+  "figure_size": null,
+  "text": "The equation 2\nx + (y −1) = 49 represents circle A.\nCircle B is obtained by shifting circle A down 2 units\nin the xy-plane. Which of the following equations\nrepresents circle B?\n(x −2) + (y −1) = 49\nA)\nx + (y −3) = 49\nB)\n(x + 2) + (y −1) = 49\nC)\nx + (y + 1) = 49\nD)\nSTOP\nIf you finish before time is called, you may check your work on this module only.\nDo not turn to any other module in the test."
+ },
+ {
+  "module": 2,
+  "n": 26,
+  "page": 48,
+  "col": 1,
+  "key": "B",
+  "figure": null,
+  "figure_size": null,
+  "text": "Two identical rectangular prisms each have a height\nof 90 centimeters (cm). The base of each prism is a\ncm .\nsquare, and the surface area of each prism is K\nIf the prisms are glued together along a square base,\nthe resulting prism has a surface area of 92 K\ncm .\nWhat is the side length, in cm, of each square base?\nA) 4\nB) 8\nC) 9\nD) 16"
+ },
+ {
+  "module": 2,
+  "n": 27,
+  "page": 48,
+  "col": 1,
+  "key": [
+   "600"
+  ],
+  "figure": null,
+  "figure_size": null,
+  "text": "210 is p% greater than 30. What is the value of p ?\n[continued]\nGENERAL DIRECTIONS\n• You may work on only one module at a time.\n• If you finish a module before time is called, check your work on that module only.\nYou may NOT turn to any other module.\nTIMING\nReading and Writing, Module 1 : 39 minutes\nReading and Writing, Module 2: 39 minutes\n10-minute break\nMath, Module 1: 43 minutes\nMath, Module 2: 43 minutes\nThe above are standard times. If you are approved for accommodations involving\nadditional time, you should give yourself that time when you practice.\nMARKING YOUR ANSWERS\n• Be sure to answer your questions properly in this book.\n• Circle only one answer to each question. If you change your mind, completely\nerase the circle. You will not get credit for questions with more than one answer\ncircled, or for questions with no answers circled.\nUSING YOUR TEST BOOK\n• You may use the test book for scratch work.\n• You may not fold or remove pages or portions of a page from this book,\nor take the book from the testing room.\n[continued]\nII I II II I II I IIIII II I 111111111111111"
+ }
+]

@@ -11,7 +11,8 @@ import { SelectionToolbar, SplitHandle, ToolsMenu, useHighlights, useStored } fr
 import { BoardToolbar, DrawLayer, INK, type BoardSettings, type Shape } from "./board";
 import { paperFont } from "../fonts";
 
-type QState = { option: string | null; flagged: boolean };
+type QState = { option: string | null; response?: string | null; flagged: boolean };
+const isAnswered = (s?: QState) => Boolean(s?.option || s?.response?.trim());
 type SyncStatus = "saved" | "saving" | "retrying";
 
 const storageKey = (attemptId: string) => `northmark:attempt:${attemptId}`;
@@ -53,7 +54,7 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
   // ---------- answer state (server answers, overlaid with unsynced local changes) ----------
   const [state, setState] = useState<Record<string, QState>>(() => {
     const initial: Record<string, QState> = {};
-    for (const a of payload.answers) initial[a.question_id] = { option: a.option_id, flagged: a.flagged };
+    for (const a of payload.answers) initial[a.question_id] = { option: a.option_id, response: a.response, flagged: a.flagged };
     return initial;
   });
   const dirty = useRef<Record<string, QState>>({});
@@ -69,7 +70,7 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
   const retryTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const [index, setIndex] = useState(() => {
-    const firstUnanswered = questions.findIndex((q) => !payload.answers.some((a) => a.question_id === q.id && a.option_id));
+    const firstUnanswered = questions.findIndex((q) => !payload.answers.some((a) => a.question_id === q.id && (a.option_id || a.response)));
     return firstUnanswered === -1 ? 0 : firstUnanswered;
   });
   const current = questions[index];
@@ -91,6 +92,7 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
           attemptId,
           questionId: qid,
           optionId: desired.option,
+          response: desired.response?.trim() || null,
           setOption: true,
           flagged: desired.flagged,
         });
@@ -229,7 +231,7 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
   // Multi-module exams (Literacy) show a module page at the start and between modules.
   const multiModule = payload.sections.length > 1;
   const [intro, setIntro] = useState<string | null>(() =>
-    multiModule && payload.answers.every((a) => !a.option_id) ? questions[0].section_id : null,
+    multiModule && payload.answers.every((a) => !a.option_id && !a.response) ? questions[0].section_id : null,
   );
   const next = useCallback(() => {
     const upcoming = questions[index + 1];
@@ -260,7 +262,7 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [intro, confirmOpen, navOpen, go, next, index, current, currentState.flagged, update]);
 
-  const answeredCount = questions.filter((q) => state[q.id]?.option).length;
+  const answeredCount = questions.filter((q) => isAnswered(state[q.id])).length;
   const flaggedCount = questions.filter((q) => state[q.id]?.flagged).length;
   const section = sectionsById.get(current.section_id);
   const stimulus = current.stimulus_id ? stimuliById.get(current.stimulus_id) : undefined;
@@ -492,6 +494,7 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
                   total={total}
                   state={currentState}
                   onSelect={(optionId) => update(current.id, { option: optionId })}
+                  onResponse={(response) => update(current.id, { response })}
                   disabled={closed || timeUp}
                   paper={paper}
                   crossed={crossed[current.id] ?? []}
@@ -512,6 +515,7 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
                 total={total}
                 state={currentState}
                 onSelect={(optionId) => update(current.id, { option: optionId })}
+                  onResponse={(response) => update(current.id, { response })}
                 disabled={closed || timeUp}
                   paper={paper}
                   crossed={crossed[current.id] ?? []}
@@ -611,7 +615,7 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
           total={total}
           answered={answeredCount}
           flagged={flaggedCount}
-          unanswered={questions.filter((q) => !state[q.id]?.option).map((q) => q.position)}
+          unanswered={questions.filter((q) => !isAnswered(state[q.id])).map((q) => q.position)}
           submitting={submitting}
           error={submitError}
           onCancel={() => setConfirmOpen(false)}
@@ -633,6 +637,7 @@ function QuestionPane({
   total,
   state,
   onSelect,
+  onResponse,
   disabled,
   crossed,
   onCross,
@@ -644,6 +649,7 @@ function QuestionPane({
   total: number;
   state: QState;
   onSelect: (optionId: string | null) => void;
+  onResponse: (response: string | null) => void;
   disabled: boolean;
   crossed: string[];
   onCross: (optionId: string) => void;
@@ -669,6 +675,9 @@ function QuestionPane({
         <RichContentView content={question.stem} className={cn("font-reading text-[1.1875rem] leading-relaxed text-ink-950", !paper && "mt-4")} />
       </div>
 
+      {question.format === "spr" ? (
+        <ResponseInput value={state.response ?? ""} onChange={(v) => onResponse(v || null)} disabled={disabled} />
+      ) : (
       <fieldset className="mt-7" disabled={disabled}>
         <legend className="sr-only">Answer choices</legend>
         <div className="grid gap-2.5" data-hl-scope={`qo:${question.id}`}>
@@ -741,10 +750,11 @@ function QuestionPane({
           })}
         </div>
       </fieldset>
+      )}
 
       <div className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-line pt-5">
-        {state.option && !disabled ? (
-          <button type="button" onClick={() => onSelect(null)} className="text-sm text-ink-500 underline-offset-4 hover:text-ink-950 hover:underline">
+        {isAnswered(state) && !disabled ? (
+          <button type="button" onClick={() => (question.format === "spr" ? onResponse(null) : onSelect(null))} className="text-sm text-ink-500 underline-offset-4 hover:text-ink-950 hover:underline">
             Clear answer
           </button>
         ) : null}
@@ -763,6 +773,37 @@ function QuestionPane({
         />
       ) : null}
     </section>
+  );
+}
+
+/** Typed answer for student-produced response questions (SAT grid-ins): up to 5 characters, 6 with a minus sign. */
+function ResponseInput({ value, onChange, disabled }: { value: string; onChange: (v: string) => void; disabled: boolean }) {
+  return (
+    <div className="mt-7">
+      <label htmlFor="spr-answer" className="text-sm font-medium text-ink-700">
+        Your answer
+      </label>
+      <input
+        id="spr-answer"
+        type="text"
+        inputMode="decimal"
+        autoComplete="off"
+        spellCheck={false}
+        value={value}
+        disabled={disabled}
+        onChange={(e) => {
+          const v = e.target.value.replace(/[^-0-9./]/g, "");
+          onChange(v.slice(0, v.startsWith("-") ? 6 : 5));
+        }}
+        placeholder="e.g. 3.5 or 7/2"
+        className="mt-2 block h-14 w-48 rounded-[var(--radius-md)] bg-white px-4 font-reading text-2xl tabular ring-1 ring-inset ring-line-strong outline-none focus:ring-2 focus:ring-ink-950 disabled:cursor-not-allowed disabled:opacity-60"
+      />
+      <ul className="mt-4 list-disc space-y-1 pl-5 text-sm leading-relaxed text-ink-600">
+        <li>Up to 5 characters for a positive answer, 6 for a negative one (the minus sign counts).</li>
+        <li>Fractions are fine: write 7/2 rather than 3 1/2. If a fraction or decimal is too long, round or cut it at the fourth digit.</li>
+        <li>Leave out symbols such as %, $ or commas.</li>
+      </ul>
+    </div>
   );
 }
 
@@ -788,7 +829,7 @@ function ModuleIntro({
   const prev = i > 0 ? sections[i - 1] : null;
   const inModule = questions.filter((q) => q.section_id === sectionId);
   const prevQs = prev ? questions.filter((q) => q.section_id === prev.id) : [];
-  const prevAnswered = prevQs.filter((q) => state[q.id]?.option).length;
+  const prevAnswered = prevQs.filter((q) => isAnswered(state[q.id])).length;
   const label = `Module ${i + 1}`;
 
   return (
@@ -853,7 +894,7 @@ function ModuleIntro({
         {prev && prevAnswered < prevQs.length ? (
           <button
             type="button"
-            onClick={() => onReviewPrevious(questions.findIndex((q) => q.section_id === prev.id && !state[q.id]?.option))}
+            onClick={() => onReviewPrevious(questions.findIndex((q) => q.section_id === prev.id && !isAnswered(state[q.id])))}
             className="mt-3 block w-full text-sm font-medium text-ink-600 underline-offset-4 hover:text-ink-950 hover:underline"
           >
             Go back to the {prevQs.length - prevAnswered} unanswered in Module {i}
@@ -971,12 +1012,12 @@ function Navigator({
                       type="button"
                       onClick={() => onPick(questions.indexOf(q))}
                       aria-current={isCurrent ? "step" : undefined}
-                      aria-label={`Question ${q.position}${s?.option ? ", answered" : ", unanswered"}${s?.flagged ? ", flagged" : ""}`}
+                      aria-label={`Question ${q.position}${isAnswered(s) ? ", answered" : ", unanswered"}${s?.flagged ? ", flagged" : ""}`}
                       className={cn(
                         "relative flex h-10 items-center justify-center rounded-[var(--radius-sm)] text-sm font-medium tabular transition-colors",
                         isCurrent
                           ? "bg-ink-950 text-paper"
-                          : s?.option
+                          : isAnswered(s)
                             ? "bg-ink-700/10 text-ink-900 hover:bg-ink-700/20"
                             : "text-ink-500 ring-1 ring-inset ring-line-strong hover:bg-paper-2",
                       )}

@@ -1,0 +1,417 @@
+# SAT Practice Test 4 — Math (transcribed; explanations written for 16hundred)
+
+## M1 Q1 | PSDA | easy
+A group of students voted on five after-school activities. The bar graph shows the number of students who voted for each of the five activities. How many students chose activity 3?
+A) $25$
+B) $39$
+C) $48$
+D) $50$
+> The bar for activity 3 ends just below the 40 line, at $39$.
+
+## M1 Q2 | PSDA | easy
+What percentage of $300$ is $75$?
+A) $25\%$
+B) $50\%$
+C) $75\%$
+D) $225\%$
+> $\dfrac{75}{300} = 0.25$, which is $25\%$.
+
+## M1 Q3 | ADV | easy
+$$ \frac{x^2}{25} = 36 $$
+
+What is a solution to the given equation?
+A) $6$
+B) $30$
+C) $450$
+D) $900$
+> Multiply both sides by $25$: $x^2 = 900$, so $x = 30$ (or $-30$). Only $30$ is listed.
+
+## M1 Q4 | ALG | easy
+$3$ more than $8$ times a number $x$ is equal to $83$. Which equation represents this situation?
+A) $(3)(8)x = 83$
+B) $8x = 83 + 3$
+C) $3x + 8 = 83$
+D) $8x + 3 = 83$
+> "$8$ times a number" is $8x$, and "$3$ more than" that is $8x + 3$. Setting it equal to $83$ gives $8x + 3 = 83$.
+
+## M1 Q5 | ALG | easy
+Hana deposited a fixed amount into her bank account each month. The function $f(t) = 100 + 25t$ gives the amount, in dollars, in Hana's bank account after $t$ monthly deposits. What is the best interpretation of $25$ in this context?
+A) With each monthly deposit, the amount in Hana's bank account increased by $\$25$.
+B) Before Hana made any monthly deposits, the amount in her bank account was $\$25$.
+C) After $1$ monthly deposit, the amount in Hana's bank account was $\$25$.
+D) Hana made a total of $25$ monthly deposits.
+> $25$ multiplies $t$, the number of deposits, so it is the amount added with each deposit: $\$25$. The $100$ is the starting amount.
+
+## M1 Q6 | ALG | easy
+A customer spent $\$27$ to purchase oranges at $\$3$ per pound. How many pounds of oranges did the customer purchase?
+> $27 \div 3 = 9$ pounds.
+
+## M1 Q7 | ALG | easy
+Nasir bought $9$ storage bins that were each the same price. He used a coupon for $\$63$ off the entire purchase. The cost for the entire purchase after using the coupon was $\$27$. What was the original price, in dollars, for $1$ storage bin?
+> Before the coupon the bins cost $27 + 63 = 90$ dollars, so one bin cost $90 \div 9 = 10$ dollars.
+
+## M1 Q8 | ALG | easy
+For the linear function $f$, the table shows three values of $x$ and their corresponding values of $f(x)$. Which equation defines $f(x)$?
+A) $f(x) = 3x + 29$
+B) $f(x) = 29x + 32$
+C) $f(x) = 35x + 29$
+D) $f(x) = 32x + 35$
+> $f(0) = 29$ is the $y$-intercept, and $f$ increases by $3$ each time $x$ increases by $1$, so the slope is $3$: $f(x) = 3x + 29$.
+
+## M1 Q9 | GEO | easy
+Right triangles $PQR$ and $STU$ are similar, where $P$ corresponds to $S$. If the measure of angle $Q$ is $18^\circ$, what is the measure of angle $S$?
+A) $18^\circ$
+B) $72^\circ$
+C) $82^\circ$
+D) $162^\circ$
+> The right angle is at $R$, so $P = 180^\circ - 90^\circ - 18^\circ = 72^\circ$. Corresponding angles of similar triangles are equal, so $S = 72^\circ$.
+
+## M1 Q10 | PSDA | easy
+The scatterplot shows the relationship between two variables, $x$ and $y$.
+
+Which of the following equations is the most appropriate linear model for the data shown?
+A) $y = 0.9 + 9.4x$
+B) $y = 0.9 - 9.4x$
+C) $y = 9.4 + 0.9x$
+D) $y = 9.4 - 0.9x$
+> The points fall from about $y = 9$ near $x = 0$ to about $y = 1$ near $x = 9$: a negative slope (roughly $-0.9$) and a $y$-intercept near $9.4$. Only $y = 9.4 - 0.9x$ fits.
+
+## M1 Q11 | ALG | easy
+$$ 2.5b + 5r = 80 $$
+
+The given equation describes the relationship between the number of birds, $b$, and the number of reptiles, $r$, that can be cared for at a pet care business on a given day. If the business cares for $16$ reptiles on a given day, how many birds can it care for on this day?
+A) $0$
+B) $5$
+C) $40$
+D) $80$
+> Substitute $r = 16$: $2.5b + 80 = 80$, so $2.5b = 0$ and $b = 0$.
+
+## M1 Q12 | ALG | easy
+What is an equation of the graph shown?
+A) $y = -2x - 8$
+B) $y = x - 8$
+C) $y = -x - 8$
+D) $y = 2x - 8$
+> The line crosses the $y$-axis at $(0, -8)$ and the $x$-axis at $(-8, 0)$, so its slope is $\dfrac{0 - (-8)}{-8 - 0} = -1$: $y = -x - 8$.
+
+## M1 Q13 | ALG | easy
+If $\dfrac{x}{8} = 5$, what is the value of $\dfrac{8}{x}$?
+> $\dfrac{8}{x}$ is the reciprocal of $\dfrac{x}{8}$, so it equals $\dfrac{1}{5}$ (or $0.2$).
+
+## M1 Q14 | ALG | medium
+$$ \begin{aligned} 24x + y &= 48 \\ 6x + y &= 72 \end{aligned} $$
+
+The solution to the given system of equations is $(x, y)$. What is the value of $y$?
+> Subtract the second equation from the first: $18x = -24$, so $x = -\tfrac{4}{3}$. Then $y = 72 - 6x = 72 + 8 = 80$.
+
+## M1 Q15 | ALG | medium
+Line $t$ in the $xy$-plane has a slope of $-\dfrac{1}{3}$ and passes through the point $(9, 10)$. Which equation defines line $t$?
+A) $y = 13x - \dfrac{1}{3}$
+B) $y = 9x + 10$
+C) $y = -\dfrac{x}{3} + 10$
+D) $y = -\dfrac{x}{3} + 13$
+> Point-slope form: $y - 10 = -\tfrac{1}{3}(x - 9)$, so $y = -\tfrac{x}{3} + 3 + 10 = -\tfrac{x}{3} + 13$.
+
+## M1 Q16 | ADV | medium
+The function $f(x) = 206(1.034)^x$ models the value, in dollars, of a certain bank account by the end of each year from $1957$ through $1972$, where $x$ is the number of years after $1957$. Which of the following is the best interpretation of "$f(5)$ is approximately equal to $243$" in this context?
+A) The value of the bank account is estimated to be approximately $5$ dollars greater in $1962$ than in $1957$.
+B) The value of the bank account is estimated to be approximately $243$ dollars in $1962$.
+C) The value, in dollars, of the bank account is estimated to be approximately $5$ times greater in $1962$ than in $1957$.
+D) The value of the bank account is estimated to increase by approximately $243$ dollars every $5$ years between $1957$ and $1972$.
+> $x = 5$ means $5$ years after $1957$, which is $1962$, and $f(5)$ is the account's value then: about $\$243$.
+
+## M1 Q17 | PSDA | medium
+For a certain rectangular region, the ratio of its length to its width is $35$ to $10$. If the width of the rectangular region increases by $7$ units, how must the length change to maintain this ratio?
+A) It must decrease by $24.5$ units.
+B) It must increase by $24.5$ units.
+C) It must decrease by $7$ units.
+D) It must increase by $7$ units.
+> The length is $\tfrac{35}{10} = 3.5$ times the width, so a $7$-unit increase in width needs a $3.5 \times 7 = 24.5$-unit increase in length.
+
+## M1 Q18 | ADV | medium
+Square P has a side length of $x$ inches. Square Q has a perimeter that is $176$ inches greater than the perimeter of square P. The function $f$ gives the area of square Q, in square inches. Which of the following defines $f$?
+A) $f(x) = (x + 44)^2$
+B) $f(x) = (x + 176)^2$
+C) $f(x) = (176x + 44)^2$
+D) $f(x) = (176x + 176)^2$
+> Square Q's perimeter is $4x + 176$, so its side is $\dfrac{4x + 176}{4} = x + 44$ and its area is $(x + 44)^2$.
+
+## M1 Q19 | ADV | medium
+$$ \frac{14x}{7y} = 2\sqrt{w + 19} $$
+
+The given equation relates the distinct positive real numbers $w$, $x$, and $y$. Which equation correctly expresses $w$ in terms of $x$ and $y$?
+A) $w = \sqrt{\dfrac{x}{y}} - 19$
+B) $w = \sqrt{\dfrac{28x}{14y}} - 19$
+C) $w = \left(\dfrac{x}{y}\right)^2 - 19$
+D) $w = \left(\dfrac{28x}{14y}\right)^2 - 19$
+> $\dfrac{14x}{7y} = \dfrac{2x}{y}$, so dividing by $2$ gives $\dfrac{x}{y} = \sqrt{w + 19}$. Square both sides: $w + 19 = \left(\dfrac{x}{y}\right)^2$, so $w = \left(\dfrac{x}{y}\right)^2 - 19$.
+
+## M1 Q20 | GEO | easy
+Point $O$ is the center of a circle. The measure of arc $RS$ on this circle is $100^\circ$. What is the measure, in degrees, of its associated angle $ROS$?
+> A central angle has the same measure as the arc it intercepts: $100^\circ$.
+
+## M1 Q21 | ADV | hard
+The expression $6\sqrt[5]{3^5x^{45}} \cdot \sqrt[8]{2^8x}$ is equivalent to $ax^b$, where $a$ and $b$ are positive constants and $x > 1$. What is the value of $a + b$?
+> $\sqrt[5]{3^5x^{45}} = 3x^9$ and $\sqrt[8]{2^8x} = 2x^{1/8}$. The product is $6 \cdot 3x^9 \cdot 2x^{1/8} = 36x^{73/8}$, so $a + b = 36 + \tfrac{73}{8} = \tfrac{361}{8}$ (about $45.13$).
+
+## M1 Q22 | GEO | medium
+A right triangle has sides of length $2\sqrt{2}$, $6\sqrt{2}$, and $\sqrt{80}$ units. What is the area of the triangle, in square units?
+A) $8\sqrt{2} + \sqrt{80}$
+B) $12$
+C) $24\sqrt{80}$
+D) $24$
+> $\sqrt{80}$ is the longest side, so it is the hypotenuse (check: $8 + 72 = 80$). The legs are $2\sqrt{2}$ and $6\sqrt{2}$, so the area is $\tfrac{1}{2}(2\sqrt{2})(6\sqrt{2}) = \tfrac{1}{2}(24) = 12$.
+
+## M1 Q23 | ADV | hard
+The expression $4x^2 + bx - 45$, where $b$ is a constant, can be rewritten as $(hx + k)(x + j)$, where $h$, $k$, and $j$ are integer constants. Which of the following must be an integer?
+A) $\dfrac{b}{h}$
+B) $\dfrac{b}{k}$
+C) $\dfrac{45}{h}$
+D) $\dfrac{45}{k}$
+> Expanding gives $hx^2 + (hj + k)x + kj$, so $kj = -45$. Then $\dfrac{45}{k} = -j$, which is an integer. The other quotients need not be integers (for example $h = 4$ does not divide $45$).
+
+## M1 Q24 | ADV | hard
+$$ \begin{aligned} y &= 2x^2 - 21x + 64 \\ y &= 3x + a \end{aligned} $$
+
+In the given system of equations, $a$ is a constant. The graphs of the equations in the given system intersect at exactly one point, $(x, y)$, in the $xy$-plane. What is the value of $x$?
+A) $-8$
+B) $-6$
+C) $6$
+D) $8$
+> Setting the equations equal: $2x^2 - 24x + (64 - a) = 0$. One intersection means this quadratic has a single (double) root, at $x = -\dfrac{-24}{2 \cdot 2} = 6$.
+
+## M1 Q25 | GEO | medium
+An isosceles right triangle has a hypotenuse of length $58$ inches. What is the perimeter, in inches, of this triangle?
+A) $29\sqrt{2}$
+B) $58\sqrt{2}$
+C) $58 + 58\sqrt{2}$
+D) $58 + 116\sqrt{2}$
+> Each leg is $\dfrac{58}{\sqrt{2}} = 29\sqrt{2}$, so the perimeter is $29\sqrt{2} + 29\sqrt{2} + 58 = 58 + 58\sqrt{2}$.
+
+## M1 Q26 | ADV | hard
+In the $xy$-plane, a parabola has vertex $(9, -14)$ and intersects the $x$-axis at two points. If the equation of the parabola is written in the form $y = ax^2 + bx + c$, where $a$, $b$, and $c$ are constants, which of the following could be the value of $a + b + c$?
+A) $-23$
+B) $-19$
+C) $-14$
+D) $-12$
+> The vertex is below the $x$-axis and the parabola crosses it twice, so it opens upward: $y = a(x - 9)^2 - 14$ with $a > 0$. Then $a + b + c$ is the value at $x = 1$: $64a - 14$, which is greater than $-14$. Only $-12$ works.
+
+## M1 Q27 | ADV | hard
+Function $f$ is defined by $f(x) = -a^x + b$, where $a$ and $b$ are constants. In the $xy$-plane, the graph of $y = f(x) - 15$ has a $y$-intercept at $\left(0, -\dfrac{99}{7}\right)$. The product of $a$ and $b$ is $\dfrac{65}{7}$. What is the value of $a$?
+> At $x = 0$: $-1 + b - 15 = -\tfrac{99}{7}$, so $b = 16 - \tfrac{99}{7} = \tfrac{13}{7}$. Then $a = \dfrac{65/7}{13/7} = 5$.
+
+## M2 Q1 | PSDA | easy
+The line graph shows the estimated number of chipmunks in a state park on April 1 of each year from $1989$ to $1999$.
+
+Based on the line graph, in which year was the estimated number of chipmunks in the state park the greatest?
+A) $1989$
+B) $1994$
+C) $1995$
+D) $1998$
+> The highest point on the graph, about $160$, is at $1994$.
+
+## M2 Q2 | PSDA | easy
+A fish swam a distance of $5{,}104$ yards. How far did the fish swim, in **miles**? ($1$ mile $= 1{,}760$ yards)
+A) $0.3$
+B) $2.9$
+C) $3{,}344$
+D) $6{,}864$
+> $5{,}104 \div 1{,}760 = 2.9$ miles.
+
+## M2 Q3 | ADV | easy
+Which expression is equivalent to $12x^3 - 5x^3$?
+A) $7x^6$
+B) $17x^3$
+C) $7x^3$
+D) $17x^6$
+> These are like terms, so subtract the coefficients and keep the power: $12x^3 - 5x^3 = 7x^3$.
+
+## M2 Q4 | ALG | easy
+$$ \begin{aligned} x + y &= 18 \\ 5y &= x \end{aligned} $$
+
+What is the solution $(x, y)$ to the given system of equations?
+A) $(15, 3)$
+B) $(16, 2)$
+C) $(17, 1)$
+D) $(18, 0)$
+> Substitute $x = 5y$ into the first equation: $6y = 18$, so $y = 3$ and $x = 15$.
+
+## M2 Q5 | ALG | easy
+The point $(8, 2)$ in the $xy$-plane is a solution to which of the following systems of inequalities?
+A) $$ \begin{aligned} x &> 0 \\ y &> 0 \end{aligned} $$
+B) $$ \begin{aligned} x &> 0 \\ y &< 0 \end{aligned} $$
+C) $$ \begin{aligned} x &< 0 \\ y &> 0 \end{aligned} $$
+D) $$ \begin{aligned} x &< 0 \\ y &< 0 \end{aligned} $$
+> Both coordinates of $(8, 2)$ are positive, so the point satisfies $x > 0$ and $y > 0$.
+
+## M2 Q6 | ALG | medium
+$$ |x - 5| = 10 $$
+
+What is one possible solution to the given equation?
+> Either $x - 5 = 10$, giving $x = 15$, or $x - 5 = -10$, giving $x = -5$. Both are correct.
+
+## M2 Q7 | ALG | easy
+$$ f(x) = 7x + 1 $$
+
+The function gives the total number of people on a company retreat with $x$ managers. What is the total number of people on a company retreat with $7$ managers?
+> $f(7) = 7(7) + 1 = 50$.
+
+## M2 Q8 | ADV | easy | nofig
+$$ h(x) = x^2 - 3 $$
+
+Which table gives three values of $x$ and their corresponding values of $h(x)$ for the given function $h$?
+A) | $x$ | $1$ | $2$ | $3$ |
+| $h(x)$ | $4$ | $5$ | $6$ |
+B) | $x$ | $1$ | $2$ | $3$ |
+| $h(x)$ | $-2$ | $1$ | $6$ |
+C) | $x$ | $1$ | $2$ | $3$ |
+| $h(x)$ | $-1$ | $1$ | $3$ |
+D) | $x$ | $1$ | $2$ | $3$ |
+| $h(x)$ | $-2$ | $1$ | $3$ |
+> $h(1) = 1 - 3 = -2$, $h(2) = 4 - 3 = 1$, and $h(3) = 9 - 3 = 6$.
+
+## M2 Q9 | ADV | easy
+The function $f$ is defined by $f(x) = 270(0.1)^x$. What is the value of $f(0)$?
+A) $0$
+B) $1$
+C) $27$
+D) $270$
+> Any nonzero number to the power $0$ is $1$, so $f(0) = 270 \cdot 1 = 270$.
+
+## M2 Q10 | PSDA | medium
+To estimate the proportion of a population that has a certain characteristic, a random sample was selected from the population. Based on the sample, it is estimated that the proportion of the population that has the characteristic is $0.49$, with an associated margin of error of $0.04$. Based on this estimate and margin of error, which of the following is the most appropriate conclusion about the proportion of the population that has the characteristic?
+A) It is plausible that the proportion is between $0.45$ and $0.53$.
+B) It is plausible that the proportion is less than $0.45$.
+C) The proportion is exactly $0.49$.
+D) It is plausible that the proportion is greater than $0.53$.
+> The plausible values are the estimate plus or minus the margin of error: $0.49 \pm 0.04$, from $0.45$ to $0.53$.
+
+## M2 Q11 | ALG | medium
+A moving truck can tow a trailer if the combined weight of the trailer and the boxes it contains is no more than $4{,}600$ pounds. What is the maximum number of boxes this truck can tow in a trailer with a weight of $500$ pounds if each box weighs $120$ pounds?
+A) $34$
+B) $35$
+C) $38$
+D) $39$
+> $500 + 120n \le 4{,}600$ gives $120n \le 4{,}100$, so $n \le 34.1\ldots$. The greatest whole number of boxes is $34$.
+
+## M2 Q12 | ADV | medium
+$$ -4x^2 - 7x = -36 $$
+
+What is the positive solution to the given equation?
+A) $\dfrac{7}{4}$
+B) $\dfrac{9}{4}$
+C) $4$
+D) $7$
+> Rearrange to $4x^2 + 7x - 36 = 0$ and factor: $(4x - 9)(x + 4) = 0$. The positive solution is $x = \tfrac{9}{4}$.
+
+## M2 Q13 | PSDA | easy
+The table summarizes the distribution of color and shape for $100$ tiles of equal area.
+
+If one of these tiles is selected at random, what is the probability of selecting a red tile? (Express your answer as a decimal or fraction, not as a percent.)
+> $30$ of the $100$ tiles are red, so the probability is $\tfrac{30}{100} = 0.3$.
+
+## M2 Q14 | ALG | easy
+$$ f(x) = 2x + 3 $$
+
+For the given function $f$, the graph of $y = f(x)$ in the $xy$-plane is parallel to line $j$. What is the slope of line $j$?
+> Parallel lines have equal slopes. The slope of $y = 2x + 3$ is $2$.
+
+## M2 Q15 | ALG | medium
+A proposal for a new library was included on an election ballot. A radio show stated that $3$ times as many people voted in favor of the proposal as people who voted against it. A social media post reported that $15{,}000$ more people voted in favor of the proposal than voted against it. Based on these data, how many people voted against the proposal?
+A) $7{,}500$
+B) $15{,}000$
+C) $22{,}500$
+D) $45{,}000$
+> If $a$ people voted against, then $3a$ voted in favor and $3a - a = 15{,}000$, so $a = 7{,}500$.
+
+## M2 Q16 | GEO | medium
+In the figure, lines $m$ and $n$ are parallel. If $x = 6k + 13$ and $y = 8k - 29$, what is the value of $z$?
+A) $3$
+B) $21$
+C) $41$
+D) $139$
+> Angles $x$ and $y$ are vertical angles, so $6k + 13 = 8k - 29$, giving $k = 21$ and $x = 139$. Angles $x$ and $z$ are same-side angles between the parallel lines, so $z = 180 - 139 = 41$.
+
+## M2 Q17 | ALG | medium
+$$ -3x + 21px = 84 $$
+
+In the given equation, $p$ is a constant. The equation has no solution. What is the value of $p$?
+A) $0$
+B) $\dfrac{1}{7}$
+C) $\dfrac{4}{3}$
+D) $4$
+> Factor: $x(21p - 3) = 84$. There is no solution only when the coefficient of $x$ is $0$: $21p = 3$, so $p = \tfrac{1}{7}$.
+
+## M2 Q18 | ADV | medium
+$$ f(x) = (x - 10)(x + 13) $$
+
+The function $f$ is defined by the given equation. For what value of $x$ does $f(x)$ reach its minimum?
+A) $-130$
+B) $-13$
+C) $-\dfrac{23}{2}$
+D) $-\dfrac{3}{2}$
+> The zeros are $10$ and $-13$. The parabola opens upward, so its minimum is halfway between the zeros: $x = \dfrac{10 + (-13)}{2} = -\dfrac{3}{2}$.
+
+## M2 Q19 | ADV | medium
+The function $f(x) = \dfrac{1}{9}(x - 7)^2 + 3$ gives a metal ball's height above the ground $f(x)$, in inches, $x$ seconds after it started moving on a track, where $0 \le x \le 10$. Which of the following is the best interpretation of the vertex of the graph of $y = f(x)$ in the $xy$-plane?
+A) The metal ball's minimum height was $3$ inches above the ground.
+B) The metal ball's minimum height was $7$ inches above the ground.
+C) The metal ball's height was $3$ inches above the ground when it started moving.
+D) The metal ball's height was $7$ inches above the ground when it started moving.
+> The vertex is $(7, 3)$, and since the parabola opens upward it is the lowest point: the ball's minimum height was $3$ inches, reached at $7$ seconds.
+
+## M2 Q20 | GEO | medium
+In triangle $JKL$, $\cos(K) = \dfrac{24}{51}$ and angle $J$ is a right angle. What is the value of $\cos(L)$?
+> $K$ and $L$ are complementary, so $\cos(L) = \sin(K)$. With adjacent side $24$ and hypotenuse $51$, the opposite side is $\sqrt{51^2 - 24^2} = 45$, so $\cos(L) = \tfrac{45}{51} = \tfrac{15}{17}$ (about $0.8824$).
+
+## M2 Q21 | ADV | hard
+$$ -x^2 + bx - 676 = 0 $$
+
+In the given equation, $b$ is a positive integer. The equation has no real solution. What is the greatest possible value of $b$?
+> No real solution means the discriminant is negative: $b^2 - 4(-1)(-676) < 0$, so $b^2 < 2{,}704$ and $b < 52$. The greatest integer is $51$.
+
+## M2 Q22 | ALG | hard
+If a new graph of three linear equations is created using the system of equations shown and the equation $x + 4y = -16$, how many solutions $(x, y)$ will the resulting system of three equations have?
+A) Zero
+B) Exactly one
+C) Exactly two
+D) Infinitely many
+> The slanted line passes through $(-4, 5)$ and $(8, 2)$, so it is $x + 4y = 16$. The line $x + 4y = -16$ is parallel to it and never meets it, so no point lies on all three lines: zero solutions.
+
+## M2 Q23 | ADV | hard
+$$ f(x) = 5{,}470(0.64)^{\frac{x}{12}} $$
+
+The function $f$ gives the value, in dollars, of a certain piece of equipment after $x$ months of use. If the value of the equipment decreases each **year** by $p\%$ of its value the preceding year, what is the value of $p$?
+A) $4$
+B) $5$
+C) $36$
+D) $64$
+> Every $12$ months the exponent increases by $1$, so each year the value is multiplied by $0.64$: a decrease of $1 - 0.64 = 0.36$, or $36\%$.
+
+## M2 Q24 | PSDA | medium
+The dot plot represents the $15$ values in data set A. Data set B is created by adding $56$ to each of the values in data set A. Which of the following correctly compares the medians and the ranges of data sets A and B?
+A) The median of data set B is equal to the median of data set A, and the range of data set B is equal to the range of data set A.
+B) The median of data set B is equal to the median of data set A, and the range of data set B is greater than the range of data set A.
+C) The median of data set B is greater than the median of data set A, and the range of data set B is equal to the range of data set A.
+D) The median of data set B is greater than the median of data set A, and the range of data set B is greater than the range of data set A.
+> Adding $56$ to every value shifts the median up by $56$, but the distance between the largest and smallest values does not change, so the range stays the same.
+
+## M2 Q25 | GEO | medium
+The equation $x^2 + (y - 1)^2 = 49$ represents circle A. Circle B is obtained by shifting circle A down $2$ units in the $xy$-plane. Which of the following equations represents circle B?
+A) $(x - 2)^2 + (y - 1)^2 = 49$
+B) $x^2 + (y - 3)^2 = 49$
+C) $(x + 2)^2 + (y - 1)^2 = 49$
+D) $x^2 + (y + 1)^2 = 49$
+> Circle A's center is $(0, 1)$. Moving down $2$ units puts the center at $(0, -1)$, with the same radius: $x^2 + (y + 1)^2 = 49$.
+
+## M2 Q26 | GEO | hard
+Two identical rectangular prisms each have a height of $90$ centimeters (cm). The base of each prism is a square, and the surface area of each prism is $K$ cm$^2$. If the prisms are glued together along a square base, the resulting prism has a surface area of $\dfrac{92}{47}K$ cm$^2$. What is the side length, in cm, of each square base?
+A) $4$
+B) $8$
+C) $9$
+D) $16$
+> With base side $s$: $K = 2s^2 + 360s$, and the glued prism (height $180$) has area $2s^2 + 720s$. So $47(2s^2 + 720s) = 92(2s^2 + 360s)$, which simplifies to $90s^2 = 720s$, giving $s = 8$.
+
+## M2 Q27 | PSDA | medium
+$210$ is $p\%$ greater than $30$. What is the value of $p$?
+> $210 = 30\left(1 + \dfrac{p}{100}\right)$, so $1 + \dfrac{p}{100} = 7$ and $p = 600$.

@@ -1,0 +1,470 @@
+# SAT Practice Test 9 — Math (transcribed; explanations written for 16hundred)
+
+## M1 Q1 | GEO | easy
+The lengths of two sides of a triangle are $4$ centimeters and $6$ centimeters. If the perimeter of the triangle is $18$ centimeters, what is the length, in centimeters, of the third side of this triangle?
+A) $2$
+B) $8$
+C) $10$
+D) $24$
+> $18 - 4 - 6 = 8$ centimeters.
+
+## M1 Q2 | ALG | easy
+$$ 16x + 30 = 190 $$
+
+Which equation has the same solution as the given equation?
+A) $16x = 30$
+B) $16x = 130$
+C) $16x = 160$
+D) $16x = 190$
+> Subtracting $30$ from both sides gives the equivalent equation $16x = 160$.
+
+## M1 Q3 | ALG | easy
+Ty set a goal to walk at least $24$ kilometers every day to prepare for a multiday hike. On a certain day, Ty plans to walk at an average speed of $4$ kilometers per hour. What is the minimum number of hours Ty must walk on that day to fulfill the daily goal?
+A) $4$
+B) $6$
+C) $20$
+D) $24$
+> $24 \div 4 = 6$ hours.
+
+## M1 Q4 | ADV | easy
+The function $g$ is defined by $g(x) = x^2 + 9$. For which value of $x$ is $g(x) = 25$?
+A) $4$
+B) $5$
+C) $9$
+D) $13$
+> $x^2 + 9 = 25$ gives $x^2 = 16$, so $x = 4$ (or $-4$).
+
+## M1 Q5 | ADV | easy
+Which expression is equivalent to $9x^2 + 5x$?
+A) $x(9x + 5)$
+B) $5x(9x + 1)$
+C) $9x(x + 5)$
+D) $x^2(9x + 5)$
+> Factor out $x$: $x(9x + 5)$.
+
+## M1 Q6 | PSDA | easy
+Each value in the data set shown represents the height, in centimeters, of a plant.
+
+$$ 6, 10, 13, 2, 15, 22, 10, 4, 4, 4 $$
+
+What is the mean height, in centimeters, of these plants?
+> The sum is $90$ and there are $10$ values, so the mean is $9$.
+
+## M1 Q7 | ALG | easy | nofig
+A student council group is selling school posters for a fundraiser. They use the function $p(x) = 5x - 220$ to determine their profit $p(x)$, in dollars, for selling $x$ school posters. In order to earn a profit of $\$900$, how many school posters must they sell?
+> $5x - 220 = 900$, so $5x = 1{,}120$ and $x = 224$.
+
+## M1 Q8 | ALG | easy | nofig
+Jay walks at a speed of $3$ miles per hour and runs at a speed of $5$ miles per hour. He walks for $w$ hours and runs for $r$ hours for a combined total of $14$ miles. Which equation represents this situation?
+A) $3w + 5r = 14$
+B) $\dfrac{1}{3}w + \dfrac{1}{5}r = 14$
+C) $\dfrac{1}{3}w + \dfrac{1}{5}r = 112$
+D) $3w + 5r = 112$
+> Distance is speed times time: $3w$ miles walking and $5r$ miles running, for a total of $14$: $3w + 5r = 14$.
+
+## M1 Q9 | ALG | easy | nofig
+John paid a total of $\$165$ for a microscope by making a down payment of $\$37$ plus $p$ monthly payments of $\$16$ each. Which of the following equations represents this situation?
+A) $16p - 37 = 165$
+B) $37p - 16 = 165$
+C) $16p + 37 = 165$
+D) $37p + 16 = 165$
+> The monthly payments total $16p$, plus the $\$37$ down payment: $16p + 37 = 165$.
+
+## M1 Q10 | ALG | easy
+$$ y - 57 = px $$
+
+The given equation relates the positive numbers $p$, $x$, and $y$. Which equation correctly expresses $y$ in terms of $p$ and $x$?
+A) $y = 57x + p$
+B) $y = px + 57$
+C) $y = 57px$
+D) $y = \dfrac{px}{57}$
+> Add $57$ to both sides: $y = px + 57$.
+
+## M1 Q11 | ADV | medium | nofig
+A company opens an account with an initial balance of $\$36{,}100.00$. The account earns interest, and no additional deposits or withdrawals are made. The account balance is given by an exponential function $A$, where $A(t)$ is the account balance, in dollars, $t$ years after the account is opened. The account balance after $13$ years is $\$68{,}071.93$. Which equation could define $A$?
+A) $A(t) = 36{,}100.00(1.05)^t$
+B) $A(t) = 31{,}971.93(1.05)^t$
+C) $A(t) = 31{,}971.93(0.05)^t$
+D) $A(t) = 36{,}100.00(0.05)^t$
+> The initial value $A(0)$ must be $36{,}100.00$, and the balance grows, so the base is greater than $1$: $A(t) = 36{,}100.00(1.05)^t$. (Check: $36{,}100(1.05)^{13} \approx 68{,}072$.)
+
+## M1 Q12 | GEO | medium
+The circle shown has center $O$, circumference $144\pi$, and diameters $\overline{PR}$ and $\overline{QS}$. The length of arc $PS$ is twice the length of arc $PQ$. What is the length of arc $QR$?
+A) $24\pi$
+B) $48\pi$
+C) $72\pi$
+D) $96\pi$
+> Arcs $PQ$ and $PS$ together make a semicircle ($72\pi$), and $PS = 2 \cdot PQ$, so $PQ = 24\pi$ and $PS = 48\pi$. Arc $QR$ is opposite arc $PS$ (vertical central angles), so it is also $48\pi$.
+
+## M1 Q13 | ALG | easy
+$$ \begin{aligned} y &= -2x \\ 3x + y &= 40 \end{aligned} $$
+
+The solution to the given system of equations is $(x, y)$. What is the value of $x$?
+> Substitute: $3x - 2x = 40$, so $x = 40$.
+
+## M1 Q14 | PSDA | easy
+The frequency table summarizes the $57$ data values in a data set. What is the maximum data value in the data set?
+> The largest data value with a nonzero frequency is $14$ (frequency $6$).
+
+## M1 Q15 | GEO | medium
+One leg of a right triangle has a length of $43.2$ millimeters. The hypotenuse of the triangle has a length of $196.8$ millimeters. What is the length of the other leg of the triangle, in millimeters?
+A) $43.2$
+B) $120$
+C) $192$
+D) $201.5$
+> $\sqrt{196.8^2 - 43.2^2} = \sqrt{36{,}864} = 192$.
+
+## M1 Q16 | ALG | medium
+A wire with a length of $106$ inches is cut into two parts. One part has a length of $x$ inches, and the other part has a length of $y$ inches. The value of $x$ is $6$ more than $4$ times the value of $y$. What is the value of $x$?
+A) $25$
+B) $28$
+C) $56$
+D) $86$
+> $x + y = 106$ and $x = 4y + 6$, so $5y + 6 = 106$, $y = 20$, and $x = 86$.
+
+## M1 Q17 | ADV | medium | nofig
+$$ f(x) = (x + 6)(x + 5)(x - 4) $$
+
+The function $f$ is given. Which table of values represents $y = f(x) - 3$?
+A) | $x$ | $y$ |
+| --- | --- |
+| $-6$ | $-9$ |
+| $-5$ | $-8$ |
+| $4$ | $1$ |
+B) | $x$ | $y$ |
+| --- | --- |
+| $-6$ | $-3$ |
+| $-5$ | $-3$ |
+| $4$ | $-3$ |
+C) | $x$ | $y$ |
+| --- | --- |
+| $-6$ | $-3$ |
+| $-5$ | $-2$ |
+| $4$ | $7$ |
+D) | $x$ | $y$ |
+| --- | --- |
+| $-6$ | $3$ |
+| $-5$ | $3$ |
+| $4$ | $3$ |
+> $f(-6) = f(-5) = f(4) = 0$, so $f(x) - 3 = -3$ at each of these $x$-values.
+
+## M1 Q18 | PSDA | medium
+A landscaper uses a hose that puts $88x$ ounces of water in a bucket in $5y$ minutes. Which expression represents the number of ounces of water the hose puts in the bucket in $9y$ minutes at this rate?
+A) $\dfrac{9x}{440}$
+B) $\dfrac{440x}{9}$
+C) $\dfrac{5x}{792}$
+D) $\dfrac{792x}{5}$
+> The rate is $\dfrac{88x}{5y}$ ounces per minute, so in $9y$ minutes: $\dfrac{88x}{5y} \cdot 9y = \dfrac{792x}{5}$.
+
+## M1 Q19 | ALG | hard
+$$ \begin{aligned} 4x - 9y &= 9y + 5 \\ hy &= 2 + 4x \end{aligned} $$
+
+In the given system of equations, $h$ is a constant. If the system has no solution, what is the value of $h$?
+A) $-9$
+B) $0$
+C) $9$
+D) $18$
+> Rewrite: $4x - 18y = 5$ and $4x - hy = -2$. These are parallel with different constants when $h = 18$, so there is no solution.
+
+## M1 Q20 | PSDA | easy
+$13$ is $p\%$ of $25$. What is the value of $p$?
+> $\dfrac{13}{25} = 0.52$, so $p = 52$.
+
+## M1 Q21 | ADV | hard
+$$ \sqrt{(x - 2)^2} = \sqrt{3x + 34} $$
+
+What is the smallest solution to the given equation?
+> Square both sides: $(x - 2)^2 = 3x + 34$, so $x^2 - 7x - 30 = 0$ and $(x - 10)(x + 3) = 0$. Both $10$ and $-3$ check in the original equation; the smaller is $-3$.
+
+## M1 Q22 | ADV | hard | nofig
+Function $f$ is defined by $f(x) = (x + 6)(x + 5)(x + 1)$. Function $g$ is defined by $g(x) = f(x - 1)$. The graph of $y = g(x)$ in the $xy$-plane has $x$-intercepts at $(a, 0)$, $(b, 0)$, and $(c, 0)$, where $a$, $b$, and $c$ are distinct constants. What is the value of $a + b + c$?
+A) $-15$
+B) $-9$
+C) $11$
+D) $15$
+> $g(x) = 0$ when $x - 1$ is a zero of $f$: $-6$, $-5$, or $-1$. So $x = -5$, $-4$, or $0$, and the sum is $-9$.
+
+## M1 Q23 | ALG | medium
+For $x > 0$, the function $f$ is defined as follows:
+
+$f(x)$ equals $201\%$ of $x$
+
+Which of the following could describe this function?
+A) Decreasing exponential
+B) Decreasing linear
+C) Increasing exponential
+D) Increasing linear
+> $f(x) = 2.01x$, a line with positive slope: increasing linear.
+
+## M1 Q24 | ADV | hard | nofig
+$$ f(x) = 4x^2 + 64x + 262 $$
+
+The function $g$ is defined by $g(x) = f(x + 5)$. For what value of $x$ does $g(x)$ reach its minimum?
+A) $-13$
+B) $-8$
+C) $-5$
+D) $-3$
+> $f$ has its minimum at $x = -\dfrac{64}{2(4)} = -8$. $g(x) = f(x + 5)$ reaches it when $x + 5 = -8$, so $x = -13$.
+
+## M1 Q25 | ALG | medium
+One gallon of stain will cover $170$ square feet of a surface. A yard has a total fence area of $w$ square feet. Which equation represents the total amount of stain $S$, in gallons, needed to stain the fence in this yard twice?
+A) $S = \dfrac{w}{170}$
+B) $S = 170w$
+C) $S = 340w$
+D) $S = \dfrac{w}{85}$
+> Two coats cover $2w$ square feet, which needs $\dfrac{2w}{170} = \dfrac{w}{85}$ gallons.
+
+## M1 Q26 | PSDA | medium
+| Poll Results | |
+| --- | --- |
+| Angel Cruz | $483$ |
+| Terry Smith | $320$ |
+
+The table shows the results of a poll. A total of $803$ voters selected at random were asked which candidate they would vote for in the upcoming election. According to the poll, if $6{,}424$ people vote in the election, by how many votes would Angel Cruz be expected to win?
+A) $163$
+B) $1{,}304$
+C) $3{,}864$
+D) $5{,}621$
+> In the poll Cruz led by $483 - 320 = 163$ of $803$ voters. Scaling to $6{,}424$ voters (a factor of $8$): $163 \times 8 = 1{,}304$.
+
+## M1 Q27 | GEO | hard
+Right rectangular prism X is similar to right rectangular prism Y. The surface area of right rectangular prism X is $58$ square centimeters (cm$^2$), and the surface area of right rectangular prism Y is $1{,}450$ cm$^2$. The volume of right rectangular prism Y is $1{,}250$ cubic centimeters (cm$^3$). What is the sum of the volumes, in cm$^3$, of right rectangular prism X and right rectangular prism Y?
+> The area ratio is $\tfrac{1{,}450}{58} = 25$, so the length ratio is $5$ and the volume ratio is $125$. Prism X has volume $\tfrac{1{,}250}{125} = 10$, and the sum is $1{,}260$.
+
+## M2 Q1 | ALG | easy
+$$ w + 7 = 357 $$
+
+What value of $w$ is the solution to the given equation?
+A) $51$
+B) $350$
+C) $364$
+D) $3{,}577$
+> $w = 357 - 7 = 350$.
+
+## M2 Q2 | ADV | easy
+Which expression is equivalent to $16(x + 15)$?
+A) $16x + 31$
+B) $16x + 240$
+C) $16x + 1$
+D) $16x + 15$
+> Distribute: $16x + 16(15) = 16x + 240$.
+
+## M2 Q3 | PSDA | easy
+| | Live east of the river | Live west of the river | Total |
+| --- | --- | --- | --- |
+| Less than $40$ years old | $17$ | $11$ | $28$ |
+| At least $40$ years old | $18$ | $89$ | $107$ |
+| Total | $35$ | $100$ | $135$ |
+
+The table summarizes members of a local organization by age and whether they live east or west of the river. If a member of the organization is selected at random, what is the probability that the selected member is at least $40$ years old?
+A) $\dfrac{28}{135}$
+B) $\dfrac{35}{135}$
+C) $\dfrac{100}{135}$
+D) $\dfrac{107}{135}$
+> $107$ of the $135$ members are at least $40$ years old, so the probability is $\tfrac{107}{135}$.
+
+## M2 Q4 | ALG | easy
+$$ \begin{aligned} 3x &= 12 \\ -3x + y &= -6 \end{aligned} $$
+
+The solution to the given system of equations is $(x, y)$. What is the value of $y$?
+A) $-3$
+B) $6$
+C) $18$
+D) $30$
+> $3x = 12$, so $-12 + y = -6$ and $y = 6$.
+
+## M2 Q5 | ALG | easy | nofig
+A line in the $xy$-plane has a slope of $\dfrac{1}{9}$ and passes through the point $(0, 14)$. Which equation represents this line?
+A) $y = -\dfrac{1}{9}x - 14$
+B) $y = -\dfrac{1}{9}x + 14$
+C) $y = \dfrac{1}{9}x - 14$
+D) $y = \dfrac{1}{9}x + 14$
+> Slope $\tfrac{1}{9}$ and $y$-intercept $14$: $y = \tfrac{1}{9}x + 14$.
+
+## M2 Q6 | GEO | easy
+In the figure shown, line $c$ intersects parallel lines $s$ and $t$. What is the value of $x$?
+> The $110^\circ$ angle at line $t$ and the angle corresponding to it at line $s$ are equal, and angle $x$ forms a straight line with that angle, so $x = 180 - 110 = 70$.
+
+## M2 Q7 | ALG | easy
+$$ f(x) = x + \frac{8}{11} $$
+
+The function $f$ is defined by the given equation. What is the value of $f(x)$ when $x = \dfrac{3}{11}$?
+> $\dfrac{3}{11} + \dfrac{8}{11} = \dfrac{11}{11} = 1$.
+
+## M2 Q8 | ALG | easy | nofig
+| $x$ | $y$ |
+| --- | --- |
+| $0$ | $18$ |
+| $1$ | $13$ |
+| $2$ | $8$ |
+
+The table shows three values of $x$ and their corresponding values of $y$. There is a linear relationship between $x$ and $y$. Which of the following equations represents this relationship?
+A) $y = 18x + 13$
+B) $y = 18x + 18$
+C) $y = -5x + 13$
+D) $y = -5x + 18$
+> When $x = 0$, $y = 18$, and $y$ decreases by $5$ for each increase of $1$ in $x$: $y = -5x + 18$.
+
+## M2 Q9 | ADV | easy | nofig
+$$ \begin{aligned} x + 7 &= 10 \\ (x + 7)^2 &= y \end{aligned} $$
+
+Which ordered pair $(x, y)$ is a solution to the given system of equations?
+A) $(3, 100)$
+B) $(3, 3)$
+C) $(3, 10)$
+D) $(3, 70)$
+> $x + 7 = 10$, so $x = 3$ and $y = 10^2 = 100$.
+
+## M2 Q10 | ALG | easy
+The function $f$ is defined by $f(x) = 7x - 84$. What is the $x$-intercept of the graph of $y = f(x)$ in the $xy$-plane?
+A) $(-12, 0)$
+B) $(-7, 0)$
+C) $(7, 0)$
+D) $(12, 0)$
+> $7x - 84 = 0$ gives $x = 12$, so the $x$-intercept is $(12, 0)$.
+
+## M2 Q11 | ADV | medium
+Rosa opened a savings account at a bank. The table shows the exponential relationship between the time $t$, in years, since Rosa opened the account and the total amount $n$, in dollars, in the account. If Rosa made no additional deposits or withdrawals, which of the following equations best represents the relationship between $t$ and $n$?
+A) $n = (1 + 604)^t$
+B) $n = (1 + 0.004)^t$
+C) $n = 604(1 + 0.004)^t$
+D) $n = 0.004(1 + 604)^t$
+> The starting amount is $604$ and it grows by $\tfrac{606.42 - 604}{604} \approx 0.004$ each year: $n = 604(1 + 0.004)^t$.
+
+## M2 Q12 | ALG | easy
+$$ w(t) = 300 - 4t $$
+
+The function $w$ models the volume of liquid, in milliliters, in a container $t$ seconds after it begins draining from a hole at the bottom. According to the model, what is the predicted volume, in milliliters, draining from the container each second?
+A) $300$
+B) $296$
+C) $75$
+D) $4$
+> The volume drops by $4$ milliliters for each second ($-4t$).
+
+## M2 Q13 | ALG | easy
+$$ h(x) = x + b $$
+
+For the linear function $h$, $b$ is a constant and $h(0) = 45$. What is the value of $b$?
+> $h(0) = 0 + b = 45$, so $b = 45$.
+
+## M2 Q14 | ADV | medium
+$$ z^2 + 10z - 24 = 0 $$
+
+What is one of the solutions to the given equation?
+> Factor: $(z + 12)(z - 2) = 0$, so $z = 2$ or $z = -12$. Either is correct.
+
+## M2 Q15 | GEO | medium
+Triangle $FGH$ is similar to triangle $JKL$, where angle $F$ corresponds to angle $J$ and angles $G$ and $K$ are right angles. If $\sin(F) = \dfrac{308}{317}$, what is the value of $\sin(J)$?
+A) $\dfrac{75}{317}$
+B) $\dfrac{308}{317}$
+C) $\dfrac{317}{308}$
+D) $\dfrac{317}{75}$
+> Corresponding angles of similar triangles are equal, so $\sin(J) = \sin(F) = \tfrac{308}{317}$.
+
+## M2 Q16 | PSDA | easy
+The population of Greenville increased by $7\%$ from $2015$ to $2016$. If the $2016$ population is $k$ times the $2015$ population, what is the value of $k$?
+A) $0.07$
+B) $0.7$
+C) $1.07$
+D) $1.7$
+> A $7\%$ increase multiplies by $1 + 0.07 = 1.07$.
+
+## M2 Q17 | PSDA | medium
+Each of the dot plots shown represents the number of glue sticks brought in by each student for two classes, class A and class B. Which statement best compares the standard deviations of the numbers of glue sticks brought in by each student for these two classes?
+A) The standard deviation of the number of glue sticks brought in by each student for class A is less than the standard deviation of the number of glue sticks brought in by each student for class B.
+B) The standard deviation of the number of glue sticks brought in by each student for class A is equal to the standard deviation of the number of glue sticks brought in by each student for class B.
+C) The standard deviation of the number of glue sticks brought in by each student for class A is greater than the standard deviation of the number of glue sticks brought in by each student for class B.
+D) There is not enough information to compare these standard deviations.
+> The two dot plots have exactly the same shape; class B's values are class A's shifted up by $13$. Shifting every value does not change the spread, so the standard deviations are equal.
+
+## M2 Q18 | ADV | medium | nofig
+$$ m(t) = -0.0274\left(\frac{t}{7}\right)^2 + 7.3873\left(\frac{t}{7}\right) + 75.032 $$
+
+The function $m$ gives the predicted body mass $m(t)$, in kilograms (kg), of a certain animal $t$ days after it was born in a wildlife reserve, where $t \le 390$. Which of the following is the best interpretation of the statement "$m(330)$ is approximately equal to $362$" in this context?
+A) The predicted body mass of the animal was approximately $330$ kg $362$ days after it was born.
+B) The predicted body mass of the animal was approximately $362$ kg $330$ days after it was born.
+C) The predicted body mass of the animal was approximately $362$ kg $\dfrac{330}{7}$ days after it was born.
+D) The predicted body mass of the animal was approximately $\dfrac{330}{7}$ kg $362$ days after it was born.
+> The input $t = 330$ is days after birth and the output $362$ is the predicted mass in kilograms.
+
+## M2 Q19 | GEO | medium | nofig
+Triangle $XYZ$ is similar to triangle $RST$ such that $X$, $Y$, and $Z$ correspond to $R$, $S$, and $T$, respectively. The measure of $\angle Z$ is $20^\circ$ and $2XY = RS$. What is the measure of $\angle T$?
+A) $2^\circ$
+B) $10^\circ$
+C) $20^\circ$
+D) $40^\circ$
+> Similar triangles have equal corresponding angles, whatever the scale factor, so $\angle T = \angle Z = 20^\circ$.
+
+## M2 Q20 | ADV | medium
+The function $f(t) = 60{,}000(2)^{\frac{t}{410}}$ gives the number of bacteria in a population $t$ minutes after an initial observation. How much time, in minutes, does it take for the number of bacteria in the population to double?
+> The base $2$ is raised to $\tfrac{t}{410}$, so the population doubles every $410$ minutes.
+
+## M2 Q21 | ADV | hard | nofig
+The function $f$ is defined by $f(x) = a^x + b$, where $a$ and $b$ are constants and $a > 0$. In the $xy$-plane, the graph of $y = f(x)$ has a $y$-intercept at $(0, -25)$ and passes through the point $(2, 23)$. What is the value of $a + b$?
+> $f(0) = 1 + b = -25$, so $b = -26$. Then $a^2 - 26 = 23$, so $a = 7$ and $a + b = -19$.
+
+## M2 Q22 | ALG | medium | nofig
+$$ y > 13x - 18 $$
+
+For which of the following tables are all the values of $x$ and their corresponding values of $y$ solutions to the given inequality?
+A) | $x$ | $y$ |
+| --- | --- |
+| $3$ | $21$ |
+| $5$ | $47$ |
+| $8$ | $86$ |
+B) | $x$ | $y$ |
+| --- | --- |
+| $3$ | $26$ |
+| $5$ | $42$ |
+| $8$ | $86$ |
+C) | $x$ | $y$ |
+| --- | --- |
+| $3$ | $16$ |
+| $5$ | $42$ |
+| $8$ | $81$ |
+D) | $x$ | $y$ |
+| --- | --- |
+| $3$ | $26$ |
+| $5$ | $52$ |
+| $8$ | $91$ |
+> $13x - 18$ equals $21$, $47$, and $86$ at $x = 3$, $5$, $8$. Only table D has every $y$ strictly greater: $26$, $52$, $91$.
+
+## M2 Q23 | PSDA | medium
+A certain town has an area of $4.36$ square miles. What is the area, in **square yards**, of this town? ($1$ mile $= 1{,}760$ yards)
+A) $404$
+B) $7{,}674$
+C) $710{,}459$
+D) $13{,}505{,}536$
+> One square mile is $1{,}760^2 = 3{,}097{,}600$ square yards, so $4.36 \times 3{,}097{,}600 = 13{,}505{,}536$.
+
+## M2 Q24 | GEO | medium
+A square is inscribed in a circle. The radius of the circle is $\dfrac{20\sqrt{2}}{2}$ inches. What is the side length, in inches, of the square?
+A) $20$
+B) $\dfrac{20\sqrt{2}}{2}$
+C) $20\sqrt{2}$
+D) $40$
+> The diagonal of the square is a diameter: $20\sqrt{2}$. A square's diagonal is its side times $\sqrt{2}$, so the side is $20$.
+
+## M2 Q25 | ADV | hard | nofig
+Which expression is equivalent to $\dfrac{y + 12}{x - 8} + \dfrac{y(x - 8)}{x^2y - 8xy}$?
+A) $\dfrac{xy + y + 4}{x^3y - 16x^2y + 64xy}$
+B) $\dfrac{xy + 9y + 12}{x^2y - 8xy + x - 8}$
+C) $\dfrac{xy^2 + 13xy - 8y}{x^2y - 8xy}$
+D) $\dfrac{xy^2 + 13xy - 8y}{x^3y - 16x^2y + 64xy}$
+> Over the common denominator $xy(x - 8) = x^2y - 8xy$: the first fraction becomes $\dfrac{xy(y + 12)}{x^2y - 8xy}$, so the sum is $\dfrac{xy^2 + 12xy + xy - 8y}{x^2y - 8xy} = \dfrac{xy^2 + 13xy - 8y}{x^2y - 8xy}$.
+
+## M2 Q26 | ADV | hard
+The function $f$ is defined by $f(x) = a(2.2^x + 2.2^b)$, where $a$ and $b$ are integer constants and $0 < a < b$. The functions $g$ and $h$ are equivalent to function $f$, where $k$ and $m$ are constants. Which of the following equations displays the $y$-coordinate of the $y$-intercept of the graph of $y = f(x)$ in the $xy$-plane as a constant or coefficient?
+
+$$ \begin{aligned} &\text{I. } g(x) = a(2.2^x + k) \\ &\text{II. } h(x) = a(2.2)^x + m \end{aligned} $$
+A) I only
+B) II only
+C) I and II
+D) Neither I nor II
+> The $y$-intercept is $f(0) = a(1 + 2.2^b)$. In I, $k = 2.2^b$, so the intercept is $a(1 + k)$; in II, $m = a(2.2^b)$, so the intercept is $a + m$. Neither shows it directly as a single constant or coefficient.
+
+## M2 Q27 | ADV | hard
+$$ x(kx - 56) = -16 $$
+
+In the given equation, $k$ is an integer constant. If the equation has no real solution, what is the least possible value of $k$?
+> Rewrite as $kx^2 - 56x + 16 = 0$. No real solution requires $56^2 - 4(k)(16) < 0$: $3{,}136 < 64k$, so $k > 49$. The least integer is $50$.

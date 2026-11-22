@@ -1,0 +1,419 @@
+# SAT Practice Test 5 — Math (transcribed; explanations written for 16hundred)
+
+## M1 Q1 | ALG | easy
+The graph of a system of a linear equation and a nonlinear equation is shown. What is the solution $(x, y)$ to this system?
+A) $(0, 0)$
+B) $(0, 4)$
+C) $(4, 5)$
+D) $(5, 0)$
+> The solution is the point where the two graphs intersect: $(4, 5)$.
+
+## M1 Q2 | ALG | easy
+On the first day of a semester, a film club has $90$ members. Each day after the first day of the semester, $10$ new members join the film club. If no members leave the film club, how many total members will the film club have $4$ days after the first day of the semester?
+A) $400$
+B) $130$
+C) $94$
+D) $90$
+> $90 + 4(10) = 130$ members.
+
+## M1 Q3 | ALG | easy
+The graph of the linear function $f$ is shown, where $y = f(x)$. What is the $y$-intercept of the graph of $f$?
+A) $(0, 0)$
+B) $\left(0, -\dfrac{16}{11}\right)$
+C) $(0, -8)$
+D) $(0, 8)$
+> The line crosses the $y$-axis at $y = 8$, so the $y$-intercept is $(0, 8)$.
+
+## M1 Q4 | ALG | easy | nofig
+$$ \begin{aligned} s + 7r &= 27 \\ r &= 3 \end{aligned} $$
+
+What is the solution $(r, s)$ to the given system of equations?
+A) $(6, 3)$
+B) $(3, 6)$
+C) $(3, 27)$
+D) $(27, 3)$
+> Substitute $r = 3$: $s + 21 = 27$, so $s = 6$. As an ordered pair $(r, s)$ this is $(3, 6)$.
+
+## M1 Q5 | ALG | easy
+The table shows selected values from function $f$.
+
+Which of the following is the best description of function $f$?
+A) Decreasing linear
+B) Increasing linear
+C) Decreasing exponential
+D) Increasing exponential
+> Each time $x$ increases by $1$, $f(x)$ increases by the same amount, $1$. A constant rate of increase means $f$ is increasing linear.
+
+## M1 Q6 | ALG | easy
+The graph of a system of linear equations is shown. The solution to the system is $(x, y)$. What is the value of $x$?
+> The lines intersect at $(4, 1)$, so $x = 4$.
+
+## M1 Q7 | PSDA | easy
+$$ 23, 27, 27, 32, 35, 36, 52 $$
+
+What is the range of the $7$ scores shown?
+> Range $=$ greatest $-$ least $= 52 - 23 = 29$.
+
+## M1 Q8 | GEO | easy
+In the figure, line $m$ is parallel to line $n$, and line $k$ intersects both lines. Which of the following statements is true?
+A) The value of $x$ is less than $145$.
+B) The value of $x$ is greater than $145$.
+C) The value of $x$ is equal to $145$.
+D) The value of $x$ cannot be determined.
+> The angles marked $x^\circ$ and $145^\circ$ are vertical angles where line $k$ crosses line $n$, so they are equal: $x = 145$.
+
+## M1 Q9 | ALG | easy
+The equation $x + y = 1{,}440$ represents the number of minutes of daylight (between sunrise and sunset), $x$, and the number of minutes of non-daylight, $y$, on a particular day in Oak Park, Illinois. If this day has $670$ minutes of daylight, how many minutes of non-daylight does it have?
+A) $670$
+B) $770$
+C) $1{,}373$
+D) $1{,}440$
+> $670 + y = 1{,}440$, so $y = 770$.
+
+## M1 Q10 | PSDA | easy
+Scott selected $20$ employees at random from all $400$ employees at a company. He found that $16$ of the employees in this sample are enrolled in exactly three professional development courses this year. Based on Scott's findings, which of the following is the best estimate of the number of employees at the company who are enrolled in exactly three professional development courses this year?
+A) $4$
+B) $320$
+C) $380$
+D) $384$
+> In the random sample, $\tfrac{16}{20} = 80\%$ are enrolled. Applying this to all employees: $0.8 \times 400 = 320$.
+
+## M1 Q11 | ALG | easy | nofig
+If $4x - 28 = -24$, what is the value of $x - 7$?
+A) $-24$
+B) $-22$
+C) $-6$
+D) $-1$
+> $4x - 28 = 4(x - 7)$, so $4(x - 7) = -24$ and $x - 7 = -6$.
+
+## M1 Q12 | ALG | easy | nofig
+For a snowstorm in a certain town, the minimum rate of snowfall recorded was $0.6$ inches per hour, and the maximum rate of snowfall recorded was $1.8$ inches per hour. Which inequality is true for all values of $s$, where $s$ represents a rate of snowfall, in inches per hour, recorded for this snowstorm?
+A) $s \ge 2.4$
+B) $s \ge 1.8$
+C) $0 \le s \le 0.6$
+D) $0.6 \le s \le 1.8$
+> Every recorded rate is at least the minimum, $0.6$, and at most the maximum, $1.8$: $0.6 \le s \le 1.8$.
+
+## M1 Q13 | ADV | medium
+$$ \begin{aligned} y &= 4x \\ y &= x^2 - 12 \end{aligned} $$
+
+A solution to the given system of equations is $(x, y)$, where $x > 0$. What is the value of $x$?
+> Set the expressions equal: $x^2 - 12 = 4x$, so $x^2 - 4x - 12 = 0$ and $(x - 6)(x + 2) = 0$. With $x > 0$, $x = 6$.
+
+## M1 Q14 | ALG | easy
+A store sells two different-sized containers of blueberries. The store's sales of these blueberries totaled $896.86$ dollars last month. The equation $4.51x + 6.07y = 896.86$ represents this situation, where $x$ is the number of smaller containers sold and $y$ is the number of larger containers sold. According to the equation, what is the price, in dollars, of each smaller container?
+> Each smaller container adds $4.51$ dollars to the total for each one sold ($4.51x$), so it costs $\$4.51$.
+
+## M1 Q15 | GEO | easy
+A right circular cylinder has a base diameter of $22$ centimeters and a height of $6$ centimeters. What is the volume, in cubic centimeters, of the cylinder?
+A) $132\pi$
+B) $264\pi$
+C) $726\pi$
+D) $2{,}904\pi$
+> The radius is $11$, so $V = \pi r^2 h = \pi(121)(6) = 726\pi$.
+
+## M1 Q16 | ADV | medium
+The graph of the rational function $f$ is shown, where $y = f(x)$ and $x \ge 0$. Which of the following is the graph of $y = f(x) + 5$, where $x \ge 0$?
+A) ![Graph A](/sat/test-05/math-m1-q16-A.png)
+B) ![Graph B](/sat/test-05/math-m1-q16-B.png)
+C) ![Graph C](/sat/test-05/math-m1-q16-C.png)
+D) ![Graph D](/sat/test-05/math-m1-q16-D.png)
+> Adding $5$ shifts the whole graph up $5$ units. The original curve levels off near $y = 1$ for large $x$, so the new one levels off near $y = 6$. Only graph D does this.
+
+## M1 Q17 | PSDA | easy
+At a particular track meet, the ratio of coaches to athletes is $1$ to $26$. If there are $x$ coaches at the track meet, which of the following expressions represents the number of athletes at the track meet?
+A) $\dfrac{x}{26}$
+B) $26x$
+C) $x + 26$
+D) $\dfrac{26}{x}$
+> There are $26$ athletes for every coach, so $x$ coaches go with $26x$ athletes.
+
+## M1 Q18 | ALG | medium
+Kaylani used fabric measuring $5$ yards in length to make each suit for a men's choir. The relationship between the number of suits that Kaylani made, $x$, and the total length of fabric that she purchased $y$, in yards, is represented by the equation $y - 5x = 6$. What is the best interpretation of $6$ in this context?
+A) Kaylani made $6$ suits.
+B) Kaylani purchased a total of $6$ yards of fabric.
+C) Kaylani used a total of $6$ yards of fabric to make the suits.
+D) Kaylani purchased $6$ yards more fabric than she used to make the suits.
+> $5x$ is the fabric used for the suits and $y$ is the fabric purchased, so $y - 5x = 6$ says she bought $6$ yards more than she used.
+
+## M1 Q19 | GEO | hard
+What is the value of $\tan\dfrac{92\pi}{3}$?
+A) $-\sqrt{3}$
+B) $-\dfrac{\sqrt{3}}{3}$
+C) $\dfrac{\sqrt{3}}{3}$
+D) $\sqrt{3}$
+> Tangent repeats every $\pi$. $\dfrac{92\pi}{3} = 30\pi + \dfrac{2\pi}{3}$, so the value equals $\tan\dfrac{2\pi}{3} = -\sqrt{3}$.
+
+## M1 Q20 | GEO | medium
+In the triangle shown, what is the value of $\cos x^\circ$?
+> The side of length $11$ is adjacent to angle $x$, and $28$ is the hypotenuse, so $\cos x^\circ = \tfrac{11}{28}$ (about $0.3929$).
+
+## M1 Q21 | ADV | medium
+The function $g$ is defined by $g(x) = (x + 14)(t - x)$, where $t$ is a constant. In the $xy$-plane, the graph of $y = g(x)$ passes through the point $(24, 0)$. What is the value of $g(0)$?
+> $g(24) = 38(t - 24) = 0$, so $t = 24$. Then $g(0) = (14)(24) = 336$.
+
+## M1 Q22 | GEO | medium
+$$ (x + 4)^2 + (y - 19)^2 = 121 $$
+
+The graph of the given equation is a circle in the $xy$-plane. The point $(a, b)$ lies on the circle. Which of the following is a possible value for $a$?
+A) $-16$
+B) $-14$
+C) $11$
+D) $19$
+> The center is $(-4, 19)$ and the radius is $11$, so $x$-coordinates on the circle range from $-15$ to $7$. Only $-14$ is in that range.
+
+## M1 Q23 | ADV | medium | nofig
+A right rectangular prism has a height of $9$ inches. The length of the prism's base is $x$ inches, which is $7$ inches more than the width of the prism's base. Which function $V$ gives the volume of the prism, in cubic inches, in terms of the length of the prism's base?
+A) $V(x) = x(x + 9)(x + 7)$
+B) $V(x) = x(x + 9)(x - 7)$
+C) $V(x) = 9x(x + 7)$
+D) $V(x) = 9x(x - 7)$
+> The width is $x - 7$, so the volume is length $\times$ width $\times$ height $= x(x - 7)(9) = 9x(x - 7)$.
+
+## M1 Q24 | ADV | hard | nofig
+Which of the following functions has(have) a minimum value at $-3$?
+
+$$ \begin{aligned} &\text{I. } f(x) = -6(3)^x - 3 \\ &\text{II. } g(x) = -3(6)^x \end{aligned} $$
+A) I only
+B) II only
+C) I and II
+D) Neither I nor II
+> Both functions are a negative multiple of an increasing exponential, so both decrease without bound as $x$ grows and have no minimum value. ($f$ approaches $-3$ from below only as $x \to -\infty$.)
+
+## M1 Q25 | PSDA | medium
+The result of increasing the quantity $x$ by $400\%$ is $60$. What is the value of $x$?
+A) $12$
+B) $15$
+C) $240$
+D) $340$
+> Increasing by $400\%$ multiplies by $1 + 4 = 5$: $5x = 60$, so $x = 12$.
+
+## M1 Q26 | ADV | hard
+The function $f$ is defined by $f(x) = ax^2 + bx + c$, where $a$, $b$, and $c$ are constants. The graph of $y = f(x)$ in the $xy$-plane passes through the points $(7, 0)$ and $(-3, 0)$. If $a$ is an integer greater than $1$, which of the following could be the value of $a + b$?
+A) $-6$
+B) $-3$
+C) $4$
+D) $5$
+> $f(x) = a(x - 7)(x + 3) = ax^2 - 4ax - 21a$, so $b = -4a$ and $a + b = -3a$. With $a = 2$, $a + b = -6$.
+
+## M1 Q27 | ADV | hard
+The function $g$ is defined by $g(x) = x(x - 2)(x + 6)^2$. The value of $g(7 - w)$ is $0$, where $w$ is a constant. What is the sum of all possible values of $w$?
+> $g$ is $0$ when its input is $0$, $2$, or $-6$. So $7 - w \in \{0, 2, -6\}$, giving $w = 7$, $5$, or $13$. Their sum is $25$.
+
+## M2 Q1 | PSDA | easy
+What is $20\%$ of $440$?
+A) $44$
+B) $88$
+C) $880$
+D) $1{,}760$
+> $0.20 \times 440 = 88$.
+
+## M2 Q2 | ALG | easy
+Argon is placed inside a container with a constant volume. The graph shows the estimated pressure $y$, in pounds per square inch (psi), of the argon when its temperature is $x$ kelvins.
+
+What is the estimated pressure of the argon, in psi, when the temperature is $600$ kelvins?
+A) $6$
+B) $12$
+C) $300$
+D) $600$
+> At $x = 600$ the line is at $y = 12$.
+
+## M2 Q3 | ALG | easy
+The function $f$ is defined by $f(x) = 4x - 3$. What is the value of $f(10)$?
+A) $-30$
+B) $37$
+C) $40$
+D) $43$
+> $f(10) = 4(10) - 3 = 37$.
+
+## M2 Q4 | ADV | easy | nofig
+Which expression is equivalent to $16x^3y^2 + 14xy$?
+A) $2xy(8xy + 7)$
+B) $2xy(8x^2y + 7)$
+C) $14xy(2x^2y + 1)$
+D) $14xy(8x^2y + 1)$
+> The greatest common factor is $2xy$: $16x^3y^2 + 14xy = 2xy(8x^2y + 7)$.
+
+## M2 Q5 | ALG | easy | nofig
+A veterinarian recommends that each day a certain rabbit should eat $25$ calories per pound of the rabbit's weight, plus an additional $11$ calories. Which equation represents this situation, where $c$ is the total number of calories the veterinarian recommends the rabbit should eat each day if the rabbit's weight is $x$ pounds?
+A) $c = 25x$
+B) $c = 36x$
+C) $c = 11x + 25$
+D) $c = 25x + 11$
+> $25$ calories for each of the $x$ pounds is $25x$, plus $11$ more: $c = 25x + 11$.
+
+## M2 Q6 | ALG | easy
+If $6n = 12$, what is the value of $n + 4$?
+> $n = 2$, so $n + 4 = 6$.
+
+## M2 Q7 | ADV | medium
+$$ (d - 30)(d + 30) - 7 = -7 $$
+
+What is a solution to the given equation?
+> Add $7$ to both sides: $(d - 30)(d + 30) = 0$, so $d = 30$ or $d = -30$. Either is correct.
+
+## M2 Q8 | ALG | easy | nofig
+Line $r$ in the $xy$-plane has a slope of $4$ and passes through the point $(0, 6)$. Which equation defines line $r$?
+A) $y = -6x + 4$
+B) $y = 6x + 4$
+C) $y = 4x - 6$
+D) $y = 4x + 6$
+> Slope $4$ and $y$-intercept $6$ give $y = 4x + 6$.
+
+## M2 Q9 | ADV | easy
+A competitive diver dives from a platform into the water. The graph shown gives the height above the water $y$, in meters, of the diver $x$ seconds after diving from the platform. What is the best interpretation of the $x$-intercept of the graph?
+A) The diver reaches a maximum height above the water at $1.6$ seconds.
+B) The diver hits the water at $1.6$ seconds.
+C) The diver reaches a maximum height above the water at $0.2$ seconds.
+D) The diver hits the water at $0.2$ seconds.
+> The $x$-intercept, about $(1.6, 0)$, is where the height above the water is $0$: the diver hits the water at $1.6$ seconds.
+
+## M2 Q10 | ADV | medium
+The kinetic energy, in joules, of an object with mass $9$ kilograms traveling at a speed of $v$ meters per second is given by the function $K$, where $K(v) = \dfrac{9}{2}v^2$. Which of the following is the best interpretation of $K(34) = 5{,}202$ in this context?
+A) The object traveling at $34$ meters per second has a kinetic energy of $5{,}202$ joules.
+B) The object traveling at $340$ meters per second has a kinetic energy of $5{,}202$ joules.
+C) The object traveling at $5{,}202$ meters per second has a kinetic energy of $34$ joules.
+D) The object traveling at $23{,}409$ meters per second has a kinetic energy of $34$ joules.
+> The input $v = 34$ is the speed in meters per second and the output $5{,}202$ is the kinetic energy in joules.
+
+## M2 Q11 | PSDA | medium
+The scatterplot shows the relationship between two variables $x$ and $y$. A line of best fit for the data is also shown.
+
+For how many of the $10$ data points is the actual $y$-value greater than the $y$-value predicted by the line of best fit?
+A) $3$
+B) $4$
+C) $6$
+D) $7$
+> A point's actual $y$-value is greater than the predicted value when the point lies above the line. Six of the ten points are above the line.
+
+## M2 Q12 | PSDA | medium
+At a movie theater, there are a total of $350$ customers. Each customer is located in either theater A, theater B, or theater C. If one of these customers is selected at random, the probability of selecting a customer who is located in theater A is $0.48$, and the probability of selecting a customer who is located in theater B is $0.24$. How many customers are located in theater C?
+A) $28$
+B) $40$
+C) $84$
+D) $98$
+> The probability for theater C is $1 - 0.48 - 0.24 = 0.28$, so $0.28 \times 350 = 98$ customers.
+
+## M2 Q13 | ALG | medium
+What is the slope of the graph of $y = \dfrac{1}{3}(29x + 10) + 5x$ in the $xy$-plane?
+> Distribute: $y = \tfrac{29}{3}x + \tfrac{10}{3} + 5x = \tfrac{44}{3}x + \tfrac{10}{3}$. The slope is $\tfrac{44}{3}$ (about $14.67$).
+
+## M2 Q14 | GEO | medium
+The length of each edge of a box is $29$ inches. Each side of the box is in the shape of a square. The box does not have a lid. What is the exterior surface area, in square inches, of this box without a lid?
+> A cube without a lid has $5$ square faces, each $29^2 = 841$ square inches: $5 \times 841 = 4{,}205$.
+
+## M2 Q15 | PSDA | medium
+Five *Eretmochelys imbricata*, a type of sea turtle, each have a nest. The table shows an original data set of the number of eggs that each turtle laid in its nest.
+
+A sixth nest with $121$ eggs is added to create a new data set. Which of the following correctly compares the means of the two data sets?
+A) The mean of the original data set is greater than the mean of the new data set.
+B) The mean of the original data set is less than the mean of the new data set.
+C) The means of both data sets are equal.
+D) There is not enough information to compare the means.
+> Every original value is above $121$, so the original mean is above $121$. Adding a value below the mean pulls the mean down, so the original mean is greater.
+
+## M2 Q16 | GEO | medium
+In $\triangle RST$, the measure of $\angle R$ is $63^\circ$. Which of the following could be the measure, in degrees, of $\angle S$?
+A) $116$
+B) $118$
+C) $126$
+D) $180$
+> The other two angles must total $180 - 63 = 117$ degrees, so $\angle S$ is less than $117$. Only $116$ works.
+
+## M2 Q17 | ADV | easy | nofig
+Which expression is equivalent to $(8x^3 + 8) - (x^3 - 2)$?
+A) $8x^3 + 6$
+B) $7x^3 + 10$
+C) $8x^3 + 10$
+D) $7x^3 + 6$
+> Distribute the subtraction: $8x^3 + 8 - x^3 + 2 = 7x^3 + 10$.
+
+## M2 Q18 | ADV | medium
+If $4\sqrt{2x} = 16$, what is the value of $6x$?
+A) $24$
+B) $48$
+C) $72$
+D) $96$
+> $\sqrt{2x} = 4$, so $2x = 16$ and $x = 8$. Then $6x = 48$.
+
+## M2 Q19 | ALG | medium | nofig
+$$ 2x - y > 883 $$
+
+For which of the following tables are all the values of $x$ and their corresponding values of $y$ solutions to the given inequality?
+A) | $x$ | $y$ |
+| --- | --- |
+| $440$ | $0$ |
+| $441$ | $-2$ |
+| $442$ | $-4$ |
+B) | $x$ | $y$ |
+| --- | --- |
+| $440$ | $0$ |
+| $442$ | $-2$ |
+| $441$ | $-4$ |
+C) | $x$ | $y$ |
+| --- | --- |
+| $442$ | $0$ |
+| $440$ | $-2$ |
+| $441$ | $-4$ |
+D) | $x$ | $y$ |
+| --- | --- |
+| $442$ | $0$ |
+| $441$ | $-2$ |
+| $440$ | $-4$ |
+> Check table D: $2(442) - 0 = 884$, $2(441) + 2 = 884$, and $2(440) + 4 = 884$, all greater than $883$. Each other table has a pair that fails (for example $(440, 0)$ gives $880$).
+
+## M2 Q20 | ALG | medium
+$$ \begin{aligned} 5y &= 10x + 11 \\ -5y &= 5x - 21 \end{aligned} $$
+
+The solution to the given system of equations is $(x, y)$. What is the value of $30x$?
+> Add the equations: $0 = 15x - 10$, so $15x = 10$ and $30x = 20$.
+
+## M2 Q21 | GEO | hard
+A rectangle is inscribed in a circle, such that each vertex of the rectangle lies on the circumference of the circle. The diagonal of the rectangle is twice the length of the shortest side of the rectangle. The area of the rectangle is $1{,}089\sqrt{3}$ square units. What is the length, in units, of the diameter of the circle?
+> If the short side is $s$, the diagonal is $2s$, so the long side is $s\sqrt{3}$ and the area is $s^2\sqrt{3} = 1{,}089\sqrt{3}$, giving $s = 33$. The diagonal is a diameter of the circle: $2s = 66$.
+
+## M2 Q22 | GEO | medium
+Rectangles $ABCD$ and $EFGH$ are similar. The length of each side of $EFGH$ is $6$ times the length of the corresponding side of $ABCD$. The area of $ABCD$ is $54$ square units. What is the area, in square units, of $EFGH$?
+A) $9$
+B) $36$
+C) $324$
+D) $1{,}944$
+> Scaling lengths by $6$ scales area by $6^2 = 36$: $54 \times 36 = 1{,}944$.
+
+## M2 Q23 | ADV | medium | nofig
+Which expression is equivalent to $\dfrac{42a}{k} + 42ak$, where $k > 0$?
+A) $\dfrac{84a}{k}$
+B) $\dfrac{84ak^2}{k}$
+C) $\dfrac{42a(k + 1)}{k}$
+D) $\dfrac{42a(k^2 + 1)}{k}$
+> Write $42ak$ over $k$: $\dfrac{42a + 42ak^2}{k} = \dfrac{42a(k^2 + 1)}{k}$.
+
+## M2 Q24 | ADV | medium | nofig
+Which quadratic equation has no real solutions?
+A) $x^2 + 14x - 49 = 0$
+B) $x^2 - 14x + 49 = 0$
+C) $5x^2 - 14x - 49 = 0$
+D) $5x^2 - 14x + 49 = 0$
+> An equation has no real solutions when its discriminant is negative. For D: $(-14)^2 - 4(5)(49) = 196 - 980 < 0$. The others have discriminants $\ge 0$.
+
+## M2 Q25 | ADV | hard | nofig
+$$ P(t) = 260(1.04)^{\left(\frac{6}{4}\right)t} $$
+
+The function $P$ models the population, in thousands, of a certain city $t$ years after $2003$. According to the model, the population is predicted to increase by $4\%$ every $n$ months. What is the value of $n$?
+A) $8$
+B) $12$
+C) $18$
+D) $72$
+> The population grows by $4\%$ each time the exponent $\tfrac{6}{4}t$ increases by $1$, that is, every $\tfrac{4}{6} = \tfrac{2}{3}$ of a year, which is $8$ months.
+
+## M2 Q26 | GEO | hard
+A circle in the $xy$-plane has its center at $(-1, 1)$. Line $t$ is tangent to this circle at the point $(5, -4)$. Which of the following points also lies on line $t$?
+A) $\left(0, \dfrac{6}{5}\right)$
+B) $(4, 7)$
+C) $(10, 2)$
+D) $(11, 1)$
+> The radius to $(5, -4)$ has slope $\dfrac{-4 - 1}{5 - (-1)} = -\dfrac{5}{6}$, so the tangent has slope $\dfrac{6}{5}$: $y + 4 = \tfrac{6}{5}(x - 5)$. At $x = 10$, $y = -4 + 6 = 2$, so $(10, 2)$ is on the line.
+
+## M2 Q27 | GEO | hard
+For an electric field passing through a flat surface perpendicular to it, the electric flux of the electric field through the surface is the product of the electric field's strength and the area of the surface. A certain flat surface consists of two adjacent squares, where the side length, in meters, of the larger square is $3$ times the side length, in meters, of the smaller square. An electric field with strength $29.00$ volts per meter passes uniformly through this surface, which is perpendicular to the electric field. If the total electric flux of the electric field through this surface is $4{,}640$ volts $\cdot$ meters, what is the electric flux, in volts $\cdot$ meters, of the electric field through the larger square?
+> With small side $s$, the total area is $s^2 + 9s^2 = 10s^2$, so $29(10s^2) = 4{,}640$ and $s^2 = 16$. The larger square's area is $9 \times 16 = 144$, so its flux is $29 \times 144 = 4{,}176$.
