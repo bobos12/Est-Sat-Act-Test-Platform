@@ -1,10 +1,12 @@
+import { brand } from "@/lib/brand";
+
 /** Marketing extras that sit beside the plans and content in the database. */
 
 /** Strike-through price, badge and "Most popular" flag, keyed by plan code. */
 export const PLAN_EXTRAS: Record<string, { compareAtCents?: number; popular?: boolean; cta: string; hook: string }> = {
   monthly: { compareAtCents: 60000, cta: "Start monthly", hook: "Try everything. Cancel anytime." },
   quarterly: { popular: true, cta: "Get 3 months", hook: "Covers a full exam season" },
-  yearly: { cta: "Get the full year", hook: "For students aiming for 1600" },
+  yearly: { cta: "Get the full year", hook: "For students aiming for a top score" },
 };
 
 /** Per-month price and saving against the monthly plan, for the pricing cards. */
@@ -27,7 +29,7 @@ export const TESTIMONIALS: { name: string; detail: string; quote: string }[] = [
 
 /** Contact channels. Empty values are not shown. */
 export const CONTACT = {
-  email: "support@16hundred.app",
+  email: brand.supportEmail,
   whatsapp: "", // e.g. "201000000000" (international format, digits only)
   instagram: "", // handle without @
   tiktok: "", // handle without @

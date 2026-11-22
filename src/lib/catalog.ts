@@ -39,6 +39,7 @@ export type CatalogExam = {
   subject_id: string;
   focus_topic_id: string | null;
   sort_order: number;
+  updated_at: string;
 };
 
 export type Plan = {
@@ -88,7 +89,7 @@ export async function getPublishedExams(): Promise<CatalogExam[]> {
   if (!isSupabaseConfigured()) return [];
   const { data, error } = await anonClient()
     .from("exams")
-    .select("id, slug, title, description, kind, difficulty, access, duration_minutes, question_count, subject_id, focus_topic_id, sort_order")
+    .select("id, slug, title, description, kind, difficulty, access, duration_minutes, question_count, subject_id, focus_topic_id, sort_order, updated_at")
     .eq("status", "published")
     .order("sort_order")
     .order("title");
@@ -103,7 +104,7 @@ export async function getExamBySlug(slug: string): Promise<CatalogExam | null> {
   if (!isSupabaseConfigured()) return null;
   const { data, error } = await anonClient()
     .from("exams")
-    .select("id, slug, title, description, kind, difficulty, access, duration_minutes, question_count, subject_id, focus_topic_id, sort_order")
+    .select("id, slug, title, description, kind, difficulty, access, duration_minutes, question_count, subject_id, focus_topic_id, sort_order, updated_at")
     .eq("slug", slug)
     .eq("status", "published")
     .maybeSingle();

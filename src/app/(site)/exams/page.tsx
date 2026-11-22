@@ -8,11 +8,15 @@ import { TRACKS } from "@/lib/exam-catalog";
 import { createClient } from "@/lib/supabase/server";
 import { cn } from "@/lib/utils";
 import { UnlockBanner } from "@/components/site/unlock-banner";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Exam library",
-  description: "Browse EST, SAT and ACT mock exams by subject, topic, difficulty and access.",
-};
+// Filtered views (?track=, ?subject=, …) all canonicalise to /exams.
+export const metadata: Metadata = pageMetadata({
+  title: "Practice Test Library: EST, SAT & ACT Mock Exams",
+  description:
+    "Browse every EST, SAT and ACT practice test on TargetScore by exam, subject, topic and difficulty. Timed online mock exams for American Diploma students, with free tests to start.",
+  path: "/exams",
+});
 
 type Filters = { track?: string; subject?: string; topic?: string; difficulty?: string; access?: string; q?: string; sort?: string };
 

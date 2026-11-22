@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 
-/** Hero background: blue graph paper, cells light up near the pointer, and a score line climbs to "1600". */
+/** Hero background: blue graph paper, cells light up near the pointer, and a score line climbs to the target. */
 export function GraphPaper() {
   const ref = useRef<HTMLCanvasElement>(null);
 
@@ -48,7 +48,7 @@ export function GraphPaper() {
       }
       if (p >= 1) {
         ctx.fillStyle = "rgba(21,89,237,.55)"; ctx.beginPath(); ctx.arc(last[0], last[1], 6, 0, 7); ctx.fill();
-        ctx.font = "italic 22px 'Instrument Serif', Georgia, serif"; ctx.textAlign = "right"; ctx.fillText("1600", last[0] - 12, last[1] + 7);
+        ctx.font = "italic 22px 'Instrument Serif', Georgia, serif"; ctx.textAlign = "right"; ctx.fillText("target score", last[0] - 12, last[1] + 7);
       }
       if (p < 1) p = Math.min(1, p + .006);
       if (!reduce) raf = requestAnimationFrame(frame);

@@ -18,16 +18,16 @@ export default function AuthLayout({ children }: LayoutProps<"/">) {
           className="absolute inset-0 opacity-[0.07]"
           style={{ backgroundImage: "linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px)", backgroundSize: "28px 28px" }}
         />
-        <Link href="/" aria-label="16hundred home" className="relative">
+        <Link href="/" aria-label="TargetScore home" className="relative">
           <Logo tone="paper" />
         </Link>
         <div className="relative mt-auto max-w-md">
           <p className="font-display text-5xl leading-[1.02]">
-            Train smarter.
+            Practice like
             <br />
-            Score higher.
+            the real test.
             <br />
-            Reach <span className="italic text-sky" style={{ fontFamily: "var(--f-serif), serif", fontWeight: 400 }}>1600</span>.
+            Hit your <span className="italic text-sky" style={{ fontFamily: "var(--f-serif), serif", fontWeight: 400 }}>target</span>.
           </p>
           <ul className="mt-10 space-y-3.5">
             {points.map((p) => (
@@ -51,7 +51,7 @@ export default function AuthLayout({ children }: LayoutProps<"/">) {
       {/* Form */}
       <div className="flex min-h-screen flex-col">
         <header className="flex items-center justify-between px-6 py-5 sm:px-10">
-          <Link href="/" aria-label="16hundred home" className="lg:invisible">
+          <Link href="/" aria-label="TargetScore home" className="lg:invisible">
             <Logo />
           </Link>
           <Link href="/" className="text-sm text-ink-500 hover:text-ink-950">

@@ -89,7 +89,7 @@ export const paymob: PaymentProvider = {
         items: [{ name: req.description.slice(0, 50), amount: req.amountCents, description: req.description, quantity: 1 }],
         billing_data: {
           first_name: req.customer.firstName || "Student",
-          last_name: req.customer.lastName || "16hundred",
+          last_name: req.customer.lastName || "TargetScore",
           email: req.customer.email,
           phone_number: req.customer.phone,
           // Paymob requires these keys; "NA" is its documented placeholder for unknown address fields.

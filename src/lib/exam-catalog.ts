@@ -1,5 +1,5 @@
 /**
- * 16hundred exam catalog — the shape the homepage shelf renders.
+ * TargetScore exam catalog — the shape the homepage shelf renders.
  *
  * `FALLBACK_CATALOG` mirrors the EST blueprint (24 official papers in TESTS/):
  * EST I Math + Literacy for the Sample / Jan / Mar / May 2026 sessions, and the

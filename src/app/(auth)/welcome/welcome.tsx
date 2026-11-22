@@ -28,7 +28,7 @@ export function Welcome({ next }: { next: string }) {
         </span>
       </div>
       <h1 className="mt-8 font-display text-4xl font-medium text-ink-950">You&apos;re confirmed! 🎉</h1>
-      <p className="mt-3 text-lg text-ink-600">Your 16hundred account is ready. Let&apos;s get you to your first exam.</p>
+      <p className="mt-3 text-lg text-ink-600">Your TargetScore account is ready. Let&apos;s get you to your first exam.</p>
 
       <div className="mx-auto mt-8 h-1.5 w-56 overflow-hidden rounded-full bg-paper-3">
         <div className="h-full rounded-full bg-mark-500 transition-[width] duration-1000 ease-linear" style={{ width: `${((SECONDS - Math.max(left, 0)) / SECONDS) * 100}%` }} />

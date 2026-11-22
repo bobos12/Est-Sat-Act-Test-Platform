@@ -5,23 +5,34 @@ import { Suspense } from "react";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
 import { getViewer } from "@/lib/auth/session";
-import { difficultyLabel, getExamBySlug, getSubjects, getTopics, type CatalogExam } from "@/lib/catalog";
+import { difficultyLabel, getExamBySlug, getPublishedExams, getSubjects, getTopics, type CatalogExam, type Subject } from "@/lib/catalog";
+import { absoluteUrl, breadcrumbs, isoDuration, JsonLd, ORG_ID, pageMetadata } from "@/lib/seo";
+import { TRACK_CONTENT, trackOfFamily } from "@/lib/tracks";
 import { createClient } from "@/lib/supabase/server";
 import { startExam } from "../actions";
 import { StartExamButton } from "../start-button";
 
+/** A search-friendly description: the admin's own text when present, otherwise built from the facts. */
+function examDescription(exam: CatalogExam, subject?: Subject) {
+  const family = subject ? TRACK_CONTENT[trackOfFamily(subject.test_family)].name : "exam";
+  const access = exam.access === "free" ? "Free with a TargetScore account." : "Included with TargetScore membership.";
+  const own = exam.description?.trim();
+  if (own) return `${own.replace(/\.?$/, ".")} Timed online with instant scoring and an explanation for every question.`;
+  return `Take ${exam.title} online: ${exam.question_count} questions in ${exam.duration_minutes} minutes, timed like the real ${family}, with instant scoring and an explanation for every question. ${access}`;
+}
+
 export async function generateMetadata({ params }: PageProps<"/exams/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const exam = await getExamBySlug(slug);
-  return exam ? { title: exam.title, description: exam.description || undefined } : { title: "Exam not found" };
+  if (!exam) return { title: "Exam not found", robots: { index: false } };
+  const subject = (await getSubjects()).find((s) => s.id === exam.subject_id);
+  const title = /practice|mock|test/i.test(exam.title) ? `${exam.title} (Timed Online Practice)` : `${exam.title} Practice Test Online`;
+  return pageMetadata({ title, description: examDescription(exam, subject).slice(0, 300), path: `/exams/${exam.slug}` });
 }
 
 export default function ExamDetailPage({ params }: PageProps<"/exams/[slug]">) {
   return (
     <div className="mx-auto max-w-4xl px-5 pb-24 pt-10 sm:px-6 sm:pt-14">
-      <Link href="/exams" className="text-sm text-ink-500 hover:text-ink-950">
-        ← Exam library
-      </Link>
       <Suspense fallback={<div className="mt-8 h-96 animate-pulse rounded-[var(--radius-lg)] bg-paper-2" />}>
         <ExamDetail params={params} />
       </Suspense>
@@ -38,6 +49,12 @@ async function ExamDetail({ params }: { params: PageProps<"/exams/[slug]">["para
   const subject = subjects.find((s) => s.id === exam.subject_id);
   const topic = topics.find((t) => t.id === exam.focus_topic_id);
   const isMath = subject?.code.includes("math");
+  const track = TRACK_CONTENT[trackOfFamily(subject?.test_family ?? "")];
+  const crumbs = [
+    { name: "Home", path: "/" },
+    { name: `${track.name} practice tests`, path: track.path },
+    { name: exam.title, path: `/exams/${exam.slug}` },
+  ];
 
   const facts = [
     { label: "Questions", value: String(exam.question_count) },
@@ -51,12 +68,21 @@ async function ExamDetail({ params }: { params: PageProps<"/exams/[slug]">["para
     "The countdown runs on our server and doesn't pause. When it reaches zero, your exam is submitted automatically.",
     "Every answer is saved as soon as you choose it — a refresh or lost connection won't lose your work.",
     "Flag questions you want to revisit before you submit.",
-    isMath ? "A calculator is allowed, as on the real EST I Math paper." : "Passages stay on screen while you answer their questions.",
+    isMath ? "A calculator is allowed, as on the real test." : "Passages stay on screen while you answer their questions.",
   ];
 
   return (
-    <article className="mt-8">
-      <div className="flex flex-wrap items-center gap-2">
+    <article>
+      <nav aria-label="Breadcrumb" className="text-sm text-ink-500">
+        <ol className="flex flex-wrap items-center gap-1.5">
+          <li><Link href="/" className="hover:text-ink-950">Home</Link></li>
+          <li aria-hidden="true">/</li>
+          <li><Link href={track.path} className="hover:text-ink-950">{track.name} practice tests</Link></li>
+          <li aria-hidden="true">/</li>
+          <li aria-current="page" className="truncate text-ink-700">{exam.title}</li>
+        </ol>
+      </nav>
+      <div className="mt-8 flex flex-wrap items-center gap-2">
         <span className="text-sm font-medium text-mark-500">{subject?.name}</span>
         {topic ? <span className="text-sm text-ink-500">· {topic.name}</span> : null}
       </div>
@@ -91,7 +117,61 @@ async function ExamDetail({ params }: { params: PageProps<"/exams/[slug]">["para
           </Suspense>
         </aside>
       </div>
+
+      <Suspense fallback={null}>
+        <RelatedExams exam={exam} trackName={track.name} trackPath={track.path} />
+      </Suspense>
+
+      <JsonLd
+        data={[
+          {
+            "@type": "LearningResource",
+            "@id": `${absoluteUrl(`/exams/${exam.slug}`)}#resource`,
+            name: exam.title,
+            description: examDescription(exam, subject),
+            url: absoluteUrl(`/exams/${exam.slug}`),
+            learningResourceType: exam.kind === "full_mock" ? "Practice test" : "Practice questions",
+            educationalLevel: "High school",
+            inLanguage: "en",
+            timeRequired: isoDuration(exam.duration_minutes),
+            isAccessibleForFree: exam.access === "free",
+            ...(subject ? { about: { "@type": "Thing", name: subject.name } } : {}),
+            ...(topic ? { teaches: topic.name } : {}),
+            audience: { "@type": "EducationalAudience", educationalRole: "student", audienceType: "American Diploma students" },
+            provider: { "@id": ORG_ID },
+          },
+          breadcrumbs(crumbs),
+        ]}
+      />
     </article>
+  );
+}
+
+/** Other published exams in the same subject, then the same track: internal links between related tests. */
+async function RelatedExams({ exam, trackName, trackPath }: { exam: CatalogExam; trackName: string; trackPath: string }) {
+  const [all, subjects] = await Promise.all([getPublishedExams(), getSubjects()]);
+  const family = new Map(subjects.map((s) => [s.id, s.test_family]));
+  const myTrack = trackOfFamily(family.get(exam.subject_id) ?? "");
+  const others = all.filter((e) => e.id !== exam.id && trackOfFamily(family.get(e.subject_id) ?? "") === myTrack);
+  const related = [...others.filter((e) => e.subject_id === exam.subject_id), ...others.filter((e) => e.subject_id !== exam.subject_id)].slice(0, 6);
+  if (!related.length) return null;
+  return (
+    <section aria-labelledby="related" className="mt-16 border-t border-line pt-10">
+      <h2 id="related" className="text-lg font-semibold text-ink-950">More {trackName} practice tests</h2>
+      <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+        {related.map((e) => (
+          <li key={e.id}>
+            <Link href={`/exams/${e.slug}`} className="flex items-center justify-between gap-3 rounded-[var(--radius-md)] bg-white px-4 py-3 text-sm ring-1 ring-line hover:ring-ink-300">
+              <span className="font-medium text-ink-900">{e.title}</span>
+              <span className="shrink-0 text-ink-500">{e.question_count} Q · {e.duration_minutes} min</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <Link href={trackPath} className="mt-5 inline-block text-sm font-medium text-mark-600 hover:text-mark-700">
+        All {trackName} practice tests →
+      </Link>
+    </section>
   );
 }
 

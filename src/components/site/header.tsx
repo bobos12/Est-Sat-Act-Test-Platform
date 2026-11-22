@@ -6,9 +6,9 @@ import { getViewer } from "@/lib/auth/session";
 import { signOut } from "@/app/(auth)/actions";
 
 const nav = [
-  { href: "/exams?track=sat", label: "SAT" },
-  { href: "/exams?track=act", label: "ACT" },
-  { href: "/exams?track=est", label: "EST" },
+  { href: "/est", label: "EST" },
+  { href: "/sat", label: "SAT" },
+  { href: "/act", label: "ACT" },
   { href: "/exams", label: "Exams" },
   { href: "/practice", label: "Question bank" },
   { href: "/pricing", label: "Pricing" },
@@ -19,7 +19,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-line/70 bg-paper/90 backdrop-blur supports-[backdrop-filter]:bg-paper/75">
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-8 px-5 sm:px-6">
-        <Link href="/" aria-label="16hundred home" className="shrink-0">
+        <Link href="/" aria-label="TargetScore home" className="shrink-0">
           <Logo />
         </Link>
         <nav aria-label="Main" className="hidden items-center gap-1 md:flex">

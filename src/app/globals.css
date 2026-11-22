@@ -1,9 +1,7 @@
 @import "tailwindcss";
-@import "@fontsource-variable/source-serif-4/opsz.css";
-@import "katex/dist/katex.min.css";
 
 /*
- * 16hundred design tokens
+ * TargetScore design tokens
  * Graph paper and the answer bubble. Exam blue for actions, ink for text, navy for dark surfaces.
  * Green and red are reserved for right and wrong answers.
  */
