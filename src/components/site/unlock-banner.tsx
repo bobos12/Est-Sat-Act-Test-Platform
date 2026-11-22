@@ -66,7 +66,7 @@ export function UnlockBanner({ locked, compact = false }: { locked: Locked[]; co
         {/* The offer */}
         <div className="rounded-3xl bg-white p-6 text-ink-950 shadow-2xl">
           <div className="flex items-center justify-between">
-            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-mark-500">16hundred membership</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-mark-500">TargetScore membership</p>
             <span className="rounded-full bg-success-600 px-2.5 py-1 text-[0.6875rem] font-bold text-white">Save up to 52%</span>
           </div>
           <p className="mt-3 flex items-baseline gap-1.5">

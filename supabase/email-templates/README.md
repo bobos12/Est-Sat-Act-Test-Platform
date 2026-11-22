@@ -9,9 +9,9 @@ For each template, set the subject and paste the whole HTML file into the messag
 
 | Template | Subject | File |
 |---|---|---|
-| Confirm signup | Confirm your 16hundred account ✓ | `confirm-signup.html` |
-| Magic Link | Your 16hundred sign-in link 🔑 | `magic-link.html` |
-| Reset Password | Reset your 16hundred password | `reset-password.html` |
+| Confirm signup | Confirm your TargetScore account ✓ | `confirm-signup.html` |
+| Magic Link | Your TargetScore sign-in link 🔑 | `magic-link.html` |
+| Reset Password | Reset your TargetScore password | `reset-password.html` |
 
 These links open `/auth/confirm` on your site, so they work on any device (phone or computer) and show the "You're confirmed!" screen.
 

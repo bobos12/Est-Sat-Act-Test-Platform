@@ -1,6 +1,6 @@
-# 16hundred — EST examination platform
+# TargetScore — EST, SAT & ACT practice platform
 
-Commercial EST I preparation platform: public site and exam library, a timed examination engine,
+Online practice platform for American Diploma students (https://www.targetscore.online): public site and exam library, a timed examination engine,
 and a private admin dashboard. Next.js 16 (App Router, Cache Components) + Supabase (Postgres, Auth, Storage).
 
 - Blueprint derived from the source papers: [`docs/EST_BLUEPRINT.md`](docs/EST_BLUEPRINT.md)
@@ -19,6 +19,7 @@ and a private admin dashboard. Next.js 16 (App Router, Cache Components) + Supab
 | 7 | Plans, Paymob checkout, verified webhooks, renewals | ✅ (needs Paymob keys + sandbox test) |
 | 8 | End-to-end testing | in progress — see "Launch checklist" |
 | 9 | Question bank: student practice (`/practice`) + admin bank (`/admin/questions`) | ✅ (apply migration `20261120000001_question_bank.sql`) |
+| 11 | SEO & brand: TargetScore rebrand, `/est` `/sat` `/act` landing pages, metadata, JSON-LD, sitemap, robots, manifest, OG images | ✅ set `GOOGLE_SITE_VERIFICATION` / `BING_SITE_VERIFICATION` (optional), re-paste `supabase/email-templates` into Supabase |
 | 10 | Typed (grid-in) answers + official SAT Practice Tests 4–11 (16 exams) | ✅ apply migration `20261121000001_student_produced_responses.sql`, then run `supabase/content/sat/sat_practice_tests.sql` (see [`supabase/content/sat`](supabase/content/sat/README.md)) |
 
 ## Setup
@@ -51,7 +52,7 @@ update public.profiles set role = 'admin' where email = 'you@example.com';
 After that, admins manage roles from the dashboard (every change is written to the audit log).
 
 ### 5. Auth URLs
-**Authentication → URL Configuration**: set **Site URL** to your domain (e.g. `https://16hundred.app`) and add
+**Authentication → URL Configuration**: set **Site URL** to your domain (`https://www.targetscore.online`) and add
 `http://localhost:3000/**` to Redirect URLs for local development. The default confirmation email works as is.
 Optionally, for links that also work across devices, change **Email Templates → Confirm signup** to:
 ```

@@ -177,7 +177,7 @@ export function AuthForm({ mode, next }: { mode: "sign-in" | "sign-up"; next?: s
         </button>
 
         {mode === "sign-up" ? (
-          <p className="text-center text-xs text-ink-500">By creating an account you agree to use 16hundred for personal study.</p>
+          <p className="text-center text-xs text-ink-500">By creating an account you agree to use TargetScore for personal study.</p>
         ) : null}
       </form>
       )}

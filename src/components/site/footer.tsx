@@ -7,9 +7,9 @@ const columns = [
   {
     title: "Practice",
     links: [
-      { href: "/exams?track=est", label: "EST" },
-      { href: "/exams?track=sat", label: "SAT" },
-      { href: "/exams?track=act", label: "ACT" },
+      { href: "/est", label: "EST practice tests" },
+      { href: "/sat", label: "SAT practice tests" },
+      { href: "/act", label: "ACT practice tests" },
       { href: "/exams?access=free", label: "Free exams" },
     ],
   },
@@ -37,7 +37,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-6xl gap-12 px-5 py-14 sm:px-6 md:grid-cols-[1.4fr_repeat(3,1fr)]">
         <div className="max-w-xs">
           <Logo />
-          <p className="mt-4 text-sm leading-relaxed text-ink-600">{brand.description}</p>
+          <p className="mt-4 text-sm leading-relaxed text-ink-600">{brand.short} Practise under real test conditions and reach your target score.</p>
         </div>
         {columns.map((col) => (
           <div key={col.title}>

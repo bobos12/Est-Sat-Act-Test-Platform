@@ -12,6 +12,8 @@ import { Arrow } from "./Icons";
 import { FREE_START_HREF, TRACKS, TRACK_OF, type ShelfExam } from "@/lib/exam-catalog";
 import { formatPrice, type Plan } from "@/lib/catalog";
 import { CONTACT, TESTIMONIALS, periodLabel, planPitch } from "@/lib/marketing";
+import { brand } from "@/lib/brand";
+import { absoluteUrl, faqPage, JsonLd, ORG_ID, SITE_ID } from "@/lib/seo";
 
 const TOPICS = ["Foundational Algebra", "Words in Context", "SAT Advanced Math", "Data Analysis and Probability", "ACT English",
   "Expression of Ideas", "Geometry and Trigonometry", "ACT Science", "Standard English Conventions", "SAT Reading and Writing"];
@@ -19,13 +21,27 @@ const TOPICS = ["Foundational Algebra", "Words in Context", "SAT Advanced Math",
 const css = (vars: Record<string, string>) => vars as React.CSSProperties;
 
 /**
- * 16hundred homepage. Server component; pass the exams and plans to show.
+ * TargetScore homepage. Server component; pass the exams and plans to show.
  * Wrapped in `.sh` so the brand styles never leak into the exam engine / admin.
  */
 export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }) {
   const live = exams.filter((e) => e.access !== "soon");
   const questionCount = live.reduce((n, e) => n + e.questions, 0);
   const roundedQuestions = questionCount >= 100 ? `${Math.floor(questionCount / 100) * 100}+` : String(questionCount);
+  const liveIn = (t: string) => live.filter((e) => TRACK_OF[e.subject] === t).length;
+  const liveTracks = TRACKS.filter((t) => liveIn(t.key) > 0);
+  const soonTracks = TRACKS.filter((t) => liveIn(t.key) === 0);
+  const list = (names: string[]) => (names.length > 1 ? `${names.slice(0, -1).join(", ")} and ${names.at(-1)}` : names[0] ?? "");
+  const liveLine = `${list(liveTracks.map((t) => t.name))} practice tests are live now.${soonTracks.length ? ` ${list(soonTracks.map((t) => t.name))} ${soonTracks.length > 1 ? "open" : "opens"} as soon as the first full practice tests are published.` : ""}`;
+  const faqs = [
+    { q: "What is TargetScore?", a: "TargetScore is an online practice platform for American Diploma students preparing for the EST, SAT and ACT. You take full-length, timed practice tests on screen, get an explanation for every question, and see your score broken down by topic so you know what to study next." },
+    { q: "Who is TargetScore for?", a: "American Diploma students in Egypt and the wider MENA region preparing for the EST, SAT or ACT, and the teachers, tutors and parents who support them." },
+    { q: "Which exams are available?", a: liveLine },
+    { q: "Are these the official exams?", a: "No. TargetScore is an independent practice platform, not affiliated with or endorsed by the EST, SAT or ACT organisers. Our practice tests follow each exam's official format: the same sections, question types, number of questions and timing." },
+    { q: "What's free and what needs a membership?", a: "Exams marked FREE only need a free account, no card. A membership unlocks every practice test in the library, on every track." },
+    { q: "How do I follow progress?", a: "Every submitted test is saved to your dashboard with an estimated scaled score, the time used, a breakdown by topic and an explanation for every question." },
+    { q: "How do we pay?", a: "In Egyptian pounds through Paymob's secure checkout. We never see or store your card details." },
+  ];
 
   return (
     <div className="sh">
@@ -34,10 +50,10 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
   <div className="wrap">
     <Logo href="/" />
     <nav className="nav-links" aria-label="Main">
-      <Link href="/exams?track=sat">SAT</Link>
-      <Link href="/exams?track=act">ACT</Link>
-      <Link href="/exams?track=est">EST</Link>
-      <a href="#exams">Exams</a>
+      <Link href="/est">EST</Link>
+      <Link href="/sat">SAT</Link>
+      <Link href="/act">ACT</Link>
+      <Link href="/exams">Exams</Link>
       <a href="#pricing">Pricing</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -47,10 +63,10 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
       <details className="mnav">
         <summary aria-label="Open menu"><span /><span /><span /></summary>
         <nav className="mnav-panel" aria-label="Mobile">
-          <Link href="/exams?track=est">EST</Link>
-          <Link href="/exams?track=sat">SAT</Link>
-          <Link href="/exams?track=act">ACT</Link>
-          <a href="#exams">Exam library</a>
+          <Link href="/est">EST practice tests</Link>
+          <Link href="/sat">SAT practice tests</Link>
+          <Link href="/act">ACT practice tests</Link>
+          <Link href="/exams">Exam library</Link>
           <a href="#pricing">Pricing</a>
           <a href="#contact">Contact</a>
           <Link href="/sign-in" className="mnav-login">Log in</Link>
@@ -64,12 +80,12 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
   <GraphPaper />
   <div className="wrap">
     <div>
-      <span className="pill"><b>EST · SAT · ACT</b>Take every EST exam online</span>
+      <span className="pill"><b>EST · SAT · ACT</b>Built for American Diploma students</span>
       <h1 className="h">
-        <span className="ln"><span>Train smarter. Score higher.</span></span>
-        <span className="ln"><span>Reach <span className="goal">1600</span>.</span></span>
+        <span className="ln"><span>Practice like the real test.</span></span>
+        <span className="ln"><span>Hit your <span className="goal">target</span> score.</span></span>
       </h1>
-      <p className="lede">Your complete SAT, ACT and EST practice platform. Real timed tests, an explanation for every answer, and a score by topic, so you always know what to study next. <strong>Your first exam is free.</strong></p>
+      <p className="lede">TargetScore gives American Diploma students full-length EST, SAT and ACT practice tests online: timed like test day, with an explanation for every answer and a score by topic, so you always know what to study next. <strong>Your first exam is free.</strong></p>
       <div className="ctas">
         <Link href="/sign-up" className="btn btn-blue">Start learning <Arrow s={16} /></Link>
         <a href="#pricing" className="btn btn-line">View plans</a>
@@ -78,7 +94,7 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
       <dl className="stats">
         <div><dt>Practice questions</dt><dd>{roundedQuestions}</dd></div>
         <div><dt>Timed tests</dt><dd>{live.length}</dd></div>
-        <div><dt>Peak score</dt><dd>1,600</dd></div>
+        <div><dt>Exam tracks live</dt><dd>{liveTracks.length}</dd></div>
       </dl>
     </div>
 
@@ -96,10 +112,10 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
     <div className="sec-head rv">
       <StickyNote color="orange" rotate={-4} className="note-head" doodle="star">Future you will thank present you</StickyNote>
       <div>
-        <div className="eyebrow">Courses</div>
-        <h2 className="h">One platform, <span className="serif">every exam</span> you need.</h2>
+        <div className="eyebrow">Exams</div>
+        <h2 className="h">EST, SAT and ACT practice, <span className="serif">in one place.</span></h2>
       </div>
-      <p>EST is live now. SAT and ACT open as soon as their first full mocks are published.</p>
+      <p>{liveLine}</p>
     </div>
     <p className="swipe-hint" aria-hidden="true">Swipe to see more →</p>
     <div className="tracks">
@@ -112,7 +128,7 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
               {count ? <span className="live-dot"><i />LIVE · {count} EXAMS</span> : <span className="access soon">COMING SOON</span>}
             </div>
             <div className="logo-tile">
-              <Image src={t.logo.src} alt={`${t.name} logo`} width={t.logo.w} height={t.logo.h} className="logo-img" loading="eager" />
+              <Image src={t.logo.src} alt={`${t.name} logo`} width={t.logo.w} height={t.logo.h} className="logo-img" />
             </div>
             <h3 className="h">{t.name} <span className="serif">prep</span></h3>
             <p className="fmt">{t.format}</p>
@@ -120,8 +136,8 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
             <div className="chips">
               {t.sections.map((s) => <Link key={s.code} href={`/exams?subject=${s.code}`}>{s.label}</Link>)}
             </div>
-            <Link href={`/exams?track=${t.key}`} className="track-go">
-              {count ? `Start practising ${t.name}` : `See what's coming`} <Arrow s={14} />
+            <Link href={`/${t.key}`} className="track-go">
+              {count ? `${t.name} practice tests` : `About ${t.name} practice`} <Arrow s={14} />
             </Link>
           </article>
         );
@@ -207,7 +223,7 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
       <div className="points">
         <div className="point rv"><span className="n">i.</span><div><h4>A score out of 800</h4><p>Every section gets an estimated scaled score, so you can track it the way the real exam reports it.</p></div></div>
         <div className="point rv"><span className="n">ii.</span><div><h4>Review every question</h4><p>Step through your mistakes one by one, with the passage, the right answer and the explanation.</p></div></div>
-        <div className="point rv"><span className="n">iii.</span><div><h4>Retake and climb</h4><p>Take a new test, compare it with the last one, and keep closing the gap to 1600.</p></div></div>
+        <div className="point rv"><span className="n">iii.</span><div><h4>Retake and climb</h4><p>Take a new test, compare it with the last one, and keep closing the gap to your target score.</p></div></div>
       </div>
     </div>
   </div>
@@ -306,24 +322,22 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
   <div className="wrap">
     <div className="faq-wrap">
       <div className="side rv">
-        <h3 className="h">Questions students and parents ask</h3>
+        <h2 className="h">Questions students and parents ask</h2>
         <p>Something else? Message us and a person will reply.</p>
       </div>
       <div className="rv">
-        <details open><summary>Are these the official exams?<span className="pm">+</span></summary><p>No. 16hundred is an independent practice platform, not affiliated with the EST, SAT or ACT organisers. Our tests follow each exam&apos;s official format: the same topics, question types, number of questions and timing.</p></details>
-        <details><summary>Which exams are available?<span className="pm">+</span></summary><p>EST I Math and Literacy, and EST II Math Level 1 and 2, are live now. SAT (Math, Reading and Writing) and ACT (Math, English, Science) open as soon as their first full mocks are published.</p></details>
-        <details><summary>What&apos;s free and what needs a membership?<span className="pm">+</span></summary><p>Exams marked FREE only need a free account, no card. A membership unlocks every exam in the library, on every track.</p></details>
-        <details><summary>How do I follow progress?<span className="pm">+</span></summary><p>Every submitted test is saved to the dashboard with the score out of 800, the time used, a breakdown by topic and an explanation for every question.</p></details>
-        <details><summary>How do we pay?<span className="pm">+</span></summary><p>By card, through Paymob&apos;s secure checkout. We never see or store your card details.</p></details>
+        {faqs.map((f, i) => (
+          <details key={f.q} open={i === 0}><summary>{f.q}<span className="pm">+</span></summary><p>{f.a}</p></details>
+        ))}
       </div>
     </div>
   </div>
 </section>
 
 <section className="final">
-  <div className="ghost" aria-hidden="true">1600</div>
+  <svg className="ghost" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" strokeWidth=".35" /><circle cx="16" cy="16" r="9.5" fill="none" stroke="currentColor" strokeWidth=".35" /><circle cx="16" cy="16" r="5" fill="none" stroke="currentColor" strokeWidth=".35" /><circle cx="16" cy="16" r="1.4" fill="currentColor" /></svg>
   <div className="wrap">
-    <h2 className="h rv">Ready to start climbing<br /><span className="serif">toward 1600?</span></h2>
+    <h2 className="h rv">Ready to hit<br /><span className="serif">your target score?</span></h2>
     <div className="row rv">
       <p>Create your free account, explore the exam library and take your first practice test today.</p>
       <div className="final-ctas">
@@ -356,15 +370,41 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
 <footer>
   <div className="wrap">
     <div className="foot-top">
-      <div><Logo href="/" /><p>EST, SAT and ACT practice for American Diploma students. Study with intent, practise with precision.</p></div>
-      <div><h6>Practice</h6><Link href="/exams?track=est">EST</Link><Link href="/exams?track=sat">SAT</Link><Link href="/exams?track=act">ACT</Link><Link href="/exams?access=free">Free exams</Link></div>
+      <div><Logo href="/" tone="paper" /><p>{brand.short} Practise under real test conditions and reach your target score.</p></div>
+      <div><h6>Practice</h6><Link href="/est">EST practice tests</Link><Link href="/sat">SAT practice tests</Link><Link href="/act">ACT practice tests</Link><Link href="/exams?access=free">Free exams</Link></div>
       <div><h6>Platform</h6><Link href="/exams">Exam library</Link><Link href="/pricing">Pricing</Link><a href="#contact">Contact</a><Link href="/dashboard">My account</Link></div>
       <div><h6>Account</h6><Link href="/sign-in">Log in</Link><Link href="/sign-up">Create account</Link></div>
     </div>
-    <div className="wordmark" aria-hidden="true"><b>16</b>hundred</div>
-    <div className="legal"><span>© 2026 16hundred. All rights reserved.</span><span>Independent practice platform, not affiliated with or endorsed by the EST, SAT or ACT organisers. SAT® is a trademark of the College Board; ACT® is a trademark of ACT, Inc.</span></div>
+    <div className="wordmark" aria-hidden="true">Target<b>Score</b></div>
+    <div className="legal"><span>© 2026 TargetScore. All rights reserved.</span><span>Independent practice platform, not affiliated with or endorsed by the EST, SAT or ACT organisers. SAT® is a trademark of the College Board; ACT® is a trademark of ACT, Inc.</span></div>
   </div>
 </footer>
+      <JsonLd
+        data={[
+          {
+            "@type": "WebPage",
+            "@id": `${absoluteUrl("/")}#webpage`,
+            url: absoluteUrl("/"),
+            name: "TargetScore: American Diploma EST, SAT & ACT Practice Tests",
+            isPartOf: { "@id": SITE_ID },
+            about: { "@id": ORG_ID },
+            description: brand.description,
+          },
+          {
+            "@type": "WebApplication",
+            name: brand.name,
+            url: brand.url,
+            applicationCategory: "EducationalApplication",
+            operatingSystem: "Web browser",
+            description: brand.description,
+            audience: { "@type": "EducationalAudience", educationalRole: "student", audienceType: "American Diploma students" },
+            featureList: ["Timed full-length practice tests", "Explanation for every question", "Score breakdown by topic", "Progress tracking across attempts", "Question bank by topic and difficulty"],
+            offers: { "@type": "Offer", price: "0", priceCurrency: "EGP", description: "Free account with free practice exams" },
+            publisher: { "@id": ORG_ID },
+          },
+          faqPage(faqs),
+        ]}
+      />
     </div>
   );
 }

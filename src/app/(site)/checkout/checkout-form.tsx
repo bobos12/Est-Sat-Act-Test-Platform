@@ -115,7 +115,7 @@ export function ManualCheckout({ plan, userId, extendsAccess }: { plan: PlanInfo
       {/* Steps */}
       <div className="space-y-5">
         <a
-          href={`https://wa.me/${PAYMENT.whatsapp}?text=${encodeURIComponent(`Hi 16hundred, I'm outside Egypt and want the ${plan.name} plan.`)}`}
+          href={`https://wa.me/${PAYMENT.whatsapp}?text=${encodeURIComponent(`Hi TargetScore, I'm outside Egypt and want the ${plan.name} plan.`)}`}
           target="_blank"
           rel="noreferrer"
           className="flex items-center gap-3 rounded-[var(--radius-lg)] bg-success-50 px-5 py-4 text-sm text-success-700 ring-1 ring-success-600/20 transition hover:ring-success-600/50"
@@ -407,7 +407,7 @@ export function PendingCard({ reference, planName, amount, fresh }: { reference:
           Keep practising free exams
         </Link>
         <a
-          href={`https://wa.me/${PAYMENT.whatsapp}?text=${encodeURIComponent(`Hi 16hundred, I just paid for ${planName}. Reference ${reference}.`)}`}
+          href={`https://wa.me/${PAYMENT.whatsapp}?text=${encodeURIComponent(`Hi TargetScore, I just paid for ${planName}. Reference ${reference}.`)}`}
           target="_blank"
           rel="noreferrer"
           className="inline-flex h-11 items-center justify-center gap-2 rounded-[var(--radius-md)] px-5 text-sm font-medium text-success-700 ring-1 ring-inset ring-success-600/40 hover:bg-success-50"

@@ -68,7 +68,7 @@ export function TryQuestion() {
               <div className="done">
                 <div className="eyebrow">Warm-up complete</div>
                 <div className="big">{score}/3</div>
-                <p>{score === 3 ? "A perfect warm-up. That's the 1600 mindset." : "Good start. Now you know what to practise."} The full EST I Math mock is 50 questions in 75 minutes, and your first one is free.</p>
+                <p>{score === 3 ? "A perfect warm-up. You're on target." : "Good start. Now you know what to practise."} The full EST I Math mock is 50 questions in 75 minutes, and your first one is free.</p>
                 <a className="btn btn-blue" href={FREE_START_HREF}>Start a free exam <Arrow /></a>
                 <div style={{ marginTop: 14 }}><button className="link" onClick={reset}>Try again</button></div>
               </div>

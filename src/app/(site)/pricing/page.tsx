@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { PlanList, PlanListSkeleton } from "@/components/site/plans";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Pricing",
-  description: "Simple, honest pricing: full access to every EST, SAT and ACT exam. Cancel anytime.",
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Pricing: EST, SAT & ACT Practice Test Membership",
+  description:
+    "One membership for every EST, SAT and ACT practice test on TargetScore, with explanations and progress tracking. Free exams stay open. Pay securely in EGP, cancel anytime.",
+  path: "/pricing",
+});
 
 const included = [
   "Every published EST, SAT and ACT mock exam",

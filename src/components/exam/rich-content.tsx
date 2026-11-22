@@ -1,4 +1,7 @@
 import katex from "katex";
+// Math and reading-serif styles load only on pages that render question content.
+import "katex/dist/katex.min.css";
+import "@fontsource-variable/source-serif-4/opsz.css";
 import { Fragment, type ReactNode } from "react";
 import type { Block, RichContent } from "@/lib/content";
 import { cn } from "@/lib/utils";

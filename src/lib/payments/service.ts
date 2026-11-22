@@ -52,7 +52,7 @@ export async function startCheckout(input: {
       merchantReference: reference,
       amountCents: plan.price_cents,
       currency: plan.currency,
-      description: `16hundred ${plan.name}`,
+      description: `TargetScore ${plan.name}`,
       customer: { email: input.email, firstName: firstName ?? "", lastName: rest.join(" "), phone: input.phone },
       notificationUrl: `${site}/api/webhooks/${provider.id}`,
       redirectionUrl: `${site}/checkout/return?ref=${encodeURIComponent(reference)}`,
