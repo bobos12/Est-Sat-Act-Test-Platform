@@ -7,6 +7,6 @@ export const brand = {
     "TargetScore is the online practice platform for American Diploma students preparing for the EST, SAT and ACT: full-length timed practice tests, an explanation for every answer and a score by topic. Your first exam is free.",
   /** Short line for footers and cards. */
   short: "EST, SAT and ACT practice tests for American Diploma students.",
-  supportEmail: "support@targetscore.online", // TODO: confirm this mailbox exists before launch
+  supportEmail: "targetscore1600@gmail.com",
   themeColor: "#1559ED",
 } as const;
