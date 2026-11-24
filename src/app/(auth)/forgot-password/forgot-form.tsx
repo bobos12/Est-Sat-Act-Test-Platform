@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useActionState } from "react";
+import { Turnstile } from "@/components/auth/turnstile";
 import { FormMessage } from "@/components/ui/field";
 import { requestPasswordReset, type AuthState } from "../actions";
 import { CheckInbox } from "../auth-form";
@@ -30,6 +31,7 @@ export function ForgotForm() {
           />
           {state?.fieldErrors?.email ? <p className="text-sm text-danger-600" role="alert">{state.fieldErrors.email}</p> : null}
         </div>
+        <Turnstile action="reset" resetKey={state} />
         <button type="submit" disabled={pending} className="h-12 w-full rounded-xl bg-mark-500 font-semibold text-white shadow-lg shadow-mark-500/25 hover:bg-mark-600 disabled:opacity-60">
           {pending ? "Sending…" : "Send reset link"}
         </button>

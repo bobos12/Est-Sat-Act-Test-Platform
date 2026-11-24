@@ -3,7 +3,7 @@ import katex from "katex";
 import "katex/dist/katex.min.css";
 import "@fontsource-variable/source-serif-4/opsz.css";
 import { Fragment, type ReactNode } from "react";
-import type { Block, RichContent } from "@/lib/content";
+import { INLINE_TOKEN as TOKEN, mediaSrc, type Block, type RichContent } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 /**
@@ -16,9 +16,6 @@ function renderMath(latex: string, displayMode: boolean) {
 }
 
 type InlineOptions = { activeMarker?: number | null; onMarker?: (n: number) => void };
-
-// Tokens: $$display$$, $inline$ (\$ is a literal dollar inside math), **bold**, [[n|text]] / [[n]]
-const TOKEN = /(\$\$(?:\\\$|[^$])+\$\$|\$(?:\\\$|[^$\n])+\$|\*\*[^*]+\*\*|\[\[\d+(?:\|[^\]]*)?\]\])/g;
 
 export function InlineText({ text, options }: { text: string; options?: InlineOptions }) {
   const parts = text.split(TOKEN).filter((p) => p !== "");
@@ -80,7 +77,7 @@ function BlockView({ block, options }: { block: Block; options?: InlineOptions }
       return (
         <figure>
           {/* eslint-disable-next-line @next/next/no-img-element -- question media come from Supabase Storage with arbitrary sizes */}
-          <img src={block.src} alt={block.alt} width={block.width} className="h-auto max-w-full rounded-[var(--radius-sm)]" loading="lazy" />
+          <img src={mediaSrc(block.src)} alt={block.alt} width={block.width} className="h-auto max-w-full rounded-[var(--radius-sm)]" loading="lazy" />
           {block.caption ? <figcaption className="mt-2 text-sm text-ink-500">{block.caption}</figcaption> : null}
         </figure>
       );

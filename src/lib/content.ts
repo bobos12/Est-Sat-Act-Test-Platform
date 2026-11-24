@@ -20,6 +20,10 @@ export type RichContent = { blocks: Block[] };
 
 export const emptyContent: RichContent = { blocks: [] };
 
+// Tokens: $$display$$, $inline$ (\$ is a literal dollar inside math), **bold**, [[n|text]] / [[n]]
+// Splitting on it puts plain text at even indexes and tokens at odd ones.
+export const INLINE_TOKEN = /(\$\$(?:\\\$|[^$])+\$\$|\$(?:\\\$|[^$\n])+\$|\*\*[^*]+\*\*|\[\[\d+(?:\|[^\]]*)?\]\])/g;
+
 export function plainText(content: RichContent | null | undefined, max = 160): string {
   if (!content?.blocks) return "";
   const text = content.blocks
@@ -43,6 +47,15 @@ export function plainText(content: RichContent | null | undefined, max = 160): s
     .replace(/\s+/g, " ")
     .trim();
   return text.length > max ? `${text.slice(0, max - 1)}…` : text;
+}
+
+export const MEDIA_BUCKET = "question-media";
+export const MEDIA_PUBLIC_MARK = `/storage/v1/object/public/${MEDIA_BUCKET}/`;
+
+/** The bucket is private: unsigned image URLs (admin views) go through /media, which signs them for admins. */
+export function mediaSrc(src: string) {
+  const i = src.indexOf(MEDIA_PUBLIC_MARK);
+  return i === -1 ? src : `/media/${src.slice(i + MEDIA_PUBLIC_MARK.length)}`;
 }
 
 /**

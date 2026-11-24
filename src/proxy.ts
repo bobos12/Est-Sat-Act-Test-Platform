@@ -1,20 +1,35 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { DEVICE_COOKIE } from "@/lib/device";
 import { updateSession } from "@/lib/supabase/proxy-session";
 
 // Optimistic gate only: real authorization happens in server code and RLS.
 const PROTECTED = ["/dashboard", "/exam", "/results", "/account", "/admin", "/checkout", "/practice"];
 
 export async function proxy(request: NextRequest) {
+  // A first-party device id for the account-sharing signals (how many devices use one login).
+  const newDevice = request.cookies.get(DEVICE_COOKIE) ? null : crypto.randomUUID();
+  if (newDevice) request.cookies.set(DEVICE_COOKIE, newDevice);
+
   const { response, userId } = await updateSession(request);
   const { pathname, search } = request.nextUrl;
 
+  let res = response;
   if (!userId && PROTECTED.some((p) => pathname === p || pathname.startsWith(`${p}/`))) {
     const url = request.nextUrl.clone();
     url.pathname = "/sign-in";
     url.search = `?next=${encodeURIComponent(pathname + search)}`;
-    return NextResponse.redirect(url);
+    res = NextResponse.redirect(url);
   }
-  return response;
+  if (newDevice) {
+    res.cookies.set(DEVICE_COOKIE, newDevice, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 400,
+    });
+  }
+  return res;
 }
 
 export const config = {

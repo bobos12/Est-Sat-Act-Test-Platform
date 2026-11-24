@@ -4,6 +4,7 @@ import { SiteFooter } from "@/components/site/footer";
 import { SiteHeader } from "@/components/site/header";
 import { requireViewer } from "@/lib/auth/session";
 import type { BankOverview } from "@/lib/bank-types";
+import { redirectIfRevoked } from "@/lib/auth/single-session";
 import { createClient } from "@/lib/supabase/server";
 import { BankHome } from "./bank-home";
 
@@ -34,6 +35,7 @@ async function Bank({ searchParams }: { searchParams: PageProps<"/practice">["se
   const sp = await searchParams;
   const supabase = await createClient();
   const { data, error } = await supabase.rpc("bank_overview");
+  redirectIfRevoked(error, "/practice");
   if (error) throw new Error("We couldn't load the question bank. Please refresh.");
   const overview = data as BankOverview;
   return (

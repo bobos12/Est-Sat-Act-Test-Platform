@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import type { EmailOtpType } from "@supabase/supabase-js";
+import { claimSession } from "@/lib/auth/single-session";
 import { createClient } from "@/lib/supabase/server";
 
 /**
@@ -25,6 +26,7 @@ export async function GET(request: NextRequest) {
     ok = !(await supabase.auth.exchangeCodeForSession(code)).error;
   }
   if (!ok) return NextResponse.redirect(new URL("/sign-in?error=confirmation", request.url));
+  await claimSession(supabase);
 
   if (type === "recovery" || next === "/reset-password") return NextResponse.redirect(new URL("/reset-password", request.url));
   if (welcome) return NextResponse.redirect(new URL(`/welcome?next=${encodeURIComponent(next)}`, request.url));

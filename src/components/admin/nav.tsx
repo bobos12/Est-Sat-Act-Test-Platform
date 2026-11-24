@@ -12,6 +12,7 @@ const items = [
   { href: "/admin/knowledge", label: "Knowledge base" },
   { href: "/admin/students", label: "Students" },
   { href: "/admin/billing", label: "Plans & payments" },
+  { href: "/admin/security", label: "Security" },
 ];
 
 export function AdminNav({ badges }: { badges?: Record<string, number> }) {
