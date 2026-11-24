@@ -1,8 +1,9 @@
 "use client";
 
+import { ActionMessage } from "@/components/admin/client";
 import { useActionState } from "react";
 import { Button } from "@/components/ui/button";
-import { FormMessage, Input } from "@/components/ui/field";
+import { Input } from "@/components/ui/field";
 import { Label, Select } from "@/components/admin/ui";
 import { saveDiscount } from "./actions";
 
@@ -10,8 +11,7 @@ export function DiscountForm() {
   const [state, action, pending] = useActionState(saveDiscount, undefined);
   return (
     <form action={action} className="space-y-3">
-      {state?.error ? <FormMessage>{state.error}</FormMessage> : null}
-      {state?.ok ? <FormMessage tone="success">{state.ok}</FormMessage> : null}
+      <ActionMessage state={state} />
       <div>
         <Label htmlFor="code">Code</Label>
         <Input id="code" name="code" placeholder="EST20" className="font-mono uppercase" required />

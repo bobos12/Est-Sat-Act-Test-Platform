@@ -1,154 +1,258 @@
-import { requestTime } from "@/lib/time";
 import Link from "next/link";
-import { Input } from "@/components/ui/field";
-import { DataTable, Empty, Panel, PageHeader, Td, Th, adminDay } from "@/components/admin/ui";
-import { cn } from "@/lib/utils";
+import { SearchBox, btn } from "@/components/admin/client";
+import { Icon } from "@/components/admin/icons";
+import { Avatar, Badge, Empty, FilterTabs, PageHeader, Pagination, Panel, ScorePill, StatCard, Th, adminDay, money, relative } from "@/components/admin/ui";
 import { adminClient } from "@/lib/admin/server";
+import { ACCESS_FILTERS, loadAccessSets, loadStudentActivity, searchFilter, type AccessFilter } from "@/lib/admin/students";
+import { requestTime } from "@/lib/time";
+import { cn } from "@/lib/utils";
 
 export const metadata = { title: "Students" };
 
 const PAGE = 50;
+const SORTS = { new: "Newest first", old: "Oldest first", name: "Name A–Z" } as const;
+type Sort = keyof typeof SORTS;
 
 export default async function Students({ searchParams }: PageProps<"/admin/students">) {
   const { supabase } = await adminClient();
   const sp = await searchParams;
-  const q = typeof sp.q === "string" ? sp.q.trim().slice(0, 100) : "";
-  const access = typeof sp.access === "string" ? sp.access : "";
+  const str = (k: string) => (typeof sp[k] === "string" ? (sp[k] as string) : "");
+  const q = str("q").trim().slice(0, 100);
+  const access = (ACCESS_FILTERS.includes(str("access") as AccessFilter) ? str("access") : "") as AccessFilter;
+  const sort: Sort = str("sort") in SORTS ? (str("sort") as Sort) : "new";
   const page = Math.max(1, Number(sp.page) || 1);
-  const deleted = typeof sp.deleted === "string" ? sp.deleted : "";
 
   const now = requestTime();
-  const nowIso = new Date(now).toISOString();
-  const since30 = new Date(now - 30 * 86400000).toISOString();
+  const since30 = new Date(now - 30 * 86_400_000).toISOString();
+  const search = searchFilter(q);
 
-  // Who has premium right now (used for both the tiles and the Premium/Free filters).
-  const [{ data: activeSubs }, { count: totalAll }, { count: new30 }, { count: admins }] = await Promise.all([
-    supabase.from("subscriptions").select("user_id").eq("status", "active").lte("current_period_start", nowIso).gt("current_period_end", nowIso),
+  const [sets, { count: totalAll }, { count: new30 }, { count: admins }] = await Promise.all([
+    loadAccessSets(supabase, now),
     supabase.from("profiles").select("id", { count: "exact", head: true }),
     supabase.from("profiles").select("id", { count: "exact", head: true }).gte("created_at", since30),
     supabase.from("profiles").select("id", { count: "exact", head: true }).eq("role", "admin"),
   ]);
-  const premiumIds = [...new Set((activeSubs ?? []).map((s) => s.user_id))];
 
-  let query = supabase
-    .from("profiles")
-    .select("id, email, full_name, phone, role, created_at, subscriptions!subscriptions_user_id_fkey(status, current_period_start, current_period_end), exam_attempts(count)", { count: "exact" })
-    .order("created_at", { ascending: false })
-    .range((page - 1) * PAGE, page * PAGE - 1);
-  if (q) {
-    const safe = q.replace(/[%,()]/g, " ");
-    query = query.or(`email.ilike.%${safe}%,full_name.ilike.%${safe}%,phone.ilike.%${safe}%`);
+  const cols = "id, email, full_name, phone, school, grade, role, created_at";
+  const order = (query: ReturnType<typeof base>) =>
+    sort === "name" ? query.order("full_name", { ascending: true }).order("email") : query.order("created_at", { ascending: sort === "old" });
+  function base(select: string, opts?: { count: "exact" }) {
+    let query = supabase.from("profiles").select(select, opts);
+    if (search) query = query.or(search);
+    return query;
   }
-  if (access === "admin") query = query.eq("role", "admin");
-  if (access === "new") query = query.gte("created_at", since30);
-  if (access === "premium") query = query.in("id", premiumIds.length ? premiumIds : ["00000000-0000-0000-0000-000000000000"]);
-  if (access === "free" && premiumIds.length) query = query.not("id", "in", `(${premiumIds.join(",")})`);
-  const { data: rows, count, error } = await query;
-  if (error) throw new Error(error.message);
 
-  const students = (rows ?? [])
-    .map((r) => {
-      const active = (r.subscriptions ?? []).find(
-        (s) => s.status === "active" && Date.parse(s.current_period_start) <= now && Date.parse(s.current_period_end) > now,
-      );
-      const lastEnd = (r.subscriptions ?? []).map((s) => s.current_period_end).filter(Boolean).sort().at(-1);
-      const attempts = Array.isArray(r.exam_attempts) ? (r.exam_attempts[0] as { count: number } | undefined)?.count ?? 0 : 0;
-      return { ...r, active, lastEnd, attempts };
-    });
+  let rows: { id: string; email: string; full_name: string; phone: string | null; school: string | null; grade: string | null; role: string; created_at: string }[] = [];
+  let total = 0;
+  if (access === "premium" || access === "expiring" || access === "expired" || access === "free") {
+    // Membership comes from subscriptions, so filter a light id list here and fetch only this page's rows.
+    const { data: light, error } = await order(base("id")).limit(20000);
+    if (error) throw new Error(error.message);
+    const ids = (light as unknown as { id: string }[]).map((r) => r.id).filter((id) => (access === "free" ? !sets.premium.has(id) : sets[access].has(id)));
+    total = ids.length;
+    const pageIds = ids.slice((page - 1) * PAGE, page * PAGE);
+    if (pageIds.length) {
+      const { data } = await supabase.from("profiles").select(cols).in("id", pageIds);
+      const pos = new Map(pageIds.map((id, i) => [id, i]));
+      rows = (data ?? []).sort((a, b) => pos.get(a.id)! - pos.get(b.id)!);
+    }
+  } else {
+    let query = order(base(cols, { count: "exact" }));
+    if (access === "admin") query = query.eq("role", "admin");
+    if (access === "new") query = query.gte("created_at", since30);
+    const { data, count, error } = await query.range((page - 1) * PAGE, page * PAGE - 1);
+    if (error) throw new Error(error.message);
+    rows = (data ?? []) as unknown as typeof rows;
+    total = count ?? 0;
+  }
 
-  const pages = Math.max(1, Math.ceil((count ?? 0) / PAGE));
-  const qs = (p: number) => `/admin/students?${new URLSearchParams({ ...(q ? { q } : {}), ...(access ? { access } : {}), page: String(p) })}`;
+  const activity = await loadStudentActivity(
+    supabase,
+    rows.map((r) => r.id),
+  );
+
+  const pages = Math.max(1, Math.ceil(total / PAGE));
+  const link = (patch: Record<string, string>) => {
+    const next = new URLSearchParams({ ...(q ? { q } : {}), ...(access ? { access } : {}), ...(sort !== "new" ? { sort } : {}), ...patch });
+    for (const [k, v] of [...next]) if (!v) next.delete(k);
+    return `/admin/students${next.size ? `?${next}` : ""}`;
+  };
+  const free = Math.max(0, (totalAll ?? 0) - sets.premium.size);
 
   return (
     <>
-      <PageHeader title="Students" description="Search and filter every account. Open a student to edit, grant access, suspend or delete." />
-      {deleted ? <p className="mb-4 rounded-[var(--radius-md)] bg-success-50 px-4 py-3 text-sm text-success-700">Deleted {deleted}.</p> : null}
-      <div className="grid grid-cols-2 gap-px overflow-hidden rounded-[var(--radius-lg)] bg-line ring-1 ring-line sm:grid-cols-5">
-        {[
-          { k: "", label: "All students", v: totalAll ?? 0 },
-          { k: "premium", label: "Premium now", v: premiumIds.length, tone: "text-success-700" },
-          { k: "free", label: "Free", v: Math.max(0, (totalAll ?? 0) - premiumIds.length), tone: "text-mark-500" },
-          { k: "new", label: "New (30 days)", v: new30 ?? 0 },
-          { k: "admin", label: "Admins", v: admins ?? 0 },
-        ].map((t) => (
-          <Link
-            key={t.k}
-            href={`/admin/students?${new URLSearchParams({ ...(q ? { q } : {}), ...(t.k ? { access: t.k } : {}) })}`}
-            className={cn("px-4 py-4 transition", access === t.k ? "bg-mark-50 shadow-[inset_0_-3px_0_var(--color-mark-500)]" : "bg-white hover:bg-paper")}
-          >
-            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-ink-500">{t.label}</p>
-            <p className={cn("mt-1.5 font-display text-3xl tabular", t.tone ?? "text-ink-950")}>{t.v.toLocaleString("en")}</p>
-          </Link>
-        ))}
+      <PageHeader
+        title="Students"
+        description="Everyone with an account. Click a student to see their scores, payments and devices, and to manage their access."
+        actions={
+          <a href={`/admin/students/export${access ? `?access=${access}` : ""}`} className={btn("secondary")} download>
+            <Icon name="download" size={15} /> Export CSV
+          </a>
+        }
+      />
+
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+        <StatCard label="All students" value={(totalAll ?? 0).toLocaleString("en")} note={`+${new30 ?? 0} in 30 days`} href={link({ access: "", page: "" })} active={!access} icon="users" />
+        <StatCard
+          label="Premium now"
+          value={sets.premium.size.toLocaleString("en")}
+          note={`${sets.expiring.size} expiring in 7 days`}
+          href={link({ access: "premium", page: "" })}
+          active={access === "premium"}
+          icon="crown"
+          tone="success"
+        />
+        <StatCard label="Free" value={free.toLocaleString("en")} note={`${sets.expired.size} used to be premium`} href={link({ access: "free", page: "" })} active={access === "free"} icon="lock" tone="brand" />
+        <StatCard
+          label="Expiring soon"
+          value={sets.expiring.size.toLocaleString("en")}
+          note="Premium ends within 7 days"
+          href={link({ access: "expiring", page: "" })}
+          active={access === "expiring"}
+          icon="clock"
+          tone="warning"
+        />
       </div>
-      <form className="mb-4 mt-5 flex flex-wrap gap-2" action="/admin/students">
-        {access ? <input type="hidden" name="access" value={access} /> : null}
-        <Input name="q" defaultValue={q} placeholder="Search name, email or phone" className="max-w-sm" />
-        <button className="h-11 rounded-[var(--radius-md)] bg-ink-950 px-4 text-sm font-medium text-paper">Search</button>
-        {q || access ? (
-          <Link href="/admin/students" className="self-center text-sm font-medium text-ink-500 hover:text-ink-950">
-            Clear
-          </Link>
-        ) : null}
-        <span className="ml-auto self-center text-sm text-ink-500">{count ?? 0} shown</span>
-      </form>
-      <Panel>
-        {students.length ? (
-          <DataTable>
-            <thead>
-              <tr>
-                <Th>Student</Th>
-                <Th>Access</Th>
-                <Th>Attempts</Th>
-                <Th>Joined</Th>
-                <Th className="text-right"> </Th>
-              </tr>
-            </thead>
-            <tbody>
-              {students.map((s) => (
-                <tr key={s.id} className="hover:bg-paper">
-                  <Td>
-                    <Link href={`/admin/students/${s.id}`} className="font-medium text-ink-950 hover:underline">
-                      {s.full_name || s.email}
-                    </Link>
-                    <p className="text-xs text-ink-500">
-                      {s.email}
-                      {s.role === "admin" ? " · Administrator" : ""}
-                    </p>
-                  </Td>
-                  <Td>
-                    {s.active ? (
-                      <span className="text-success-700">Premium until {adminDay.format(new Date(s.active.current_period_end))}</span>
-                    ) : s.lastEnd ? (
-                      <span className="text-ink-500">Expired {adminDay.format(new Date(s.lastEnd))}</span>
-                    ) : (
-                      <span className="text-ink-500">Free</span>
-                    )}
-                  </Td>
-                  <Td className="tabular">{s.attempts}</Td>
-                  <Td className="text-ink-500">{adminDay.format(new Date(s.created_at))}</Td>
-                  <Td className="text-right">
-                    <Link href={`/admin/students/${s.id}`} className="rounded-md px-2.5 py-1 text-xs font-semibold text-ink-700 ring-1 ring-line hover:bg-paper-2">
-                      Manage
-                    </Link>
-                  </Td>
-                </tr>
-              ))}
-            </tbody>
-          </DataTable>
-        ) : (
-          <Empty>No students match.</Empty>
-        )}
-      </Panel>
-      {pages > 1 ? (
-        <div className="mt-4 flex items-center justify-between text-sm">
-          {page > 1 ? <Link href={qs(page - 1)} className="text-ink-700 hover:underline">← Previous</Link> : <span />}
-          <span className="text-ink-500">
-            Page {page} of {pages}
-          </span>
-          {page < pages ? <Link href={qs(page + 1)} className="text-ink-700 hover:underline">Next →</Link> : <span />}
+
+      <Panel className="mt-6">
+        <div className="flex flex-col gap-3 border-b border-line p-4 lg:flex-row lg:items-center">
+          <FilterTabs
+            items={[
+              { label: "All", href: link({ access: "", page: "" }), active: !access, count: totalAll ?? 0 },
+              { label: "Premium", href: link({ access: "premium", page: "" }), active: access === "premium", count: sets.premium.size },
+              { label: "Expiring", href: link({ access: "expiring", page: "" }), active: access === "expiring", count: sets.expiring.size },
+              { label: "Expired", href: link({ access: "expired", page: "" }), active: access === "expired", count: sets.expired.size },
+              { label: "Free", href: link({ access: "free", page: "" }), active: access === "free", count: free },
+              { label: "New (30d)", href: link({ access: "new", page: "" }), active: access === "new", count: new30 ?? 0 },
+              { label: "Admins", href: link({ access: "admin", page: "" }), active: access === "admin", count: admins ?? 0 },
+            ]}
+          />
+          <div className="flex flex-1 items-center gap-2 lg:justify-end">
+            <SearchBox placeholder="Name, email, phone or school" className="flex-1 lg:max-w-xs" />
+            <SortMenu sort={sort} link={link} />
+          </div>
         </div>
-      ) : null}
+
+        {q ? (
+          <p className="border-b border-line bg-mark-50/50 px-5 py-2 text-sm text-ink-600">
+            {total.toLocaleString("en")} result{total === 1 ? "" : "s"} for <b className="text-ink-950">“{q}”</b> ·{" "}
+            <Link href={link({ q: "", page: "" })} className="font-medium text-mark-600 hover:underline">
+              clear search
+            </Link>
+          </p>
+        ) : null}
+
+        {rows.length ? (
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[900px] text-left text-sm">
+              <thead>
+                <tr>
+                  <Th>Student</Th>
+                  <Th>Access</Th>
+                  <Th>Exams</Th>
+                  <Th>Last active</Th>
+                  <Th>Total paid</Th>
+                  <Th>Joined</Th>
+                  <Th className="w-10" />
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-line">
+                {rows.map((s) => {
+                  const a = activity.get(s.id);
+                  const premium = sets.premium.has(s.id);
+                  const end = sets.lastEnd.get(s.id);
+                  const daysLeft = end ? Math.ceil((end - now) / 86_400_000) : 0;
+                  const paid = Object.entries(a?.paid ?? {});
+                  const href = `/admin/students/${s.id}`;
+                  return (
+                    <tr key={s.id} className="group transition hover:bg-paper">
+                      <td className="px-5 py-3">
+                        <Link href={href} className="flex items-center gap-3">
+                          <Avatar name={s.full_name || s.email} />
+                          <span className="min-w-0">
+                            <span className="flex items-center gap-2 font-medium text-ink-950 group-hover:text-mark-600">
+                              <span className="truncate">{s.full_name || <span className="text-ink-500">No name</span>}</span>
+                              {s.role === "admin" ? <Badge tone="dark">Admin</Badge> : null}
+                            </span>
+                            <span className="block truncate text-xs text-ink-500">
+                              {s.email}
+                              {s.phone ? ` · ${s.phone}` : ""}
+                            </span>
+                          </span>
+                        </Link>
+                      </td>
+                      <td className="px-5 py-3">
+                        {premium ? (
+                          <div>
+                            <Badge tone={daysLeft <= 7 ? "warning" : "success"} icon="crown">
+                              Premium
+                            </Badge>
+                            <p className={cn("mt-1 text-xs", daysLeft <= 7 ? "font-medium text-warning-700" : "text-ink-500")}>
+                              {daysLeft <= 1 ? "Ends today" : `${daysLeft} days left`} · {adminDay.format(new Date(end!))}
+                            </p>
+                          </div>
+                        ) : sets.expired.has(s.id) ? (
+                          <Badge tone="neutral">Expired</Badge>
+                        ) : (
+                          <Badge tone="brand">Free</Badge>
+                        )}
+                      </td>
+                      <td className="px-5 py-3">
+                        {a?.attempts ? (
+                          <span className="flex items-center gap-2">
+                            <span className="tabular text-ink-900">{a.attempts}</span>
+                            {a.avg != null ? <ScorePill percent={a.avg} /> : null}
+                          </span>
+                        ) : (
+                          <span className="text-ink-400">None</span>
+                        )}
+                      </td>
+                      <td className="px-5 py-3 text-ink-600">{a?.lastActive ? relative(a.lastActive, now) : <span className="text-ink-400">Never</span>}</td>
+                      <td className="px-5 py-3 tabular text-ink-900">{paid.length ? paid.map(([c, v]) => money(v, c)).join(" · ") : <span className="text-ink-400">—</span>}</td>
+                      <td className="px-5 py-3 text-ink-600">{adminDay.format(new Date(s.created_at))}</td>
+                      <td className="px-3 py-3 text-right">
+                        <Link href={href} aria-label="Open" className="inline-flex h-8 w-8 items-center justify-center rounded-md text-ink-400 transition group-hover:bg-white group-hover:text-mark-600 group-hover:ring-1 group-hover:ring-line">
+                          <Icon name="chevronRight" size={16} />
+                        </Link>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <Empty icon="users" action={q || access ? <Link href="/admin/students" className={btn("secondary", "sm")}>Clear filters</Link> : undefined}>
+            {q ? `No students match “${q}”.` : "No students in this group."}
+          </Empty>
+        )}
+        <div className="border-t border-line">
+          <Pagination page={page} pages={pages} href={(p) => link({ page: String(p) })} total={total} />
+        </div>
+      </Panel>
     </>
+  );
+}
+
+function SortMenu({ sort, link }: { sort: Sort; link: (p: Record<string, string>) => string }) {
+  return (
+    <div className="flex shrink-0 rounded-[var(--radius-md)] ring-1 ring-inset ring-line-strong">
+      {(Object.keys(SORTS) as Sort[]).map((k, i) => (
+        <Link
+          key={k}
+          href={link({ sort: k === "new" ? "" : k, page: "" })}
+          scroll={false}
+          title={SORTS[k]}
+          className={cn(
+            "flex h-10 items-center px-3 text-xs font-semibold transition",
+            i === 0 && "rounded-l-[var(--radius-md)]",
+            i === 2 && "rounded-r-[var(--radius-md)]",
+            sort === k ? "bg-ink-950 text-white" : "text-ink-600 hover:bg-paper-2",
+          )}
+        >
+          {{ new: "Newest", old: "Oldest", name: "A–Z" }[k]}
+        </Link>
+      ))}
+    </div>
   );
 }

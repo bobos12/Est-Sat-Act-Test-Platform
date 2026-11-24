@@ -33,10 +33,10 @@ export async function GET(request: NextRequest) {
   await claimSession(supabase);
   const { data: auth } = await supabase.auth.getUser();
 
-  // An admin opening an email sign-in link goes to the 2-step screen (where a lost phone can be reset).
+  // An admin opening an email sign-in link goes straight to the dashboard (the link counts as 2-step verification).
   if (type === "email" || type === "magiclink") {
     const { data: profile } = auth.user ? await supabase.from("profiles").select("role").eq("id", auth.user.id).single() : { data: null };
-    if (profile?.role === "admin") return NextResponse.redirect(new URL("/two-step", request.url));
+    if (profile?.role === "admin") return NextResponse.redirect(new URL(next.startsWith("/admin") ? next : "/admin", request.url));
   }
 
   if (type === "recovery" || next === "/reset-password") return NextResponse.redirect(new URL("/reset-password", request.url));

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SubmitButton } from "@/components/admin/client";
 import { notFound } from "next/navigation";
 import { RichContentView } from "@/components/exam/rich-content";
 import { Label, Panel, Select, StatusBadge, Textarea, adminDate } from "@/components/admin/ui";
@@ -236,7 +237,7 @@ export default async function AdminQuestion({ params, searchParams }: PageProps<
                 <Label htmlFor="review_notes">Reviewer notes</Label>
                 <Textarea id="review_notes" name="review_notes" rows={3} defaultValue={q.review_notes ?? ""} placeholder="Only admins see this." className="font-sans" />
               </div>
-              <button className="h-10 w-full rounded-[var(--radius-md)] bg-ink-950 text-sm font-medium text-paper hover:bg-ink-800">Save tags</button>
+              <SubmitButton className="w-full" pendingLabel="Saving…">Save tags</SubmitButton>
               <p className="text-xs text-ink-400">
                 Created {adminDate.format(new Date(q.created_at))} · updated {adminDate.format(new Date(q.updated_at))}
               </p>

@@ -1,3 +1,5 @@
-export default function AdminLoading() {
-  return <div className="p-10 text-sm text-ink-500">Loading…</div>;
+import { PageSkeleton } from "@/components/admin/ui";
+
+export default function Loading() {
+  return <PageSkeleton stats={0} rows={4} side />;
 }

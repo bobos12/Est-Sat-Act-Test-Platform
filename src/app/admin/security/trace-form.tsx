@@ -1,8 +1,8 @@
 "use client";
 
+import { SubmitButton } from "@/components/admin/client";
 import Link from "next/link";
 import { useActionState } from "react";
-import { Button } from "@/components/ui/button";
 import { FormMessage } from "@/components/ui/field";
 import { Textarea } from "@/components/admin/ui";
 import { traceLeak, type TraceState } from "./actions";
@@ -34,9 +34,9 @@ export function TraceForm() {
           )}
         </div>
       ))}
-      <Button type="submit" size="sm" disabled={pending}>
+      <SubmitButton size="sm" disabled={pending}>
         {pending ? "Tracing…" : "Trace"}
-      </Button>
+      </SubmitButton>
     </form>
   );
 }

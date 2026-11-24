@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SubmitButton } from "@/components/admin/client";
 import { notFound } from "next/navigation";
 import { RichContentView } from "@/components/exam/rich-content";
 import { FormMessage } from "@/components/ui/field";
@@ -49,17 +50,17 @@ export default async function DocumentPage({ params, searchParams }: PageProps<"
             {doc.kind === "question_paper" && doc.extracted_question_count === 0 && doc.status !== "processing" ? (
               <form action={processDocument}>
                 <input type="hidden" name="id" value={doc.id} />
-                <button className="h-10 rounded-[var(--radius-md)] bg-ink-950 px-4 text-sm font-medium text-paper hover:bg-ink-800">
+                <SubmitButton icon="sparkle" pendingLabel="Analysing… this can take a minute">
                   {doc.status === "failed" ? "Retry analysis" : "Analyse with AI"}
-                </button>
+                </SubmitButton>
               </form>
             ) : null}
             {doc.status === "extracted" ? (
               <form action={markReviewed}>
                 <input type="hidden" name="id" value={doc.id} />
-                <button className="h-10 rounded-[var(--radius-md)] bg-white px-4 text-sm font-medium text-ink-950 ring-1 ring-inset ring-line-strong hover:bg-paper-2">
+                <SubmitButton variant="secondary" icon="check" pendingLabel="Saving…">
                   Mark reviewed
-                </button>
+                </SubmitButton>
               </form>
             ) : null}
           </>
@@ -94,7 +95,9 @@ export default async function DocumentPage({ params, searchParams }: PageProps<"
                         <form action={retireQuestion}>
                           <input type="hidden" name="id" value={q.id} />
                           <input type="hidden" name="doc" value={doc.id} />
-                          <button className="text-xs text-ink-500 hover:text-danger-600">Exclude</button>
+                          <SubmitButton variant="ghost" size="xs" pendingLabel="Excluding…">
+                            Exclude
+                          </SubmitButton>
                         </form>
                       ) : null}
                     </div>

@@ -1,8 +1,8 @@
 "use client";
 
+import { ActionMessage, SubmitButton } from "@/components/admin/client";
 import { useActionState } from "react";
-import { Button } from "@/components/ui/button";
-import { FormMessage, Input } from "@/components/ui/field";
+import { Input } from "@/components/ui/field";
 import { Label, Select } from "@/components/admin/ui";
 import { uploadReadyExam } from "./actions";
 
@@ -13,8 +13,7 @@ export function ReadyExamForm({ subjects }: { subjects: { id: string; name: stri
   const [state, action, pending] = useActionState(uploadReadyExam, undefined);
   return (
     <form action={action} className="space-y-4">
-      {state?.error ? <FormMessage>{state.error}</FormMessage> : null}
-      {state?.ok ? <FormMessage tone="success">{state.ok}</FormMessage> : null}
+      <ActionMessage state={state} />
       <div>
         <Label htmlFor="paper">Exam PDF</Label>
         <input id="paper" name="paper" type="file" accept="application/pdf" required className={file} />
@@ -51,9 +50,9 @@ export function ReadyExamForm({ subjects }: { subjects: { id: string; name: stri
           <Input id="duration" name="duration" type="number" min={1} max={300} placeholder="Subject default" />
         </div>
       </div>
-      <Button type="submit" size="sm" disabled={pending}>
+      <SubmitButton size="sm" disabled={pending}>
         {pending ? "Reading the PDF… this takes a few minutes" : "Upload and build exam"}
-      </Button>
+      </SubmitButton>
     </form>
   );
 }

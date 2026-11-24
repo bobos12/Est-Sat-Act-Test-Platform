@@ -1,8 +1,9 @@
 "use client";
 
+import { ActionMessage } from "@/components/admin/client";
 import { useActionState } from "react";
 import { Button } from "@/components/ui/button";
-import { FormMessage, Input } from "@/components/ui/field";
+import { Input } from "@/components/ui/field";
 import { Label, Textarea } from "@/components/admin/ui";
 import { savePlan } from "./actions";
 
@@ -25,8 +26,7 @@ export function PlanForm({ plan }: { plan?: Plan }) {
   return (
     <form action={action} className="space-y-4">
       {plan ? <input type="hidden" name="id" value={plan.id} /> : null}
-      {state?.error ? <FormMessage>{state.error}</FormMessage> : null}
-      {state?.ok ? <FormMessage tone="success">{state.ok}</FormMessage> : null}
+      <ActionMessage state={state} />
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <Label htmlFor={`name-${key}`}>Name</Label>

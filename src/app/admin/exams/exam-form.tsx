@@ -1,8 +1,8 @@
 "use client";
 
+import { ActionMessage, SubmitButton } from "@/components/admin/client";
 import { useActionState, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { FormMessage, Input } from "@/components/ui/field";
+import { Input } from "@/components/ui/field";
 import { Label, Select, Textarea } from "@/components/admin/ui";
 import type { ActionState } from "./actions";
 
@@ -41,8 +41,7 @@ export function ExamForm({
   return (
     <form action={formAction} className="space-y-5">
       {exam ? <input type="hidden" name="id" value={exam.id} /> : null}
-      {state?.error ? <FormMessage>{state.error}</FormMessage> : null}
-      {state?.ok ? <FormMessage tone="success">{state.ok}</FormMessage> : null}
+      <ActionMessage state={state} />
 
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
@@ -135,9 +134,9 @@ export function ExamForm({
         </div>
       </div>
 
-      <Button type="submit" disabled={pending}>
+      <SubmitButton disabled={pending}>
         {pending ? "Saving…" : exam ? "Save details" : "Create exam"}
-      </Button>
+      </SubmitButton>
     </form>
   );
 }

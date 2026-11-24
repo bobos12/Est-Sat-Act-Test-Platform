@@ -25,6 +25,7 @@ export async function grantAccess(_: AccessState, formData: FormData): Promise<A
   });
   if (error) return { error: error.message };
   revalidatePath(`/admin/students/${parsed.data.user_id}`);
+  revalidatePath("/admin/students");
   return { ok: `Premium access granted for ${parsed.data.days} days.` };
 }
 
@@ -40,6 +41,7 @@ export async function revokeAccess(_: AccessState, formData: FormData): Promise<
   const { data, error } = await supabase.rpc("admin_revoke_access", { p_user: parsed.data.user_id, p_note: parsed.data.note });
   if (error) return { error: error.message };
   revalidatePath(`/admin/students/${parsed.data.user_id}`);
+  revalidatePath("/admin/students");
   return { ok: data ? `Revoked ${data} active subscription${data === 1 ? "" : "s"}.` : "There was no active access to revoke." };
 }
 
@@ -138,5 +140,5 @@ export async function deleteStudent(_: AccessState, formData: FormData): Promise
   const { error } = await svc.auth.admin.deleteUser(id);
   if (error) return { error: error.message };
   revalidatePath("/admin/students");
-  redirect(`/admin/students?deleted=${encodeURIComponent(p.email)}`);
+  redirect(`/admin/students?ok=${encodeURIComponent(`Deleted ${p.email}.`)}`);
 }

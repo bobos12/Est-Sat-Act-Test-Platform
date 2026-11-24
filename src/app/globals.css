@@ -176,3 +176,13 @@ body.ts-protected img { -webkit-user-drag: none; }
     display: block; padding: 48px; font: 600 18px/1.5 system-ui, sans-serif; color: #0b1220;
   }
 }
+
+/* Admin: dialog pop-in and toast slide-in */
+@keyframes admin-pop {
+  from { opacity: 0; transform: translateY(6px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes admin-slide {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
