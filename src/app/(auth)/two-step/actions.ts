@@ -1,15 +1,20 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { requireViewer } from "@/lib/auth/session";
-import { createClient } from "@/lib/supabase/server";
+import { isRecentEmailLogin, requireViewer } from "@/lib/auth/session";
+import { createClient, createServiceClient } from "@/lib/supabase/server";
 
 export type Enrollment = { factorId?: string; qr?: string; secret?: string; error?: string };
 export type CodeState = { error?: string } | undefined;
 
-async function adminSupabase() {
+async function adminViewer() {
   const viewer = await requireViewer("/two-step");
   if (viewer.role !== "admin") redirect("/dashboard");
+  return viewer;
+}
+
+async function adminSupabase() {
+  await adminViewer();
   return createClient();
 }
 
@@ -42,4 +47,43 @@ export async function verifyCode(_: CodeState, formData: FormData): Promise<Code
   const { error } = await supabase.auth.mfa.challengeAndVerify({ factorId: factor.id, code });
   if (error) return { error: "That code didn't work. Use the newest code in the app, and check your phone's clock is set automatically." };
   redirect("/admin");
+}
+
+export type RecoveryState = { error?: string; sent?: string } | undefined;
+
+/** Lost phone: email a one-time sign-in link to the admin's own address (proves inbox access). */
+export async function sendRecoveryLink(_: RecoveryState, formData: FormData): Promise<RecoveryState> {
+  const viewer = await adminViewer();
+  const supabase = await createClient();
+  const token = formData.get("cf-turnstile-response");
+  const { error } = await supabase.auth.signInWithOtp({
+    email: viewer.email,
+    options: { shouldCreateUser: false, captchaToken: typeof token === "string" && token ? token : undefined },
+  });
+  if (error) return { error: error.message.includes("seconds") ? "Please wait a minute before asking for another link." : "We couldn't send the email. Try again in a minute." };
+  return { sent: viewer.email };
+}
+
+/**
+ * After signing in from that email link: remove the lost authenticator so a new one can be set up.
+ * Supabase signs the account out everywhere when a verified factor is deleted, so the admin
+ * signs in once more and lands on the setup screen.
+ */
+export async function resetTwoStep() {
+  const viewer = await adminViewer();
+  if (!(await isRecentEmailLogin())) redirect("/two-step");
+  let svc;
+  try {
+    svc = createServiceClient();
+  } catch {
+    redirect("/two-step?error=service");
+  }
+  const { data } = await svc.auth.admin.mfa.listFactors({ userId: viewer.id });
+  for (const f of data?.factors ?? []) {
+    if (f.factor_type === "totp") await svc.auth.admin.mfa.deleteFactor({ userId: viewer.id, id: f.id });
+  }
+  await svc.from("admin_audit_log").insert({ actor_id: viewer.id, action: "mfa.reset", target_type: "profile", target_id: viewer.id, details: { via: "email link" } });
+  const supabase = await createClient();
+  await supabase.auth.signOut({ scope: "local" });
+  redirect("/sign-in?reason=mfa_reset&next=/admin");
 }

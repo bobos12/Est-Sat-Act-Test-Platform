@@ -58,6 +58,18 @@ export const isAdminVerified = cache(async () => {
   return data?.currentLevel === "aal2";
 });
 
+/**
+ * True when this session was opened from an email link in the last 15 minutes.
+ * It proves control of the account's inbox, which is what 2-step recovery accepts.
+ */
+export const isRecentEmailLogin = cache(async () => {
+  const { supabase } = await authCheck();
+  const { data } = await supabase.auth.getClaims();
+  const amr = data?.claims?.amr;
+  const since = Date.now() / 1000 - 15 * 60;
+  return Array.isArray(amr) && amr.some((e) => typeof e === "object" && (e.method === "otp" || e.method === "magiclink") && e.timestamp >= since);
+});
+
 /** Server-side admin check. Use at the top of every admin page and admin server action. */
 export async function requireAdmin() {
   const viewer = await requireViewer("/admin");
