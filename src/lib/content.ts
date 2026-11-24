@@ -20,9 +20,17 @@ export type RichContent = { blocks: Block[] };
 
 export const emptyContent: RichContent = { blocks: [] };
 
-// Tokens: $$display$$, $inline$ (\$ is a literal dollar inside math), **bold**, [[n|text]] / [[n]]
+// Tokens: \$ (literal dollar in text), $$display$$, $inline$ (\$ is a literal dollar inside math), **bold**, [[n|text]] / [[n]]
 // Splitting on it puts plain text at even indexes and tokens at odd ones.
-export const INLINE_TOKEN = /(\$\$(?:\\\$|[^$])+\$\$|\$(?:\\\$|[^$\n])+\$|\*\*[^*]+\*\*|\[\[\d+(?:\|[^\]]*)?\]\])/g;
+export const INLINE_TOKEN = /(\\\$|\$\$(?:\\\$|[^$])+\$\$|\$(?:\\\$|[^$\n])+\$|\*\*[^*]+\*\*|\[\[\d+(?:\|[^\]]*)?\]\])/g;
+
+/**
+ * Short text written as bare LaTeX without $…$ (e.g. an imported option "60^\circ" or "r = \frac{x}{7}").
+ * It is rendered as math as a whole, and the watermark leaves it alone.
+ */
+export function isBareMath(text: string) {
+  return text.length <= 200 && !text.replace(/\\\$/g, "").includes("$") && /\\[a-zA-Z]+|\^|_\{/.test(text) && !/\[\[\d/.test(text);
+}
 
 export function plainText(content: RichContent | null | undefined, max = 160): string {
   if (!content?.blocks) return "";

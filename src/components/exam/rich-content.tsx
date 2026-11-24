@@ -3,7 +3,7 @@ import katex from "katex";
 import "katex/dist/katex.min.css";
 import "@fontsource-variable/source-serif-4/opsz.css";
 import { Fragment, type ReactNode } from "react";
-import { INLINE_TOKEN as TOKEN, mediaSrc, type Block, type RichContent } from "@/lib/content";
+import { INLINE_TOKEN as TOKEN, isBareMath, mediaSrc, type Block, type RichContent } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 /**
@@ -18,6 +18,7 @@ function renderMath(latex: string, displayMode: boolean) {
 type InlineOptions = { activeMarker?: number | null; onMarker?: (n: number) => void };
 
 export function InlineText({ text, options }: { text: string; options?: InlineOptions }) {
+  if (isBareMath(text)) return <span dangerouslySetInnerHTML={{ __html: renderMath(text, false) }} />;
   const parts = text.split(TOKEN).filter((p) => p !== "");
   return (
     <>
@@ -28,6 +29,7 @@ export function InlineText({ text, options }: { text: string; options?: InlineOp
         if (part.startsWith("$") && part.endsWith("$") && part.length > 2) {
           return <span key={i} dangerouslySetInnerHTML={{ __html: renderMath(part.slice(1, -1), false) }} />;
         }
+        if (part === "\\$") return <Fragment key={i}>$</Fragment>;
         if (part.startsWith("**") && part.endsWith("**")) {
           return <strong key={i}>{part.slice(2, -2)}</strong>;
         }

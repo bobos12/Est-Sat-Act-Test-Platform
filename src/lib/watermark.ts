@@ -1,4 +1,4 @@
-import { INLINE_TOKEN } from "@/lib/content";
+import { INLINE_TOKEN, isBareMath } from "@/lib/content";
 
 /*
  * Leak tracing. Every student gets an 8-character code built from the first 40 bits of
@@ -54,7 +54,7 @@ export function decodeMarks(text: string) {
 
 /** Insert the mark after the first space of plain text (never inside math, bold or passage markers). */
 export function markText(text: string, mark: string) {
-  if (!mark || text.includes(EDGE)) return text;
+  if (!mark || text.includes(EDGE) || isBareMath(text)) return text;
   const parts = text.split(INLINE_TOKEN);
   for (let i = 0; i < parts.length; i += 2) {
     const at = parts[i].indexOf(" ");
