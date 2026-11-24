@@ -31,6 +31,11 @@ async function Form({ searchParams }: { searchParams: PageProps<"/sign-in">["sea
           That link has expired or was already used. Sign in below, or ask for a new link.
         </p>
       ) : null}
+      {error === "confirmed" ? (
+        <p role="alert" className="mb-5 rounded-xl bg-success-50 px-4 py-3 text-sm text-success-700">
+          ✓ Your email is verified. Sign in once below to continue.
+        </p>
+      ) : null}
       {error === "google" ? (
         <p role="alert" className="mb-5 rounded-xl bg-warning-50 px-4 py-3 text-sm text-warning-700">
           Google sign-in isn&apos;t available right now. Use your email below, or try again later.

@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Caveat, Instrument_Sans, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Suspense } from "react";
+import { WelcomeDialog } from "@/components/auth/welcome-dialog";
 import { brand } from "@/lib/brand";
 import { JsonLd, siteGraph } from "@/lib/seo";
 import "./globals.css";
@@ -39,6 +41,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-full flex-col" suppressHydrationWarning>
         <JsonLd data={siteGraph} />
         {children}
+        <Suspense fallback={null}>
+          <WelcomeDialog />
+        </Suspense>
       </body>
     </html>
   );
