@@ -16,6 +16,11 @@ async function Form({ searchParams }: { searchParams: PageProps<"/sign-in">["sea
   const { next, error, reason } = await searchParams;
   return (
     <>
+      {reason === "mfa_reset" ? (
+        <p role="alert" className="mb-5 rounded-xl bg-success-50 px-4 py-3 text-sm text-success-700">
+          2-step verification was reset. Sign in again, then scan the new QR code with your new phone.
+        </p>
+      ) : null}
       {reason === "elsewhere" ? (
         <p role="alert" className="mb-5 rounded-xl bg-warning-50 px-4 py-3 text-sm text-warning-700">
           You were signed out because your account was signed in on another device. Sign in again to continue here.

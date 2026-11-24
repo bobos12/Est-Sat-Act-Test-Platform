@@ -28,6 +28,13 @@ export async function GET(request: NextRequest) {
   if (!ok) return NextResponse.redirect(new URL("/sign-in?error=confirmation", request.url));
   await claimSession(supabase);
 
+  // An admin opening an email sign-in link goes to the 2-step screen (where a lost phone can be reset).
+  if (type === "email" || type === "magiclink") {
+    const { data: auth } = await supabase.auth.getUser();
+    const { data: profile } = auth.user ? await supabase.from("profiles").select("role").eq("id", auth.user.id).single() : { data: null };
+    if (profile?.role === "admin") return NextResponse.redirect(new URL("/two-step", request.url));
+  }
+
   if (type === "recovery" || next === "/reset-password") return NextResponse.redirect(new URL("/reset-password", request.url));
   if (welcome) return NextResponse.redirect(new URL(`/welcome?next=${encodeURIComponent(next)}`, request.url));
   return NextResponse.redirect(new URL(next, request.url));

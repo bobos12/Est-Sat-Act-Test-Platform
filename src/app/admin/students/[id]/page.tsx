@@ -275,7 +275,9 @@ export default async function StudentProfile({ params }: PageProps<"/admin/stude
                               ? `Role → ${d.role}`
                               : a.action === "sessions.revoke"
                                 ? "Signed out everywhere"
-                                : a.action}
+                                : a.action === "mfa.reset"
+                                  ? "Reset 2-step verification (email link)"
+                                  : a.action}
                       </p>
                       {d.note ? <p className="text-ink-600">“{d.note}”</p> : null}
                       <p className="text-xs text-ink-500">
