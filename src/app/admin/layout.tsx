@@ -66,6 +66,22 @@ function Main({ children }: { children: React.ReactNode }) {
 
 async function AdminGate({ children }: { children: React.ReactNode }) {
   await requireAdmin();
+  // The app let this session in, but every admin query also needs the database's is_admin() to agree.
+  const supabase = await createClient();
+  const { data: dbAdmin } = await supabase.rpc("is_admin");
+  if (dbAdmin === false) {
+    return (
+      <Main>
+        <div className="mx-auto mt-10 max-w-lg rounded-[var(--radius-lg)] bg-white p-6 ring-1 ring-line">
+          <h1 className="text-lg font-semibold text-ink-950">The database didn&apos;t accept this sign-in</h1>
+          <p className="mt-2 text-sm text-ink-600">
+            You&apos;re signed in as an admin, but the database still only allows admin access after the authenticator code. Run the admin SQL
+            update (supabase/migrations/20261127000001_admin_email_link.sql) in the Supabase SQL Editor, then reload this page.
+          </p>
+        </div>
+      </Main>
+    );
+  }
   return <Main>{children}</Main>;
 }
 
