@@ -56,8 +56,15 @@ export function SiteFooter() {
       </div>
       <div className="border-t border-line">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-5 py-6 text-xs text-ink-500 sm:flex-row sm:justify-between sm:px-6">
-          <p>
-            © <CopyrightYear /> {brand.name}. All rights reserved.
+          <p className="shrink-0">
+            © <CopyrightYear /> {brand.name}. All rights reserved. ·{" "}
+            <Link href="/privacy" className="hover:text-ink-950">
+              Privacy
+            </Link>{" "}
+            ·{" "}
+            <Link href="/terms" className="hover:text-ink-950">
+              Terms
+            </Link>
           </p>
           <p>{brand.name} is an independent preparation platform and is not affiliated with or endorsed by the EST, SAT or ACT organisers. SAT® is a trademark of the College Board; ACT® is a trademark of ACT, Inc.</p>
         </div>
