@@ -1,8 +1,10 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { redirectIfRevoked } from "@/lib/auth/single-session";
-import { createClient } from "@/lib/supabase/server";
+import { getViewer } from "@/lib/auth/session";
+import { createClient, createServiceClient } from "@/lib/supabase/server";
 import type { SaveResult } from "@/lib/exam-types";
 
 const saveInput = z.object({
@@ -51,5 +53,33 @@ export async function submitAttempt(attemptId: string): Promise<{ ok: boolean; m
   const { error } = await supabase.rpc("submit_attempt", { p_attempt: attemptId });
   redirectIfRevoked(error, `/exam/${attemptId}`);
   if (error) return { ok: false, message: "We couldn't submit right now. Your answers are saved — please try again." };
+  return { ok: true };
+}
+
+/**
+ * Discard an unfinished attempt (and its saved answers) so it no longer shows as in progress.
+ * Students can't delete attempts through RLS, so this checks ownership here and deletes with the service key.
+ */
+export async function cancelAttempt(attemptId: string): Promise<{ ok: boolean; message?: string }> {
+  if (!z.string().uuid().safeParse(attemptId).success) return { ok: false, message: "Invalid attempt" };
+  const viewer = await getViewer();
+  if (!viewer) return { ok: false, message: "Please sign in again." };
+  let svc;
+  try {
+    svc = createServiceClient();
+  } catch {
+    return { ok: false, message: "Cancelling isn't available right now." };
+  }
+  const { data, error } = await svc
+    .from("exam_attempts")
+    .delete()
+    .eq("id", attemptId)
+    .eq("user_id", viewer.id)
+    .eq("status", "in_progress")
+    .select("id");
+  if (error) return { ok: false, message: "We couldn't cancel this exam. Please try again." };
+  if (!data?.length) return { ok: false, message: "This exam has already finished." };
+  revalidatePath("/dashboard");
+  revalidatePath("/exams");
   return { ok: true };
 }
