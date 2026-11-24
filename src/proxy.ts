@@ -10,8 +10,13 @@ export async function proxy(request: NextRequest) {
   const newDevice = request.cookies.get(DEVICE_COOKIE) ? null : crypto.randomUUID();
   if (newDevice) request.cookies.set(DEVICE_COOKIE, newDevice);
 
-  const { response, userId } = await updateSession(request);
   const { pathname, search } = request.nextUrl;
+  // Supabase falls back to the Site URL (home page) when a redirect isn't allow-listed: finish the sign-in anyway.
+  if (pathname === "/" && request.nextUrl.searchParams.has("code")) {
+    return NextResponse.redirect(new URL(`/auth/confirm${search}`, request.url));
+  }
+
+  const { response, userId } = await updateSession(request);
 
   let res = response;
   if (!userId && PROTECTED.some((p) => pathname === p || pathname.startsWith(`${p}/`))) {
