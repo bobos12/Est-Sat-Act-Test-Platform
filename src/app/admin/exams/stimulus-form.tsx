@@ -1,9 +1,9 @@
 "use client";
 
+import { SubmitButton } from "@/components/admin/client";
 import Link from "next/link";
 import { useActionState, useState } from "react";
 import { RichContentView } from "@/components/exam/rich-content";
-import { Button } from "@/components/ui/button";
 import { FormMessage, Input } from "@/components/ui/field";
 import { Label, Select, Textarea } from "@/components/admin/ui";
 import { textToContent } from "@/lib/content";
@@ -67,9 +67,9 @@ export function StimulusForm({
           </p>
         </div>
         <div className="flex gap-3">
-          <Button type="submit" disabled={pending}>
+          <SubmitButton disabled={pending}>
             {pending ? "Saving…" : "Save passage"}
-          </Button>
+          </SubmitButton>
           <Link href={`/admin/exams/${examId}`} className="inline-flex h-10 items-center px-3 text-sm text-ink-600 hover:text-ink-950">
             Cancel
           </Link>

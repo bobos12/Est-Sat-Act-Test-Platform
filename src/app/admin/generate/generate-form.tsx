@@ -1,7 +1,7 @@
 "use client";
 
+import { SubmitButton } from "@/components/admin/client";
 import { useActionState, useState } from "react";
-import { Button } from "@/components/ui/button";
 import { FormMessage, Input } from "@/components/ui/field";
 import { Label, Select } from "@/components/admin/ui";
 import { generateExams } from "./actions";
@@ -98,9 +98,9 @@ export function GenerateForm({ subjects, topics, disabled }: { subjects: Subject
         </div>
       </fieldset>
 
-      <Button type="submit" disabled={pending || disabled}>
+      <SubmitButton disabled={pending || disabled}>
         {pending ? "Writing questions… this takes 1–4 minutes" : "Generate draft exams"}
-      </Button>
+      </SubmitButton>
       <p className="text-xs text-ink-500">
         Generated exams are saved as <strong>In review</strong> with every question as a draft. Each answer key is checked by a second, independent
         AI pass; disagreements are flagged on the question. Nothing is published until you approve and publish it.

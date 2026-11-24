@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useFormStatus } from "react-dom";
+import { Spinner } from "@/components/admin/icons";
 import { cn } from "@/lib/utils";
 
 type Opt = { value: string; label: string };
@@ -12,6 +14,7 @@ type Opt = { value: string; label: string };
 export function BulkBar({ topics, exams }: { topics: Opt[]; exams: Opt[] }) {
   const ref = useRef<HTMLDivElement>(null);
   const [count, setCount] = useState(0);
+  const { pending } = useFormStatus();
 
   useEffect(() => {
     const form = ref.current?.closest("form");
@@ -42,12 +45,20 @@ export function BulkBar({ topics, exams }: { topics: Opt[]; exams: Opt[] }) {
       <div
         className={cn(
           "fixed inset-x-0 bottom-5 z-40 flex justify-center px-4 transition-all duration-300",
-          count ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0",
+          count || pending ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0",
         )}
         aria-hidden={!count}
       >
-        <div className="flex max-w-full flex-wrap items-center gap-2 rounded-2xl bg-ink-950 p-2 pl-4 text-paper shadow-[0_24px_60px_-20px_rgba(10,15,28,.6)]">
-          <span className="mr-1 text-sm font-semibold tabular">{count} selected</span>
+        <fieldset disabled={pending} className="flex max-w-full flex-wrap items-center gap-2 rounded-2xl bg-ink-950 p-2 pl-4 text-paper shadow-[0_24px_60px_-20px_rgba(10,15,28,.6)] disabled:opacity-90">
+          <span className="mr-1 flex items-center gap-2 text-sm font-semibold tabular">
+            {pending ? (
+              <>
+                <Spinner size={14} /> Saving {count}…
+              </>
+            ) : (
+              `${count} selected`
+            )}
+          </span>
           <Btn onClick={() => submit("status:approved")} className="bg-success-600 hover:bg-success-700">
             Approve
           </Btn>
@@ -61,7 +72,7 @@ export function BulkBar({ topics, exams }: { topics: Opt[]; exams: Opt[] }) {
           <button type="button" onClick={clear} className="ml-1 h-9 cursor-pointer rounded-lg px-2.5 text-sm text-ink-400 hover:text-paper" aria-label="Clear selection">
             ✕
           </button>
-        </div>
+        </fieldset>
       </div>
     </div>
   );

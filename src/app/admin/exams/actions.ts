@@ -103,8 +103,9 @@ export async function setExamAccess(formData: FormData) {
   const id = uuid.parse(formData.get("id"));
   const access = z.enum(["free", "premium"]).parse(formData.get("access"));
   const { error } = await supabase.from("exams").update({ access }).eq("id", id);
-  if (error) throw new Error(error.message);
+  if (error) redirect(`/admin/exams/${id}?error=${encodeURIComponent(error.message)}`);
   updateTag(CATALOG_TAG);
+  redirect(`/admin/exams/${id}?ok=${encodeURIComponent(access === "free" ? "Exam is now free for every account." : "Exam is now premium only.")}`);
 }
 
 /** Approve every draft question in an exam (after review) so it can be published. */
@@ -329,7 +330,9 @@ export async function examRowAction(formData: FormData) {
   const { error } = await supabase.from("exams").update(patch).eq("id", id);
   updateTag(CATALOG_TAG);
   revalidatePath("/admin/exams");
-  redirect(error ? withMsg(backTo(formData), "error", error.message) : backTo(formData));
+  const done =
+    field === "access" ? `Exam is now ${value}.` : value === "published" ? "Exam published. Students can see it now." : value === "archived" ? "Exam archived." : "Exam unpublished (back to draft).";
+  redirect(withMsg(backTo(formData), error ? "error" : "ok", error ? error.message : done));
 }
 
 /** Apply one change to every ticked exam. */

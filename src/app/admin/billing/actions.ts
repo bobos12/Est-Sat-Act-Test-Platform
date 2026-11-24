@@ -44,17 +44,6 @@ export async function savePlan(_: PlanState, formData: FormData): Promise<PlanSt
   return { ok: id ? "Plan updated." : "Plan created." };
 }
 
-/** Approve (access starts now) or reject a manual InstaPay / Vodafone Cash payment. */
-export async function reviewPayment(formData: FormData) {
-  const { supabase } = await adminClient();
-  const id = z.string().uuid().parse(formData.get("id"));
-  const approve = formData.get("decision") === "approve";
-  const reason = String(formData.get("reason") ?? "").slice(0, 200);
-  const { error } = await supabase.rpc("admin_review_payment", { p_payment: id, p_approve: approve, p_reason: reason || null });
-  if (error) throw new Error(error.message);
-  revalidatePath("/admin/billing");
-}
-
 const codeSchema = z.object({
   code: z
     .string()

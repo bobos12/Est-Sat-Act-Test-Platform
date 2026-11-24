@@ -5,7 +5,7 @@ import { loadTaxonomy } from "@/lib/admin/data";
 import { adminClient } from "@/lib/admin/server";
 import { plainText, type RichContent } from "@/lib/content";
 import { cn } from "@/lib/utils";
-import { SelectAll } from "../exams/select-all";
+import { SelectAll } from "@/components/admin/client";
 import { bulkQuestions } from "./actions";
 import { BulkBar } from "./bulk-bar";
 

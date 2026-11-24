@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { ButtonLink } from "@/components/ui/button";
-import { Empty, PageHeader, StatusBadge, adminDay } from "@/components/admin/ui";
+import { ConfirmSubmit, SearchBox, SelectAll, SelectedCount, SubmitButton, btn } from "@/components/admin/client";
+import { Icon } from "@/components/admin/icons";
+import { Empty, PageHeader, StatCard, StatusBadge, adminDay } from "@/components/admin/ui";
 import { adminClient } from "@/lib/admin/server";
 import { cn } from "@/lib/utils";
 import { bulkExams } from "./actions";
-import { SelectAll } from "./select-all";
 
 export const metadata = { title: "Exams" };
 
@@ -16,8 +16,7 @@ const TRACKS = [
 ];
 const STATUSES = [
   { key: "published", label: "Published" },
-  { key: "draft", label: "Draft" },
-  { key: "in_review", label: "In review" },
+  { key: "draft", label: "Draft / review" },
   { key: "archived", label: "Archived" },
 ];
 const trackOf = (code: string) => (code.startsWith("sat") ? "sat" : code.startsWith("act") ? "act" : "est");
@@ -27,8 +26,6 @@ export default async function AdminExams({ searchParams }: PageProps<"/admin/exa
   const sp = await searchParams;
   const one = (k: string) => (typeof sp[k] === "string" ? (sp[k] as string) : "");
   const f: Filters = { q: one("q").trim(), track: one("track"), subject: one("subject"), access: one("access"), status: one("status") };
-  const ok = one("ok");
-  const err = one("error");
 
   const [{ data: exams, error }, { data: subjects }] = await Promise.all([
     supabase
@@ -51,7 +48,7 @@ export default async function AdminExams({ searchParams }: PageProps<"/admin/exa
     (skip === "track" || !f.track || e.track === f.track) &&
     (skip === "subject" || !f.subject || e.subject?.code === f.subject) &&
     (skip === "access" || !f.access || e.access === f.access) &&
-    (skip === "status" || !f.status || e.status === f.status);
+    (skip === "status" || !f.status || (f.status === "draft" ? e.status === "draft" || e.status === "in_review" : e.status === f.status));
   const visible = all.filter((e) => match(e));
 
   const href = (patch: Partial<Filters>) => {
@@ -61,76 +58,57 @@ export default async function AdminExams({ searchParams }: PageProps<"/admin/exa
     return qs ? `/admin/exams?${qs}` : "/admin/exams";
   };
   const back = href({}).replace("/admin/exams", "");
-  const count = (k: keyof Filters, v: string) => all.filter((e) => match(e, k) && (v === "" || (k === "track" ? e.track === v : k === "access" ? e.access === v : k === "status" ? e.status === v : true))).length;
+  const count = (k: keyof Filters, v: string) =>
+    all.filter((e) => match(e, k) && (v === "" || (k === "track" ? e.track === v : k === "access" ? e.access === v : k === "status" ? (v === "draft" ? e.status === "draft" || e.status === "in_review" : e.status === v) : true))).length;
   const subjectsInTrack = (subjects ?? []).filter((s) => !f.track || trackOf(s.code) === f.track);
-
-  const tiles = [
-    { label: "All exams", value: count("status", ""), href: href({ status: "", access: "" }), active: !f.status && !f.access },
-    { label: "Published", value: count("status", "published"), href: href({ status: "published" }), active: f.status === "published", tone: "text-success-700" },
-    { label: "Draft / review", value: count("status", "draft") + count("status", "in_review"), href: href({ status: "draft" }), active: f.status === "draft" || f.status === "in_review", tone: "text-warning-700" },
-    { label: "Free", value: count("access", "free"), href: href({ access: "free" }), active: f.access === "free", tone: "text-mark-500" },
-    { label: "Premium", value: count("access", "premium"), href: href({ access: "premium" }), active: f.access === "premium" },
-    { label: "Questions", value: visible.reduce((n, e) => n + e.question_count, 0), href: null, active: false },
-  ];
+  const anyFilter = Object.values(f).some(Boolean);
 
   return (
     <>
       <PageHeader
         title="Exams"
-        description="Filter, review and publish exams. Tick several to change them in one go."
+        description="Publish, set free or premium, and edit every exam. Tick several rows to change them in one go."
         actions={
           <>
-            <ButtonLink href="/admin/knowledge" variant="secondary">
-              Upload PDF
-            </ButtonLink>
-            <ButtonLink href="/admin/exams/new">New exam</ButtonLink>
+            <Link href="/admin/knowledge" className={btn("secondary")}>
+              <Icon name="book" size={15} /> Import PDF
+            </Link>
+            <Link href="/admin/exams/new" className={btn("dark")}>
+              <Icon name="plus" size={15} /> New exam
+            </Link>
           </>
         }
       />
 
-      {ok ? <p className="mb-4 rounded-[var(--radius-md)] bg-success-50 px-4 py-3 text-sm text-success-700">{ok}</p> : null}
-      {err ? <p className="mb-4 rounded-[var(--radius-md)] bg-danger-50 px-4 py-3 text-sm text-danger-600">{err}</p> : null}
-
-      {/* Count tiles: click to filter */}
-      <div className="grid grid-cols-2 gap-px overflow-hidden rounded-[var(--radius-lg)] bg-line ring-1 ring-line sm:grid-cols-3 lg:grid-cols-6">
-        {tiles.map((t) => {
-          const body = (
-            <>
-              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-ink-500">{t.label}</p>
-              <p className={cn("mt-1.5 font-display text-3xl tabular", t.tone ?? "text-ink-950")}>{t.value.toLocaleString("en")}</p>
-            </>
-          );
-          return t.href ? (
-            <Link key={t.label} href={t.href} className={cn("px-4 py-4 transition", t.active ? "bg-mark-50 shadow-[inset_0_-3px_0_var(--color-mark-500)]" : "bg-white hover:bg-paper")}>
-              {body}
-            </Link>
-          ) : (
-            <div key={t.label} className="bg-white px-4 py-4">
-              {body}
-            </div>
-          );
-        })}
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+        <StatCard label="Live" value={count("status", "published")} note="Students can take these" href={href({ status: "published" })} active={f.status === "published"} icon="check" tone="success" />
+        <StatCard
+          label="Not live yet"
+          value={count("status", "draft")}
+          note="Draft or in review"
+          href={href({ status: "draft" })}
+          active={f.status === "draft"}
+          icon="edit"
+          tone="warning"
+        />
+        <StatCard label="Free" value={count("access", "free")} note="Open to every account" href={href({ access: f.access === "free" ? "" : "free" })} active={f.access === "free"} icon="lock" tone="brand" />
+        <StatCard label="Premium" value={count("access", "premium")} note="Need an active plan" href={href({ access: f.access === "premium" ? "" : "premium" })} active={f.access === "premium"} icon="crown" />
       </div>
 
       {/* Filters */}
-      <div className="mt-5 space-y-3 rounded-[var(--radius-lg)] bg-white p-4 ring-1 ring-line">
-        <form action="/admin/exams" className="flex flex-wrap items-center gap-2">
-          {Object.entries(f).map(([k, v]) => (k !== "q" && v ? <input key={k} type="hidden" name={k} value={v} /> : null))}
-          <input
-            name="q"
-            defaultValue={f.q}
-            placeholder="Search exam titles…"
-            className="h-10 min-w-0 flex-1 rounded-[var(--radius-md)] bg-paper px-3.5 text-sm ring-1 ring-inset ring-line focus:outline-none focus:ring-2 focus:ring-mark-500 sm:max-w-xs"
-          />
-          <button className="h-10 rounded-[var(--radius-md)] bg-ink-950 px-4 text-sm font-medium text-paper">Search</button>
-          {Object.values(f).some(Boolean) ? (
-            <Link href="/admin/exams" className="text-sm font-medium text-ink-500 hover:text-ink-950">
-              Clear all filters
+      <div className="mt-6 space-y-3 rounded-[var(--radius-lg)] bg-white p-4 shadow-[0_1px_2px_rgba(10,15,28,0.04)] ring-1 ring-line">
+        <div className="flex flex-wrap items-center gap-3">
+          <SearchBox placeholder="Search exam titles…" className="min-w-56 flex-1 sm:max-w-sm" />
+          {anyFilter ? (
+            <Link href="/admin/exams" className="inline-flex items-center gap-1 text-sm font-medium text-ink-500 hover:text-ink-950">
+              <Icon name="x" size={14} /> Clear all filters
             </Link>
           ) : null}
-        </form>
+        </div>
         <FilterRow label="Track">
-          <Chip href={href({ track: "" })} active={!f.track} count={count("track", "")}>All</Chip>
+          <Chip href={href({ track: "" })} active={!f.track} count={count("track", "")}>
+            All
+          </Chip>
           {TRACKS.map((t) => (
             <Chip key={t.key} href={href({ track: t.key })} active={f.track === t.key} count={count("track", t.key)}>
               {t.label}
@@ -138,7 +116,9 @@ export default async function AdminExams({ searchParams }: PageProps<"/admin/exa
           ))}
         </FilterRow>
         <FilterRow label="Subject">
-          <Chip href={href({ subject: "" })} active={!f.subject}>All</Chip>
+          <Chip href={href({ subject: "" })} active={!f.subject}>
+            All
+          </Chip>
           {subjectsInTrack.map((s) => (
             <Chip key={s.code} href={href({ subject: s.code })} active={f.subject === s.code} count={all.filter((e) => match(e, "subject") && e.subject?.code === s.code).length}>
               {s.name}
@@ -146,12 +126,20 @@ export default async function AdminExams({ searchParams }: PageProps<"/admin/exa
           ))}
         </FilterRow>
         <FilterRow label="Access">
-          <Chip href={href({ access: "" })} active={!f.access} count={count("access", "")}>All</Chip>
-          <Chip href={href({ access: "free" })} active={f.access === "free"} count={count("access", "free")}>Free</Chip>
-          <Chip href={href({ access: "premium" })} active={f.access === "premium"} count={count("access", "premium")}>🔒 Premium</Chip>
+          <Chip href={href({ access: "" })} active={!f.access} count={count("access", "")}>
+            All
+          </Chip>
+          <Chip href={href({ access: "free" })} active={f.access === "free"} count={count("access", "free")}>
+            Free
+          </Chip>
+          <Chip href={href({ access: "premium" })} active={f.access === "premium"} count={count("access", "premium")}>
+            Premium
+          </Chip>
         </FilterRow>
         <FilterRow label="Status">
-          <Chip href={href({ status: "" })} active={!f.status} count={count("status", "")}>All</Chip>
+          <Chip href={href({ status: "" })} active={!f.status} count={count("status", "")}>
+            All
+          </Chip>
           {STATUSES.map((s) => (
             <Chip key={s.key} href={href({ status: s.key })} active={f.status === s.key} count={count("status", s.key)}>
               {s.label}
@@ -161,45 +149,62 @@ export default async function AdminExams({ searchParams }: PageProps<"/admin/exa
       </div>
 
       {/* Table with bulk actions */}
-      <form action={bulkExams} className="mt-5 overflow-hidden rounded-[var(--radius-lg)] bg-white ring-1 ring-line">
+      <form action={bulkExams} className="mt-5 overflow-hidden rounded-[var(--radius-lg)] bg-white shadow-[0_1px_2px_rgba(10,15,28,0.04)] ring-1 ring-line">
         <input type="hidden" name="back" value={back} />
-        <div className="flex flex-wrap items-center gap-2 border-b border-line bg-paper px-4 py-3">
-          <span className="mr-auto text-sm text-ink-600">
-            <b className="text-ink-950">{visible.length}</b> {visible.length === 1 ? "exam" : "exams"} shown · tick to change several
+        <div className="sticky top-14 z-10 flex flex-wrap items-center gap-2 border-b border-line bg-white/95 px-4 py-3 backdrop-blur lg:top-0">
+          <span className="mr-auto flex items-center gap-2 text-sm text-ink-600">
+            <b className="text-ink-950">{visible.length}</b> {visible.length === 1 ? "exam" : "exams"} ·
+            <SelectedCount />
           </span>
-          <BulkButton op="free">Make free</BulkButton>
-          <BulkButton op="premium">Make premium</BulkButton>
-          <BulkButton op="publish">Publish</BulkButton>
-          <BulkButton op="unpublish">Unpublish</BulkButton>
-          <BulkButton op="archive" danger>
+          <SubmitButton name="op" value="free" size="sm" variant="secondary" pendingLabel="Saving…">
+            Make free
+          </SubmitButton>
+          <SubmitButton name="op" value="premium" size="sm" variant="secondary" pendingLabel="Saving…">
+            Make premium
+          </SubmitButton>
+          <SubmitButton name="op" value="publish" size="sm" variant="secondary" pendingLabel="Publishing…">
+            Publish
+          </SubmitButton>
+          <SubmitButton name="op" value="unpublish" size="sm" variant="secondary" pendingLabel="Saving…">
+            Unpublish
+          </SubmitButton>
+          <ConfirmSubmit
+            name="op"
+            value="archive"
+            size="sm"
+            title="Archive the ticked exams?"
+            body="Archived exams disappear from the library. Students' past results are kept, and you can publish them again later."
+            confirmLabel="Archive"
+            pendingLabel="Archiving…"
+          >
             Archive
-          </BulkButton>
+          </ConfirmSubmit>
         </div>
         {visible.length ? (
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[860px] text-sm">
+            <table className="w-full min-w-[920px] text-sm">
               <thead>
-                <tr className="border-b border-line text-left text-xs font-semibold uppercase tracking-[0.08em] text-ink-500">
-                  <th className="w-10 px-4 py-3">
+                <tr className="border-b border-line bg-paper/60 text-left text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-ink-500">
+                  <th className="w-10 px-4 py-2.5">
                     <SelectAll />
                   </th>
-                  <th className="px-3 py-3">Exam</th>
-                  <th className="px-3 py-3">Questions</th>
-                  <th className="px-3 py-3">Attempts</th>
-                  <th className="px-3 py-3">Access</th>
-                  <th className="px-3 py-3">Status</th>
-                  <th className="px-3 py-3">Updated</th>
-                  <th className="px-3 py-3 text-right">Actions</th>
+                  <th className="px-3 py-2.5">Exam</th>
+                  <th className="px-3 py-2.5">Questions</th>
+                  <th className="px-3 py-2.5">Attempts</th>
+                  <th className="px-3 py-2.5">Access</th>
+                  <th className="px-3 py-2.5">Status</th>
+                  <th className="px-3 py-2.5">Updated</th>
+                  <th className="px-3 py-2.5 text-right">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-line">
                 {visible.map((e) => (
-                  <tr key={e.id} className="hover:bg-paper has-[:checked]:bg-mark-50/60">
+                  <tr key={e.id} className="group transition hover:bg-paper has-[:checked]:bg-mark-50/60">
                     <td className="px-4 py-3 align-top">
                       <input type="checkbox" name="ids" value={e.id} aria-label={`Select ${e.title}`} className="mt-1 h-4 w-4 accent-mark-500" />
                     </td>
                     <td className="px-3 py-3">
-                      <Link href={`/admin/exams/${e.id}`} className="font-medium text-ink-950 hover:underline">
+                      <Link href={`/admin/exams/${e.id}`} className="font-medium text-ink-950 hover:text-mark-600">
                         {e.title}
                       </Link>
                       <p className="mt-0.5 text-xs text-ink-500">
@@ -209,47 +214,52 @@ export default async function AdminExams({ searchParams }: PageProps<"/admin/exa
                       </p>
                     </td>
                     <td className="px-3 py-3 tabular">{e.question_count}</td>
-                    <td className="px-3 py-3 tabular">{e.attempts}</td>
+                    <td className="px-3 py-3 tabular">
+                      {e.attempts ? (
+                        <Link href={`/admin/exams/${e.id}?tab=results`} className="hover:text-mark-600 hover:underline">
+                          {e.attempts}
+                        </Link>
+                      ) : (
+                        <span className="text-ink-400">0</span>
+                      )}
+                    </td>
                     <td className="px-3 py-3">
-                      <div className="inline-flex rounded-full bg-paper-2 p-0.5 text-xs font-semibold">
-                        {(["free", "premium"] as const).map((a) => (
-                          <button
-                            key={a}
-                            name="row"
-                            value={`${e.id}:access:${a}`}
-                            disabled={e.access === a}
-                            className={cn(
-                              "rounded-full px-3 py-1 transition",
-                              e.access === a ? (a === "free" ? "bg-mark-500 text-white" : "bg-ink-950 text-paper") : "text-ink-500 hover:text-ink-950",
-                            )}
-                          >
-                            {a === "premium" ? "🔒 Premium" : "Free"}
-                          </button>
-                        ))}
+                      <div className="inline-flex rounded-full bg-paper-2 p-0.5">
+                        {(["free", "premium"] as const).map((a) =>
+                          e.access === a ? (
+                            <span key={a} className={cn("rounded-full px-3 py-1 text-xs font-semibold", a === "free" ? "bg-mark-500 text-white" : "bg-ink-950 text-white")}>
+                              {a === "premium" ? "Premium" : "Free"}
+                            </span>
+                          ) : (
+                            <SubmitButton key={a} name="row" value={`${e.id}:access:${a}`} size="xs" variant="ghost" className="rounded-full" pendingLabel="…">
+                              {a === "premium" ? "Premium" : "Free"}
+                            </SubmitButton>
+                          ),
+                        )}
                       </div>
                     </td>
                     <td className="px-3 py-3">
                       <StatusBadge status={e.status} />
                     </td>
-                    <td className="px-3 py-3 text-ink-500">{adminDay.format(new Date(e.updated_at))}</td>
+                    <td className="px-3 py-3 whitespace-nowrap text-ink-500">{adminDay.format(new Date(e.updated_at))}</td>
                     <td className="px-3 py-3">
                       <div className="flex items-center justify-end gap-1.5">
                         {e.status === "published" ? (
                           <>
-                            <Link href={`/exams/${e.slug}`} target="_blank" className="rounded-md px-2 py-1 text-xs font-medium text-ink-600 ring-1 ring-line hover:bg-paper-2">
-                              View
+                            <Link href={`/exams/${e.slug}`} target="_blank" title="Open in the student library" className={btn("ghost", "xs")}>
+                              <Icon name="external" size={13} />
                             </Link>
-                            <button name="row" value={`${e.id}:status:draft`} className="rounded-md px-2 py-1 text-xs font-medium text-ink-600 ring-1 ring-line hover:bg-paper-2">
+                            <SubmitButton name="row" value={`${e.id}:status:draft`} size="xs" variant="secondary" pendingLabel="…">
                               Unpublish
-                            </button>
+                            </SubmitButton>
                           </>
                         ) : (
-                          <button name="row" value={`${e.id}:status:published`} className="rounded-md bg-success-600 px-2 py-1 text-xs font-semibold text-white hover:bg-success-700">
+                          <SubmitButton name="row" value={`${e.id}:status:published`} size="xs" variant="success" pendingLabel="Publishing…">
                             Publish
-                          </button>
+                          </SubmitButton>
                         )}
-                        <Link href={`/admin/exams/${e.id}`} className="rounded-md px-2 py-1 text-xs font-medium text-ink-600 ring-1 ring-line hover:bg-paper-2">
-                          Edit
+                        <Link href={`/admin/exams/${e.id}`} className={btn("secondary", "xs")}>
+                          <Icon name="edit" size={13} /> Edit
                         </Link>
                       </div>
                     </td>
@@ -259,7 +269,9 @@ export default async function AdminExams({ searchParams }: PageProps<"/admin/exa
             </table>
           </div>
         ) : (
-          <Empty>No exams match these filters.</Empty>
+          <Empty icon="exams" action={anyFilter ? <Link href="/admin/exams" className={btn("secondary", "sm")}>Clear filters</Link> : undefined}>
+            No exams match these filters.
+          </Empty>
         )}
       </form>
     </>
@@ -269,7 +281,7 @@ export default async function AdminExams({ searchParams }: PageProps<"/admin/exa
 function FilterRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="flex items-center gap-3">
-      <span className="w-16 shrink-0 text-xs font-semibold uppercase tracking-[0.1em] text-ink-500">{label}</span>
+      <span className="w-16 shrink-0 text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-ink-400">{label}</span>
       <div className="flex min-w-0 flex-1 gap-1.5 overflow-x-auto pb-0.5 [scrollbar-width:none]">{children}</div>
     </div>
   );
@@ -281,27 +293,12 @@ function Chip({ href, active, count, children }: { href: string; active: boolean
       href={href}
       scroll={false}
       className={cn(
-        "inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1.5 text-sm transition",
-        active ? "bg-ink-950 text-paper" : "bg-paper text-ink-700 ring-1 ring-inset ring-line hover:ring-ink-400",
+        "inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1 text-[0.8125rem] font-medium transition",
+        active ? "bg-ink-950 text-white" : "bg-paper text-ink-700 ring-1 ring-inset ring-line hover:ring-ink-300",
       )}
     >
       {children}
       {count !== undefined ? <span className={cn("tabular text-xs", active ? "text-ink-300" : "text-ink-400")}>{count}</span> : null}
     </Link>
-  );
-}
-
-function BulkButton({ op, danger, children }: { op: string; danger?: boolean; children: React.ReactNode }) {
-  return (
-    <button
-      name="op"
-      value={op}
-      className={cn(
-        "h-8 rounded-md px-3 text-xs font-semibold ring-1 ring-inset transition",
-        danger ? "text-danger-600 ring-danger-600/30 hover:bg-danger-50" : "bg-white text-ink-800 ring-line hover:ring-ink-400",
-      )}
-    >
-      {children}
-    </button>
   );
 }
