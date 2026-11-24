@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ConfirmSubmit, SearchBox, SelectAll, SelectedCount, SubmitButton, btn } from "@/components/admin/client";
+import { ConfirmSubmit, SearchBox, SelectAll, SelectedCount, SubmitButton } from "@/components/admin/client";
+import { btn } from "@/components/admin/btn";
 import { Icon } from "@/components/admin/icons";
 import { Empty, PageHeader, StatCard, StatusBadge, adminDay } from "@/components/admin/ui";
 import { adminClient } from "@/lib/admin/server";

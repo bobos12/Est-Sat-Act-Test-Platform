@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { SearchBox, btn } from "@/components/admin/client";
+import { SearchBox } from "@/components/admin/client";
+import { btn } from "@/components/admin/btn";
 import { Icon } from "@/components/admin/icons";
 import { Avatar, Badge, Empty, FilterTabs, PageHeader, Pagination, Panel, ScorePill, StatCard, Th, adminDay, money, relative } from "@/components/admin/ui";
 import { adminClient } from "@/lib/admin/server";

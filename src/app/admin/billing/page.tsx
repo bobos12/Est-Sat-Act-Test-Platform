@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { SubmitButton, btn } from "@/components/admin/client";
+import { SubmitButton } from "@/components/admin/client";
+import { btn } from "@/components/admin/btn";
 import { Icon } from "@/components/admin/icons";
 import { Badge, Callout, Empty, PageHeader, Panel, StatusBadge, adminDate, adminDay, money } from "@/components/admin/ui";
 import { adminClient } from "@/lib/admin/server";

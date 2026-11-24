@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ConfirmSubmit, SubmitButton, Tabs, btn } from "@/components/admin/client";
+import { ConfirmSubmit, SubmitButton, Tabs } from "@/components/admin/client";
+import { btn } from "@/components/admin/btn";
 import { Icon } from "@/components/admin/icons";
 import { Avatar, Badge, Callout, DataTable, Empty, Panel, PageHeader, ScorePill, StatCard, StatusBadge, Td, Th, adminDate, one, relative } from "@/components/admin/ui";
 import { adminClient } from "@/lib/admin/server";

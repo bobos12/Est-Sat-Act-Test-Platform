@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { bucketDays, DailyBars } from "@/components/admin/bar-chart";
-import { btn } from "@/components/admin/client";
+import { btn } from "@/components/admin/btn";
 import { Icon, type IconName } from "@/components/admin/icons";
 import { Avatar, Empty, Panel, PageHeader, ScorePill, StatCard, StatusBadge, money, one, providerName, relative } from "@/components/admin/ui";
 import { adminClient } from "@/lib/admin/server";
