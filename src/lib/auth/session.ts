@@ -51,11 +51,17 @@ export async function requireViewer(next?: string) {
   return viewer;
 }
 
-/** True once this session has passed 2-step verification (the database's is_admin() requires it too). */
+/**
+ * True once this session has passed 2-step verification, or was opened from an email sign-in link
+ * (proves control of the admin's inbox). The database's is_admin() accepts the same two.
+ */
 export const isAdminVerified = cache(async () => {
   const { supabase } = await authCheck();
   const { data } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
-  return data?.currentLevel === "aal2";
+  if (data?.currentLevel === "aal2") return true;
+  const { data: c } = await supabase.auth.getClaims();
+  const amr = c?.claims?.amr;
+  return Array.isArray(amr) && amr.some((e) => typeof e === "object" && (e.method === "otp" || e.method === "magiclink"));
 });
 
 /**
