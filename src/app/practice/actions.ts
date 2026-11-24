@@ -3,6 +3,10 @@
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import type { BankAnswer } from "@/lib/bank-types";
+import { redirectIfRevoked } from "@/lib/auth/single-session";
+import { getViewer } from "@/lib/auth/session";
+import { signQuestionMedia } from "@/lib/media";
+import { fingerprintContent } from "@/lib/watermark";
 import { createClient } from "@/lib/supabase/server";
 
 export type CreateState = { error?: string } | undefined;
@@ -40,6 +44,7 @@ export async function createPracticeSession(_: CreateState, formData: FormData):
     p_tutor: v.tutor,
   });
   if (error) {
+    redirectIfRevoked(error, "/practice");
     if (error.message.includes("NO_QUESTIONS")) {
       return {
         error:
@@ -53,6 +58,7 @@ export async function createPracticeSession(_: CreateState, formData: FormData):
       };
     }
     if (error.message.includes("AUTH_REQUIRED")) redirect("/sign-in?next=/practice");
+    if (error.message.includes("DAILY_LIMIT")) return { error: "You've reached today's practice limit. More questions open up within 24 hours." };
     return { error: "We couldn't start the session. Please try again." };
   }
   redirect(`/practice/${data as string}`);
@@ -77,18 +83,26 @@ export async function submitPracticeAnswer(input: { sessionId: string; questionI
     .safeParse(input);
   if (!parsed.success) return { ok: false, message: "Invalid answer" };
   const { sessionId, questionId, optionId, timeMs } = parsed.data;
+  let res;
   try {
     const supabase = await createClient();
-    const { data, error } = await supabase.rpc("bank_answer", {
+    res = await supabase.rpc("bank_answer", {
       p_session: sessionId,
       p_question: questionId,
       p_option: optionId,
       p_time_ms: timeMs,
     });
+  } catch {
+    return { ok: false, message: "Network error. Your answer wasn't saved; try again." };
+  }
+  redirectIfRevoked(res.error, `/practice/${sessionId}`);
+  try {
+    const { data, error } = res;
     if (error) {
       return { ok: false, message: "We couldn't save that answer. Check your connection and try again.", finished: error.message.includes("SESSION_FINISHED") };
     }
-    const d = data as { option_id: string; is_correct?: boolean; correct_option_id?: string; explanation?: BankAnswer["explanation"]; peer_correct?: number | null; time_ms?: number };
+    const viewer = await getViewer();
+    const d = (await signQuestionMedia(viewer ? fingerprintContent(data, viewer.id) : data)) as { option_id: string; is_correct?: boolean; correct_option_id?: string; explanation?: BankAnswer["explanation"]; peer_correct?: number | null; time_ms?: number };
     return {
       ok: true,
       answer: {
@@ -110,6 +124,7 @@ export async function finishPracticeSession(sessionId: string): Promise<{ ok: bo
   if (!uuid.safeParse(sessionId).success) return { ok: false };
   const supabase = await createClient();
   const { error } = await supabase.rpc("bank_finish_session", { p_session: sessionId });
+  redirectIfRevoked(error, `/practice/${sessionId}`);
   return { ok: !error };
 }
 
@@ -118,6 +133,7 @@ export async function resetProgress(subjectId: string): Promise<{ ok: boolean }>
   if (!uuid.safeParse(subjectId).success) return { ok: false };
   const supabase = await createClient();
   const { error } = await supabase.rpc("bank_reset_progress", { p_subject: subjectId });
+  redirectIfRevoked(error, "/practice");
   return { ok: !error };
 }
 
@@ -127,6 +143,7 @@ export async function restartSession(formData: FormData) {
   if (!id.success) redirect("/practice");
   const supabase = await createClient();
   const { data, error } = await supabase.rpc("bank_restart_session", { p_session: id.data });
+  redirectIfRevoked(error, "/practice");
   if (error) redirect(`/practice?error=${encodeURIComponent("We couldn't restart that session. Please try again.")}`);
   redirect(`/practice/${data as string}`);
 }
@@ -135,6 +152,7 @@ export async function toggleBookmark(questionId: string): Promise<{ ok: boolean;
   if (!uuid.safeParse(questionId).success) return { ok: false };
   const supabase = await createClient();
   const { data, error } = await supabase.rpc("bank_toggle_bookmark", { p_question: questionId });
+  redirectIfRevoked(error);
   if (error) return { ok: false };
   return { ok: true, bookmarked: Boolean(data) };
 }

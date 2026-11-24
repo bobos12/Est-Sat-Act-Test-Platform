@@ -4,7 +4,7 @@ import { useActionState, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { FormMessage, Input } from "@/components/ui/field";
 import { Label } from "@/components/admin/ui";
-import { deleteStudent, setSuspended, updateStudent } from "./actions";
+import { deleteStudent, setSuspended, signOutEverywhere, updateStudent } from "./actions";
 
 type Profile = { id: string; full_name: string | null; email: string; phone: string | null; school: string | null; grade: string | null };
 
@@ -66,6 +66,20 @@ export function SuspendForm({ userId, suspended }: { userId: string; suspended: 
       >
         {pending ? "Saving…" : suspended ? "Restore account" : "Suspend account"}
       </button>
+    </form>
+  );
+}
+
+export function SignOutEverywhereForm({ userId }: { userId: string }) {
+  const [state, action, pending] = useActionState(signOutEverywhere, undefined);
+  return (
+    <form action={action} className="space-y-2">
+      <input type="hidden" name="user_id" value={userId} />
+      {state?.error ? <FormMessage>{state.error}</FormMessage> : null}
+      {state?.ok ? <FormMessage tone="success">{state.ok}</FormMessage> : null}
+      <Button type="submit" size="sm" variant="secondary" disabled={pending}>
+        {pending ? "Signing out…" : "Sign out everywhere"}
+      </Button>
     </form>
   );
 }

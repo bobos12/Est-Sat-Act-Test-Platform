@@ -3,6 +3,8 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { DISPOSABLE_MESSAGE, isDisposableEmail } from "@/lib/auth/disposable-email";
+import { claimSession } from "@/lib/auth/single-session";
 import { createClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured, publicEnv } from "@/lib/env";
 
@@ -16,6 +18,14 @@ async function siteOrigin() {
   const proto = h.get("x-forwarded-proto") ?? (host.startsWith("localhost") || host.startsWith("127.") ? "http" : "https");
   return `${proto}://${host}`;
 }
+
+/** Turnstile token from the form (checked by Supabase Auth once its captcha protection is on). */
+function captcha(formData: FormData) {
+  const t = formData.get("cf-turnstile-response");
+  return typeof t === "string" && t ? t : undefined;
+}
+const CAPTCHA_MESSAGE = "The security check didn't finish. Wait a moment and try again.";
+const isCaptchaError = (e: { code?: string; message: string }) => e.code === "captcha_failed" || /captcha/i.test(e.message);
 
 /** Only allow same-site relative redirects. */
 function safeNext(value: FormDataEntryValue | null) {
@@ -35,16 +45,18 @@ export async function signIn(_: AuthState, formData: FormData): Promise<AuthStat
     return { fieldErrors: Object.fromEntries(parsed.error.issues.map((i) => [String(i.path[0]), i.message])), email: String(formData.get("email") ?? "") };
   }
   const supabase = await createClient();
-  const { error } = await supabase.auth.signInWithPassword(parsed.data);
+  const { error } = await supabase.auth.signInWithPassword({ ...parsed.data, options: { captchaToken: captcha(formData) } });
   if (error) {
     return {
       email: parsed.data.email,
-      error:
-        error.code === "email_not_confirmed"
+      error: isCaptchaError(error)
+        ? CAPTCHA_MESSAGE
+        : error.code === "email_not_confirmed"
           ? "Please confirm your email first. Check your inbox, or resend the link below."
           : "That email and password don't match an account.",
     };
   }
+  await claimSession(supabase);
   redirect(safeNext(formData.get("next")));
 }
 
@@ -65,12 +77,14 @@ export async function signUp(_: AuthState, formData: FormData): Promise<AuthStat
   if (!parsed.success) {
     return { fieldErrors: Object.fromEntries(parsed.error.issues.map((i) => [String(i.path[0]), i.message])), email: String(formData.get("email") ?? "") };
   }
+  if (isDisposableEmail(parsed.data.email)) return { fieldErrors: { email: DISPOSABLE_MESSAGE }, email: parsed.data.email };
   const next = safeNext(formData.get("next"));
   const supabase = await createClient();
   const { data, error } = await supabase.auth.signUp({
     email: parsed.data.email,
     password: parsed.data.password,
     options: {
+      captchaToken: captcha(formData),
       data: { full_name: parsed.data.fullName },
       emailRedirectTo: `${await siteOrigin()}/auth/confirm?welcome=1&next=${encodeURIComponent(next)}`,
     },
@@ -78,12 +92,17 @@ export async function signUp(_: AuthState, formData: FormData): Promise<AuthStat
   if (error) {
     return {
       email: parsed.data.email,
-      error: error.code === "user_already_exists" ? "An account with this email already exists. Sign in instead." : error.message,
+      error: isCaptchaError(error)
+        ? CAPTCHA_MESSAGE
+        : error.code === "user_already_exists"
+          ? "An account with this email already exists. Sign in instead."
+          : error.message,
     };
   }
   if (!data.session) {
     return { notice: "confirm", email: parsed.data.email };
   }
+  await claimSession(supabase);
   redirect(next);
 }
 
@@ -96,15 +115,16 @@ export async function signOut() {
 }
 
 /** Send the confirmation email again. */
-export async function resendConfirmation(email: string): Promise<{ ok?: boolean; error?: string }> {
+export async function resendConfirmation(email: string, captchaToken?: string): Promise<{ ok?: boolean; error?: string }> {
   const parsed = z.string().trim().toLowerCase().email().safeParse(email);
   if (!parsed.success) return { error: "Enter a valid email address." };
   const supabase = await createClient();
   const { error } = await supabase.auth.resend({
     type: "signup",
     email: parsed.data,
-    options: { emailRedirectTo: `${await siteOrigin()}/auth/confirm?welcome=1&next=/dashboard` },
+    options: { emailRedirectTo: `${await siteOrigin()}/auth/confirm?welcome=1&next=/dashboard`, captchaToken },
   });
+  if (error && isCaptchaError(error)) return { error: CAPTCHA_MESSAGE };
   if (error) return { error: error.message.includes("seconds") ? "Please wait a minute before asking again." : "We couldn't resend the email. Try again in a minute." };
   return { ok: true };
 }
@@ -115,9 +135,11 @@ export async function requestPasswordReset(_: AuthState, formData: FormData): Pr
   const parsed = z.string().trim().toLowerCase().email().safeParse(formData.get("email"));
   if (!parsed.success) return { fieldErrors: { email: "Enter a valid email address." } };
   const supabase = await createClient();
-  await supabase.auth.resetPasswordForEmail(parsed.data, {
+  const { error } = await supabase.auth.resetPasswordForEmail(parsed.data, {
     redirectTo: `${await siteOrigin()}/auth/confirm?next=/reset-password`,
+    captchaToken: captcha(formData),
   });
+  if (error && isCaptchaError(error)) return { error: CAPTCHA_MESSAGE, email: parsed.data };
   // Same answer whether or not the account exists, so emails can't be probed.
   return { notice: "reset", email: parsed.data };
 }
@@ -152,12 +174,15 @@ export async function sendMagicLink(_: AuthState, formData: FormData): Promise<A
   if (!isSupabaseConfigured()) return { error: "Sign-in is not available yet." };
   const parsed = z.string().trim().toLowerCase().email().safeParse(formData.get("email"));
   if (!parsed.success) return { fieldErrors: { email: "Enter a valid email address." }, email: String(formData.get("email") ?? "") };
+  // The link also creates accounts, so it gets the same disposable-email check as sign-up.
+  if (isDisposableEmail(parsed.data)) return { fieldErrors: { email: DISPOSABLE_MESSAGE }, email: parsed.data };
   const next = safeNext(formData.get("next"));
   const supabase = await createClient();
   const { error } = await supabase.auth.signInWithOtp({
     email: parsed.data,
-    options: { emailRedirectTo: `${await siteOrigin()}/auth/confirm?next=${encodeURIComponent(next)}`, shouldCreateUser: true },
+    options: { emailRedirectTo: `${await siteOrigin()}/auth/confirm?next=${encodeURIComponent(next)}`, shouldCreateUser: true, captchaToken: captcha(formData) },
   });
+  if (error && isCaptchaError(error)) return { email: parsed.data, error: CAPTCHA_MESSAGE };
   if (error) return { email: parsed.data, error: error.message.includes("seconds") ? "Please wait a minute before asking for another link." : "We couldn't send the link. Try again in a minute." };
   return { notice: "magic", email: parsed.data };
 }

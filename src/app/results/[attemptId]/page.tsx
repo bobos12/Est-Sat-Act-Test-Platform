@@ -5,7 +5,10 @@ import { Suspense } from "react";
 import { QuestionReviewer, type ReviewQuestion } from "@/components/exam/question-reviewer";
 import { ButtonLink } from "@/components/ui/button";
 import { requireViewer } from "@/lib/auth/session";
+import { redirectIfRevoked } from "@/lib/auth/single-session";
 import type { RichContent } from "@/lib/content";
+import { ContentGuard } from "@/components/exam/content-guard";
+import { protectPayload, watermarkFor } from "@/lib/protect";
 import { createClient } from "@/lib/supabase/server";
 import { cn } from "@/lib/utils";
 
@@ -60,15 +63,16 @@ function minutesBetween(a: string, b: string) {
 
 async function Results({ params }: { params: PageProps<"/results/[attemptId]">["params"] }) {
   const { attemptId } = await params;
-  await requireViewer(`/results/${attemptId}`);
+  const viewer = await requireViewer(`/results/${attemptId}`);
   const supabase = await createClient();
   const { data, error } = await supabase.rpc("get_attempt_review", { p_attempt: attemptId });
   if (error) {
+    redirectIfRevoked(error, `/results/${attemptId}`);
     if (error.message.includes("ATTEMPT_OPEN")) redirect(`/exam/${attemptId}`);
     if (error.message.includes("ATTEMPT_NOT_FOUND") || error.code === "22P02") notFound();
     throw new Error("We couldn't load your results. Please refresh.");
   }
-  const review = data as Review;
+  const review = await protectPayload(data as Review, viewer.id);
   const a = review.attempt;
   const percent = Math.round(Number(a.percent));
   // SAT papers carry their official raw -> scaled table (a range, 200-800); EST uses an estimate from 400 to 800.
@@ -93,6 +97,7 @@ async function Results({ params }: { params: PageProps<"/results/[attemptId]">["
 
   return (
     <>
+      <ContentGuard {...watermarkFor(viewer.id)} />
       <Link href="/dashboard" className="text-sm text-ink-500 hover:text-ink-950">
         ← My exams
       </Link>

@@ -4,10 +4,21 @@ import { notFound } from "next/navigation";
 import { DataTable, Empty, Panel, PageHeader, StatusBadge, Td, Th, adminDate, adminDay, money } from "@/components/admin/ui";
 import { adminClient } from "@/lib/admin/server";
 import { GrantForm, RevokeForm, RoleForm } from "../access-forms";
-import { DeleteStudentForm, EditStudentForm, SuspendForm } from "../manage-forms";
+import { DeleteStudentForm, EditStudentForm, SignOutEverywhereForm, SuspendForm } from "../manage-forms";
 import { createServiceClient } from "@/lib/supabase/server";
 
 export const metadata = { title: "Student" };
+
+type Device = { device_id: string; first_seen: string; last_seen: string; sign_ins: number; ip: string | null; user_agent: string | null; place: string | null };
+type UserSecurity = { score: number; active_sessions: number; devices: Device[]; signals: { devices_30d: number; signin_devices_24h: number; travel_7d: number } };
+
+/** "Chrome on Windows" from a user agent, good enough to tell devices apart. */
+function deviceLabel(ua: string | null) {
+  if (!ua) return "Unknown device";
+  const browser = /Edg\//.test(ua) ? "Edge" : /OPR\//.test(ua) ? "Opera" : /Chrome\//.test(ua) ? "Chrome" : /Firefox\//.test(ua) ? "Firefox" : /Safari\//.test(ua) ? "Safari" : "Browser";
+  const os = /iPhone|iPad/.test(ua) ? "iOS" : /Android/.test(ua) ? "Android" : /Windows/.test(ua) ? "Windows" : /Mac OS X/.test(ua) ? "macOS" : /Linux/.test(ua) ? "Linux" : "";
+  return os ? `${browser} on ${os}` : browser;
+}
 
 export default async function StudentProfile({ params }: PageProps<"/admin/students/[id]">) {
   const { supabase, viewer } = await adminClient();
@@ -15,12 +26,14 @@ export default async function StudentProfile({ params }: PageProps<"/admin/stude
   const { data: p } = await supabase.from("profiles").select("id, email, full_name, phone, school, grade, role, created_at").eq("id", id).maybeSingle();
   if (!p) notFound();
 
-  const [{ data: subs }, { data: payments }, { data: attempts }, { data: audit }] = await Promise.all([
+  const [{ data: subs }, { data: payments }, { data: attempts }, { data: audit }, { data: security }] = await Promise.all([
     supabase.from("subscriptions").select("id, status, source, current_period_start, current_period_end, note, plans(name), created_at").eq("user_id", id).order("created_at", { ascending: false }),
     supabase.from("payments").select("id, status, provider, merchant_reference, amount_cents, currency, failure_reason, created_at, paid_at").eq("user_id", id).order("created_at", { ascending: false }),
     supabase.from("exam_attempts").select("id, status, percent, correct_count, question_count, started_at, exams(title)").eq("user_id", id).order("started_at", { ascending: false }).limit(50),
     supabase.from("admin_audit_log").select("id, action, details, created_at, profiles:actor_id(full_name, email)").eq("target_type", "profile").eq("target_id", id).order("created_at", { ascending: false }).limit(50),
+    supabase.rpc("admin_user_security", { p_user: id }),
   ]);
+  const sec = security as UserSecurity | null;
 
   // Suspension lives on the login (auth), readable only with the service key.
   let suspended = false;
@@ -178,6 +191,33 @@ export default async function StudentProfile({ params }: PageProps<"/admin/stude
         </div>
 
         <div className="space-y-6">
+          {sec ? (
+            <Panel title={`Devices · last 30 days · risk ${sec.score}`}>
+              {sec.devices.length ? (
+                <ul className="divide-y divide-line">
+                  {sec.devices.map((d) => (
+                    <li key={d.device_id} className="px-5 py-3 text-sm">
+                      <p className="font-medium text-ink-900">{deviceLabel(d.user_agent)}</p>
+                      <p className="text-xs text-ink-500">
+                        {[d.place, d.ip].filter(Boolean).join(" · ") || "Location unknown"}
+                        {d.sign_ins ? ` · ${d.sign_ins} sign-in${d.sign_ins === 1 ? "" : "s"}` : ""}
+                      </p>
+                      <p className="text-xs text-ink-500">Last seen {adminDate.format(new Date(d.last_seen))}</p>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <Empty>No devices recorded yet.</Empty>
+              )}
+              <div className="space-y-2 border-t border-line px-5 py-4">
+                <p className="text-xs text-ink-500">
+                  {sec.active_sessions} open session{sec.active_sessions === 1 ? "" : "s"}
+                  {sec.signals.travel_7d ? ` · ${sec.signals.travel_7d} impossible-travel jump${sec.signals.travel_7d === 1 ? "" : "s"} this week` : ""}
+                </p>
+                {p.id !== viewer.id && sec.active_sessions ? <SignOutEverywhereForm userId={p.id} /> : null}
+              </div>
+            </Panel>
+          ) : null}
           <Panel title="Edit details">
             <div className="p-5">
               <EditStudentForm p={p} />
@@ -233,7 +273,9 @@ export default async function StudentProfile({ params }: PageProps<"/admin/stude
                             ? `Revoked access (${d.canceled_subscriptions ?? 0})`
                             : a.action === "profile.role"
                               ? `Role → ${d.role}`
-                              : a.action}
+                              : a.action === "sessions.revoke"
+                                ? "Signed out everywhere"
+                                : a.action}
                       </p>
                       {d.note ? <p className="text-ink-600">“{d.note}”</p> : null}
                       <p className="text-xs text-ink-500">

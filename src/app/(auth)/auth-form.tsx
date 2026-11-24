@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { useActionState, useState, useTransition } from "react";
+import { Turnstile } from "@/components/auth/turnstile";
 import { FormMessage } from "@/components/ui/field";
 import { cn } from "@/lib/utils";
-import { resendConfirmation, sendMagicLink, signIn, signUp, type AuthState } from "./actions";
+import { resendConfirmation, sendMagicLink, signIn, signInWithGoogle, signUp, type AuthState } from "./actions";
 
 const q = (next?: string) => (next ? `?next=${encodeURIComponent(next)}` : "");
 
@@ -51,7 +52,16 @@ export function AuthForm({ mode, next }: { mode: "sign-in" | "sign-up"; next?: s
       </p>
 
       {/* Quick sign-in */}
-      {/* Google sign-in is ready (signInWithGoogle) but hidden until the provider is set up in Supabase. */}
+      <form action={signInWithGoogle} className="mb-3">
+        {next ? <input type="hidden" name="next" value={next} /> : null}
+        <button
+          type="submit"
+          className="flex h-12 w-full items-center justify-center gap-3 rounded-xl bg-white text-[0.9375rem] font-semibold text-ink-950 ring-1 ring-inset ring-line-strong transition hover:bg-paper-2 hover:ring-ink-400"
+        >
+          <GoogleIcon />
+          Continue with Google
+        </button>
+      </form>
       <button
         type="button"
         onClick={() => setMagic((m) => !m)}
@@ -84,6 +94,7 @@ export function AuthForm({ mode, next }: { mode: "sign-in" | "sign-up"; next?: s
             defaultValue={magicState?.email}
             error={magicState?.fieldErrors?.email}
           />
+          <Turnstile action="magic-link" resetKey={magicState} />
           <button
             type="submit"
             disabled={magicPending}
@@ -168,6 +179,7 @@ export function AuthForm({ mode, next }: { mode: "sign-in" | "sign-up"; next?: s
           ) : null}
         </div>
 
+        <Turnstile action={mode} resetKey={state} />
         <button
           type="submit"
           disabled={pending}
@@ -216,21 +228,25 @@ function TextField({ label, name, error, ...props }: { label: string; name: stri
 
 function ResendLink({ email }: { email: string }) {
   const [msg, setMsg] = useState<string | null>(null);
+  const [token, setToken] = useState<string>();
   const [busy, start] = useTransition();
   return (
-    <button
-      type="button"
-      disabled={busy}
-      onClick={() =>
-        start(async () => {
-          const r = await resendConfirmation(email);
-          setMsg(r.error ?? "Sent! Check your inbox (and spam).");
-        })
-      }
-      className="text-sm font-semibold text-mark-500 hover:underline disabled:opacity-60"
-    >
-      {msg ?? (busy ? "Sending…" : "Resend the confirmation email")}
-    </button>
+    <>
+      <Turnstile action="resend" field={false} onToken={setToken} resetKey={msg} />
+      <button
+        type="button"
+        disabled={busy}
+        onClick={() =>
+          start(async () => {
+            const r = await resendConfirmation(email, token);
+            setMsg(r.error ?? "Sent! Check your inbox (and spam).");
+          })
+        }
+        className="text-sm font-semibold text-mark-500 hover:underline disabled:opacity-60"
+      >
+        {msg ?? (busy ? "Sending…" : "Resend the confirmation email")}
+      </button>
+    </>
   );
 }
 

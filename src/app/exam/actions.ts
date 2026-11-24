@@ -1,6 +1,7 @@
 "use server";
 
 import { z } from "zod";
+import { redirectIfRevoked } from "@/lib/auth/single-session";
 import { createClient } from "@/lib/supabase/server";
 import type { SaveResult } from "@/lib/exam-types";
 
@@ -21,9 +22,10 @@ export async function saveAnswer(input: z.input<typeof saveInput>): Promise<Save
   if (!parsed.success) return { ok: false, retry: false, message: "Invalid answer" };
   const { attemptId, questionId, optionId, response, setOption, flagged } = parsed.data;
 
+  let res;
   try {
     const supabase = await createClient();
-    const { data, error } = await supabase.rpc("save_answer", {
+    res = await supabase.rpc("save_answer", {
       p_attempt: attemptId,
       p_question: questionId,
       p_option: optionId,
@@ -31,20 +33,23 @@ export async function saveAnswer(input: z.input<typeof saveInput>): Promise<Save
       p_flagged: flagged,
       p_response: response,
     });
-    if (error) {
-      const permanent = /INVALID_|ATTEMPT_NOT_FOUND/.test(error.message);
-      return { ok: false, retry: !permanent, message: error.message };
-    }
-    return { ok: true, result: data as SaveResult };
   } catch (e) {
     return { ok: false, retry: true, message: e instanceof Error ? e.message : "Network error" };
   }
+  const { data, error } = res;
+  if (error) {
+    redirectIfRevoked(error, `/exam/${attemptId}`);
+    const permanent = /INVALID_|ATTEMPT_NOT_FOUND/.test(error.message);
+    return { ok: false, retry: !permanent, message: error.message };
+  }
+  return { ok: true, result: data as SaveResult };
 }
 
 export async function submitAttempt(attemptId: string): Promise<{ ok: boolean; message?: string }> {
   if (!z.string().uuid().safeParse(attemptId).success) return { ok: false, message: "Invalid attempt" };
   const supabase = await createClient();
   const { error } = await supabase.rpc("submit_attempt", { p_attempt: attemptId });
+  redirectIfRevoked(error, `/exam/${attemptId}`);
   if (error) return { ok: false, message: "We couldn't submit right now. Your answers are saved — please try again." };
   return { ok: true };
 }

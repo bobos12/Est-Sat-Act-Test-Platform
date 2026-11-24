@@ -30,17 +30,17 @@ export async function generateMetadata({ params }: PageProps<"/exams/[slug]">): 
   return pageMetadata({ title, description: examDescription(exam, subject).slice(0, 300), path: `/exams/${exam.slug}` });
 }
 
-export default function ExamDetailPage({ params }: PageProps<"/exams/[slug]">) {
+export default function ExamDetailPage({ params, searchParams }: PageProps<"/exams/[slug]">) {
   return (
     <div className="mx-auto max-w-4xl px-5 pb-24 pt-10 sm:px-6 sm:pt-14">
       <Suspense fallback={<div className="mt-8 h-96 animate-pulse rounded-[var(--radius-lg)] bg-paper-2" />}>
-        <ExamDetail params={params} />
+        <ExamDetail params={params} searchParams={searchParams} />
       </Suspense>
     </div>
   );
 }
 
-async function ExamDetail({ params }: { params: PageProps<"/exams/[slug]">["params"] }) {
+async function ExamDetail({ params, searchParams }: Pick<PageProps<"/exams/[slug]">, "params" | "searchParams">) {
   const { slug } = await params;
   const exam = await getExamBySlug(slug);
   if (!exam) notFound();
@@ -113,7 +113,7 @@ async function ExamDetail({ params }: { params: PageProps<"/exams/[slug]">["para
         </section>
         <aside className="self-start rounded-[var(--radius-lg)] bg-white p-6 ring-1 ring-line">
           <Suspense fallback={<div className="h-28" />}>
-            <StartPanel exam={exam} />
+            <StartPanel exam={exam} searchParams={searchParams} />
           </Suspense>
         </aside>
       </div>
@@ -175,7 +175,7 @@ async function RelatedExams({ exam, trackName, trackPath }: { exam: CatalogExam;
   );
 }
 
-async function StartPanel({ exam }: { exam: CatalogExam }) {
+async function StartPanel({ exam, searchParams }: { exam: CatalogExam; searchParams: PageProps<"/exams/[slug]">["searchParams"] }) {
   const viewer = await getViewer();
   const next = `/exams/${exam.slug}`;
 
@@ -227,6 +227,11 @@ async function StartPanel({ exam }: { exam: CatalogExam }) {
           ? "Pick up exactly where you left off. The timer has kept running."
           : `The ${exam.duration_minutes}-minute timer starts as soon as you press Start.`}
       </p>
+      {!open && (await searchParams).limit === "daily" ? (
+        <p className="mt-3 rounded-[var(--radius-md)] bg-warning-50 px-3 py-2 text-sm text-warning-700">
+          You&apos;ve started the maximum number of exams for today. You can start a new one within 24 hours.
+        </p>
+      ) : null}
       <StartExamButton resume={Boolean(open)} title={exam.title} />
     </form>
   );

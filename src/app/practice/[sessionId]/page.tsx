@@ -4,7 +4,10 @@ import { Suspense } from "react";
 import { SiteFooter } from "@/components/site/footer";
 import { SiteHeader } from "@/components/site/header";
 import { requireViewer } from "@/lib/auth/session";
+import { redirectIfRevoked } from "@/lib/auth/single-session";
 import type { BankSessionPayload } from "@/lib/bank-types";
+import { ContentGuard } from "@/components/exam/content-guard";
+import { protectPayload, watermarkFor } from "@/lib/protect";
 import { createClient } from "@/lib/supabase/server";
 import { SessionResults } from "./session-results";
 import { SessionRunner } from "./session-runner";
@@ -21,14 +24,16 @@ export default function PracticeSessionPage({ params }: PageProps<"/practice/[se
 
 async function Session({ params }: { params: PageProps<"/practice/[sessionId]">["params"] }) {
   const { sessionId } = await params;
-  await requireViewer(`/practice/${sessionId}`);
+  const viewer = await requireViewer(`/practice/${sessionId}`);
   const supabase = await createClient();
   const { data, error } = await supabase.rpc("bank_session", { p_session: sessionId });
   if (error) {
+    redirectIfRevoked(error, `/practice/${sessionId}`);
     if (error.message.includes("SESSION_NOT_FOUND") || error.code === "22P02") notFound();
     throw new Error("We couldn't load this session. Please refresh.");
   }
-  const payload = data as BankSessionPayload;
+  const payload = await protectPayload(data as BankSessionPayload, viewer.id);
+  const guard = <ContentGuard {...watermarkFor(viewer.id)} />;
 
   if (payload.session.completed_at) {
     return (
@@ -38,10 +43,16 @@ async function Session({ params }: { params: PageProps<"/practice/[sessionId]">[
           <SessionResults payload={payload} />
         </main>
         <SiteFooter />
+        {guard}
       </>
     );
   }
-  return <SessionRunner payload={payload} />;
+  return (
+    <>
+      <SessionRunner payload={payload} />
+      {guard}
+    </>
+  );
 }
 
 function RunnerSkeleton() {

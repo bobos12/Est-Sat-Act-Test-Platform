@@ -96,7 +96,7 @@ export async function updateStudent(_: AccessState, formData: FormData): Promise
 }
 
 export async function setSuspended(_: AccessState, formData: FormData): Promise<AccessState> {
-  const { viewer } = await adminClient();
+  const { supabase, viewer } = await adminClient();
   const id = z.string().uuid().parse(formData.get("user_id"));
   const suspend = formData.get("suspend") === "true";
   if (id === viewer.id) return { error: "You can't suspend your own account." };
@@ -104,8 +104,22 @@ export async function setSuspended(_: AccessState, formData: FormData): Promise<
   if (!svc) return { error: NO_SERVICE };
   const { error } = await svc.auth.admin.updateUserById(id, { ban_duration: suspend ? "876000h" : "none" });
   if (error) return { error: error.message };
+  // A ban only stops new sign-ins; end the sessions already open too.
+  if (suspend) await supabase.rpc("admin_revoke_sessions", { p_user: id });
   revalidatePath(`/admin/students/${id}`);
   return { ok: suspend ? "Account suspended. They can't sign in until you restore it." : "Account restored. They can sign in again." };
+}
+
+/** End every session on the account: all devices must sign in again. */
+export async function signOutEverywhere(_: AccessState, formData: FormData): Promise<AccessState> {
+  const { supabase, viewer } = await adminClient();
+  const id = z.string().uuid().parse(formData.get("user_id"));
+  if (id === viewer.id) return { error: "Use Sign out on your own account instead." };
+  const { data, error } = await supabase.rpc("admin_revoke_sessions", { p_user: id });
+  if (error) return { error: error.message };
+  revalidatePath(`/admin/students/${id}`);
+  const n = Number(data ?? 0);
+  return { ok: n ? `Signed out of ${n} session${n === 1 ? "" : "s"}.` : "No open sessions." };
 }
 
 export async function deleteStudent(_: AccessState, formData: FormData): Promise<AccessState> {
