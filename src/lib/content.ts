@@ -89,7 +89,8 @@ export function textToContent(text: string): RichContent {
       blocks.push({ type: "math", latex: chunk.slice(2, -2).trim() });
     } else if (chunk.startsWith("## ")) {
       blocks.push({ type: "heading", text: chunk.slice(3).trim() });
-    } else if (lines.every((l) => l.startsWith("|"))) {
+    } else if (lines.every((l) => l.length > 1 && l.startsWith("|") && l.endsWith("|"))) {
+      // Rows must start and end with "|", so "|x - 1| < 2" (absolute value) stays text.
       const rows = lines
         .map((l) => l.replace(/^\|/, "").replace(/\|$/, "").split("|").map((c) => c.trim()));
       const sep = rows.length > 1 && rows[1].every((c) => /^:?-{3,}:?$/.test(c));
