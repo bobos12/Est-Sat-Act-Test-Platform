@@ -1,11 +1,12 @@
 "use client";
 
 import { ActionMessage, SubmitButton } from "@/components/admin/client";
-import { useActionState, useRef } from "react";
+import { useActionState, useRef, useState } from "react";
 import { Input } from "@/components/ui/field";
 import { DropZone } from "@/components/admin/drop-zone";
 import { Label, Select } from "@/components/admin/ui";
 import { uploadDocument } from "./actions";
+import { ImportRun } from "./import-runner";
 
 export function UploadForm({
   subjects,
@@ -16,9 +17,11 @@ export function UploadForm({
 }) {
   const [state, action, pending] = useActionState(uploadDocument, undefined);
   const titleRef = useRef<HTMLInputElement>(null);
+  const [kind, setKind] = useState("question_paper");
   return (
     <form action={action} className="space-y-4">
       <ActionMessage state={state} />
+      {!pending && state?.docId ? <ImportRun key={state.docId} docId={state.docId} title={state.docTitle ?? "Paper"} opts={state.run} /> : null}
       <DropZone
         name="file"
         label="PDF"
@@ -44,7 +47,7 @@ export function UploadForm({
         </div>
         <div>
           <Label htmlFor="doc-kind">Document type</Label>
-          <Select id="doc-kind" name="kind">
+          <Select id="doc-kind" name="kind" value={kind} onChange={(e) => setKind(e.target.value)}>
             <option value="question_paper">Question paper</option>
             <option value="answer_key">Answer key</option>
             <option value="reference">Other reference</option>
@@ -57,8 +60,8 @@ export function UploadForm({
           <Input id="doc-session_label" name="session_label" placeholder="e.g. January 2026" />
         </div>
         <div>
-          <Label htmlFor="doc-paired_document_id">Answer key for…</Label>
-          <Select id="doc-paired_document_id" name="paired_document_id" defaultValue="">
+          <Label htmlFor="doc-paired_document_id">{kind === "answer_key" ? "Answer key for which paper? (required)" : "Answer key for…"}</Label>
+          <Select id="doc-paired_document_id" name="paired_document_id" defaultValue="" required={kind === "answer_key"} disabled={kind !== "answer_key"}>
             <option value="">—</option>
             {papers.map((p) => (
               <option key={p.id} value={p.id}>

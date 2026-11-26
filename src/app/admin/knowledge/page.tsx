@@ -7,6 +7,8 @@ import { aiConfigured } from "@/lib/ai/client";
 import { requestTime } from "@/lib/time";
 import { BulkImport } from "./bulk-import";
 import { ReadyExamForm } from "./ready-exam-form";
+import { DeleteDocument } from "./delete-document";
+import { StopImportButton } from "./import-runner";
 import { UploadForm } from "./upload-form";
 
 export const maxDuration = 300; // Vercel Hobby limit
@@ -23,7 +25,9 @@ export default async function Knowledge({ searchParams }: PageProps<"/admin/know
 
   let docsQuery = supabase
     .from("source_documents")
-    .select("id, title, kind, session_label, status, status_detail, page_count, extracted_question_count, created_at, updated_at, subjects(name)", { count: "exact" })
+    .select("id, title, kind, session_label, status, status_detail, page_count, extracted_question_count, created_at, updated_at, paired_document_id, subjects(name)", { count: "exact" })
+    // An answer key belongs to its paper and is shown on the paper's row, not as a document of its own.
+    .or("kind.neq.answer_key,paired_document_id.is.null")
     .order("created_at", { ascending: false });
   if (q) docsQuery = docsQuery.ilike("title", `%${q.replace(/[%_\\]/g, " ")}%`);
   if (!showAll && !q) docsQuery = docsQuery.limit(RECENT);
@@ -38,6 +42,11 @@ export default async function Knowledge({ searchParams }: PageProps<"/admin/know
     supabase.from("source_documents").select("id", { count: "exact", head: true }),
   ]);
   const total = count ?? 0;
+  const paperIds = (docs ?? []).filter((d) => d.kind === "question_paper").map((d) => d.id);
+  const { data: keys } = paperIds.length
+    ? await supabase.from("source_documents").select("paired_document_id").eq("kind", "answer_key").in("paired_document_id", paperIds)
+    : { data: [] as { paired_document_id: string | null }[] };
+  const hasKey = new Set((keys ?? []).map((k) => k.paired_document_id));
   const now = requestTime();
 
   return (
@@ -124,6 +133,7 @@ export default async function Knowledge({ searchParams }: PageProps<"/admin/know
                 <Th>Type</Th>
                 <Th>Questions</Th>
                 <Th>Status</Th>
+                <Th className="w-32" />
               </tr>
             </thead>
             <tbody>
@@ -143,11 +153,44 @@ export default async function Knowledge({ searchParams }: PageProps<"/admin/know
                         {d.page_count ? ` · ${d.page_count} pages` : ""} · added {adminDay.format(new Date(d.created_at))}
                       </p>
                     </Td>
-                    <Td className="text-ink-600">{d.kind === "question_paper" ? "Paper" : d.kind === "answer_key" ? "Answer key" : "Reference"}</Td>
+                    <Td className="text-ink-600">
+                      {d.kind === "question_paper" ? (
+                        <>
+                          Paper
+                          <p className="text-xs">{hasKey.has(d.id) || d.paired_document_id ? <span className="text-success-700">✓ Answer key attached</span> : <span className="text-ink-400">No answer key</span>}</p>
+                        </>
+                      ) : d.kind === "answer_key" ? (
+                        <>
+                          Answer key
+                          <p className="text-xs text-warning-700">Not linked to a paper</p>
+                        </>
+                      ) : (
+                        "Reference"
+                      )}
+                    </Td>
                     <Td className="tabular">{d.kind === "question_paper" ? d.extracted_question_count : "—"}</Td>
                     <Td>
-                      {stale ? <StatusBadge status="failed" label="Timed out · open to retry" /> : <StatusBadge status={d.status} label={live ? `Processing ${live[1]}%` : undefined} />}
+                      {stale ? (
+                        <StatusBadge status="failed" label="Stuck · not responding" />
+                      ) : (
+                        <StatusBadge status={d.status} label={live ? `Importing ${live[1]}%` : d.status === "failed" ? "Didn't finish" : undefined} />
+                      )}
+                      {live ? <p className="mt-1 max-w-56 truncate text-xs text-ink-500">{live[2]}</p> : null}
                       {d.status === "failed" && d.status_detail ? <p className="mt-1 max-w-56 text-xs text-danger-600">{d.status_detail}</p> : null}
+                    </Td>
+                    <Td className="text-right">
+                      {d.status === "processing" && !stale ? (
+                        <StopImportButton docId={d.id} size="xs" />
+                      ) : (
+                        <div className="flex items-center justify-end gap-1.5">
+                          {d.kind === "question_paper" && d.extracted_question_count === 0 ? (
+                            <Link href={`/admin/knowledge/${d.id}`} className={btn("secondary", "xs")}>
+                              {stale || d.status === "failed" ? "Run again" : "Run import"}
+                            </Link>
+                          ) : null}
+                          <DeleteDocument id={d.id} title={d.title} kind={d.kind} compact />
+                        </div>
+                      )}
                     </Td>
                   </tr>
                 );

@@ -47,7 +47,7 @@ export function planPageChunks(numPages: number, pagesPerChunk = 6): string[] {
   return Array.from({ length: n }, (_, i) => `the questions that START on pages ${i * size + 1}-${Math.min(numPages, (i + 1) * size)} (PDF pages)`);
 }
 
-async function extractChunk(
+export async function extractChunk(
   input: { subjectName: string; paper: Buffer; answerKey?: Buffer; topics: string[]; skills: string[]; domains: string[] },
   scope: string,
   refPrefix: string,

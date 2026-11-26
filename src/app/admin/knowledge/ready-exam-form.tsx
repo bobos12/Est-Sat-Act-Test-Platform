@@ -9,25 +9,54 @@ import { Label, Select } from "@/components/admin/ui";
 import { Input } from "@/components/ui/field";
 import { cn } from "@/lib/utils";
 import { examTitleTaken, uploadReadyExam } from "./actions";
+import { ImportRun } from "./import-runner";
 
 type Clash = { id: string; title: string; status: string } | null;
 
-export function ReadyExamForm({ subjects }: { subjects: { id: string; name: string; minutes: number }[] }) {
-  // If the server cuts the request off (time limit), show a clear message instead of an error page.
+type Subjects = { id: string; name: string; minutes: number }[];
+
+/** Best subject for a file name like "EST I HS Literacy Practice Test 3.pdf" (null when unsure). */
+function guessSubject(fileName: string, subjects: Subjects) {
+  const norm = (x: string) =>
+    ` ${x
+      .toLowerCase()
+      .replace(/\.pdf$/, "")
+      .replace(/[^a-z0-9]+/g, " ")
+      .replace(/\best\s*(2|ii)\b/g, "est ii")
+      .replace(/\best\s*(1|i)\b/g, "est i")
+      .replace(/\blevel\s*(1|i)\b/g, "level 1")
+      .replace(/\blevel\s*(2|ii)\b/g, "level 2")} `;
+  const file = norm(fileName);
+  let best: { id: string; score: number } | null = null;
+  for (const s of subjects) {
+    const words = norm(s.name).trim().split(" ");
+    // Every word of the subject name must appear ("est i literacy" needs est, i and literacy).
+    if (!words.every((w) => file.includes(` ${w} `))) continue;
+    if (!best || words.length > best.score) best = { id: s.id, score: words.length };
+  }
+  return best?.id ?? null;
+}
+
+/** Remounts the form after an import so another exam can be uploaded from a clean slate. */
+export function ReadyExamForm({ subjects }: { subjects: Subjects }) {
+  const [round, setRound] = useState(0);
+  return <ExamUpload key={round} subjects={subjects} onReset={() => setRound((r) => r + 1)} />;
+}
+
+function ExamUpload({ subjects, onReset }: { subjects: Subjects; onReset: () => void }) {
+  // A lost connection during upload shows a clear message instead of an error page.
   const [state, action, pending] = useActionState(async (prev: Awaited<ReturnType<typeof uploadReadyExam>>, fd: FormData) => {
     try {
       return await uploadReadyExam(prev, fd);
     } catch {
-      return {
-        error:
-          "The import stopped before it finished, usually because a long PDF takes more than the server's 5-minute limit. Check the document in the list below and press Retry, or split the PDF into smaller parts.",
-      };
+      return { error: "The upload didn't reach the server. Check your connection and try again." };
     }
   }, undefined);
   const [title, setTitle] = useState("");
   // Live "name already taken" check, debounced. The answer is kept per title, so typing never shows a stale result.
   const [checked, setChecked] = useState<{ title: string; clash: Clash } | null>(null);
   const titleTouched = useRef(false);
+  const [subjectId, setSubjectId] = useState(subjects[0]?.id ?? "");
   const t = title.trim();
   const checking = t.length >= 3 && checked?.title !== t;
   const clash = checked?.title === t ? checked.clash : null;
@@ -48,16 +77,27 @@ export function ReadyExamForm({ subjects }: { subjects: { id: string; name: stri
   return (
     <form action={action} className="space-y-4">
       <ActionMessage state={state} />
-      {pending ? <ImportProgress title={title.trim()} /> : null}
+      {pending ? <Uploading /> : null}
+      {!pending && state?.docId ? (
+        <div className="space-y-3">
+          <ImportRun key={state.docId} docId={state.docId} title={state.docTitle ?? title} opts={state.run} />
+          <button type="button" onClick={onReset} className="text-sm font-medium text-mark-600 hover:underline">
+            Upload another exam
+          </button>
+        </div>
+      ) : null}
 
-      <div className={cn("space-y-4", pending && "hidden")}>
+      <div className={cn("space-y-4", (pending || state?.docId) && "hidden")}>
         <div className="grid gap-4 md:grid-cols-2">
           <DropZone
             name="paper"
             label="Exam PDF"
             required
             onFiles={(f) => {
-              if (f[0] && !titleTouched.current) setTitle(f[0].name.replace(/\.pdf$/i, "").replace(/[_]+/g, " ").trim());
+              if (!f[0]) return;
+              if (!titleTouched.current) setTitle(f[0].name.replace(/\.pdf$/i, "").replace(/[_]+/g, " ").trim());
+              const guess = guessSubject(f[0].name, subjects);
+              if (guess) setSubjectId(guess);
             }}
           />
           <DropZone name="key" label="Answer key PDF" hint="Without a key the AI works out the answers and flags them for review." />
@@ -103,7 +143,7 @@ export function ReadyExamForm({ subjects }: { subjects: { id: string; name: stri
         <div className="grid gap-4 sm:grid-cols-3">
           <div>
             <Label htmlFor="subject_id">Subject</Label>
-            <Select id="subject_id" name="subject_id">
+            <Select id="subject_id" name="subject_id" value={subjectId} onChange={(e) => setSubjectId(e.target.value)}>
               {subjects.map((s) => (
                 <option key={s.id} value={s.id}>
                   {s.name}
@@ -132,58 +172,17 @@ export function ReadyExamForm({ subjects }: { subjects: { id: string; name: stri
   );
 }
 
-/** Progress bar while the PDF is uploaded, read by the AI and published. Polls the import's saved progress. */
-function ImportProgress({ title }: { title: string }) {
-  const [p, setP] = useState<{ pct: number; label: string }>({ pct: 2, label: "Uploading the PDF" });
-  const [seconds, setSeconds] = useState(0);
-  const [failed, setFailed] = useState<string | null>(null);
-
-  useEffect(() => {
-    let alive = true;
-    const poll = async () => {
-      try {
-        const res = await fetch(`/admin/knowledge/progress?title=${encodeURIComponent(title)}`, { cache: "no-store" });
-        const r = (await res.json()) as { pct: number; label: string; failed?: boolean } | null;
-        if (alive && r?.failed) setFailed(r.label);
-        else if (alive && r) setP((cur) => (r.pct >= cur.pct ? r : cur));
-      } catch {
-        /* keep the last value; the next poll retries */
-      }
-    };
-    const id = setInterval(poll, 2000);
-    const tick = setInterval(() => setSeconds((s) => s + 1), 1000);
-    return () => {
-      alive = false;
-      clearInterval(id);
-      clearInterval(tick);
-    };
-  }, [title]);
-
-  const time = `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
-  if (failed)
-    return (
-      <div className="rounded-[var(--radius-lg)] bg-danger-50 p-5 text-sm text-danger-600 ring-1 ring-danger-600/20" role="alert">
-        <p className="font-semibold">{title || "This exam"} didn&apos;t finish</p>
-        <p className="mt-1">{failed}</p>
-      </div>
-    );
+/** Shown while the PDF files travel to the server, before the import starts. */
+function Uploading() {
   return (
     <div className="rounded-[var(--radius-lg)] bg-mark-50/60 p-5 ring-1 ring-mark-500/20" role="status" aria-live="polite">
-      <div className="flex items-center justify-between gap-3">
-        <p className="flex min-w-0 items-center gap-2 text-sm font-semibold text-ink-950">
-          <Spinner size={16} className="shrink-0 text-mark-500" />
-          <span className="truncate">{title || "Your exam"}</span>
-        </p>
-        <span className="font-display text-2xl font-semibold tabular text-mark-600">{p.pct}%</span>
-      </div>
+      <p className="flex items-center gap-2 text-sm font-semibold text-ink-950">
+        <Spinner size={16} className="text-mark-500" /> Uploading the PDF…
+      </p>
       <div className="mt-3 h-2.5 overflow-hidden rounded-full bg-white ring-1 ring-mark-500/15">
-        <div className="h-full rounded-full bg-mark-500 transition-[width] duration-700 ease-out" style={{ width: `${Math.max(2, p.pct)}%` }} />
+        <div className="h-full w-1/3 animate-pulse rounded-full bg-mark-500" />
       </div>
-      <div className="mt-2 flex justify-between gap-3 text-xs text-ink-600">
-        <span>{p.label}…</span>
-        <span className="shrink-0 tabular">{time} elapsed</span>
-      </div>
-      <p className="mt-3 text-xs text-ink-500">This usually takes 2–5 minutes. Keep this tab open until it finishes.</p>
+      <p className="mt-2 text-xs text-ink-500">Next, the AI reads it part by part and you&apos;ll see the percentage here.</p>
     </div>
   );
 }

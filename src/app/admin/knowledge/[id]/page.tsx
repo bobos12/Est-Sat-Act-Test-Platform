@@ -4,11 +4,13 @@ import { SubmitButton } from "@/components/admin/client";
 import { notFound } from "next/navigation";
 import { RichContentView } from "@/components/exam/rich-content";
 import { FormMessage } from "@/components/ui/field";
-import { Empty, Panel, PageHeader, StatusBadge, adminDate } from "@/components/admin/ui";
+import { Callout, Empty, Panel, PageHeader, StatusBadge, adminDate, relative } from "@/components/admin/ui";
 import { adminClient } from "@/lib/admin/server";
 import type { RichContent } from "@/lib/content";
 import { cn } from "@/lib/utils";
-import { markReviewed, processDocument, retireQuestion } from "../actions";
+import { markReviewed, retireQuestion } from "../actions";
+import { DeleteDocument } from "../delete-document";
+import { RunImportButton, StopImportButton } from "../import-runner";
 
 export const metadata = { title: "Document" };
 export const maxDuration = 300; // extraction of a full paper can take a few minutes
@@ -24,7 +26,11 @@ export default async function DocumentPage({ params, searchParams }: PageProps<"
     .maybeSingle();
   if (!doc) notFound();
   // No progress for 6 minutes: the server time limit cut the run off, so it can be retried.
-  const stale = doc.status === "processing" && requestTime() - Date.parse(doc.updated_at) > 6 * 60_000;
+  const now = requestTime();
+  const stale = doc.status === "processing" && now - Date.parse(doc.updated_at) > 6 * 60_000;
+  const running = doc.status === "processing";
+  const canRun = doc.kind === "question_paper" && doc.extracted_question_count === 0 && (!running || stale);
+  const live = running ? /^(\d{1,3})% · (.*)$/.exec(doc.status_detail ?? "") : null;
 
   const { data: questions } = await supabase
     .from("questions")
@@ -50,14 +56,7 @@ export default async function DocumentPage({ params, searchParams }: PageProps<"
         }
         actions={
           <>
-            {doc.kind === "question_paper" && doc.extracted_question_count === 0 && (doc.status !== "processing" || stale) ? (
-              <form action={processDocument}>
-                <input type="hidden" name="id" value={doc.id} />
-                <SubmitButton icon="sparkle" pendingLabel="Analysing… this can take a minute">
-                  {doc.status === "failed" || stale ? "Retry analysis" : "Analyse with AI"}
-                </SubmitButton>
-              </form>
-            ) : null}
+            {doc.status !== "processing" || stale ? <DeleteDocument id={doc.id} title={doc.title} kind={doc.kind} /> : null}
             {doc.status === "extracted" ? (
               <form action={markReviewed}>
                 <input type="hidden" name="id" value={doc.id} />
@@ -71,7 +70,49 @@ export default async function DocumentPage({ params, searchParams }: PageProps<"
       />
       {typeof sp.ok === "string" ? <div className="mb-6"><FormMessage tone="success">{sp.ok}</FormMessage></div> : null}
       {typeof sp.error === "string" ? <div className="mb-6"><FormMessage>{sp.error}</FormMessage></div> : null}
-      {doc.status_detail ? <p className="mb-6 text-sm text-ink-600">{doc.status_detail}{doc.processed_at ? ` · ${adminDate.format(new Date(doc.processed_at))}` : ""}</p> : null}
+      {canRun || running ? (
+        <div className="mb-6 rounded-[var(--radius-lg)] bg-white p-5 ring-1 ring-line">
+          {running && !stale ? (
+            <div className="flex flex-wrap items-center gap-4">
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-semibold text-ink-950">Importing now{live ? ` · ${live[1]}%` : ""}</p>
+                <p className="text-sm text-ink-600">
+                  {live ? live[2] : doc.status_detail} · last update {relative(doc.updated_at, now)}
+                </p>
+                {live ? (
+                  <div className="mt-2 h-2 max-w-md overflow-hidden rounded-full bg-paper-2">
+                    <div className="h-full rounded-full bg-mark-500" style={{ width: `${live[1]}%` }} />
+                  </div>
+                ) : null}
+              </div>
+              <StopImportButton docId={doc.id} />
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {stale ? (
+                <Callout tone="warning" title="This import stopped responding">
+                  No progress since {relative(doc.updated_at, now)} (it was probably started before step-by-step imports, or the tab was closed). Run it again; parts that finished are kept.
+                </Callout>
+              ) : doc.status === "failed" ? (
+                <Callout tone="danger" title="The last import didn't finish">
+                  {doc.status_detail}
+                </Callout>
+              ) : (
+                <p className="text-sm text-ink-600">This paper hasn&apos;t been imported yet. The AI reads it part by part and publishes it as an exam.</p>
+              )}
+              <div className="flex flex-wrap items-center gap-2">
+                <RunImportButton docId={doc.id} title={doc.title} label={doc.status === "failed" || stale ? "Run import again" : "Run import"} fallback={{ title: doc.title, anyPdf: true }} />
+                {stale ? <StopImportButton docId={doc.id} /> : null}
+              </div>
+            </div>
+          )}
+        </div>
+      ) : doc.status_detail ? (
+        <p className="mb-6 text-sm text-ink-600">
+          {doc.status_detail}
+          {doc.processed_at ? ` · ${adminDate.format(new Date(doc.processed_at))}` : ""}
+        </p>
+      ) : null}
       {doc.kind === "question_paper" && doc.status === "uploaded" ? (
         <p className="mb-6 max-w-2xl text-sm text-ink-600">
           Upload this paper&apos;s answer key first (and link it), then press <strong>Analyse with AI</strong>. The paper and key are read together so
@@ -121,7 +162,7 @@ export default async function DocumentPage({ params, searchParams }: PageProps<"
               })}
             </ol>
           ) : (
-            <Empty>{stale ? "The last run timed out before finishing. Press Retry analysis." : doc.status === "processing" ? "Analysis in progress — refresh in a minute." : "Nothing extracted yet."}</Empty>
+            <Empty>{doc.status === "processing" && !stale ? "Import in progress. Questions appear here when it finishes." : "Nothing imported yet."}</Empty>
           )}
         </Panel>
       ) : (

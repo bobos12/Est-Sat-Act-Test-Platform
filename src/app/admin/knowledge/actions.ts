@@ -2,18 +2,13 @@
 
 import { createHash } from "node:crypto";
 import { redirect } from "next/navigation";
-import { updateTag } from "next/cache";
-import { CATALOG_TAG } from "@/lib/catalog";
 import { z } from "zod";
 import { adminClient } from "@/lib/admin/server";
 import { aiConfigured } from "@/lib/ai/client";
-import { extractPaper, planChunks, planPageChunks } from "@/lib/ai/extract";
-import { solveMissingAnswers } from "@/lib/ai/solve";
-import { attachFigures } from "@/lib/ai/figures";
-import { publishSourceExam, saveExtraction } from "@/lib/admin/persist";
 import type { SupabaseClient } from "@supabase/supabase-js";
+import type { RunOptions } from "./import-actions";
 
-export type UploadState = { error?: string; ok?: string } | undefined;
+export type UploadState = { error?: string; ok?: string; docId?: string; docTitle?: string; run?: RunOptions } | undefined;
 
 const MAX_PDF = 50 * 1024 * 1024;
 
@@ -80,106 +75,6 @@ async function storeDocument(supabase: SupabaseClient, viewerId: string, input: 
 
 const slugify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 70);
 
-/**
- * Reads a paper (with its answer key) and publishes it as a student exam in the library.
- * Returns a human message. Throws on failure after marking the document failed.
- */
-type PublishOptions = { title?: string; access?: "free" | "premium"; duration?: number; anyPdf?: boolean };
-
-async function extractAndPublish(supabase: SupabaseClient, viewerId: string, id: string, opts: PublishOptions = {}): Promise<string> {
-  if (!aiConfigured()) throw new Error("Add GEMINI_API_KEY (free) or ANTHROPIC_API_KEY to the server environment to enable document analysis.");
-  const { data: doc } = await supabase
-    .from("source_documents")
-    .select("id, subject_id, kind, status, updated_at, title, session_label, storage_path, paired_document_id, extracted_question_count, subjects(name, official_duration_minutes, official_question_count, official_sections)")
-    .eq("id", id)
-    .single();
-  if (!doc) throw new Error("Document not found.");
-  if (doc.kind !== "question_paper") throw new Error("Process the question paper. Its answer key is read alongside it automatically.");
-  // A run that stopped reporting progress was cut off by the server time limit; it may be retried.
-  if (doc.status === "processing" && !isStale(doc.updated_at)) throw new Error("This document is already being processed.");
-  if (doc.extracted_question_count > 0) throw new Error("This paper has already been extracted. Its questions are below.");
-
-  // Progress is stored as "NN% · label" in status_detail; the upload form polls it (importProgress).
-  const progress = async (pct: number, label: string) => {
-    await supabase.from("source_documents").update({ status_detail: `${Math.round(pct)}% · ${label}` }).eq("id", id).eq("status", "processing");
-  };
-  await supabase.from("source_documents").update({ status: "processing", status_detail: "5% · Opening the PDF" }).eq("id", id);
-  try {
-    const { data: paper, error: dlErr } = await supabase.storage.from("source-documents").download(doc.storage_path);
-    if (dlErr || !paper) throw new Error(`Could not read the PDF: ${dlErr?.message}`);
-
-    let key: Buffer | undefined;
-    const { data: keyDoc } = await supabase
-      .from("source_documents")
-      .select("storage_path")
-      .eq("kind", "answer_key")
-      .or(`id.eq.${doc.paired_document_id ?? "00000000-0000-0000-0000-000000000000"},paired_document_id.eq.${id}`)
-      .limit(1)
-      .maybeSingle();
-    if (keyDoc) {
-      const { data: k } = await supabase.storage.from("source-documents").download(keyDoc.storage_path);
-      if (k) key = Buffer.from(await k.arrayBuffer());
-    }
-
-    const { data: topics } = await supabase.from("topics").select("id, kind, name").eq("subject_id", doc.subject_id);
-    const subject = Array.isArray(doc.subjects) ? doc.subjects[0] : doc.subjects;
-    const paperBytes = Buffer.from(await paper.arrayBuffer());
-    await progress(10, "Reading the questions");
-    const result = await extractPaper({
-      onChunkDone: (done, total) => progress(10 + (65 * done) / total, `Reading the questions (part ${done} of ${total})`),
-      subjectName: subject?.name ?? "EST",
-      chunks: opts.anyPdf ? planPageChunks((await pageCount(new Uint8Array(paperBytes))) ?? 12) : planChunks(subject?.official_sections ?? 1, subject?.official_question_count ?? 50),
-      paper: paperBytes,
-      answerKey: key,
-      topics: (topics ?? []).filter((t) => t.kind === "topic").map((t) => t.name),
-      skills: (topics ?? []).filter((t) => t.kind === "skill").map((t) => t.name),
-      domains: (topics ?? []).filter((t) => t.kind === "domain").map((t) => t.name),
-    });
-    if (!key) await progress(78, "Working out the answers");
-    const solved = key ? 0 : await solveMissingAnswers(result);
-    await progress(84, "Capturing figures and diagrams");
-    const figs = await attachFigures(supabase, paperBytes, id, result);
-    await progress(92, `Saving ${result.questions.length} questions`);
-    const { saved, items } = await saveExtraction(supabase, { id, subject_id: doc.subject_id }, topics ?? [], result, viewerId);
-    await progress(97, "Publishing the exam");
-
-    const title = opts.title ?? `${subject?.name ?? "EST"}${doc.session_label ? `: ${doc.session_label}` : ""}`;
-    let slug = slugify(title);
-    const { data: taken } = await supabase.from("exams").select("id").eq("slug", slug).maybeSingle();
-    if (taken) slug = `${slug}-${id.slice(0, 6)}`;
-    const outcome = await publishSourceExam(
-      supabase,
-      {
-        subject_id: doc.subject_id,
-        title,
-        slug,
-        access: opts.access ?? (/sample/i.test(doc.session_label ?? doc.title) ? "free" : "premium"),
-        duration_minutes: opts.duration ?? subject?.official_duration_minutes ?? 75,
-        sort_order: 100,
-        created_by: viewerId,
-      },
-      items,
-    );
-    await supabase
-      .from("source_documents")
-      .update({
-        status: outcome.published ? "reviewed" : "extracted",
-        status_detail: `${key ? "Extracted with answer key" : "Extracted without an answer key, keys left blank"}${solved ? `; ${solved} answers worked out by AI` : ""}${figs.attached || figs.failed ? `; ${figs.attached} figures captured${figs.failed ? `, ${figs.failed} could not be rendered` : ""}` : ""}`,
-        extracted_question_count: saved,
-        processed_at: new Date().toISOString(),
-      })
-      .eq("id", id);
-    updateTag(CATALOG_TAG);
-    return outcome.published
-      ? `${title}: ${saved} questions imported and published to the exam library.`
-      : `${title}: ${saved} questions imported, but ${outcome.missingKeys} have no answer key, so the exam is waiting in review.`;
-  } catch (e) {
-    const msg = e instanceof Error ? e.message : "Processing failed";
-    await supabase.from("source_documents").update({ status: "failed", status_detail: msg.slice(0, 500) }).eq("id", id);
-    throw new Error(msg);
-  }
-}
-
 /** Adds a PDF to the knowledge base. A paper with its answer key is imported and published automatically. */
 export async function uploadDocument(_: UploadState, formData: FormData): Promise<UploadState> {
   const { supabase, viewer } = await adminClient();
@@ -187,26 +82,24 @@ export async function uploadDocument(_: UploadState, formData: FormData): Promis
   if (!parsed.success) return { error: parsed.error.issues[0].message };
   const file = formData.get("file");
   if (!(file instanceof File)) return { error: "Choose a PDF file." };
+  if (parsed.data.kind === "answer_key" && !parsed.data.paired_document_id) return { error: "Choose the exam paper this answer key belongs to." };
 
   const stored = await storeDocument(supabase, viewer.id, { ...parsed.data, file });
   if ("error" in stored) return stored;
   if (stored.existing) return { error: "This file is already in the knowledge base. Nothing was changed." };
 
-  // The answer key completes a paper: import it now.
+  // The answer key completes a paper: the form starts its import (step by step, in the browser).
   const paperId = parsed.data.kind === "answer_key" ? parsed.data.paired_document_id : null;
   if (paperId && aiConfigured()) {
-    try {
-      return { ok: await extractAndPublish(supabase, viewer.id, paperId) };
-    } catch (e) {
-      return { error: e instanceof Error ? e.message : "Import failed" };
-    }
+    const { data: paper } = await supabase.from("source_documents").select("title, extracted_question_count").eq("id", paperId).single();
+    if (paper && paper.extracted_question_count === 0) return { ok: `Added “${parsed.data.title}”. Importing its paper now.`, docId: paperId, docTitle: paper.title, run: {} };
   }
   return { ok: `Added “${parsed.data.title}”.${parsed.data.kind === "question_paper" ? " Upload its answer key (set to this paper) to publish it automatically." : ""}` };
 }
 
 function inferFromName(name: string) {
   const n = name.toLowerCase();
-  const est2 = /est\s*(2|ii)/.test(n);
+  const est2 = /\best\s*(2|ii)\b/.test(n);
   const sat = /\bsat\b/.test(n);
   const act = /\bact\b/.test(n);
   const code = sat
@@ -242,12 +135,7 @@ export async function importExam(_: UploadState, formData: FormData): Promise<Up
     if ("error" in k) return k;
     if (k.existing) await supabase.from("source_documents").update({ paired_document_id: p.id }).eq("id", k.id).is("paired_document_id", null);
   }
-  try {
-    return { ok: await extractAndPublish(supabase, viewer.id, p.id) };
-  } catch (e) {
-    const msg = e instanceof Error ? e.message : "Import failed";
-    return { error: `${paper.name}: ${msg}` };
-  }
+  return { docId: p.id, docTitle: paper.name.replace(/\.pdf$/i, ""), run: {} };
 }
 
 const readySchema = z.object({
@@ -276,25 +164,7 @@ export async function uploadReadyExam(_: UploadState, formData: FormData): Promi
     if ("error" in k) return k;
     if (k.existing) await supabase.from("source_documents").update({ paired_document_id: p.id }).eq("id", k.id).is("paired_document_id", null);
   }
-  try {
-    return { ok: await extractAndPublish(supabase, viewer.id, p.id, { title: parsed.data.title, access: parsed.data.access, duration: parsed.data.duration, anyPdf: true }) };
-  } catch (e) {
-    return { error: e instanceof Error ? e.message : "Import failed" };
-  }
-}
-
-export async function processDocument(formData: FormData) {
-  const { supabase, viewer } = await adminClient();
-  const id = z.string().uuid().parse(formData.get("id"));
-  let msg: string;
-  let ok = true;
-  try {
-    msg = await extractAndPublish(supabase, viewer.id, id);
-  } catch (e) {
-    ok = false;
-    msg = e instanceof Error ? e.message : "Processing failed";
-  }
-  redirect(`/admin/knowledge/${id}?${ok ? "ok" : "error"}=${encodeURIComponent(msg)}`);
+  return { docId: p.id, docTitle: parsed.data.title, run: { title: parsed.data.title, access: parsed.data.access, duration: parsed.data.duration, anyPdf: true } };
 }
 
 export async function markReviewed(formData: FormData) {
@@ -331,29 +201,3 @@ export async function examTitleTaken(title: string): Promise<{ taken: false } | 
   const hit = await findExamByTitle(supabase, String(title).slice(0, 140));
   return hit ? { taken: true, ...hit } : { taken: false };
 }
-
-/** How far the import of the paper with this title has got, for the upload form's progress bar. */
-export async function importProgress(title: string): Promise<{ pct: number; label: string; failed?: boolean } | null> {
-  const { supabase } = await adminClient();
-  const { data } = await supabase
-    .from("source_documents")
-    .select("status, status_detail, updated_at")
-    .eq("kind", "question_paper")
-    .eq("title", String(title).slice(0, 200))
-    .order("created_at", { ascending: false })
-    .limit(1)
-    .maybeSingle();
-  if (!data) return null;
-  if (data.status === "failed") return { pct: 100, label: data.status_detail ?? "Import failed", failed: true };
-  if (data.status !== "processing") return { pct: 100, label: "Finishing up" };
-  if (isStale(data.updated_at)) return { pct: 100, label: STALE_MESSAGE, failed: true };
-  const m = /^(\d{1,3})% · (.*)$/.exec(data.status_detail ?? "");
-  return m ? { pct: Number(m[1]), label: m[2] } : { pct: 5, label: data.status_detail ?? "Working" };
-}
-
-/** Imports report progress at least every few minutes; silence for longer means the server cut the run off. */
-const STALE_MS = 6 * 60_000;
-function isStale(updatedAt: string | null | undefined) {
-  return !updatedAt || Date.now() - Date.parse(updatedAt) > STALE_MS;
-}
-const STALE_MESSAGE = "The import stopped: it took longer than the server's 5-minute limit. Open the document and press Retry.";

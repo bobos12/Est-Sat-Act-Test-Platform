@@ -4,8 +4,9 @@ import { useRef, useState } from "react";
 import { Spinner } from "@/components/admin/icons";
 import { DropZone } from "@/components/admin/drop-zone";
 import { importExam } from "./actions";
+import { runSteps } from "./import-runner";
 
-type Row = { name: string; state: "waiting" | "working" | "done" | "error"; message?: string };
+type Row = { name: string; state: "waiting" | "working" | "done" | "error"; message?: string; pct?: number };
 
 /** Pairs "… Answer Key …" files with their paper by file name, then imports each pair one at a time. */
 const norm = (n: string) =>
@@ -39,8 +40,14 @@ export function BulkImport() {
       const key = keys.get(norm(paper.name));
       if (key) fd.set("key", key);
       try {
+        patch({ message: "Uploading", pct: 2 });
         const res = await importExam(undefined, fd);
-        patch(res?.error ? { state: "error", message: res.error } : { state: "done", message: res?.ok });
+        if (res?.error || !res?.docId) {
+          patch({ state: "error", message: res?.error ?? "Upload failed" });
+          continue;
+        }
+        const end = await runSteps(res.docId, { opts: res.run, onProgress: (ph) => patch({ message: ph.label, pct: ph.pct }), shouldStop: () => false });
+        patch(end.state === "done" ? { state: "done", message: end.detail, pct: 100 } : { state: "error", message: end.detail ?? end.label });
       } catch (e) {
         patch({ state: "error", message: e instanceof Error ? e.message : "Import failed" });
       }
@@ -69,7 +76,7 @@ export function BulkImport() {
             <li key={r.name}>
               <span className="font-medium text-ink-950">{r.name}</span>{" "}
               <span className={r.state === "error" ? "text-danger-600" : r.state === "done" ? "text-success-700" : "text-ink-500"}>
-                {r.state === "working" ? "working…" : r.state === "waiting" ? "waiting" : r.message}
+                {r.state === "working" ? `${Math.round(r.pct ?? 0)}% · ${r.message ?? "working"}…` : r.state === "waiting" ? "waiting" : r.message}
               </span>
             </li>
           ))}
