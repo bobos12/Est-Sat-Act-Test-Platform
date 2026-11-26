@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/admin/icons";
+import { DropZone } from "@/components/admin/drop-zone";
 import { importExam } from "./actions";
 
 type Row = { name: string; state: "waiting" | "working" | "done" | "error"; message?: string };
@@ -49,16 +50,16 @@ export function BulkImport() {
 
   return (
     <div className="space-y-4">
-      <input
-        ref={input}
-        type="file"
-        accept="application/pdf"
-        multiple
-        className="block w-full text-sm text-ink-700 file:mr-3 file:rounded-[var(--radius-md)] file:border-0 file:bg-paper-2 file:px-3 file:py-2 file:text-sm file:font-medium"
-      />
-      <Button type="button" size="sm" onClick={run} disabled={busy}>
-        {busy ? "Importing…" : "Import and publish"}
-      </Button>
+      <DropZone label="Papers and answer keys" multiple required inputRef={input} disabled={busy} hint="Select or drop several PDFs at once" onFiles={() => setRows([])} />
+      <button
+        type="button"
+        onClick={run}
+        disabled={busy}
+        className="inline-flex h-10 items-center gap-2 rounded-[var(--radius-md)] bg-ink-950 px-4 text-sm font-semibold text-white hover:bg-ink-800 disabled:opacity-60"
+      >
+        {busy ? <Spinner size={14} /> : null}
+        {busy ? `Importing ${rows.filter((r) => r.state === "done" || r.state === "error").length + 1} of ${rows.length}…` : "Import and publish"}
+      </button>
       <p className="text-xs text-ink-500">
         Select papers together with their answer keys. Each pair is read, turned into an exam and published to the library. This takes a few minutes per paper.
       </p>

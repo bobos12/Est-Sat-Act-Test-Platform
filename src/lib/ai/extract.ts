@@ -16,9 +16,16 @@ export async function extractPaper(input: {
   domains: string[];
   /** Question ranges to extract in parallel, e.g. "Module 2 (questions 1-25)". One chunk = one model call. */
   chunks?: string[];
+  /** Called after each chunk finishes, for progress reporting. */
+  onChunkDone?: (done: number, total: number) => void | Promise<void>;
 }) {
   const chunks = input.chunks?.length ? input.chunks : ["the whole paper"];
-  const parts = await pool(chunks, aiConcurrency(3), (scope, idx) => extractChunk(input, scope, `c${idx}-`));
+  let done = 0;
+  const parts = await pool(chunks, aiConcurrency(3), async (scope, idx) => {
+    const part = await extractChunk(input, scope, `c${idx}-`);
+    await input.onChunkDone?.(++done, chunks.length);
+    return part;
+  });
   const stimuli = parts.flatMap((p) => p.stimuli);
   const questions = parts.flatMap((p) => p.questions);
   if (!questions.length) throw new Error("No questions could be extracted from this document.");

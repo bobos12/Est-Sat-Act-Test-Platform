@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { requestTime } from "@/lib/time";
 import { SubmitButton } from "@/components/admin/client";
 import { notFound } from "next/navigation";
 import { RichContentView } from "@/components/exam/rich-content";
@@ -18,10 +19,12 @@ export default async function DocumentPage({ params, searchParams }: PageProps<"
   const sp = await searchParams;
   const { data: doc } = await supabase
     .from("source_documents")
-    .select("id, title, kind, session_label, status, status_detail, page_count, file_size_bytes, extracted_question_count, processed_at, created_at, subjects(name)")
+    .select("id, title, kind, session_label, status, status_detail, page_count, file_size_bytes, extracted_question_count, processed_at, created_at, updated_at, subjects(name)")
     .eq("id", id)
     .maybeSingle();
   if (!doc) notFound();
+  // No progress for 6 minutes: the server time limit cut the run off, so it can be retried.
+  const stale = doc.status === "processing" && requestTime() - Date.parse(doc.updated_at) > 6 * 60_000;
 
   const { data: questions } = await supabase
     .from("questions")
@@ -47,11 +50,11 @@ export default async function DocumentPage({ params, searchParams }: PageProps<"
         }
         actions={
           <>
-            {doc.kind === "question_paper" && doc.extracted_question_count === 0 && doc.status !== "processing" ? (
+            {doc.kind === "question_paper" && doc.extracted_question_count === 0 && (doc.status !== "processing" || stale) ? (
               <form action={processDocument}>
                 <input type="hidden" name="id" value={doc.id} />
                 <SubmitButton icon="sparkle" pendingLabel="Analysing… this can take a minute">
-                  {doc.status === "failed" ? "Retry analysis" : "Analyse with AI"}
+                  {doc.status === "failed" || stale ? "Retry analysis" : "Analyse with AI"}
                 </SubmitButton>
               </form>
             ) : null}
@@ -118,7 +121,7 @@ export default async function DocumentPage({ params, searchParams }: PageProps<"
               })}
             </ol>
           ) : (
-            <Empty>{doc.status === "processing" ? "Analysis in progress — refresh in a minute." : "Nothing extracted yet."}</Empty>
+            <Empty>{stale ? "The last run timed out before finishing. Press Retry analysis." : doc.status === "processing" ? "Analysis in progress — refresh in a minute." : "Nothing extracted yet."}</Empty>
           )}
         </Panel>
       ) : (

@@ -3,6 +3,7 @@
 import { ActionMessage, SubmitButton } from "@/components/admin/client";
 import { useActionState, useRef } from "react";
 import { Input } from "@/components/ui/field";
+import { DropZone } from "@/components/admin/drop-zone";
 import { Label, Select } from "@/components/admin/ui";
 import { uploadDocument } from "./actions";
 
@@ -18,29 +19,22 @@ export function UploadForm({
   return (
     <form action={action} className="space-y-4">
       <ActionMessage state={state} />
+      <DropZone
+        name="file"
+        label="PDF"
+        required
+        onFiles={(f) => {
+          if (f[0] && titleRef.current && !titleRef.current.value) titleRef.current.value = f[0].name.replace(/\.pdf$/i, "");
+        }}
+      />
       <div>
-        <Label htmlFor="file">PDF</Label>
-        <input
-          id="file"
-          name="file"
-          type="file"
-          accept="application/pdf"
-          required
-          onChange={(e) => {
-            const f = e.target.files?.[0];
-            if (f && titleRef.current && !titleRef.current.value) titleRef.current.value = f.name.replace(/\.pdf$/i, "");
-          }}
-          className="block w-full text-sm text-ink-700 file:mr-3 file:rounded-[var(--radius-md)] file:border-0 file:bg-paper-2 file:px-3 file:py-2 file:text-sm file:font-medium"
-        />
-      </div>
-      <div>
-        <Label htmlFor="title">Title</Label>
-        <Input id="title" name="title" ref={titleRef} required />
+        <Label htmlFor="doc-title">Title</Label>
+        <Input id="doc-title" name="title" ref={titleRef} required />
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <Label htmlFor="subject_id">Subject</Label>
-          <Select id="subject_id" name="subject_id">
+          <Label htmlFor="doc-subject_id">Subject</Label>
+          <Select id="doc-subject_id" name="subject_id">
             {subjects.map((s) => (
               <option key={s.id} value={s.id}>
                 {s.name}
@@ -49,8 +43,8 @@ export function UploadForm({
           </Select>
         </div>
         <div>
-          <Label htmlFor="kind">Document type</Label>
-          <Select id="kind" name="kind">
+          <Label htmlFor="doc-kind">Document type</Label>
+          <Select id="doc-kind" name="kind">
             <option value="question_paper">Question paper</option>
             <option value="answer_key">Answer key</option>
             <option value="reference">Other reference</option>
@@ -59,12 +53,12 @@ export function UploadForm({
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <Label htmlFor="session_label">Session</Label>
-          <Input id="session_label" name="session_label" placeholder="e.g. January 2026" />
+          <Label htmlFor="doc-session_label">Session</Label>
+          <Input id="doc-session_label" name="session_label" placeholder="e.g. January 2026" />
         </div>
         <div>
-          <Label htmlFor="paired_document_id">Answer key for…</Label>
-          <Select id="paired_document_id" name="paired_document_id" defaultValue="">
+          <Label htmlFor="doc-paired_document_id">Answer key for…</Label>
+          <Select id="doc-paired_document_id" name="paired_document_id" defaultValue="">
             <option value="">—</option>
             {papers.map((p) => (
               <option key={p.id} value={p.id}>

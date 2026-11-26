@@ -90,15 +90,20 @@ async function extractAndPublish(supabase: SupabaseClient, viewerId: string, id:
   if (!aiConfigured()) throw new Error("Add GEMINI_API_KEY (free) or ANTHROPIC_API_KEY to the server environment to enable document analysis.");
   const { data: doc } = await supabase
     .from("source_documents")
-    .select("id, subject_id, kind, status, title, session_label, storage_path, paired_document_id, extracted_question_count, subjects(name, official_duration_minutes, official_question_count, official_sections)")
+    .select("id, subject_id, kind, status, updated_at, title, session_label, storage_path, paired_document_id, extracted_question_count, subjects(name, official_duration_minutes, official_question_count, official_sections)")
     .eq("id", id)
     .single();
   if (!doc) throw new Error("Document not found.");
   if (doc.kind !== "question_paper") throw new Error("Process the question paper. Its answer key is read alongside it automatically.");
-  if (doc.status === "processing") throw new Error("This document is already being processed.");
+  // A run that stopped reporting progress was cut off by the server time limit; it may be retried.
+  if (doc.status === "processing" && !isStale(doc.updated_at)) throw new Error("This document is already being processed.");
   if (doc.extracted_question_count > 0) throw new Error("This paper has already been extracted. Its questions are below.");
 
-  await supabase.from("source_documents").update({ status: "processing", status_detail: "Reading the paper…" }).eq("id", id);
+  // Progress is stored as "NN% · label" in status_detail; the upload form polls it (importProgress).
+  const progress = async (pct: number, label: string) => {
+    await supabase.from("source_documents").update({ status_detail: `${Math.round(pct)}% · ${label}` }).eq("id", id).eq("status", "processing");
+  };
+  await supabase.from("source_documents").update({ status: "processing", status_detail: "5% · Opening the PDF" }).eq("id", id);
   try {
     const { data: paper, error: dlErr } = await supabase.storage.from("source-documents").download(doc.storage_path);
     if (dlErr || !paper) throw new Error(`Could not read the PDF: ${dlErr?.message}`);
@@ -119,7 +124,9 @@ async function extractAndPublish(supabase: SupabaseClient, viewerId: string, id:
     const { data: topics } = await supabase.from("topics").select("id, kind, name").eq("subject_id", doc.subject_id);
     const subject = Array.isArray(doc.subjects) ? doc.subjects[0] : doc.subjects;
     const paperBytes = Buffer.from(await paper.arrayBuffer());
+    await progress(10, "Reading the questions");
     const result = await extractPaper({
+      onChunkDone: (done, total) => progress(10 + (65 * done) / total, `Reading the questions (part ${done} of ${total})`),
       subjectName: subject?.name ?? "EST",
       chunks: opts.anyPdf ? planPageChunks((await pageCount(new Uint8Array(paperBytes))) ?? 12) : planChunks(subject?.official_sections ?? 1, subject?.official_question_count ?? 50),
       paper: paperBytes,
@@ -128,9 +135,13 @@ async function extractAndPublish(supabase: SupabaseClient, viewerId: string, id:
       skills: (topics ?? []).filter((t) => t.kind === "skill").map((t) => t.name),
       domains: (topics ?? []).filter((t) => t.kind === "domain").map((t) => t.name),
     });
+    if (!key) await progress(78, "Working out the answers");
     const solved = key ? 0 : await solveMissingAnswers(result);
+    await progress(84, "Capturing figures and diagrams");
     const figs = await attachFigures(supabase, paperBytes, id, result);
+    await progress(92, `Saving ${result.questions.length} questions`);
     const { saved, items } = await saveExtraction(supabase, { id, subject_id: doc.subject_id }, topics ?? [], result, viewerId);
+    await progress(97, "Publishing the exam");
 
     const title = opts.title ?? `${subject?.name ?? "EST"}${doc.session_label ? `: ${doc.session_label}` : ""}`;
     let slug = slugify(title);
@@ -254,6 +265,8 @@ export async function uploadReadyExam(_: UploadState, formData: FormData): Promi
   const paper = formData.get("paper");
   const key = formData.get("key");
   if (!(paper instanceof File) || paper.size === 0) return { error: "Choose the exam PDF." };
+  const clash = await findExamByTitle(supabase, parsed.data.title);
+  if (clash) return { error: `An exam called “${clash.title}” already exists. Choose a different title.` };
 
   const base = { subject_id: parsed.data.subject_id, session_label: "", paired_document_id: null };
   const p = await storeDocument(supabase, viewer.id, { ...base, kind: "question_paper", title: parsed.data.title, file: paper });
@@ -298,3 +311,49 @@ export async function retireQuestion(formData: FormData) {
   await supabase.from("questions").update({ status: "retired" }).eq("id", id).eq("origin", "source");
   redirect(`/admin/knowledge/${doc}?ok=${encodeURIComponent("Question excluded from the knowledge base.")}`);
 }
+
+/** An existing exam with this title (case-insensitive) or the same URL slug. */
+async function findExamByTitle(supabase: SupabaseClient, title: string) {
+  const t = title.trim();
+  if (!t) return null;
+  // Exact, case-insensitive match: escape the LIKE wildcards in the title itself.
+  const pattern = t.replace(/[\\%_]/g, (c) => `\\${c}`);
+  const [{ data: byTitle }, { data: bySlug }] = await Promise.all([
+    supabase.from("exams").select("id, title, status").ilike("title", pattern).limit(1).maybeSingle(),
+    supabase.from("exams").select("id, title, status").eq("slug", slugify(t)).limit(1).maybeSingle(),
+  ]);
+  return byTitle ?? bySlug;
+}
+
+/** Live check for the upload form: is this exam title already used? */
+export async function examTitleTaken(title: string): Promise<{ taken: false } | { taken: true; id: string; title: string; status: string }> {
+  const { supabase } = await adminClient();
+  const hit = await findExamByTitle(supabase, String(title).slice(0, 140));
+  return hit ? { taken: true, ...hit } : { taken: false };
+}
+
+/** How far the import of the paper with this title has got, for the upload form's progress bar. */
+export async function importProgress(title: string): Promise<{ pct: number; label: string; failed?: boolean } | null> {
+  const { supabase } = await adminClient();
+  const { data } = await supabase
+    .from("source_documents")
+    .select("status, status_detail, updated_at")
+    .eq("kind", "question_paper")
+    .eq("title", String(title).slice(0, 200))
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  if (!data) return null;
+  if (data.status === "failed") return { pct: 100, label: data.status_detail ?? "Import failed", failed: true };
+  if (data.status !== "processing") return { pct: 100, label: "Finishing up" };
+  if (isStale(data.updated_at)) return { pct: 100, label: STALE_MESSAGE, failed: true };
+  const m = /^(\d{1,3})% · (.*)$/.exec(data.status_detail ?? "");
+  return m ? { pct: Number(m[1]), label: m[2] } : { pct: 5, label: data.status_detail ?? "Working" };
+}
+
+/** Imports report progress at least every few minutes; silence for longer means the server cut the run off. */
+const STALE_MS = 6 * 60_000;
+function isStale(updatedAt: string | null | undefined) {
+  return !updatedAt || Date.now() - Date.parse(updatedAt) > STALE_MS;
+}
+const STALE_MESSAGE = "The import stopped: it took longer than the server's 5-minute limit. Open the document and press Retry.";
