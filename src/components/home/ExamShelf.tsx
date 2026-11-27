@@ -83,8 +83,12 @@ function ExamCard({ e }: { e: ShelfExam }) {
   );
 }
 
+/** Two rows of cards on the homepage; the rest open with "Show all". */
+const SHOWN = 6;
+
 export function ExamShelf({ exams }: { exams: ShelfExam[] }) {
   const [k, setK] = useState("all");
+  const [all, setAll] = useState(false);
   const F = FILTERS.find((f) => f.k === k)!;
   const open = useMemo(() => exams.filter((e) => e.access !== "soon" && F.f(e)), [exams, F]);
   const soon = useMemo(() => exams.filter((e) => e.access === "soon" && F.f(e)), [exams, F]);
@@ -93,13 +97,20 @@ export function ExamShelf({ exams }: { exams: ShelfExam[] }) {
     <>
       <div className="filters" role="toolbar" aria-label="Filter exams">
         {FILTERS.map((f) => (
-          <button key={f.k} className="chip" aria-pressed={k === f.k} onClick={() => setK(f.k)}>
+          <button key={f.k} className="chip" aria-pressed={k === f.k} onClick={() => { setK(f.k); setAll(false); }}>
             <i />{f.label}<span className="ct">{exams.filter(f.f).length}</span>
           </button>
         ))}
       </div>
       {open.length > 1 && <p className="swipe-hint" aria-hidden="true">Swipe to see more →</p>}
-      {open.length > 0 && <div className="shelf">{open.map((e) => <ExamCard key={e.id} e={e} />)}</div>}
+      {open.length > 0 && <div className="shelf">{(all ? open : open.slice(0, SHOWN)).map((e) => <ExamCard key={e.id} e={e} />)}</div>}
+      {open.length > SHOWN ? (
+        <div className="shelf-more">
+          <button type="button" className="btn btn-line" onClick={() => setAll((v) => !v)} aria-expanded={all}>
+            {all ? "Show fewer" : `Show all ${open.length} exams`}
+          </button>
+        </div>
+      ) : null}
       {soon.length > 0 && (
         <div className="soon-row">
           <span className="lab">Coming soon:</span>

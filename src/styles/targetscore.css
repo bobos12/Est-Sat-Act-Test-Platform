@@ -643,3 +643,6 @@ html{scroll-behavior:smooth}
 .plan.pro .price.deal s{color:#8E9CC0}
 .plan .price .saved{flex-basis:100%;font-style:normal;font-size:13.5px;font-weight:700;color:#0d7a3c;margin-top:4px}
 .plan.pro .price .saved{color:#7be0a4}
+
+/* Homepage exam shelf: "Show all" under the first two rows */
+.shelf-more{display:flex;justify-content:center;margin-top:18px}
