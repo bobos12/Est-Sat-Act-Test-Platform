@@ -644,5 +644,11 @@ html{scroll-behavior:smooth}
 .plan .price .saved{flex-basis:100%;font-style:normal;font-size:13.5px;font-weight:700;color:#0d7a3c;margin-top:4px}
 .plan.pro .price .saved{color:#7be0a4}
 
-/* Homepage exam shelf: "Show all" under the first two rows */
-.shelf-more{display:flex;justify-content:center;margin-top:18px}
+/* Homepage exam shelf: first two rows, a fade hinting at more, and a strong "Show all" */
+.shelf-box{position:relative}
+.shelf-box.clipped:after{content:"";position:absolute;left:0;right:0;bottom:0;height:120px;pointer-events:none;background:linear-gradient(to bottom,transparent,var(--bg) 92%)}
+.shelf-more{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:6px;position:relative;z-index:1}
+.shelf-more .more-btn{gap:10px;padding:14px 22px;font-size:16px;box-shadow:0 14px 30px -12px rgba(21,89,237,.65);transition:transform .15s ease,box-shadow .15s ease}
+.shelf-more .more-btn:hover{transform:translateY(-2px);box-shadow:0 18px 34px -12px rgba(21,89,237,.75)}
+.shelf-more .more-count{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:24px;padding:0 8px;border-radius:999px;background:#fff;color:var(--blue);font-weight:800;font-size:13px}
+.shelf-more .more-sub{font-size:13.5px;color:var(--mute)}
