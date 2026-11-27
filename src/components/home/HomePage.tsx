@@ -1,6 +1,8 @@
 import { Logo } from "@/components/brand/logo";
 import Image from "next/image";
 import Link from "next/link";
+import { NavAccount, NavAccountPlaceholder } from "./nav-account";
+import { Suspense } from "react";
 import { GraphPaper } from "./GraphPaper";
 import { TryQuestion } from "./TryQuestion";
 import { ExamShelf } from "./ExamShelf";
@@ -58,7 +60,9 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
       <a href="#contact">Contact</a>
     </nav>
     <div className="nav-right">
-      <Link href="/sign-in" className="login">Log in</Link>
+      <Suspense fallback={<NavAccountPlaceholder />}>
+        <NavAccount />
+      </Suspense>
       <a href={FREE_START_HREF} className="btn btn-blue btn-sm">Free exams</a>
       <details className="mnav">
         <summary aria-label="Open menu"><span /><span /><span /></summary>
@@ -69,7 +73,9 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
           <Link href="/exams">Exam library</Link>
           <a href="#pricing">Pricing</a>
           <a href="#contact">Contact</a>
-          <Link href="/sign-in" className="mnav-login">Log in</Link>
+          <Suspense fallback={<NavAccountPlaceholder mobile />}>
+            <NavAccount mobile />
+          </Suspense>
         </nav>
       </details>
     </div>

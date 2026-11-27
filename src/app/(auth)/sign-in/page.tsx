@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import { Suspense } from "react";
+import { getViewer } from "@/lib/auth/session";
 import { AuthForm } from "../auth-form";
 
 export const metadata: Metadata = { title: "Sign in", robots: { index: false, follow: true } };
@@ -14,6 +16,11 @@ export default function SignInPage({ searchParams }: PageProps<"/sign-in">) {
 
 async function Form({ searchParams }: { searchParams: PageProps<"/sign-in">["searchParams"] }) {
   const { next, error, reason } = await searchParams;
+  // Already signed in (e.g. came back to the site and pressed "Log in"): go on instead of signing in again.
+  if (await getViewer()) {
+    const to = typeof next === "string" && next.startsWith("/") && !next.startsWith("//") ? next : "/dashboard";
+    redirect(to);
+  }
   return (
     <>
       {reason === "mfa_reset" ? (
