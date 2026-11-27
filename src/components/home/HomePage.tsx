@@ -260,13 +260,15 @@ export function HomePage({ exams, plans }: { exams: ShelfExam[]; plans: Plan[] }
               {pitch.popular ? <span className="ribbon">★ Most popular</span> : null}
               <div className="top">
                 <h3 className="h">{p.name}</h3>
-                {pitch.save > 0 ? <span className="save">SAVE {pitch.save}%</span> : null}
+                {pitch.compareAtCents ? <span className="save hot">🔥 −{pitch.save}%</span> : pitch.save > 0 ? <span className="save">SAVE {pitch.save}%</span> : null}
               </div>
               <p className="hook">{pitch.hook}</p>
-              <div className="price">
-                {pitch.compareAtCents ? <s>{formatPrice(pitch.compareAtCents, p.currency)}</s> : null}
+              {pitch.compareAtCents ? <span className="deal-tag">Limited-time offer</span> : null}
+              <div className={`price${pitch.compareAtCents ? " deal" : ""}`}>
+                {pitch.compareAtCents ? <i className="was"><s>{formatPrice(pitch.compareAtCents, p.currency)}</s></i> : null}
                 <b>{formatPrice(p.price_cents, p.currency)}</b>
                 <span>/ {periodLabel(p.interval_months)}</span>
+                {pitch.savedCents ? <em className="saved">You save {formatPrice(pitch.savedCents, p.currency)}</em> : null}
               </div>
               <p className="per">
                 {p.interval_months > 1 ? <>Just <b>{formatPrice(pitch.perMonth, p.currency)}</b> a month</> : <>Full access, billed monthly</>}

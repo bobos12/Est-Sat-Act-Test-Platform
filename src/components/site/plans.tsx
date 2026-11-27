@@ -44,18 +44,35 @@ export async function PlanList() {
               ) : null}
               <div className="flex items-center justify-between gap-3">
                 <h3 className="font-display text-2xl">{plan.name}</h3>
-                {pitch.save > 0 ? (
+                {pitch.compareAtCents ? (
+                  <span className="rounded-full bg-gradient-to-br from-[#ff7a18] to-[#e8233a] px-3 py-1 text-sm font-extrabold text-white shadow-[0_8px_18px_-8px_rgba(232,35,58,.75)] motion-safe:animate-pulse">
+                    🔥 −{pitch.save}%
+                  </span>
+                ) : pitch.save > 0 ? (
                   <span className="rounded-full bg-success-600 px-2.5 py-1 text-xs font-bold text-white">Save {pitch.save}%</span>
                 ) : null}
               </div>
               <p className="mt-1 text-sm opacity-70">{pitch.hook}</p>
               {pitch.compareAtCents ? (
-                <p className="mt-5 text-sm tabular line-through opacity-50">{formatPrice(pitch.compareAtCents, plan.currency)}</p>
+                <>
+                  <span className={cn("mt-4 self-start rounded-full px-2.5 py-1 text-[0.6875rem] font-bold uppercase tracking-wide", dark ? "bg-[#e8233a]/20 text-[#ffb3bc]" : "bg-[#fdecee] text-[#e8233a]")}>
+                    Limited-time offer
+                  </span>
+                  <p className="mt-3">
+                    <span className={cn("relative inline-block text-xl font-semibold tabular", dark ? "text-ink-400" : "text-ink-400")}>
+                      {formatPrice(pitch.compareAtCents, plan.currency)}
+                      <span aria-hidden className="absolute -inset-x-1 top-1/2 h-[2.5px] -rotate-[8deg] rounded bg-[#e8233a]" />
+                    </span>
+                  </p>
+                </>
               ) : null}
               <p className={cn("font-display text-5xl font-medium tabular", pitch.compareAtCents ? "mt-1" : "mt-5")}>
                 {formatPrice(plan.price_cents, plan.currency)}
                 <span className="ml-1 font-sans text-base font-normal opacity-60">/ {periodLabel(plan.interval_months)}</span>
               </p>
+              {pitch.savedCents ? (
+                <p className={cn("mt-1 text-sm font-bold", dark ? "text-[#7be0a4]" : "text-success-700")}>You save {formatPrice(pitch.savedCents, plan.currency)}</p>
+              ) : null}
               <p className="mt-2 text-sm opacity-75">
                 {plan.interval_months > 1 ? (
                   <>

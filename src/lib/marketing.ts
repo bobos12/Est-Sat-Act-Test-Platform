@@ -5,7 +5,7 @@ import { brand } from "@/lib/brand";
 /** Strike-through price, badge and "Most popular" flag, keyed by plan code. */
 export const PLAN_EXTRAS: Record<string, { compareAtCents?: number; popular?: boolean; cta: string; hook: string }> = {
   monthly: { compareAtCents: 60000, cta: "Start monthly", hook: "Try everything. Cancel anytime." },
-  quarterly: { popular: true, cta: "Get 3 months", hook: "Covers a full exam season" },
+  quarterly: { compareAtCents: 125000, popular: true, cta: "Get 3 months", hook: "Covers a full exam season" },
   yearly: { cta: "Get the full year", hook: "For students aiming for a top score" },
 };
 
@@ -16,7 +16,8 @@ export function planPitch(plan: { code: string; price_cents: number; interval_mo
   const saveVsMonthly = monthlyCents && plan.interval_months > 1 ? Math.round((1 - perMonth / monthlyCents) * 100) : 0;
   const saveVsCompare = extra?.compareAtCents ? Math.round((1 - plan.price_cents / extra.compareAtCents) * 100) : 0;
   const perDay = plan.interval_months === 12 ? Math.ceil(plan.price_cents / 365 / 100) : 0;
-  return { perMonth, save: saveVsMonthly || saveVsCompare, perDay, cta: extra?.cta ?? "Subscribe", hook: extra?.hook ?? "", popular: Boolean(extra?.popular), compareAtCents: extra?.compareAtCents };
+  // A crossed-out price sets the saving shown, so the badge always matches what the card shows.
+  return { perMonth, save: saveVsCompare || saveVsMonthly, perDay, cta: extra?.cta ?? "Subscribe", hook: extra?.hook ?? "", popular: Boolean(extra?.popular), compareAtCents: extra?.compareAtCents, savedCents: extra?.compareAtCents ? extra.compareAtCents - plan.price_cents : 0 };
 }
 
 export const periodLabel = (months: number) => (months === 1 ? "month" : months === 12 ? "year" : `${months} months`);

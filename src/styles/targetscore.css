@@ -629,3 +629,17 @@ html{scroll-behavior:smooth}
 .note-head{right:2%;top:-92px;width:156px;font-size:21px;padding:20px 12px 8px}
 
 .unlock-wrap{margin-top:22px}
+
+/* Discounted plans: hot badge, red strike, "you save" pill */
+.plan .save.hot{background:linear-gradient(135deg,#ff7a18,#e8233a);font-size:12.5px;padding:6px 11px;box-shadow:0 8px 18px -8px rgba(232,35,58,.75);animation:hot-pulse 2.4s ease-in-out infinite}
+@keyframes hot-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+@media (prefers-reduced-motion:reduce){.plan .save.hot{animation:none}}
+.plan .deal-tag{align-self:flex-start;margin-top:14px;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#e8233a;background:#fdecee;border-radius:999px;padding:4px 10px}
+.plan.pro .deal-tag{color:#ffb3bc;background:rgba(232,35,58,.18)}
+.plan .price.deal{margin-top:12px}
+.plan .price.deal .was{flex-basis:100%;font-style:normal}
+.plan .price.deal s{position:relative;display:inline-block;width:auto;text-decoration:none;font-size:20px;font-weight:600;color:var(--mute)}
+.plan .price.deal s:after{content:"";position:absolute;left:-4px;right:-4px;top:52%;height:2.5px;border-radius:2px;background:#e8233a;transform:rotate(-8deg)}
+.plan.pro .price.deal s{color:#8E9CC0}
+.plan .price .saved{flex-basis:100%;font-style:normal;font-size:13.5px;font-weight:700;color:#0d7a3c;margin-top:4px}
+.plan.pro .price .saved{color:#7be0a4}
