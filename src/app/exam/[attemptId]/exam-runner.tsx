@@ -279,6 +279,15 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
   // EST exams look like the printed EST paper; SAT and ACT keep the standard design.
   const paper = payload.exam.subject.code.startsWith("est");
 
+  // EST Literacy: every question about the current passage is shown together on the right.
+  const groupQuestions = useMemo(
+    () => (current.stimulus_id ? questions.filter((q) => q.stimulus_id === current.stimulus_id) : []),
+    [current.stimulus_id, questions],
+  );
+  const stacked = payload.exam.subject.code === "est1-literacy" && groupQuestions.length > 1;
+  const questionBlocks = useRef<Record<string, HTMLDivElement | null>>({});
+  const pickedByClick = useRef(false);
+
   // ---------- teaching board ----------
   const [board, setBoard] = useStored<BoardSettings>("16h:board", { tool: "pen", color: INK[2], size: 4 });
   const [ink, setInk] = useStored<Record<string, Shape[]>>(`16h:ink:${attemptId}`, {});
@@ -338,8 +347,20 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
     if (passageRef.current && stimulusId) passageRef.current.scrollTop = scrollMemory.current[stimulusId] ?? 0;
   }, [stimulusId, intro]);
   useEffect(() => {
-    questionRef.current?.scrollTo({ top: 0 });
-  }, [current.id]);
+    if (!stacked) {
+      questionRef.current?.scrollTo({ top: 0 });
+      return;
+    }
+    // Clicking a question in the list only marks it current; Next/Previous scroll it into view.
+    if (pickedByClick.current) {
+      pickedByClick.current = false;
+      return;
+    }
+    questionBlocks.current[current.id]?.scrollIntoView({ block: "start", behavior: "smooth" });
+  }, [current.id, stacked]);
+
+  // Drawings on the question side belong to the whole passage group when its questions are stacked.
+  const qInk = stacked && stimulus ? `g:${stimulus.id}` : `q:${current.id}`;
 
   return (
     <div className={cn("flex h-dvh flex-col bg-paper", paper && `paper ${paperFont.variable}`)}>
@@ -352,8 +373,8 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
           onRedo={redoInk}
           canUndo={stackSize.u > 0}
           canRedo={stackSize.r > 0}
-          inkCount={(ink[`q:${current.id}`]?.length ?? 0) + (stimulus ? ink[`p:${stimulus.id}`]?.length ?? 0 : 0)}
-          onClear={() => clearInk(stimulus ? [`q:${current.id}`, `p:${stimulus.id}`] : [`q:${current.id}`])}
+          inkCount={(ink[qInk]?.length ?? 0) + (stimulus ? ink[`p:${stimulus.id}`]?.length ?? 0 : 0)}
+          onClear={() => clearInk(stimulus ? [qInk, `p:${stimulus.id}`] : [qInk])}
           onClose={() => setBoardOn(false)}
         />
       ) : null}
@@ -486,7 +507,51 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
             </button>
             <SplitHandle onChange={setRatio} onReset={() => setRatio(0.5)} />
             <div ref={questionRef} className="relative min-h-0 flex-1 overflow-y-auto">
-              <DrawLayer key={`q:${current.id}`} shapes={ink[`q:${current.id}`] ?? []} onCommit={(next) => commitInk(`q:${current.id}`, next)} settings={board} active={drawing} />
+              <DrawLayer key={qInk} shapes={ink[qInk] ?? []} onCommit={(next) => commitInk(qInk, next)} settings={board} active={drawing} />
+              {stacked ? (
+                <div style={{ zoom: fontScale }}>
+                  <p className="border-b border-line bg-paper/80 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-ink-500 sm:px-10">
+                    Questions {groupQuestions[0].position}–{groupQuestions[groupQuestions.length - 1].position} · answer in any order
+                  </p>
+                  {groupQuestions.map((q) => {
+                    const active = q.id === current.id;
+                    const pick = () => {
+                      if (active) return;
+                      pickedByClick.current = true;
+                      go(questions.indexOf(q));
+                    };
+                    return (
+                      <div
+                        key={q.id}
+                        ref={(el) => {
+                          questionBlocks.current[q.id] = el;
+                        }}
+                        onPointerDownCapture={pick}
+                        onFocusCapture={pick}
+                        className={cn(
+                          "scroll-mt-2 border-b border-line transition-colors",
+                          active ? "bg-mark-50/40 shadow-[inset_4px_0_0_var(--color-mark-500)]" : "bg-transparent",
+                        )}
+                      >
+                        <QuestionPane
+                          question={q}
+                          total={total}
+                          state={state[q.id] ?? { option: null, flagged: false }}
+                          onSelect={(optionId) => update(q.id, { option: optionId })}
+                          onResponse={(response) => update(q.id, { response })}
+                          disabled={closed || timeUp}
+                          paper={paper}
+                          crossed={crossed[q.id] ?? []}
+                          onCross={toggleCross}
+                          note={notes[q.id] ?? ""}
+                          onNote={(v) => setNotes((all) => ({ ...all, [q.id]: v }))}
+                          compact
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
               <div style={{ zoom: fontScale }}>
                 <QuestionPane
                   key={current.id}
@@ -503,6 +568,7 @@ export function ExamRunner({ payload }: { payload: AttemptPayload }) {
                   onNote={(v) => setNotes((all) => ({ ...all, [current.id]: v }))}
                 />
               </div>
+              )}
             </div>
           </div>
         ) : (
@@ -644,6 +710,7 @@ function QuestionPane({
   note,
   onNote,
   paper,
+  compact,
 }: {
   question: AttemptPayload["questions"][number];
   total: number;
@@ -656,12 +723,14 @@ function QuestionPane({
   note: string;
   onNote: (v: string) => void;
   paper?: boolean;
+  /** Tighter spacing when several questions are listed together. */
+  compact?: boolean;
 }) {
   const [notesOpen, setNotesOpen] = useState(Boolean(note));
   return (
-    <section aria-labelledby="question-heading" className="px-5 py-7 sm:px-10 sm:py-10">
+    <section aria-labelledby={`question-heading-${question.id}`} className={compact ? "px-5 py-6 sm:px-10 sm:py-7" : "px-5 py-7 sm:px-10 sm:py-10"}>
       <div className="flex items-center justify-between">
-        <h1 id="question-heading" className={cn("text-sm font-medium text-ink-500", paper && "sr-only")}>
+        <h1 id={`question-heading-${question.id}`} className={cn("text-sm font-medium text-ink-500", paper && "sr-only")}>
           Question {question.position} <span className="sr-only">of {total}</span>
         </h1>
         {state.flagged ? (
